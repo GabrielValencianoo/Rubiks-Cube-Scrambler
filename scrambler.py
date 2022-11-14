@@ -10,21 +10,25 @@
 
 import random
 import time
-from msvcrt import getch
+# from msvcrt import getch
 import tkinter as tk
 from tkinter import ttk 
 from tkinter import messagebox
+from tkinter import filedialog
+
 import datetime
 import csv
+import numpy as np
 
 from matplotlib.figure import Figure 
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
 NavigationToolbar2Tk)
 
 
-
 root = tk.Tk() 
+root.title('timezinho') 
 root.geometry('1000x600+1200+200') 
+# root.iconphoto(False, tk.PhotoImage(file='/path/to/ico/icon.png'))
 
 # Label 
 row1 = ttk.LabelFrame(root)
@@ -36,7 +40,7 @@ row2.pack()
 # row2.pack(side=tk.TOP,anchor = tk.W)
 row3.pack(side=tk.LEFT,anchor = tk.N)
 
-timing = 0
+
 t0 = 0
 t1 = 0
 
@@ -85,16 +89,56 @@ global_worst_solve = 0
 countdown = 15
 run_inspecton = False
 
+#faces
+
+W = [[1,1,1],
+     [1,1,1],
+     [1,1,1]]
+
+O = [[2,2,2],
+     [2,2,2],
+     [2,2,2]]
+
+G = [[3,3,3],
+     [3,3,3],
+     [3,3,3]]
+
+R = [[4,4,4],
+     [4,4,4],
+     [4,4,4]]
+
+B = [[5,5,5],
+     [5,5,5],
+     [5,5,5]]
+
+Y = [[6,6,6],
+     [6,6,6],
+     [6,6,6]]
+
+
+buffer = [[],
+          [],
+          [],
+          []]
+
+
 def trunc(n, decimals=0):
     multiplier = 10 ** decimals
     return int(n * multiplier) / multiplier
 
 def time_convert(time):
+    if time < 60:
+        presult = time
+    else:
+        m, s = divmod(time, 60)
+        m = int(m)
+        s = trunc(s,2)
+        if s >=10:
+            presult = str(m) + ":" + str(s)
+        else:
+            presult = str(m) + ":0" + str(s)    
     
-    minutes, seconds = divmod(time, 60)  
-    seconds = trunc(seconds,2)    
-    minutes = int(minutes)
-    return minutes , seconds
+    return presult
 
 def best_worst(lista,type):
     
@@ -120,7 +164,7 @@ def best_worst(lista,type):
         return local_best_solve, local_worst_solve
  
 def average():
-    return sum(tempos)/len(tempos)
+    return sum(tempos)/len(tempos) 
 
 def mo3():
     list_3 = tempos[-3:]
@@ -149,8 +193,8 @@ def estatistica():
     global media_3
     global media_5
     global media_12
-    media = average()
 
+    media = average()
     media_3  = mo3() if len(tempos) >= 3 else media_3
     media_5  = ao5() if len(tempos) >= 5 else media_5
     media_12 = ao12() if len(tempos) >= 12 else media_12
@@ -163,76 +207,25 @@ def estatistica():
 
     best_ao12 = media_12 if media_12 < best_ao12 else best_ao12
 
-
     global_best_solve = trunc(global_best_solve,2)
     global_worst_solve = trunc(global_worst_solve,2)
+    media = trunc(media,2)
+    media_3 = trunc(media_3,2)
+    media_5 = trunc(media_5,2)
+    media_12 = trunc(media_12,2)
+    best_mo3 = trunc(best_mo3,2)
+    best_ao5 = trunc(best_ao5,2)
+    best_ao12 = trunc(best_ao12,2)
 
-
-    if global_best_solve > 60:
-        m, s = time_convert(global_best_solve) 
-        pglobal_best_solve = str(m) + ":" + str(s)
-    else:
-        global_best_solve = trunc(global_best_solve,2)
-        pglobal_best_solve = global_best_solve
-
-    if global_worst_solve > 60:
-        m, s = time_convert(global_worst_solve) 
-        pglobal_worst_solve = str(m) + ":" + str(s)
-    else:
-        global_worst_solve = trunc(global_worst_solve,2)
-        pglobal_worst_solve = global_worst_solve
-
-    if media > 60:
-        m, s = time_convert(media) 
-        pmedia = str(m) + ":" + str(s)
-    else:
-        media = trunc(media,2)
-        pmedia = media
-
-    if media_3 > 60:
-        m, s = time_convert(media_3) 
-        pmedia_3 = str(m) + ":" + str(s)
-    else:
-        media_3 = trunc(media_3,2)
-        pmedia_3 = media_3
-    
-    if media_5 > 60:
-        m, s = time_convert(media_5) 
-        pmedia_5 = str(m) + ":" + str(s)
-    else:
-        media_5 = trunc(media_5,2)
-        pmedia_5 = media_5
-
-    if media_12 > 60:
-        m, s = time_convert(media_12) 
-        pmedia_12 = str(m) + ":" + str(s)
-    else:
-        media_12 = trunc(media_12,2)
-        pmedia_12 = media_12
-
-    if best_mo3 > 60:
-        m, s = time_convert(best_mo3) 
-        pbest_mo3 = str(m) + ":" + str(s)
-    else:
-        best_mo3 = trunc(best_mo3,2)
-        pbest_mo3 = best_mo3
-
-    if best_ao5 > 60:
-        m, s = time_convert(best_ao5) 
-        pbest_ao5 = str(m) + ":" + str(s)
-    else:
-        best_ao5 = trunc(best_ao5,2)
-        pbest_ao5 = best_ao5
-
-    if best_ao12 > 60:
-        m, s = time_convert(best_ao12) 
-        pbest_ao12 = str(m) + ":" + str(s)
-    else:
-        best_ao12 = trunc(best_ao12,2)
-        pbest_ao12 = best_ao12
-
-    
-    hist2.delete(0,9)    
+    pglobal_best_solve = time_convert(global_best_solve)
+    pglobal_worst_solve = time_convert(global_worst_solve)
+    pmedia = time_convert(media)
+    pmedia_3 = time_convert(media_3)
+    pmedia_5 = time_convert(media_5)
+    pmedia_12 = time_convert(media_12)  
+    pbest_mo3 = time_convert(best_mo3) 
+    pbest_ao5 = time_convert(best_ao5) 
+    pbest_ao12 = time_convert(best_ao12)    
 
     pmedia_3  = pmedia_3 if len(tempos) >= 3 else 0
     pmedia_5  = pmedia_5 if len(tempos) >= 5 else 0
@@ -242,7 +235,7 @@ def estatistica():
     pbest_ao5  = pbest_ao5 if len(tempos) >= 5 else 0
     pbest_ao12 = pbest_ao12 if len(tempos) >= 12 else 0
 
-
+    hist2.delete(0,9)    
     hist2.insert(tk.END,"n° solves: " + str(len(tempos)))
     hist2.insert(tk.END,"melhor: " + str(pglobal_best_solve))
     hist2.insert(tk.END,"pior:" + str(pglobal_worst_solve))
@@ -710,7 +703,7 @@ def scrambler_2x2():
         pr_move = n_move
         accepted = 0
     # print(actual_scramble)    
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
     # print_scramble.update() 
 
@@ -814,7 +807,7 @@ def scrambler_3x3():
     # print(actual_scramble)    
     reset_flags()
     
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
     # print_scramble.update() 
 
@@ -958,7 +951,7 @@ def scrambler_4x4():
 
     reset_flags()
     # print(actual_scramble)    
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
     # print_scramble.update() 
     
@@ -1135,7 +1128,7 @@ def scrambler_5x5():
 
     reset_flags()
     # print(actual_scramble)    
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
     # print_scramble.update() 
 
@@ -1394,7 +1387,7 @@ def scrambler_6x6():
         accepted = 0
     # print(actual_scramble)  
     reset_flags()  
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
     # print_scramble.update() 
    
@@ -1519,7 +1512,7 @@ def scrambler_pyraminx():
 
     print(sum_turns)
     # print(actual_scramble)    
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
     # print_scramble.update() 
 
@@ -1541,7 +1534,7 @@ def scrambler_megaminx():
         sum_turns.append(turn)
     
     # print(sum_turns)
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
           
 def scrambler_skewb():
@@ -1599,7 +1592,7 @@ def scrambler_skewb():
         pr_move = n_move
         accepted = 0
     # print(actual_scramble)    
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
     # print_scramble.update() 
 
@@ -1738,10 +1731,23 @@ def scrambler_clock():
 
     print(sum_turns)
     # print(actual_scramble)    
-    scrambles.append( " ".join(sum_turns))
+    
     actual_scramble.set(" ".join(sum_turns))
     # print_scramble.update() 
            
+def on_press_esc(event):
+    global timer_state
+    global countdown 
+    global run_inspecton
+    global actual_timer
+
+    run_inspecton = False    
+    timer_state = 0    
+    countdown = 15
+    
+    actual_timer.set("0:00")   
+    print("parou....")
+
 
 def inspection():
     
@@ -1761,7 +1767,6 @@ def inspection():
         #every 1 second
         root.after(1000, inspection)
         countdown -= 1 
-
 
 _short_press = None
 _do_space_longpress = None
@@ -1836,13 +1841,13 @@ def cancel_do_space_longpress():
                 
 def start_timer():  
     global enable_start_timer    
-    global timing
+    
     global t0
     global timer_state
     
     if timer_state == 3:
         t0 = time.time()
-        timing = 1    
+        
         print("rodando........")
 
         global actual_timer
@@ -1852,54 +1857,57 @@ def start_timer():
         global run_inspecton
         run_inspecton = False
     
-
 def stop_timer(): 
-    global timing
+    
     global timer_state
 
     if timer_state == 4:
         t1 = time.time()
         data = datetime.datetime.now()
-        print(data)
+        # print(data)
 
         global t0        
         global enable_start_timer 
 
         dt = t1-t0         
         tempo = dt
-        tempos.append(tempo)
+        
         datas.append(data)
         
         enable_start_timer = False
-        timing = 0
-        timer_state = 5
-        # messagebox.showinfo( "Hello Python", "Time Lapsed = {0:.2f}".format(x))
         
-        print(tempos)
+        timer_state = 5                
+        
         global countdown 
         countdown = 15
 
         tempo = trunc(tempo,2)
-        if tempo > 60:
-            m, s = time_convert(tempo) 
-            ptempo = str(m)+":"+str(s)
-        else:   
-            ptempo = tempo
+        tempos.append(tempo)
+
+        ptempo = time_convert(tempo)        
 
         global actual_timer
 
         hist.insert(tk.END,ptempo)
-        actual_timer.set(ptempo)       
+        actual_timer.set(ptempo)    
+
+        global scrambles
+
+        scrambles.append(actual_scramble.get())
+
+        # print(tempos)
+        # print(scrambles)
 
 
         estatistica()
         next_scramble() 
 
-        t2 = time.time()
-        print(t2-t1)
+        # t2 = time.time()
+        # print(t2-t1)
         
+def change_event(event):  
 
-def change_event(event):   
+    resetar() 
     
     global flag_7_event 
     # messagebox.showinfo( "Hello Python", eventos.get())
@@ -1937,16 +1945,16 @@ def change_event(event):
         scrambler_clock()        
         flag_7_event = 0
 
-
 def plot():   
 
 	# the figure that will contain the plot 
+    window = tk.Toplevel(root)
+
     global tempos 
     fig = Figure(figsize = (5, 5),dpi = 100) 
 
 	# list of squares 
-    y = tempos
-    
+    y = tempos    
 
 	# adding the subplot 
     plot1 = fig.add_subplot(111) 
@@ -1956,11 +1964,14 @@ def plot():
 
 	# creating the Tkinter canvas 
 	# containing the Matplotlib figure 
-    canvas = FigureCanvasTkAgg(fig,	master = root) 
+    canvas = FigureCanvasTkAgg(fig,	master = window) 
     canvas.draw() 
 
 	# placing the canvas on the Tkinter root 
-    canvas.get_tk_widget().pack()     
+    canvas.get_tk_widget().pack()  
+
+    canvas.flush_events()
+
 
 	# creating the Matplotlib toolbar 
     # toolbar = NavigationToolbar2Tk(canvas,root) 
@@ -1969,11 +1980,117 @@ def plot():
 	# placing the toolbar on the Tkinter root 
     # canvas.get_tk_widget().pack() 
 
+
+def importar():
+    with open('3x3.csv', mode='r') as csv_file:
+        csv_reader = csv.DictReader(csv_file, delimiter=';')
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                print(f'Column names are {", ".join(row)}')
+                line_count += 1
+
+            else:                
+                print(f'\t{row["No."]} ; {row["Time"]} ; {row["Scramble"]} ; {row["Date"]}.')
+                line_count += 1
+                
+                tempos.append(float(row["Time"]))
+                scrambles.append(row["Scramble"])
+                datas.append(row["Date"])
+                hist.insert(tk.END,row["Time"])
+
+        print(f'Processed {line_count} lines.')
+        estatistica()
+
+
+def exportar():
+
+    name_file = eventos.get() + str(".csv")
+
+    with open(name_file, mode='w') as employee_file:
+        employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        employee_writer.writerow(["No.", "Time", "Scramble","Date"])
+
+        for i in range(len(tempos)):
+            employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i]])
+
+    messagebox.showinfo( "Warning", "Export completo.")
+     
+
+def resetar():
+    global tempos
+    global scrambles
+    global datas
+
+    global global_best_solve
+    global global_worst_solve
+
+    global best_mo3
+    global best_ao5
+    global best_ao12
+
+    global media_3
+    global media_5
+    global media_12
+
+    tempos = []
+    scrambles = []
+    datas = []
+
+    global_best_solve = 9999
+    global_worst_solve = 0
+
+    best_mo3  = 9999
+    best_ao5  = 9999
+    best_ao12 = 9999
+
+    media_3  = 9999
+    media_5  = 9999
+    media_12 = 9999
+
+    hist.delete(0,tk.END)    
+
+    hist2.delete(0,tk.END)   
+
+    # estatistica() 
+    
+
+def deletar():
+    global tempos
+    global scrambles
+    global datas
+
+    global global_best_solve
+    global global_worst_solve   
+
+    global best_mo3
+    global best_ao5
+    global best_ao12
+
+    del tempos[-1]
+    del scrambles[-1]
+    del datas[-1]
+
+    global_best_solve = 9999
+    global_worst_solve = 0
+
+    best_mo3  = 9999
+    best_ao5  = 9999
+    best_ao12 = 9999
+
+    hist.delete(tk.END,tk.END)    
+
+    hist2.delete(tk.END,tk.END)   
+
+    estatistica()
+    
+
 ttk.Label(row1, text = "Modalidade :").grid(column = 0,row = 0) 
 
-n = tk.StringVar() 
-eventos = ttk.Combobox(row1, width = 10,textvariable = n,state = "readonly") 
-
+# n = tk.StringVar() 
+# eventos = ttk.Combobox(row1, width = 10,textvariable = n,state = "readonly") 
+eventos = ttk.Combobox(row1, width = 10,state = "readonly") 
 # Adding combobox drop down list 
 eventos['values'] = ('2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock') 
 
@@ -1982,19 +2099,12 @@ eventos.bind('<<ComboboxSelected>>',change_event)
 # Shows number as a default value 
 eventos.current(1) 
 # eventos.current(7) 
-# eventos.bind('<FocusOut>', lambda e: eventos.selection_clear(0, tk.END))
 
-
-# print(actual_scramble)
 
 img = tk.PhotoImage(file = r"C:\Users\gabri\OneDrive\Documentos\VScode\lena.png")
 label_img = tk.Label(root, image = img)
 # label_img.pack(expand = "yes",anchor = tk.SE)
 # label_img.pack(fill = "both", expand = "yes",side=tk.TOP , anchor = tk.S)
-
-
-
-
 
 print_scramble = tk.Label(row2,textvariable = actual_scramble,wraplength = 500)
 print_scramble.grid(column = 0, row = 0)
@@ -2005,17 +2115,10 @@ print_timer = tk.Label(root,textvariable = actual_timer)
 print_timer.pack()
 
 
-# hist = tk.Listbox(row3,yscrollcommand = scrollbar.set,takefocus = 0,state = tk.DISABLED)
-
-
-
-# hist.bind('<FocusOut>', lambda e: hist.selection_clear(0, tk.END))
-
 scrollbar = tk.Scrollbar(row3)
 
 # scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 scrollbar.grid(column = 1, row = 0)
-
 
 
 hist = tk.Listbox(row3,yscrollcommand = scrollbar.set)
@@ -2024,27 +2127,30 @@ hist.grid(column = 0, row = 0)
 hist2 = tk.Listbox(row3)
 hist2.grid(column = 2, row = 0)
 
-
-
 scrollbar.config(command=hist.yview)
 
-
-
 scrambler_3x3()
-# scrambler_megaminx()
 
-
-# root.focus_set()
-# root.focus_force()
 root.bind("<KeyPress-space>",on_press_space)
 root.bind("<KeyRelease-space>",on_release_space)
 
+root.bind("<KeyPress-Escape>",on_press_esc)
+
 
 plot_button = tk.Button(master = root,command = plot,	height = 2, width = 10, text = "Plot") 
-
-
-
 plot_button.pack() 
+
+import_button  = tk.Button(master = root,command = importar,	height = 2, width = 10, text = "Import") 
+import_button.pack()
+
+export_button  = tk.Button(master = root,command = exportar,	height = 2, width = 10, text = "Export") 
+export_button.pack()
+
+reset_button  = tk.Button(master = root,command = resetar,	height = 2, width = 10, text = "Reset") 
+reset_button.pack()
+
+delete_button  = tk.Button(master = root,command = deletar,	height = 2, width = 10, text = "Delete") 
+delete_button.pack()
 
 
 root.mainloop() 
