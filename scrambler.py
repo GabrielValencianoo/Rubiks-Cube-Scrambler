@@ -12270,15 +12270,15 @@ def enter_time():
     
     
     chars = set('.')
-    if any((c in chars) for c in input_timer.get()):    
+    if any((c in chars) for c in input_timer.get()):    #encontrou o ponto
         chars = set(':')
-        if any((c in chars) for c in input_timer.get()):        
+        if any((c in chars) for c in input_timer.get()):        #encontrou o ponto e dois ponto  1:23.54
             t = input_timer.get().split(':')        
             t = float(t[0]) * 60 + float(t[1])    
-        else:
+        else:                                           #encontrou o ponto e nao o dois pontos   12.43
             t = input_timer.get()        
     else:        
-        if int(input_timer.get()) > 10000:                
+        if int(input_timer.get()) >= 10000 and precisionTimer == 2:                
             t = int(input_timer.get()) 
             x = [int(a) for a in str(t)]
             m = x[0]
@@ -12286,8 +12286,19 @@ def enter_time():
             c = (x[3]*10 + x[4])/100
             t = m*60 + s + c 
             print(t)                                
-        else:
+        elif int(input_timer.get()) < 10000 and precisionTimer == 2:
             t = float(input_timer.get())/100  
+        
+        elif int(input_timer.get()) >= 100000 and precisionTimer == 3:              
+            t = int(input_timer.get()) 
+            x = [int(a) for a in str(t)]
+            m = x[0]
+            s = x[1]*10 + x[2]
+            c = (x[3]*100 + x[4]*10 + x[5])/1000
+            t = m*60 + s + c 
+            print(t)                                
+        elif int(input_timer.get()) < 100000 and precisionTimer == 3:
+            t = float(input_timer.get())/1000  
         
         
     
@@ -13000,7 +13011,7 @@ inputmenu.add_radiobutton(label="Stackmat", value=3, variable=inputVar, command=
 
 
 precisionmenu.add_radiobutton(label="0.01", value=1, variable=precisionVar, command= precisionVar_change)
-# precisionmenu.add_radiobutton(label="0.001", value=2, variable=precisionVar, command= precisionVar_change)
+precisionmenu.add_radiobutton(label="0.001", value=2, variable=precisionVar, command= precisionVar_change)
 
 holdmenu.add_radiobutton(label="0", value=1, variable=holdVar, command= holdVar_change)
 holdmenu.add_radiobutton(label="0.3", value=2, variable=holdVar, command= holdVar_change)
