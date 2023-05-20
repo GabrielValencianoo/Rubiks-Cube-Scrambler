@@ -599,23 +599,50 @@ Am_color_pyra = np.array([["yellow","yellow","yellow","yellow","yellow"],
                        ["yellow","yellow","yellow","yellow","yellow"]])
 
 def trunc(n, decimals=0):
-    # print(n)
+    
     multiplier = 10 ** decimals
-    return int(n * multiplier) / multiplier
+    return int(int(n * multiplier) / multiplier)
 
 def time_convert(time):
-    global precisionTimer
+    global precisionTimer    
+    
+    if precisionTimer == 2:        
+        time /= 100
+
+    elif precisionTimer == 3:        
+        time /= 1000
+
+    
     if time < 60:
         presult = time
+        
     else:
-        m, s = divmod(time, 60)
-        m = int(m)
-        s = trunc(s,precisionTimer)
-        if s >=10:
-            presult = str(m) + ":" + str(s)
-        else:
-            presult = str(m) + ":0" + str(s)    
-    
+        # m, s = divmod(time, 60)
+        m = time // 60        
+        m = int(m)    
+
+        s = time % 60             
+
+        if precisionTimer == 2:                  
+
+            if s < 10:          
+                s = format(s,'.2f')         
+                presult = str(m) + ":0" + str(s)    
+                
+            else:
+                s = format(s,'.2f') 
+                presult = str(m) + ":" + str(s)                
+
+        elif precisionTimer == 3:
+            if s < 10:
+                s = format(s,'.3f')   
+                presult = str(m) + ":0" + str(s)    
+                
+            else:                
+                s = format(s,'.3f')   
+                presult = str(m) + ":" + str(s)
+            
+        
     return presult
 
 def best_worst(lista,type):
@@ -686,10 +713,7 @@ def estatistica(index):
     media_5  = ao5(index)  if index >= 5  else media_5
     media_12 = ao12(index) if index >= 12 else media_12
 
-    # media_3  = mo3(index)  if len(tempos) >= 3  or index > 3  else media_3
-    # media_5  = ao5(index)  if len(tempos) >= 5  or index > 5  else media_5
-    # media_12 = ao12(index) if len(tempos) >= 12 or index > 12 else media_12
- 
+   
     global_best_solve,global_worst_solve = best_worst(tempos,"global")
     
     best_mo3 = media_3 if media_3 < best_mo3 else best_mo3
@@ -784,15 +808,6 @@ def estatistica(index):
    
 
     
-        
-
-
-    
-    
-
-
-
-
 
 def define_flags(n_move):
 
@@ -10349,13 +10364,7 @@ def draw_scramble(cube):
         Az_color_6 = np.where(Az_6 != 6, Az_color_6,"yellow")
         Am_color_6 = np.where(Am_6 != 6, Am_color_6,"yellow")  
         
-        # print("---------------------------------------------------------")
-        # print(Br_color_6)
-        # print(Lr_color_6)
-        # print(Vd_color_6)
-        # print(Vm_color_6)
-        # print(Az_color_6)
-        # print(Am_color_6)
+        
 
         #U
         our_canvas.create_rectangle(120,10,135,25,fill=Br_color_6[0][0])    
@@ -11880,13 +11889,13 @@ def scrambler_6x6():
             turn = "3Bw2"    
         
         define_flags(n_move)
-        print(turn)
+        
         turn_draw("6x6",turn) if flag_7_event == 0 else turn_draw("7x7",turn)
         # draw_scramble("6x6") if flag_7_event == 0 else draw_scramble("7x7")
         sum_turns.append(turn)
         pr_move = n_move
         accepted = 0
-    # print(actual_scramble)  
+    
     reset_flags()      
     draw_scramble("6x6") if flag_7_event == 0 else draw_scramble("7x7")
     # turn_draw("6x6","R2")
@@ -11910,7 +11919,7 @@ def scrambler_pyraminx():
 
         while accepted == 0:
             n_move = random.randrange(1,9,1)
-            # print(n_move)
+            
 
             if (n_move == 1 or n_move == 2) and (pr_move == 1 or pr_move == 2):
                 accepted = 0
@@ -11952,7 +11961,7 @@ def scrambler_pyraminx():
         pr_move = n_move
         turn_draw("pyraminx",turn)
         draw_scramble("pyraminx")
-        print(turn) 
+        # print(turn) 
         accepted = 0
 
     n_caps = random.randrange(1,5,1)
@@ -12017,7 +12026,7 @@ def scrambler_pyraminx():
         turn_draw("pyraminx",turn)
         draw_scramble("pyraminx")
         
-        print(turn) 
+        # print(turn) 
         accepted = 0
 
    
@@ -12241,7 +12250,7 @@ def scrambler_clock():
         accepted = 0   
 
 
-    print(sum_turns)
+    # print(sum_turns)
     # print(actual_scramble)    
     
     actual_scramble.set(" ".join(sum_turns))
@@ -12272,45 +12281,62 @@ def enter_time():
     chars = set('.')
     if any((c in chars) for c in input_timer.get()):    #encontrou o ponto
         chars = set(':')
-        if any((c in chars) for c in input_timer.get()):        #encontrou o ponto e dois ponto  1:23.54
+        if any((c in chars) for c in input_timer.get()) and precisionTimer == 2:        #encontrou o ponto e dois ponto  1:23.54 e com centesimos
             t = input_timer.get().split(':')        
             t = float(t[0]) * 60 + float(t[1])    
-        else:                                           #encontrou o ponto e nao o dois pontos   12.43
-            t = input_timer.get()        
-    else:        
-        if int(input_timer.get()) >= 10000 and precisionTimer == 2:                
+            t *=100
+        elif not(any((c in chars) for c in input_timer.get())) and precisionTimer == 2:                                         #encontrou o ponto e nao o dois pontos   12.43
+            t = int(float(input_timer.get())*100)
+        
+        if any((c in chars) for c in input_timer.get()) and precisionTimer == 3:        #encontrou o ponto e dois ponto  1:23.54 e com milesimos
+            t = input_timer.get().split(':')        
+            t = float(t[0]) * 60 + float(t[1])    
+            t *=1000
+        elif not(any((c in chars) for c in input_timer.get())) and precisionTimer == 3:                                    #encontrou o ponto e nao o dois pontos   12.43
+            t = int(float(input_timer.get())*1000)
+
+
+    else:        #escrita sem ponto   1354
+        if int(input_timer.get()) >= 10000 and precisionTimer == 2:        #escrita sem ponto (11268) maior que 60 segundo e com centesimos        
             t = int(input_timer.get()) 
+            # print(t)
             x = [int(a) for a in str(t)]
+            # print(x)
             m = x[0]
             s = x[1]*10 + x[2]
             c = (x[3]*10 + x[4])/100
             t = m*60 + s + c 
-            print(t)                                
-        elif int(input_timer.get()) < 10000 and precisionTimer == 2:
-            t = float(input_timer.get())/100  
+            t *=100
+            # print(t)                                
+        elif int(input_timer.get()) < 10000 and precisionTimer == 2: #escrita sem ponto (1354) menor que 60 segundo e com centesimos
+            t = int(input_timer.get())
         
-        elif int(input_timer.get()) >= 100000 and precisionTimer == 3:              
+        elif int(input_timer.get()) >= 100000 and precisionTimer == 3:           #escrita sem ponto (135460) maior que 60 segundo e com milesimos   
             t = int(input_timer.get()) 
             x = [int(a) for a in str(t)]
             m = x[0]
             s = x[1]*10 + x[2]
             c = (x[3]*100 + x[4]*10 + x[5])/1000
             t = m*60 + s + c 
-            print(t)                                
-        elif int(input_timer.get()) < 100000 and precisionTimer == 3:
-            t = float(input_timer.get())/1000  
+            t *=1000
+            # print(t)                                
+        elif int(input_timer.get()) < 100000 and precisionTimer == 3:    #escrita sem ponto (13546) menor que 60 segundo e com milesimos   
+            t = float(input_timer.get())
         
-        
-    
-        
-        
+               
     
     data = datetime.datetime.now()
     datas.append(data)
 
-    tempo = float(t)
-    tempo = trunc(tempo,precisionTimer)
+    tempo = int(t)
+
+    print(tempo)
+    
     tempos.append(tempo)
+
+    print(tempos)
+
+    tempo = trunc(tempo,precisionTimer)
 
     ptempo = time_convert(tempo)        
 
@@ -12468,8 +12494,10 @@ def stop_timer():
         global t0        
         global enable_start_timer 
 
-        dt = t1-t0         
+        dt = (t1-t0)*100
         tempo = dt
+        print(tempo)
+
         
         datas.append(data)
         
@@ -12687,8 +12715,7 @@ def resetar():
     for i in tb_stat.get_children():
         tb_stat.delete(i) 
 
-    
-    
+        
 
 def deletar():
     global tempos
@@ -12747,12 +12774,12 @@ def deletar():
         # print(s1)
         estatistica(s1)
 
-        print(tempos)
+        # print(tempos)
 
 
 def on_press_enter(event):
     if inputVar.get() == 1:
-        print(inputVar.get())
+        # print(inputVar.get())
         enter_time()
 
 
@@ -12774,6 +12801,9 @@ def inputVar_change():
     plot_button.pack() 
     reset_button.pack()
     delete_button.pack()
+
+    write_txt_setting()
+
     
 
 def precisionVar_change():
@@ -12783,7 +12813,9 @@ def precisionVar_change():
         
         
     elif precisionVar.get() == 2:
-        precisionTimer = 3    
+        precisionTimer = 3  
+
+    write_txt_setting()  
 
 
 def holdVar_change():
@@ -12800,6 +12832,8 @@ def holdVar_change():
     elif holdVar.get() == 4:
         holdSpace = 1000
     
+    write_txt_setting()
+    
 def inspecionVar_change():
     global timer_state 
     
@@ -12808,6 +12842,8 @@ def inspecionVar_change():
         
     elif inspecionVar.get() == 1:
         timer_state = 0
+    
+    write_txt_setting()
 
 def scrambleVar_change():
     global timer_state 
@@ -12817,6 +12853,8 @@ def scrambleVar_change():
         
     elif scrambleVar.get() == 1:
         our_canvas.pack() 
+    
+    write_txt_setting()
     
     
 def donothing():
@@ -12865,10 +12903,6 @@ print_timer = tk.Label(root,textvariable = actual_timer)
 print_timer.pack()
 
 input_timer  = tk.Entry(root)
-# input_timer.pack()
-
-
-
 
 
 tb_times = ttk.Treeview(row3)
@@ -12896,11 +12930,6 @@ tb_times.bind('<ButtonRelease-1>', donothing_event )
 
 
 
-
-
-
-
-
 tb_stat = ttk.Treeview(row3)
 
 tb_stat['columns'] = ('tempos','atual', 'melhor')
@@ -12916,23 +12945,6 @@ tb_stat.heading("atual",text="atual",anchor=tk.CENTER)
 tb_stat.heading("melhor",text="melhor",anchor=tk.CENTER)
 
 tb_stat.grid(column = 0, row = 0)
-# tb_stat.insert(parent='',index='end',iid=0,text='',
-# values=('time',str(tempos[-1]),str(global_best_solve)))
-# tb_stat.insert(parent='',index='end',iid=1,text='',
-# values=('mo3',str(media_3),str(best_mo3)))
-# tb_stat.insert(parent='',index='end',iid=2,text='',
-# values=('ao5',str(media_5),str(best_ao5)))
-# tb_stat.insert(parent='',index='end',iid=3,text='',
-# values=('ao12',str(media_12),str(best_ao12)))
-
-
-
-
-# tb_stat.pack()
-
-
-
-
 
 
 scrambler_3x3()
@@ -12946,12 +12958,6 @@ root.bind("<KeyPress-Return>",on_press_enter)
 
 plot_button = tk.Button(master = root,command = plot,	height = 2, width = 10, text = "Plot") 
 plot_button.pack() 
-
-# import_button  = tk.Button(master = root,command = importar,	height = 2, width = 10, text = "Import") 
-# import_button.pack()
-
-# export_button  = tk.Button(master = root,command = exportar,	height = 2, width = 10, text = "Export") 
-# export_button.pack()
 
 reset_button  = tk.Button(master = root,command = resetar,	height = 2, width = 10, text = "Reset") 
 reset_button.pack()
@@ -12987,16 +12993,6 @@ inputVar = tk.IntVar()
 precisionVar = tk.IntVar()
 holdVar = tk.IntVar()
 
-inspecionVar.set(1)
-inputVar.set(2)
-precisionVar.set(1)
-holdVar.set(3)
-scrambleVar.set(1)
-
-
-
-
-
 
 optionmenu.add_checkbutton(label="Tempo de Inspeção", onvalue=1, offvalue=0, variable=inspecionVar, command= inspecionVar_change)
 optionmenu.add_checkbutton(label="Desenho scramble", onvalue=1, offvalue=0, variable=scrambleVar, command= scrambleVar_change)
@@ -13024,5 +13020,64 @@ helpmenu.add_command(label="About...", command=donothing)
 
 
 
+def read_txt_setting():
+
+    try:
+        f = open("Scrambler_Settings.txt", "r")  
+        L = f.readlines()       
+        
+        L0 = L[0].split('=')
+        L1 = L[1].split('=')
+        L2 = L[2].split('=')
+        L3 = L[3].split('=')
+        L4 = L[4].split('=')
+        
+        inspecionVar.set(bool(L0[1]))
+        scrambleVar.set(bool(L1[1]))
+        inputVar.set(L2[1])
+        precisionVar.set(L3[1])
+        holdVar.set(L4[1])        
+
+        inputVar_change()
+        precisionVar_change()
+        holdVar_change()
+        inspecionVar_change()
+        scrambleVar_change()
+        
+        f.close()    
+
+
+    except:
+        f = open("Scrambler_Settings.txt", "x")
+        f.close()
+        inspecionVar.set(1)
+        inputVar.set(2) 
+        precisionVar.set(1)
+        holdVar.set(3)
+        scrambleVar.set(1)
+        eventos.current(1) 
+
+        write_txt_setting()
+    
+    
+
+def write_txt_setting():
+
+    f = open("Scrambler_Settings.txt","w")
+    L = []    
+    L.append('Tempo de inspecao = ' + str(inspecionVar.get()))
+    L.append('\nDesenho Scrambler = ' + str(scrambleVar.get()))
+    L.append('\nDisparador cronometro = ' + str(inputVar.get()))
+    L.append('\nPrecisao = ' + str(precisionVar.get()))
+    L.append('\nTempo hold = ' + str(holdVar.get())) 
+    # L.append('\nTModalidade = ' + str(holdVar.get())) 
+
+   
+    f.writelines(L)
+    f.close()
+
+
+
+read_txt_setting()
 root.config(menu=menubar)
 root.mainloop() 
