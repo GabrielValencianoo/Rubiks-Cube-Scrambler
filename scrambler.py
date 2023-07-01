@@ -7,6 +7,9 @@
 #meta 5 - gerar desenho do scramble
 #meta 6 - ler stackmat
 #meta 10 - ler dados wca e dizer em qual posição estaria 
+#meta 11 - Ler JSON e descobrir se existe dado atualizado - OK
+#meta 12 - download automático dados WCA
+#meta 13 - unzip e ler os dados novamente
 
 import random
 import time
@@ -28,6 +31,14 @@ import os
 from matplotlib.figure import Figure 
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
 NavigationToolbar2Tk)
+
+import requests
+import json
+
+import certifi
+import urllib3
+
+from zipfile import ZipFile
 
 
 root = tk.Tk() 
@@ -91,19 +102,19 @@ precisionTimer = 2
 holdSpace = 550
 enableRanking = 0
 rankingPath = ""
-gender = 'g'
+gender = 0
 
-best_mo3  = 999999
-best_ao5  = 999999
-best_ao12 = 999999
-
-
-media_3  = 999999
-media_5  = 999999
-media_12 = 999999
+best_mo3  = 9999999999
+best_ao5  = 9999999999
+best_ao12 = 9999999999
 
 
-global_best_solve = 999999
+media_3  = 9999999999
+media_5  = 9999999999
+media_12 = 9999999999
+
+
+global_best_solve = 9999999999
 global_worst_solve = 0
 
 index_best_mo3  = 0
@@ -676,11 +687,11 @@ def best_worst(lista,type):
         return global_best_solve, global_worst_solve
         
     if type == "local":
-        local_best_solve = 999999
-        local_best_solve = 999999
+        local_best_solve = 9999999999
+        local_best_solve = 9999999999
         local_best_solve = 9999
-        local_best_solve = 999999
-        local_best_solve = 999999
+        local_best_solve = 9999999999
+        local_best_solve = 9999999999
         local_worst_solve = 0
 
         local_best_solve  = min(lista)        
@@ -815,33 +826,49 @@ def estatistica(index):
     
     tb_times.yview_moveto(1)
 
-    if media_3 != 999999:
+    if media_3 != 9999999999:
         mo_3.append(media_3)
     else:
         mo_3.append(None)
     
-    if media_5 != 999999:
+    if media_5 != 9999999999:
         ao_5.append(media_5)
     else:
         ao_5.append(None)
     
-    if media_12 != 999999:
+    if media_12 != 9999999999:
         ao_12.append(media_12)
     else:
         ao_12.append(None)
     
+
+    ch_event = eventos.get()    
   
     if enableRanking == 1:
-        current_ranking = ranking_position(tempos[index-1],media_5)
-        best_ranking = ranking_position(global_best_solve,best_ao5)
+        if ch_event == '6x6' or ch_event == '7x7':
+        
+            current_ranking = ranking_position(tempos[index-1],media_3)
+            best_ranking = ranking_position(global_best_solve,best_mo3)
 
-        tb_ranking.insert(parent='',index='end',iid=0,text='',
-        values=(str(best_ranking[2]),str(best_ranking[1]),str(best_ranking[0]),str(pglobal_best_solve),str(pbest_ao5),
+            tb_ranking.insert(parent='',index='end',iid=0,text='',
+            values=(str(best_ranking[2]),str(best_ranking[1]),str(best_ranking[0]),str(pglobal_best_solve),str(pbest_mo3),
                 str(best_ranking[3]),str(best_ranking[4]),str(best_ranking[5])))
 
-        tb_ranking.insert(parent='',index='end',iid=1,text='',
-        values=(str(current_ranking[2]),str(current_ranking[1]),str(current_ranking[0]),str(ptempo),str(pmedia_5),
+            tb_ranking.insert(parent='',index='end',iid=1,text='',
+            values=(str(current_ranking[2]),str(current_ranking[1]),str(current_ranking[0]),str(ptempo),str(pmedia_3),
                 str(current_ranking[3]),str(current_ranking[4]),str(current_ranking[5])))
+        
+        else:
+            current_ranking = ranking_position(tempos[index-1],media_5)
+            best_ranking = ranking_position(global_best_solve,best_ao5)
+
+            tb_ranking.insert(parent='',index='end',iid=0,text='',
+            values=(str(best_ranking[2]),str(best_ranking[1]),str(best_ranking[0]),str(pglobal_best_solve),str(pbest_ao5),
+                    str(best_ranking[3]),str(best_ranking[4]),str(best_ranking[5])))
+
+            tb_ranking.insert(parent='',index='end',iid=1,text='',
+            values=(str(current_ranking[2]),str(current_ranking[1]),str(current_ranking[0]),str(ptempo),str(pmedia_5),
+                    str(current_ranking[3]),str(current_ranking[4]),str(current_ranking[5])))
 
     
 
@@ -12106,8 +12133,6 @@ def scrambler_pyraminx():
     
     actual_scramble.set(" ".join(sum_turns))
     
-    
-    
 
 def scrambler_megaminx():
     sum_turns = []
@@ -12127,6 +12152,7 @@ def scrambler_megaminx():
         sum_turns.append(turn)
     
     # print(sum_turns)
+    draw_scramble("megaminx")
     
     actual_scramble.set(" ".join(sum_turns))
           
@@ -12185,7 +12211,7 @@ def scrambler_skewb():
         pr_move = n_move
         accepted = 0
     # print(actual_scramble)    
-    
+    draw_scramble("skewb")
     actual_scramble.set(" ".join(sum_turns))
     
 
@@ -12323,7 +12349,8 @@ def scrambler_clock():
 
 
     # print(sum_turns)
-    # print(actual_scramble)    
+    # print(actual_scramble)   
+    draw_scramble("clock")
     
     actual_scramble.set(" ".join(sum_turns))
     
@@ -12384,12 +12411,12 @@ def create_ranking():
 
     print(pessoas.dtypes)
 
-    if gender == 'f':
+    if gender == 3:
         country_Person = pessoas.query('countryId == @pais and gender == "f"')
         continent_Person = pessoas.query('countryId == @CR and gender == "f"')
         world_Person = pessoas.query('gender == "f"')
         
-    elif gender == 'm':
+    elif gender == 2:
         country_Person = pessoas.query('countryId == @pais and gender == "m"')
         continent_Person = pessoas.query('countryId == @CR and gender == "m"')
         world_Person = pessoas.query('gender == "m"')
@@ -12536,12 +12563,10 @@ def ranking_position(tempo_single,tempo_ao5):
         position_NR_Single = ranking_NR_Single[(ranking_NR_Single.best >= tempo_single)].iloc[0].to_list()[3]
     except:
         position_NR_Single = len(ranking_NR_Single[(ranking_NR_Single.best <= tempo_single)])+1
-
     
 
-    
-
-    
+    if tempo_ao5 == 9999999999:
+        position_WR_Average = position_CR_Average = position_NR_Average = 0  
     
 
     return [position_WR_Single,position_CR_Single,position_NR_Single,
@@ -12916,6 +12941,113 @@ def plot():
     canvas.flush_events()
 
 
+def download_data():
+
+    global rankingPath
+
+    url_API = "https://www.worldcubeassociation.org/api/v0/export/public"
+
+    # 2. download the data behind the URL
+    response = requests.get(url_API)
+
+
+    # 3. Open the response into a new file called instagram.ico
+    open("export_api.json", "wb").write(response.content)
+
+    with open('export_api.json', 'r') as f:
+        data_api = json.load(f)
+
+    print(data_api["export_date"])
+    print(data_api["tsv_url"])
+    print("OK")
+
+
+
+    url = data_api["tsv_url"]
+    url = str(url)
+    print(url)
+
+    metadata_path = rankingPath + "/" + 'metadata.json' if rankingPath != "" else 'metadata.json'
+
+    try:
+        with open(metadata_path, 'r') as f:
+            dado_local = json.load(f)
+            print(dado_local["export_date"])
+
+        if dado_local["export_date"] == data_api["export_date"]:
+            messagebox.showinfo( "Ranking Files", "Arquivos atualizados")
+            return         
+        
+    
+    except:
+        pass
+
+
+
+
+    import certifi
+    import urllib3
+
+    # url = "https://www.worldcubeassociation.org/export/results/WCA_export.tsv.zip"
+
+    file_name = url.split('/')[-1]
+
+    http = urllib3.PoolManager(
+        cert_reqs='CERT_REQUIRED',
+        ca_certs=certifi.where()
+    )
+
+    r = http.request('GET', url, preload_content=False)
+
+    file_size = int(r.headers["Content-Length"])
+
+    file_path = rankingPath + "/" + file_name if rankingPath != "" else file_name
+
+    print(file_path)
+
+    print("Downloading: {} Bytes: {}".format(file_name, file_size))
+
+    file_size_dl = 0
+    block_sz = 8192
+
+    # f = open(file_path, "wb")
+
+    # while True:
+    #     buffer = r.read(block_sz)
+    #     if not buffer:
+    #         break
+
+    #     file_size_dl += len(buffer)
+    #     f.write(buffer)
+    #     status = "{}".format(int(file_size_dl * 100. // file_size))
+    #     #status = status + chr(8)*(len(status)+1)
+    #     print(status)
+
+    # f.close()
+
+    # loading the temp.zip and creating a zip object
+    with ZipFile("WCA_export.tsv.zip", 'r') as zObject:
+    
+        # Extracting all the members of the zip 
+        # into a specific location.
+        # zObject.extractall(path="C:\\Users\\sai mohan pulamolu\\Desktop\\geeks_dir\\temp")
+        # zObject.extractall(rankingPath)
+        zObject.extractall()
+    
+
+    os.remove("WCA_export_championships.tsv") 
+    os.remove("WCA_export_Competitions.tsv") 
+    os.remove("WCA_export_Continents.tsv") 
+    os.remove("WCA_export_eligible_country_iso2s_for_championship.tsv") 
+    os.remove("WCA_export_Events.tsv")     
+    os.remove("WCA_export_Formats.tsv") 
+    os.remove("WCA_export_Results.tsv") 
+    os.remove("WCA_export_Rounds.tsv") 
+    os.remove("WCA_export_RoundTypes.tsv") 
+    os.remove("WCA_export_Scrambles.tsv") 
+    os.remove("README.md") 
+
+
 def importar_ranking():    
     global rankingPath
 
@@ -12991,17 +13123,17 @@ def resetar():
 
     reset_draw()
 
-    global_best_solve = 999999
+    global_best_solve = 9999999999
     global_worst_solve = 0
 
-    best_mo3  = 999999
-    best_ao5  = 999999
-    best_ao12 = 999999
+    best_mo3  = 9999999999
+    best_ao5  = 9999999999
+    best_ao12 = 9999999999
     
 
-    media_3  = 999999
-    media_5  = 999999
-    media_12 = 999999
+    media_3  = 9999999999
+    media_5  = 9999999999
+    media_12 = 9999999999
     
 
     for i in tb_times.get_children():
@@ -13048,15 +13180,15 @@ def deletar():
     ao_5.clear()
     ao_12.clear()
 
-    global_best_solve = 999999    
+    global_best_solve = 9999999999    
     global_worst_solve = 0
 
-    media_3  = 999999
-    media_5  = 999999
-    media_12 = 999999
-    best_mo3  = 999999
-    best_ao5  = 999999
-    best_ao12 = 999999
+    media_3  = 9999999999
+    media_5  = 9999999999
+    media_12 = 9999999999
+    best_mo3  = 9999999999
+    best_ao5  = 9999999999
+    best_ao12 = 9999999999
     
 
     for i in tb_stat.get_children():
@@ -13179,6 +13311,22 @@ def rankingVar_change():
     
     write_txt_setting()    
    
+def genderVar_change():
+    global gender
+    
+    if genderVar.get() == 1:
+        gender = 1  
+        
+    elif genderVar.get() == 2:
+        gender = 2
+    
+    elif genderVar.get() == 3:
+        gender = 3
+        
+        
+    create_ranking()
+    write_txt_setting()   
+
 def donothing():
    filewin = tk.Toplevel(root)
    button = tk.Button(filewin, text="Do nothing button")
@@ -13342,16 +13490,19 @@ optionmenu = tk.Menu(menubar, tearoff=0)
 precisionmenu = tk.Menu(menubar, tearoff=0)
 inputmenu = tk.Menu(menubar, tearoff=0)
 holdmenu = tk.Menu(menubar, tearoff=0)
+rankingmenu = tk.Menu(menubar, tearoff=0)
+gendermenu = tk.Menu(menubar, tearoff=0)
 helpmenu = tk.Menu(menubar, tearoff=0)
 
 menubar.add_cascade(label="File", menu=filemenu)
 menubar.add_cascade(label="Opções", menu=optionmenu)
+menubar.add_cascade(label="Ranking", menu=rankingmenu)
 menubar.add_cascade(label="Help", menu=helpmenu)
 
 
 filemenu.add_command(label="Importar tempos", command=importar_tempos)
 filemenu.add_command(label="Exportar tempos", command=exportar_tempos)
-filemenu.add_command(label="Importar ranking", command=importar_ranking)
+
 
 filemenu.add_separator()
 filemenu.add_command(label="Sair", command=exportar_tempos)
@@ -13362,11 +13513,11 @@ rankingVar = tk.BooleanVar()
 inputVar = tk.IntVar()
 precisionVar = tk.IntVar()
 holdVar = tk.IntVar()
+genderVar = tk.IntVar()
 
 
 optionmenu.add_checkbutton(label="Tempo de Inspeção", onvalue=1, offvalue=0, variable=inspecionVar, command= inspecionVar_change)
 optionmenu.add_checkbutton(label="Desenho scramble", onvalue=1, offvalue=0, variable=scrambleVar, command= scrambleVar_change)
-optionmenu.add_checkbutton(label="Habilitar Ranking ", onvalue=1, offvalue=0, variable=rankingVar, command= rankingVar_change)
 optionmenu.add_cascade(label="Disparador cronômetro", menu=inputmenu)
 optionmenu.add_cascade(label="Precisão timer", menu=precisionmenu)
 optionmenu.add_cascade(label="Tempo segurar Espaço", menu=holdmenu)
@@ -13386,7 +13537,15 @@ holdmenu.add_radiobutton(label="0.55", value=3, variable=holdVar, command= holdV
 holdmenu.add_radiobutton(label="1", value=4, variable=holdVar, command= holdVar_change)
 
 
-helpmenu.add_command(label="Help Index", command=donothing)
+rankingmenu.add_command(label="Importar ranking", command=importar_ranking)
+rankingmenu.add_checkbutton(label="Habilitar Ranking ", onvalue=1, offvalue=0, variable=rankingVar, command= rankingVar_change)
+rankingmenu.add_cascade(label="Gênero", menu=gendermenu)
+
+gendermenu.add_radiobutton(label="*", value=1, variable=genderVar, command= genderVar_change)
+gendermenu.add_radiobutton(label="m", value=2, variable=genderVar, command= genderVar_change)
+gendermenu.add_radiobutton(label="f", value=3, variable=genderVar, command= genderVar_change)
+
+helpmenu.add_command(label="Help Index", command=download_data)
 helpmenu.add_command(label="About...", command=donothing)
 
 
@@ -13406,6 +13565,7 @@ def read_txt_setting():
         L5 = L[5].split('=')
         L6 = L[6].split('=')
         L7 = L[7].split('=')        
+        L8 = L[8].split('=')        
         
         inspecionVar.set(L0[1].strip())
         scrambleVar.set(L1[1].strip())        
@@ -13414,7 +13574,8 @@ def read_txt_setting():
         holdVar.set(L4[1])           
         eventos.current(L5[1])           
         rankingVar.set(L6[1].strip())
-        rankingPath = L7[1]           
+        genderVar.set(L7[1])                   
+        rankingPath = L8[1]
           
 
         inputVar_change()
@@ -13423,7 +13584,9 @@ def read_txt_setting():
         inspecionVar_change()
         scrambleVar_change()
         change_event(L5[1])
-        rankingVar_change()            
+        genderVar_change()  
+        rankingVar_change()     
+        
         
         f.close()    
 
@@ -13438,6 +13601,7 @@ def read_txt_setting():
         scrambleVar.set(1)
         eventos.current(1) 
         rankingVar.set(0)
+        genderVar.set(0)
 
         inputVar_change()
         precisionVar_change()
@@ -13454,6 +13618,7 @@ def read_txt_setting():
 
 def write_txt_setting():
     global rankingPath    
+    global gender
 
     f = open("Scrambler_Settings.txt","w")
     L = []    
@@ -13464,7 +13629,9 @@ def write_txt_setting():
     L.append('\nTempo hold = ' + str(holdVar.get())) 
     L.append('\nModalidade = ' + str(eventos.current()))     
     L.append('\nHabilitar Ranking = ' + str(rankingVar.get())) 
+    L.append('\nGênero =' + str(gender)) 
     L.append('\nRanking Path =' + str(rankingPath)) 
+    
    
     f.writelines(L)
     f.close()
