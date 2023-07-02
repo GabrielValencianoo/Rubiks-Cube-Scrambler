@@ -12972,6 +12972,7 @@ def download_data():
     try:
         with open(metadata_path, 'r') as f:
             dado_local = json.load(f)
+            print(data_api["export_date"])
             print(dado_local["export_date"])
 
         if dado_local["export_date"] == data_api["export_date"]:
@@ -12982,7 +12983,7 @@ def download_data():
     except:
         pass
 
-
+        # ----------------------------------------------------------------------------------------
 
 
     import certifi
@@ -13024,29 +13025,40 @@ def download_data():
     #     print(status)
 
     # f.close()
+def unzip_database():
+    global rankingPath
+
+    name_file = askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
+                           filetypes =(("ZIP Files","*.zip"),("All Files","*.*")),title = "Choose a file.")
+
+    print(name_file)    
+    rankingPath = name_file.replace(name_file.split('/')[-1],'')
+    print(rankingPath)
 
     # loading the temp.zip and creating a zip object
-    with ZipFile("WCA_export.tsv.zip", 'r') as zObject:
+    with ZipFile(name_file, 'r') as zObject:
     
         # Extracting all the members of the zip 
         # into a specific location.
         # zObject.extractall(path="C:\\Users\\sai mohan pulamolu\\Desktop\\geeks_dir\\temp")
-        # zObject.extractall(rankingPath)
-        zObject.extractall()
+        zObject.extractall(rankingPath)       
     
 
-    os.remove("WCA_export_championships.tsv") 
-    os.remove("WCA_export_Competitions.tsv") 
-    os.remove("WCA_export_Continents.tsv") 
-    os.remove("WCA_export_eligible_country_iso2s_for_championship.tsv") 
-    os.remove("WCA_export_Events.tsv")     
-    os.remove("WCA_export_Formats.tsv") 
-    os.remove("WCA_export_Results.tsv") 
-    os.remove("WCA_export_Rounds.tsv") 
-    os.remove("WCA_export_RoundTypes.tsv") 
-    os.remove("WCA_export_Scrambles.tsv") 
-    os.remove("README.md") 
+    os.remove(rankingPath+"WCA_export_championships.tsv") 
+    os.remove(rankingPath+"WCA_export_Competitions.tsv") 
+    os.remove(rankingPath+"WCA_export_Continents.tsv") 
+    os.remove(rankingPath+"WCA_export_eligible_country_iso2s_for_championship.tsv") 
+    os.remove(rankingPath+"WCA_export_Events.tsv")     
+    os.remove(rankingPath+"WCA_export_Formats.tsv") 
+    os.remove(rankingPath+"WCA_export_Results.tsv") 
+    os.remove(rankingPath+"WCA_export_Rounds.tsv") 
+    os.remove(rankingPath+"WCA_export_RoundTypes.tsv") 
+    os.remove(rankingPath+"WCA_export_Scrambles.tsv") 
+    os.remove(rankingPath+"README.md") 
 
+    create_ranking()
+
+    messagebox.showinfo( "Warning", "Import concluido.")
 
 def importar_ranking():    
     global rankingPath
@@ -13327,6 +13339,23 @@ def genderVar_change():
     create_ranking()
     write_txt_setting()   
 
+    for i in tb_stat.get_children():
+        tb_stat.delete(i) 
+
+    for i in tb_times.get_children():
+        tb_times.delete(i) 
+
+
+    for i in tb_ranking.get_children():
+        tb_ranking.delete(i) 
+
+    s1 = 0
+    for solve in range(len(tempos)):
+        s1 += 1
+        
+        # print(s1)
+        estatistica(s1)
+
 def donothing():
    filewin = tk.Toplevel(root)
    button = tk.Button(filewin, text="Do nothing button")
@@ -13538,6 +13567,7 @@ holdmenu.add_radiobutton(label="1", value=4, variable=holdVar, command= holdVar_
 
 
 rankingmenu.add_command(label="Importar ranking", command=importar_ranking)
+rankingmenu.add_command(label="Unzip ranking", command=unzip_database)
 rankingmenu.add_checkbutton(label="Habilitar Ranking ", onvalue=1, offvalue=0, variable=rankingVar, command= rankingVar_change)
 rankingmenu.add_cascade(label="Gênero", menu=gendermenu)
 
