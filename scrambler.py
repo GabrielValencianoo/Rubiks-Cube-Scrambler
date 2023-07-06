@@ -103,6 +103,7 @@ holdSpace = 550
 enableRanking = 0
 rankingPath = ""
 gender = 0
+saveTime = 0
 
 best_mo3  = 9999999999
 best_ao5  = 9999999999
@@ -12940,52 +12941,7 @@ def plot():
 
     canvas.flush_events()
 
-
 def download_data():
-
-    global rankingPath
-
-    url_API = "https://www.worldcubeassociation.org/api/v0/export/public"
-
-    # 2. download the data behind the URL
-    response = requests.get(url_API)
-
-
-    # 3. Open the response into a new file called instagram.ico
-    open("export_api.json", "wb").write(response.content)
-
-    with open('export_api.json', 'r') as f:
-        data_api = json.load(f)
-
-    print(data_api["export_date"])
-    print(data_api["tsv_url"])
-    print("OK")
-
-
-
-    url = data_api["tsv_url"]
-    url = str(url)
-    print(url)
-
-    metadata_path = rankingPath + "/" + 'metadata.json' if rankingPath != "" else 'metadata.json'
-
-    try:
-        with open(metadata_path, 'r') as f:
-            dado_local = json.load(f)
-            print(data_api["export_date"])
-            print(dado_local["export_date"])
-
-        if dado_local["export_date"] == data_api["export_date"]:
-            messagebox.showinfo( "Ranking Files", "Arquivos atualizados")
-            return         
-        
-    
-    except:
-        pass
-
-        # ----------------------------------------------------------------------------------------
-
-
     import certifi
     import urllib3
 
@@ -13025,6 +12981,57 @@ def download_data():
     #     print(status)
 
     # f.close()
+
+def update_ranking():
+
+    global rankingPath
+
+    url_API = "https://www.worldcubeassociation.org/api/v0/export/public"
+
+    # 2. download the data behind the URL
+    response = requests.get(url_API)
+
+
+    # 3. Open the response into a new file called instagram.ico
+    open("export_api.json", "wb").write(response.content)
+
+    with open('export_api.json', 'r') as f:
+        data_api = json.load(f)
+
+    print(data_api["export_date"])
+    print(data_api["tsv_url"])
+    print("OK")
+
+
+
+    url = data_api["tsv_url"]
+    url = str(url)
+    print(url)
+
+    metadata_path = rankingPath + "/" + 'metadata.json' if rankingPath != "" else 'metadata.json'
+
+    try:
+        with open(metadata_path, 'r') as f:
+            dado_local = json.load(f)
+            print(data_api["export_date"])
+            print(dado_local["export_date"])
+
+        if dado_local["export_date"] == data_api["export_date"]:
+            messagebox.showinfo( "Ranking Files", "Arquivos atualizados")
+            return  
+        else:   
+            res = messagebox.askquestion( "Ranking Files", "Arquivo não atualizado. \n Deseja atualizar ?")     
+            if res == 'yes':
+                download_data()
+            else:
+                pass    
+        
+    
+    except:
+        pass
+        # ----------------------------------------------------------------------------------------
+
+
 def unzip_database():
     global rankingPath
 
@@ -13269,6 +13276,7 @@ def precisionVar_change():
 
 def holdVar_change():
     global holdSpace
+
     if holdVar.get() == 1:
         holdSpace = 0        
         
@@ -13294,18 +13302,28 @@ def inspecionVar_change():
     
     write_txt_setting()
 
-def scrambleVar_change():
-    global timer_state 
+def scrambleVar_change():    
     
     if scrambleVar.get() == 0:
         our_canvas.grid_forget() 
         
-    elif scrambleVar.get() == 1:        
-        # our_canvas.pack() 
+    elif scrambleVar.get() == 1:                
         our_canvas.grid(row = 5, column = 1, sticky = tk.E, pady = 2)
     
     write_txt_setting()
     
+
+
+def savetimeVar_change():
+    global saveTime 
+    
+    if savetimeVar.get() == 0:
+        saveTime = 0
+        
+    elif savetimeVar.get() == 1:       
+        saveTime = 1
+    
+    write_txt_setting()
   
 def rankingVar_change():
     global timer_state 
@@ -13318,8 +13336,7 @@ def rankingVar_change():
     elif rankingVar.get() == 1:
         enableRanking = 1
         tb_ranking.grid(row = 1, column = 1, columnspan = 2, rowspan = 2, sticky = tk.W, pady = 2)
-        create_ranking()
-        
+        create_ranking()        
     
     write_txt_setting()    
    
@@ -13538,6 +13555,7 @@ filemenu.add_command(label="Sair", command=exportar_tempos)
 
 inspecionVar = tk.BooleanVar()
 scrambleVar = tk.BooleanVar()
+savetimeVar = tk.BooleanVar()
 rankingVar = tk.BooleanVar()
 inputVar = tk.IntVar()
 precisionVar = tk.IntVar()
@@ -13547,6 +13565,7 @@ genderVar = tk.IntVar()
 
 optionmenu.add_checkbutton(label="Tempo de Inspeção", onvalue=1, offvalue=0, variable=inspecionVar, command= inspecionVar_change)
 optionmenu.add_checkbutton(label="Desenho scramble", onvalue=1, offvalue=0, variable=scrambleVar, command= scrambleVar_change)
+optionmenu.add_checkbutton(label="Guardar tempos", onvalue=1, offvalue=0, variable=savetimeVar, command= savetimeVar_change)
 optionmenu.add_cascade(label="Disparador cronômetro", menu=inputmenu)
 optionmenu.add_cascade(label="Precisão timer", menu=precisionmenu)
 optionmenu.add_cascade(label="Tempo segurar Espaço", menu=holdmenu)
@@ -13570,6 +13589,7 @@ rankingmenu.add_command(label="Importar ranking", command=importar_ranking)
 rankingmenu.add_command(label="Unzip ranking", command=unzip_database)
 rankingmenu.add_checkbutton(label="Habilitar Ranking ", onvalue=1, offvalue=0, variable=rankingVar, command= rankingVar_change)
 rankingmenu.add_cascade(label="Gênero", menu=gendermenu)
+rankingmenu.add_command(label="Verificar update", command=update_ranking)
 
 gendermenu.add_radiobutton(label="*", value=1, variable=genderVar, command= genderVar_change)
 gendermenu.add_radiobutton(label="m", value=2, variable=genderVar, command= genderVar_change)
@@ -13596,6 +13616,7 @@ def read_txt_setting():
         L6 = L[6].split('=')
         L7 = L[7].split('=')        
         L8 = L[8].split('=')        
+        L9 = L[9].split('=')        
         
         inspecionVar.set(L0[1].strip())
         scrambleVar.set(L1[1].strip())        
@@ -13604,8 +13625,9 @@ def read_txt_setting():
         holdVar.set(L4[1])           
         eventos.current(L5[1])           
         rankingVar.set(L6[1].strip())
-        genderVar.set(L7[1])                   
-        rankingPath = L8[1]
+        genderVar.set(L7[1])                           
+        savetimeVar.set(L8[1].strip())        
+        rankingPath = L9[1]
           
 
         inputVar_change()
@@ -13615,14 +13637,14 @@ def read_txt_setting():
         scrambleVar_change()
         change_event(L5[1])
         genderVar_change()  
-        rankingVar_change()     
-        
+        savetimeVar_change()         
+        rankingVar_change()             
         
         f.close()    
 
 
     except:
-        f = open("Scrambler_Settings.txt", "x")
+        f = open("Scrambler_Settings.txt", "w")
         f.close()
         inspecionVar.set(1)
         inputVar.set(2) 
@@ -13632,6 +13654,8 @@ def read_txt_setting():
         eventos.current(1) 
         rankingVar.set(0)
         genderVar.set(0)
+        inspecionVar.set(1)
+        savetimeVar.set(0)        
 
         inputVar_change()
         precisionVar_change()
@@ -13640,6 +13664,7 @@ def read_txt_setting():
         scrambleVar_change()
         change_event(rankingPath)
         rankingVar_change()
+        savetimeVar_change()         
         create_ranking()
         
         write_txt_setting()
@@ -13659,7 +13684,8 @@ def write_txt_setting():
     L.append('\nTempo hold = ' + str(holdVar.get())) 
     L.append('\nModalidade = ' + str(eventos.current()))     
     L.append('\nHabilitar Ranking = ' + str(rankingVar.get())) 
-    L.append('\nGênero =' + str(gender)) 
+    L.append('\nGênero =' + str(gender))     
+    L.append('\nSalvar tempo = ' + str(savetimeVar.get()))
     L.append('\nRanking Path =' + str(rankingPath)) 
     
    
