@@ -98,6 +98,8 @@ ao_12 = []
 scrambles = []
 datas = []
 
+first_scan = False
+flag_change_event = False   
 precisionTimer = 2
 holdSpace = 550
 enableRanking = 0
@@ -842,6 +844,8 @@ def estatistica(index):
     else:
         ao_12.append(None)
     
+    if saveTime == 1 and first_scan == False and flag_change_event == False:
+        update_file_tempos()    
 
     ch_event = eventos.get()    
   
@@ -12854,9 +12858,13 @@ def stop_timer():
        
         
 def change_event(event):  
+    global flag_change_event
+    flag_change_event = True
 
     resetar()     
-    create_ranking()    
+    create_ranking()   
+    # guardar_tempos() 
+    importar_tempos()
     
     global flag_7_event 
     flag_7_event = 0        
@@ -12881,8 +12889,9 @@ def change_event(event):
     elif ch_event == 'skewb':
         scrambler_skewb()                  
     elif ch_event == 'clock':
-        scrambler_clock()        
-    
+        scrambler_clock()  
+
+    flag_change_event = False   
     write_txt_setting()       
 
 def plot():   
@@ -12945,7 +12954,7 @@ def download_data():
     import certifi
     import urllib3
 
-    # url = "https://www.worldcubeassociation.org/export/results/WCA_export.tsv.zip"
+    url = "https://www.worldcubeassociation.org/export/results/WCA_export.tsv.zip"
 
     file_name = url.split('/')[-1]
 
@@ -13021,8 +13030,9 @@ def update_ranking():
             return  
         else:   
             res = messagebox.askquestion( "Ranking Files", "Arquivo não atualizado. \n Deseja atualizar ?")     
-            if res == 'yes':
-                download_data()
+            if res == 'yes':                
+                pass
+                # download_data()
             else:
                 pass    
         
@@ -13079,30 +13089,40 @@ def importar_ranking():
 
 def importar_tempos():    
 
-    name_file = askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
-                           filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
-   
-    with open(name_file, mode='r') as csv_file:
-        csv_reader = csv.DictReader(csv_file, delimiter=';')
-        line_count = 0
-        resetar()
-        for row in csv_reader:                         
-            print(f'\t{row["No."]} ; {row["Time"]} ; {row["Scramble"]} ; {row["Date"]}.')            
+    global first_scan
+    global flag_change_event
+    if first_scan == False and flag_change_event == False:
+        name_file = askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
+                            filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
+    elif first_scan == True or flag_change_event == True:
+        name_file = eventos.get() + '.csv'
+    
+
+
+    try:
+        with open(name_file, mode='r') as csv_file:
+            csv_reader = csv.DictReader(csv_file, delimiter=';')
+            line_count = 0
+            resetar()
+            for row in csv_reader:                         
+                print(f'\t{row["No."]} ; {row["Time"]} ; {row["Scramble"]} ; {row["Date"]}.')            
+                    
+                tempos.append(float(row["Time"]))            
+                scrambles.append(row["Scramble"])
+                datas.append(row["Date"])
+
+
+                line_count += 1
+                estatistica(line_count)
                 
-            tempos.append(float(row["Time"]))            
-            scrambles.append(row["Scramble"])
-            datas.append(row["Date"])
 
-
-            line_count += 1
-            estatistica(line_count)
-            
-
-        print(f'Processed {line_count} lines.')
+            print(f'Processed {line_count} lines.')
+    except:        
+        print("nao foi possivel importar")
         
 
 def exportar_tempos():
-
+    
     name_file = filedialog.asksaveasfilename(defaultextension=".csv")
     name_file = str(name_file)
 
@@ -13116,6 +13136,35 @@ def exportar_tempos():
 
     messagebox.showinfo( "Warning", "Export completo.")
      
+def update_file_tempos():    
+    name_file = eventos.get()  
+    name_file = name_file + '.csv'
+
+    with open(name_file, mode='a') as employee_file:
+        employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        employee_writer.writerow([len(tempos), tempos[-1], scrambles[-1], datas[-1]])
+
+def guardar_tempos():    
+    events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
+    name_file = eventos.get() 
+    name_file = name_file + '.csv'  
+    for event in events:
+        name_file = event
+        name_file = name_file + '.csv' 
+        with open(name_file, mode='w') as employee_file:
+            employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            employee_writer.writerow(["No.", "Time", "Scramble","Date"])
+            
+            if event == eventos.get():
+                for i in range(len(tempos)):
+                    employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i]])
+    
+    messagebox.showinfo( "Warning", "Export completo.")
+
+    
+    
+
 
 def resetar():
     global tempos
@@ -13132,6 +13181,9 @@ def resetar():
     global media_3
     global media_5
     global media_12
+
+    global first_scan
+    global flag_change_event
 
     tempos.clear()
     mo_3.clear()
@@ -13168,6 +13220,13 @@ def resetar():
 
     for i in tb_ranking.get_children():
         tb_ranking.delete(i) 
+    
+    if flag_change_event == False and first_scan == False:    
+        name_file = eventos.get() 
+        name_file = name_file + '.csv'  
+        with open(name_file, mode='w') as employee_file:
+            employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            employee_writer.writerow(["No.", "Time", "Scramble","Date"])
 
 def deletar():
     global tempos
@@ -13316,12 +13375,17 @@ def scrambleVar_change():
 
 def savetimeVar_change():
     global saveTime 
+    global first_scan
     
     if savetimeVar.get() == 0:
         saveTime = 0
         
     elif savetimeVar.get() == 1:       
         saveTime = 1
+        if first_scan == True:
+            importar_tempos()
+        elif first_scan == False:
+            guardar_tempos()         
     
     write_txt_setting()
   
@@ -13603,6 +13667,9 @@ helpmenu.add_command(label="About...", command=donothing)
 def read_txt_setting():
 
     global rankingPath
+    global first_scan
+
+    first_scan = True
     try:
         f = open("Scrambler_Settings.txt", "r")  
         L = f.readlines()       
@@ -13668,7 +13735,7 @@ def read_txt_setting():
         create_ranking()
         
         write_txt_setting()
-    
+    first_scan = False
     
 
 def write_txt_setting():
