@@ -11,6 +11,7 @@
 #meta 12 - download automático dados WCA
 #meta 13 - unzip e ler os dados novamente
 
+
 import random
 import time
 # from msvcrt import getch
@@ -35,10 +36,16 @@ NavigationToolbar2Tk)
 import requests
 import json
 
-import certifi
-import urllib3
+# import certifi
+# import urllib3
 
 from zipfile import ZipFile
+
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+import mpl_toolkits.mplot3d.art3d as art3d
+
 
 
 root = tk.Tk() 
@@ -138,7 +145,12 @@ ranking_NR_Single = pd.DataFrame()
 our_canvas=tk.Canvas(row4,width=450,height=350,bg="white")
 # our_canvas.pack(side = tk.RIGHT,anchor = tk.S)
 
+fig = plt.figure()
+canvas = FigureCanvasTkAgg(fig,	master = root) 
+
 #faces
+
+
 
 
 
@@ -11218,6 +11230,7 @@ def draw_scramble(cube):
         pass
     elif cube == "clock":
         pass
+    plot3D(cube)
 
 
 def next_scramble():
@@ -12950,46 +12963,3520 @@ def plot():
 
     canvas.flush_events()
 
+
+
+def plot3D(cube):      
+    
+    ax = fig.add_subplot(projection='3d')      
+    ax.set_aspect("auto")
+    ax.set_autoscale_on(True)  
+    ax.dist = 20
+    # ax.set_box_aspect(None, zoom=10)
+
+    if cube == "2x2":
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, edgecolor='k', facecolor=Lr_color_2[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1,  edgecolor='k',facecolor=Lr_color_2[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')        
+
+        side = Rectangle((1, 0), 1, 1,  edgecolor='k',facecolor=Lr_color_2[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1,  edgecolor='k',facecolor=Lr_color_2[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')     
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1,  edgecolor='k',facecolor=Vd_color_2[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1,  edgecolor='k',facecolor=Vd_color_2[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        
+
+        side = Rectangle((1, 0), 1, 1,  edgecolor='k',facecolor=Vd_color_2[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1,  edgecolor='k',facecolor=Vd_color_2[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1,  edgecolor='k',facecolor=Am_color_2[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1,  edgecolor='k',facecolor=Am_color_2[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')       
+
+        side = Rectangle((1, 0), 1, 1,  edgecolor='k',facecolor=Am_color_2[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1,  edgecolor='k',facecolor=Am_color_2[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1,  edgecolor='k',facecolor=Vm_color_2[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1,  edgecolor='k',facecolor=Vm_color_2[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='x')        
+
+        side = Rectangle((1, 0), 1, 1,  edgecolor='k',facecolor=Vm_color_2[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1,  edgecolor='k',facecolor=Vm_color_2[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='x')
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1,  edgecolor='k',facecolor=Az_color_2[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1,  edgecolor='k',facecolor=Az_color_2[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='y')       
+
+        side = Rectangle((1, 0), 1, 1,  edgecolor='k',facecolor=Az_color_2[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1,  edgecolor='k',facecolor=Az_color_2[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='y')
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1,  edgecolor='k',facecolor=Br_color_2[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1,  edgecolor='k',facecolor=Br_color_2[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='z')
+
+        
+        side = Rectangle((1, 0), 1, 1,  edgecolor='k',facecolor=Br_color_2[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1,  edgecolor='k',facecolor=Br_color_2[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=2, zdir='z')     
+
+
+
+ 
+    
+    if cube == "3x3":
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Lr_color_3[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Lr_color_3[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Lr_color_3[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Lr_color_3[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Lr_color_3[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Lr_color_3[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Lr_color_3[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Lr_color_3[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Lr_color_3[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        # for i in range(3):
+        #     for j in range(3):
+        #         side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color_3[2-j][2-i])
+        #         ax.add_patch(side)
+        #         art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+
+     
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Vd_color_3[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vd_color_3[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vd_color_3[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vd_color_3[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vd_color_3[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vd_color_3[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vd_color_3[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vd_color_3[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vd_color_3[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        # for i in range(3):
+        #     for j in range(3):
+        #         side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color_3[2-j][i])
+        #         ax.add_patch(side)
+        #         art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Am_color_3[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Am_color_3[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Am_color_3[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Am_color_3[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Am_color_3[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Am_color_3[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Am_color_3[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Am_color_3[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Am_color_3[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        # for i in range(3):
+        #     for j in range(3):
+        #         side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color_3[j][i])
+        #         ax.add_patch(side)
+        #         art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+
+
+
+
+
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Vm_color_3[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vm_color_3[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vm_color_3[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vm_color_3[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vm_color_3[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vm_color_3[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vm_color_3[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vm_color_3[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vm_color_3[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Az_color_3[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Az_color_3[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Az_color_3[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Az_color_3[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Az_color_3[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Az_color_3[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Az_color_3[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Az_color_3[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Az_color_3[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Br_color_3[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Br_color_3[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Br_color_3[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Br_color_3[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Br_color_3[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Br_color_3[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Br_color_3[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Br_color_3[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Br_color_3[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
+
+    
+    
+    if cube == "4x4":
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Lr_color_4[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Lr_color_4[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Lr_color_4[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Lr_color_4[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Lr_color_4[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Lr_color_4[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Lr_color_4[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Lr_color_4[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Lr_color_4[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Lr_color_4[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Lr_color_4[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Lr_color_4[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Lr_color_4[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Lr_color_4[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Lr_color_4[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Lr_color_4[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Vd_color_4[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vd_color_4[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vd_color_4[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Vd_color_4[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vd_color_4[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vd_color_4[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vd_color_4[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Vd_color_4[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vd_color_4[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vd_color_4[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vd_color_4[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Vd_color_4[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Vd_color_4[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Vd_color_4[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Vd_color_4[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Vd_color_4[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Am_color_4[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Am_color_4[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Am_color_4[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Am_color_4[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Am_color_4[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Am_color_4[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Am_color_4[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Am_color_4[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Am_color_4[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Am_color_4[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Am_color_4[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Am_color_4[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Am_color_4[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Am_color_4[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Am_color_4[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Am_color_4[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+
+
+
+
+
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Vm_color_4[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vm_color_4[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vm_color_4[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Vm_color_4[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vm_color_4[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vm_color_4[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vm_color_4[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Vm_color_4[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vm_color_4[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vm_color_4[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vm_color_4[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Vm_color_4[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Vm_color_4[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Vm_color_4[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Vm_color_4[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Vm_color_4[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Az_color_4[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Az_color_4[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Az_color_4[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Az_color_4[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Az_color_4[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Az_color_4[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Az_color_4[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Az_color_4[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Az_color_4[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Az_color_4[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Az_color_4[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Az_color_4[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Az_color_4[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Az_color_4[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Az_color_4[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Az_color_4[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Br_color_4[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Br_color_4[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Br_color_4[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Br_color_4[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Br_color_4[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Br_color_4[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Br_color_4[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Br_color_4[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Br_color_4[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Br_color_4[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Br_color_4[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Br_color_4[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Br_color_4[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Br_color_4[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Br_color_4[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Br_color_4[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
+
+    if cube == "5x5":
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Lr_color_5[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Lr_color_5[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Lr_color_5[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Lr_color_5[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Lr_color_5[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Lr_color_5[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Lr_color_5[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Lr_color_5[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Lr_color_5[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Lr_color_5[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Lr_color_5[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Lr_color_5[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Lr_color_5[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Lr_color_5[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Lr_color_5[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Lr_color_5[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Lr_color_5[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Lr_color_5[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Lr_color_5[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Lr_color_5[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Lr_color_5[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Lr_color_5[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Lr_color_5[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Lr_color_5[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Lr_color_5[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Vd_color_5[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vd_color_5[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vd_color_5[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Vd_color_5[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Vd_color_5[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vd_color_5[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vd_color_5[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vd_color_5[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Vd_color_5[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Vd_color_5[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vd_color_5[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vd_color_5[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vd_color_5[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Vd_color_5[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Vd_color_5[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Vd_color_5[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Vd_color_5[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Vd_color_5[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Vd_color_5[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Vd_color_5[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Vd_color_5[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Vd_color_5[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Vd_color_5[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Vd_color_5[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Vd_color_5[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Am_color_5[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Am_color_5[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Am_color_5[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Am_color_5[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Am_color_5[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Am_color_5[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Am_color_5[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Am_color_5[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Am_color_5[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Am_color_5[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Am_color_5[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Am_color_5[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Am_color_5[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Am_color_5[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Am_color_5[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Am_color_5[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Am_color_5[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Am_color_5[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Am_color_5[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Am_color_5[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Am_color_5[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Am_color_5[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Am_color_5[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Am_color_5[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Am_color_5[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Vm_color_5[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vm_color_5[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vm_color_5[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Vm_color_5[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Vm_color_5[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vm_color_5[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vm_color_5[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vm_color_5[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Vm_color_5[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Vm_color_5[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vm_color_5[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vm_color_5[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vm_color_5[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Vm_color_5[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Vm_color_5[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Vm_color_5[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Vm_color_5[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Vm_color_5[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Vm_color_5[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Vm_color_5[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Vm_color_5[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Vm_color_5[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Vm_color_5[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Vm_color_5[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Vm_color_5[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Az_color_5[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Az_color_5[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Az_color_5[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Az_color_5[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Az_color_5[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Az_color_5[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Az_color_5[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Az_color_5[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Az_color_5[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Az_color_5[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Az_color_5[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Az_color_5[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Az_color_5[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Az_color_5[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Az_color_5[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Az_color_5[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Az_color_5[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Az_color_5[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Az_color_5[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Az_color_5[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Az_color_5[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Az_color_5[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Az_color_5[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Az_color_5[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Az_color_5[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Br_color_5[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Br_color_5[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Br_color_5[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Br_color_5[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Br_color_5[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Br_color_5[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Br_color_5[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Br_color_5[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Br_color_5[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Br_color_5[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Br_color_5[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Br_color_5[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Br_color_5[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Br_color_5[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Br_color_5[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Br_color_5[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Br_color_5[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Br_color_5[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Br_color_5[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Br_color_5[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Br_color_5[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Br_color_5[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Br_color_5[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Br_color_5[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Br_color_5[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
+
+    if cube == "6x6":
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Lr_color_6[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Lr_color_6[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Lr_color_6[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Lr_color_6[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Lr_color_6[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Lr_color_6[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Lr_color_6[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Lr_color_6[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Lr_color_6[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Lr_color_6[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Lr_color_6[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Lr_color_6[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Lr_color_6[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Lr_color_6[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Lr_color_6[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Lr_color_6[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Lr_color_6[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Lr_color_6[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Lr_color_6[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Lr_color_6[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Lr_color_6[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Lr_color_6[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Lr_color_6[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Lr_color_6[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Lr_color_6[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Lr_color_6[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Lr_color_6[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Lr_color_6[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Lr_color_6[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Lr_color_6[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Lr_color_6[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Lr_color_6[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Lr_color_6[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Lr_color_6[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Lr_color_6[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Lr_color_6[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Vd_color_6[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vd_color_6[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vd_color_6[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Vd_color_6[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Vd_color_6[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Vd_color_6[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vd_color_6[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vd_color_6[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vd_color_6[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Vd_color_6[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Vd_color_6[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Vd_color_6[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vd_color_6[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vd_color_6[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vd_color_6[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Vd_color_6[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Vd_color_6[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Vd_color_6[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Vd_color_6[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Vd_color_6[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Vd_color_6[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Vd_color_6[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Vd_color_6[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Vd_color_6[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Vd_color_6[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Vd_color_6[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Vd_color_6[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Vd_color_6[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Vd_color_6[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Vd_color_6[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Vd_color_6[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Vd_color_6[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Vd_color_6[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Vd_color_6[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Vd_color_6[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Vd_color_6[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Am_color_6[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Am_color_6[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Am_color_6[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Am_color_6[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Am_color_6[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Am_color_6[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Am_color_6[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Am_color_6[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Am_color_6[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Am_color_6[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Am_color_6[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Am_color_6[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Am_color_6[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Am_color_6[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Am_color_6[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Am_color_6[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Am_color_6[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Am_color_6[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Am_color_6[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Am_color_6[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Am_color_6[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Am_color_6[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Am_color_6[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Am_color_6[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Am_color_6[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Am_color_6[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Am_color_6[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Am_color_6[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Am_color_6[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Am_color_6[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Am_color_6[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Am_color_6[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Am_color_6[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Am_color_6[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Am_color_6[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Am_color_6[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Vm_color_6[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vm_color_6[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vm_color_6[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Vm_color_6[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Vm_color_6[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Vm_color_6[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vm_color_6[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vm_color_6[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vm_color_6[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Vm_color_6[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Vm_color_6[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Vm_color_6[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vm_color_6[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vm_color_6[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vm_color_6[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Vm_color_6[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Vm_color_6[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Vm_color_6[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Vm_color_6[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Vm_color_6[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Vm_color_6[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Vm_color_6[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Vm_color_6[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Vm_color_6[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Vm_color_6[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Vm_color_6[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Vm_color_6[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Vm_color_6[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Vm_color_6[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Vm_color_6[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Vm_color_6[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Vm_color_6[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Vm_color_6[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Vm_color_6[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Vm_color_6[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Vm_color_6[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Az_color_6[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Az_color_6[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Az_color_6[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Az_color_6[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Az_color_6[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Az_color_6[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Az_color_6[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Az_color_6[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Az_color_6[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Az_color_6[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Az_color_6[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Az_color_6[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Az_color_6[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Az_color_6[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Az_color_6[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Az_color_6[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Az_color_6[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Az_color_6[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Az_color_6[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Az_color_6[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Az_color_6[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Az_color_6[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Az_color_6[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Az_color_6[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Az_color_6[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Az_color_6[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Az_color_6[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Az_color_6[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Az_color_6[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Az_color_6[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Az_color_6[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Az_color_6[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Az_color_6[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Az_color_6[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Az_color_6[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Az_color_6[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Br_color_6[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Br_color_6[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Br_color_6[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Br_color_6[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Br_color_6[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Br_color_6[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Br_color_6[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Br_color_6[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Br_color_6[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Br_color_6[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Br_color_6[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Br_color_6[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Br_color_6[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Br_color_6[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Br_color_6[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Br_color_6[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Br_color_6[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Br_color_6[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Br_color_6[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Br_color_6[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Br_color_6[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Br_color_6[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Br_color_6[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Br_color_6[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Br_color_6[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Br_color_6[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Br_color_6[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Br_color_6[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Br_color_6[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Br_color_6[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Br_color_6[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Br_color_6[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Br_color_6[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Br_color_6[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Br_color_6[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Br_color_6[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
+
+    if cube == "7x7":
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Lr_color_7[6][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Lr_color_7[5][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Lr_color_7[4][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Lr_color_7[3][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Lr_color_7[2][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Lr_color_7[1][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((0, 6), 1, 1, facecolor=Lr_color_7[0][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Lr_color_7[6][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Lr_color_7[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Lr_color_7[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Lr_color_7[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Lr_color_7[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Lr_color_7[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((1, 6), 1, 1, facecolor=Lr_color_7[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Lr_color_7[6][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Lr_color_7[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Lr_color_7[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Lr_color_7[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Lr_color_7[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Lr_color_7[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((2, 6), 1, 1, facecolor=Lr_color_7[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Lr_color_7[6][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Lr_color_7[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Lr_color_7[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Lr_color_7[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Lr_color_7[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Lr_color_7[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((3, 6), 1, 1, facecolor=Lr_color_7[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Lr_color_7[6][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Lr_color_7[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Lr_color_7[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Lr_color_7[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Lr_color_7[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Lr_color_7[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((4, 6), 1, 1, facecolor=Lr_color_7[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Lr_color_7[6][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Lr_color_7[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Lr_color_7[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Lr_color_7[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Lr_color_7[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Lr_color_7[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((5, 6), 1, 1, facecolor=Lr_color_7[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((6, 0), 1, 1, facecolor=Lr_color_7[6][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((6, 1), 1, 1, facecolor=Lr_color_7[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((6, 2), 1, 1, facecolor=Lr_color_7[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((6, 3), 1, 1, facecolor=Lr_color_7[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((6, 4), 1, 1, facecolor=Lr_color_7[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((6, 5), 1, 1, facecolor=Lr_color_7[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+        side = Rectangle((6, 6), 1, 1, facecolor=Lr_color_7[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Vd_color_7[6][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vd_color_7[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vd_color_7[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Vd_color_7[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Vd_color_7[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Vd_color_7[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((0, 6), 1, 1, facecolor=Vd_color_7[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vd_color_7[6][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vd_color_7[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vd_color_7[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Vd_color_7[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Vd_color_7[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Vd_color_7[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((1, 6), 1, 1, facecolor=Vd_color_7[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vd_color_7[6][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vd_color_7[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vd_color_7[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Vd_color_7[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Vd_color_7[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Vd_color_7[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((2, 6), 1, 1, facecolor=Vd_color_7[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Vd_color_7[6][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Vd_color_7[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Vd_color_7[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Vd_color_7[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Vd_color_7[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Vd_color_7[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((3, 6), 1, 1, facecolor=Vd_color_7[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Vd_color_7[6][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Vd_color_7[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Vd_color_7[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Vd_color_7[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Vd_color_7[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Vd_color_7[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((4, 6), 1, 1, facecolor=Vd_color_7[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Vd_color_7[6][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Vd_color_7[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Vd_color_7[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Vd_color_7[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Vd_color_7[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Vd_color_7[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((5, 6), 1, 1, facecolor=Vd_color_7[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((6, 0), 1, 1, facecolor=Vd_color_7[6][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((6, 1), 1, 1, facecolor=Vd_color_7[5][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((6, 2), 1, 1, facecolor=Vd_color_7[4][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((6, 3), 1, 1, facecolor=Vd_color_7[3][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((6, 4), 1, 1, facecolor=Vd_color_7[2][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((6, 5), 1, 1, facecolor=Vd_color_7[1][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+        side = Rectangle((6, 6), 1, 1, facecolor=Vd_color_7[0][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
+
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Am_color_7[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Am_color_7[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Am_color_7[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Am_color_7[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Am_color_7[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Am_color_7[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((0, 6), 1, 1, facecolor=Am_color_7[6][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Am_color_7[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Am_color_7[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Am_color_7[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Am_color_7[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Am_color_7[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Am_color_7[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((1, 6), 1, 1, facecolor=Am_color_7[6][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Am_color_7[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Am_color_7[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Am_color_7[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Am_color_7[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Am_color_7[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Am_color_7[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((2, 6), 1, 1, facecolor=Am_color_7[6][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Am_color_7[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Am_color_7[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Am_color_7[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Am_color_7[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Am_color_7[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Am_color_7[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((3, 6), 1, 1, facecolor=Am_color_7[6][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Am_color_7[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Am_color_7[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Am_color_7[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Am_color_7[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Am_color_7[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Am_color_7[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((4, 6), 1, 1, facecolor=Am_color_7[6][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Am_color_7[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Am_color_7[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Am_color_7[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Am_color_7[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Am_color_7[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Am_color_7[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((5, 6), 1, 1, facecolor=Am_color_7[6][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((6, 0), 1, 1, facecolor=Am_color_7[0][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((6, 1), 1, 1, facecolor=Am_color_7[1][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((6, 2), 1, 1, facecolor=Am_color_7[2][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((6, 3), 1, 1, facecolor=Am_color_7[3][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((6, 4), 1, 1, facecolor=Am_color_7[4][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((6, 5), 1, 1, facecolor=Am_color_7[5][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+        side = Rectangle((6, 6), 1, 1, facecolor=Am_color_7[6][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
+
+
+        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        side = Rectangle((0, 0), 1, 1, facecolor=Vm_color_7[6][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Vm_color_7[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Vm_color_7[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Vm_color_7[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Vm_color_7[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Vm_color_7[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((0, 6), 1, 1, facecolor=Vm_color_7[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Vm_color_7[6][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Vm_color_7[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Vm_color_7[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Vm_color_7[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Vm_color_7[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Vm_color_7[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((1, 6), 1, 1, facecolor=Vm_color_7[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Vm_color_7[6][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Vm_color_7[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Vm_color_7[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Vm_color_7[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Vm_color_7[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Vm_color_7[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((2, 6), 1, 1, facecolor=Vm_color_7[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Vm_color_7[6][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Vm_color_7[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Vm_color_7[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Vm_color_7[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Vm_color_7[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Vm_color_7[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((3, 6), 1, 1, facecolor=Vm_color_7[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Vm_color_7[6][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Vm_color_7[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Vm_color_7[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Vm_color_7[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Vm_color_7[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Vm_color_7[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((4, 6), 1, 1, facecolor=Vm_color_7[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Vm_color_7[6][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Vm_color_7[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Vm_color_7[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Vm_color_7[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Vm_color_7[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Vm_color_7[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((5, 6), 1, 1, facecolor=Vm_color_7[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((6, 0), 1, 1, facecolor=Vm_color_7[6][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((6, 1), 1, 1, facecolor=Vm_color_7[5][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((6, 2), 1, 1, facecolor=Vm_color_7[4][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((6, 3), 1, 1, facecolor=Vm_color_7[3][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((6, 4), 1, 1, facecolor=Vm_color_7[2][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((6, 5), 1, 1, facecolor=Vm_color_7[1][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+        side = Rectangle((6, 6), 1, 1, facecolor=Vm_color_7[0][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
+
+
+        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+        side = Rectangle((0, 0), 1, 1, facecolor=Az_color_7[6][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Az_color_7[5][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Az_color_7[4][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Az_color_7[3][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Az_color_7[2][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Az_color_7[1][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((0, 6), 1, 1, facecolor=Az_color_7[0][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Az_color_7[6][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Az_color_7[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Az_color_7[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Az_color_7[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Az_color_7[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Az_color_7[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((1, 6), 1, 1, facecolor=Az_color_7[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Az_color_7[6][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Az_color_7[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Az_color_7[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Az_color_7[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Az_color_7[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Az_color_7[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((2, 6), 1, 1, facecolor=Az_color_7[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Az_color_7[6][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Az_color_7[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Az_color_7[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Az_color_7[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Az_color_7[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Az_color_7[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((3, 6), 1, 1, facecolor=Az_color_7[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Az_color_7[6][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Az_color_7[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Az_color_7[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Az_color_7[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Az_color_7[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Az_color_7[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((4, 6), 1, 1, facecolor=Az_color_7[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Az_color_7[6][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Az_color_7[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Az_color_7[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Az_color_7[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Az_color_7[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Az_color_7[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((5, 6), 1, 1, facecolor=Az_color_7[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((6, 0), 1, 1, facecolor=Az_color_7[6][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((6, 1), 1, 1, facecolor=Az_color_7[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((6, 2), 1, 1, facecolor=Az_color_7[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((6, 3), 1, 1, facecolor=Az_color_7[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((6, 4), 1, 1, facecolor=Az_color_7[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((6, 5), 1, 1, facecolor=Az_color_7[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+        side = Rectangle((6, 6), 1, 1, facecolor=Az_color_7[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
+
+
+
+        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+        side = Rectangle((0, 0), 1, 1, facecolor=Br_color_7[6][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((0, 1), 1, 1, facecolor=Br_color_7[5][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((0, 2), 1, 1, facecolor=Br_color_7[4][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((0, 3), 1, 1, facecolor=Br_color_7[3][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((0, 4), 1, 1, facecolor=Br_color_7[2][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((0, 5), 1, 1, facecolor=Br_color_7[1][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((0, 6), 1, 1, facecolor=Br_color_7[0][0])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((1, 0), 1, 1, facecolor=Br_color_7[6][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((1, 1), 1, 1, facecolor=Br_color_7[5][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((1, 2), 1, 1, facecolor=Br_color_7[4][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((1, 3), 1, 1, facecolor=Br_color_7[3][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((1, 4), 1, 1, facecolor=Br_color_7[2][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((1, 5), 1, 1, facecolor=Br_color_7[1][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((1, 6), 1, 1, facecolor=Br_color_7[0][1])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((2, 0), 1, 1, facecolor=Br_color_7[6][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((2, 1), 1, 1, facecolor=Br_color_7[5][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((2, 2), 1, 1, facecolor=Br_color_7[4][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((2, 3), 1, 1, facecolor=Br_color_7[3][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((2, 4), 1, 1, facecolor=Br_color_7[2][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((2, 5), 1, 1, facecolor=Br_color_7[1][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((2, 6), 1, 1, facecolor=Br_color_7[0][2])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((3, 0), 1, 1, facecolor=Br_color_7[6][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((3, 1), 1, 1, facecolor=Br_color_7[5][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((3, 2), 1, 1, facecolor=Br_color_7[4][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((3, 3), 1, 1, facecolor=Br_color_7[3][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((3, 4), 1, 1, facecolor=Br_color_7[2][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((3, 5), 1, 1, facecolor=Br_color_7[1][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((3, 6), 1, 1, facecolor=Br_color_7[0][3])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((4, 0), 1, 1, facecolor=Br_color_7[6][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((4, 1), 1, 1, facecolor=Br_color_7[5][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((4, 2), 1, 1, facecolor=Br_color_7[4][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((4, 3), 1, 1, facecolor=Br_color_7[3][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((4, 4), 1, 1, facecolor=Br_color_7[2][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((4, 5), 1, 1, facecolor=Br_color_7[1][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((4, 6), 1, 1, facecolor=Br_color_7[0][4])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((5, 0), 1, 1, facecolor=Br_color_7[6][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((5, 1), 1, 1, facecolor=Br_color_7[5][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((5, 2), 1, 1, facecolor=Br_color_7[4][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((5, 3), 1, 1, facecolor=Br_color_7[3][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((5, 4), 1, 1, facecolor=Br_color_7[2][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((5, 5), 1, 1, facecolor=Br_color_7[1][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((5, 6), 1, 1, facecolor=Br_color_7[0][5])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((6, 0), 1, 1, facecolor=Br_color_7[6][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((6, 1), 1, 1, facecolor=Br_color_7[5][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((6, 2), 1, 1, facecolor=Br_color_7[4][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((6, 3), 1, 1, facecolor=Br_color_7[3][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((6, 4), 1, 1, facecolor=Br_color_7[2][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((6, 5), 1, 1, facecolor=Br_color_7[1][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+        side = Rectangle((6, 6), 1, 1, facecolor=Br_color_7[0][6])
+        ax.add_patch(side)
+        art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
+
+
+
+
+
+
+
+
+
+    # Hide axes ticks
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_zticks([])
+    # ax.set_visible(False)
+    # ax.set_facecolor('pink')    
+
+	
+    canvas.draw() 
+
+	# placing the canvas on the Tkinter root 
+    canvas.get_tk_widget().pack()      
+
+
+	# creating the Matplotlib toolbar 
+    # toolbar = NavigationToolbar2Tk(canvas,root) 
+    # toolbar.update() 
+
+	# placing the toolbar on the Tkinter root 
+    # canvas.get_tk_widget().pack() 
+
+    canvas.flush_events()
+
+
+
+
+def progresso_bloco(count, tamanho_bloco, tamanho_total):
+    percentual = count * tamanho_bloco * 100 // tamanho_total
+    print(f"\r{percentual}%", end='')
+    messagebox.showinfo( "Warning", percentual)
+
 def download_data():
-    import certifi
-    import urllib3
-
-    url = "https://www.worldcubeassociation.org/export/results/WCA_export.tsv.zip"
-
-    file_name = url.split('/')[-1]
-
-    http = urllib3.PoolManager(
-        cert_reqs='CERT_REQUIRED',
-        ca_certs=certifi.where()
-    )
-
-    r = http.request('GET', url, preload_content=False)
-
-    file_size = int(r.headers["Content-Length"])
-
-    file_path = rankingPath + "/" + file_name if rankingPath != "" else file_name
-
-    print(file_path)
-
-    print("Downloading: {} Bytes: {}".format(file_name, file_size))
-
-    file_size_dl = 0
-    block_sz = 8192
-
-    # f = open(file_path, "wb")
-
-    # while True:
-    #     buffer = r.read(block_sz)
-    #     if not buffer:
-    #         break
-
-    #     file_size_dl += len(buffer)
-    #     f.write(buffer)
-    #     status = "{}".format(int(file_size_dl * 100. // file_size))
-    #     #status = status + chr(8)*(len(status)+1)
-    #     print(status)
-
-    # f.close()
+    import urllib.request
+    global rankingPath
+    url =  "https://www.worldcubeassociation.org/export/results/WCA_export.tsv.zip"
+    nome_do_arquivo = rankingPath + '/' + 'WCA_export.zip'
+    print (nome_do_arquivo)
+    urllib.request.urlretrieve(url, nome_do_arquivo, reporthook=progresso_bloco)
+   
 
 def update_ranking():
 
@@ -13030,30 +16517,39 @@ def update_ranking():
             return  
         else:   
             res = messagebox.askquestion( "Ranking Files", "Arquivo não atualizado. \n Deseja atualizar ?")     
-            if res == 'yes':                
-                pass
-                # download_data()
+            if res == 'yes':                                
+                download_data()
+                unzip_database()
+
             else:
                 pass    
         
     
     except:
-        pass
+        res = messagebox.askquestion( "Ranking Files", "Arquivos não encontrados. \n Deseja baixa-los ?")     
+        if res == 'yes':                                
+            download_data()
+            unzip_database()
+
+        else:
+            pass            
         # ----------------------------------------------------------------------------------------
 
 
 def unzip_database():
     global rankingPath
+    nome_do_arquivo = rankingPath + '/' + 'WCA_export.zip'
 
-    name_file = askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
-                           filetypes =(("ZIP Files","*.zip"),("All Files","*.*")),title = "Choose a file.")
+    # name_file = askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
+    #                        filetypes =(("ZIP Files","*.zip"),("All Files","*.*")),title = "Choose a file.")
 
-    print(name_file)    
-    rankingPath = name_file.replace(name_file.split('/')[-1],'')
-    print(rankingPath)
+    # print(name_file)    
+    # rankingPath = name_file.replace(name_file.split('/')[-1],'')
+    # print(rankingPath)
+    
 
     # loading the temp.zip and creating a zip object
-    with ZipFile(name_file, 'r') as zObject:
+    with ZipFile(nome_do_arquivo, 'r') as zObject:
     
         # Extracting all the members of the zip 
         # into a specific location.
@@ -13068,7 +16564,7 @@ def unzip_database():
     os.remove(rankingPath+"WCA_export_Events.tsv")     
     os.remove(rankingPath+"WCA_export_Formats.tsv") 
     os.remove(rankingPath+"WCA_export_Results.tsv") 
-    os.remove(rankingPath+"WCA_export_Rounds.tsv") 
+    # os.remove(rankingPath+"WCA_export_Rounds.tsv") 
     os.remove(rankingPath+"WCA_export_RoundTypes.tsv") 
     os.remove(rankingPath+"WCA_export_Scrambles.tsv") 
     os.remove(rankingPath+"README.md") 
@@ -13382,10 +16878,10 @@ def savetimeVar_change():
         
     elif savetimeVar.get() == 1:       
         saveTime = 1
-        if first_scan == True:
-            importar_tempos()
-        elif first_scan == False:
-            guardar_tempos()         
+        # if first_scan == True:
+        #     importar_tempos()
+        # elif first_scan == False:
+        #     guardar_tempos()         
     
     write_txt_setting()
   
@@ -13400,7 +16896,7 @@ def rankingVar_change():
     elif rankingVar.get() == 1:
         enableRanking = 1
         tb_ranking.grid(row = 1, column = 1, columnspan = 2, rowspan = 2, sticky = tk.W, pady = 2)
-        create_ranking()        
+        # create_ranking()        
     
     write_txt_setting()    
    
@@ -13671,70 +17167,73 @@ def read_txt_setting():
 
     first_scan = True
     try:
-        f = open("Scrambler_Settings.txt", "r")  
-        L = f.readlines()       
-        
-        L0 = L[0].split('=')
-        L1 = L[1].split('=')
-        L2 = L[2].split('=')
-        L3 = L[3].split('=')
-        L4 = L[4].split('=')
-        L5 = L[5].split('=')
-        L6 = L[6].split('=')
-        L7 = L[7].split('=')        
-        L8 = L[8].split('=')        
-        L9 = L[9].split('=')        
-        
-        inspecionVar.set(L0[1].strip())
-        scrambleVar.set(L1[1].strip())        
-        inputVar.set(L2[1])
-        precisionVar.set(L3[1])
-        holdVar.set(L4[1])           
-        eventos.current(L5[1])           
-        rankingVar.set(L6[1].strip())
-        genderVar.set(L7[1])                           
-        savetimeVar.set(L8[1].strip())        
-        rankingPath = L9[1]
-          
+        if first_scan == True:
+            f = open("Scrambler_Settings.txt", "r")  
+            L = f.readlines()       
+            
+            L0 = L[0].split('=')
+            L1 = L[1].split('=')
+            L2 = L[2].split('=')
+            L3 = L[3].split('=')
+            L4 = L[4].split('=')
+            L5 = L[5].split('=')
+            L6 = L[6].split('=')
+            L7 = L[7].split('=')        
+            L8 = L[8].split('=')        
+            L9 = L[9].split('=')        
+            
+            inspecionVar.set(L0[1].strip())
+            scrambleVar.set(L1[1].strip())        
+            inputVar.set(L2[1])
+            precisionVar.set(L3[1])
+            holdVar.set(L4[1])           
+            eventos.current(L5[1])           
+            rankingVar.set(L6[1].strip())
+            genderVar.set(L7[1])                           
+            savetimeVar.set(L8[1].strip())        
+            rankingPath = L9[1]
+            
 
-        inputVar_change()
-        precisionVar_change()
-        holdVar_change()
-        inspecionVar_change()
-        scrambleVar_change()
-        change_event(L5[1])
-        genderVar_change()  
-        savetimeVar_change()         
-        rankingVar_change()             
-        
-        f.close()    
+            inputVar_change()
+            precisionVar_change()
+            holdVar_change()
+            inspecionVar_change()
+            scrambleVar_change()
+            # change_event(L5[1])
+            genderVar_change()  
+            savetimeVar_change()         
+            rankingVar_change()             
+            
+            f.close()    
 
 
     except:
-        f = open("Scrambler_Settings.txt", "w")
-        f.close()
-        inspecionVar.set(1)
-        inputVar.set(2) 
-        precisionVar.set(1)
-        holdVar.set(3)
-        scrambleVar.set(1)
-        eventos.current(1) 
-        rankingVar.set(0)
-        genderVar.set(0)
-        inspecionVar.set(1)
-        savetimeVar.set(0)        
+        if first_scan == True:
+            f = open("Scrambler_Settings.txt", "w")
+            
+            inspecionVar.set(1)
+            inputVar.set(2) 
+            precisionVar.set(1)
+            holdVar.set(3)
+            scrambleVar.set(1)
+            eventos.current(1) 
+            rankingVar.set(0)
+            genderVar.set(0)
+            inspecionVar.set(1)
+            savetimeVar.set(0)        
 
-        inputVar_change()
-        precisionVar_change()
-        holdVar_change()
-        inspecionVar_change()
-        scrambleVar_change()
-        change_event(rankingPath)
-        rankingVar_change()
-        savetimeVar_change()         
-        create_ranking()
-        
-        write_txt_setting()
+            inputVar_change()
+            precisionVar_change()
+            holdVar_change()
+            inspecionVar_change()
+            scrambleVar_change()
+            change_event(rankingPath)
+            rankingVar_change()
+            savetimeVar_change()         
+            create_ranking()
+            f.close()
+            
+            write_txt_setting()
     first_scan = False
     
 
