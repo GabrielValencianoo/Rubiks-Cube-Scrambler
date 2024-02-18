@@ -12795,6 +12795,15 @@ def cancel_do_space_longpress():
     if _do_space_longpress:
         root.after_cancel(_do_space_longpress)
 
+def atualizar_label():
+    global t0
+    global actual_timer
+    if timer_state == 4:
+        tempo_decorrido = time.time() - t0
+        minutos, segundos = divmod(tempo_decorrido, 60)
+        segundos, centesimos = divmod(segundos, 1)
+        actual_timer.set(f"{int(minutos):02d}:{int(segundos):02d}:{int(centesimos*100):02d}")
+        root.after(10, atualizar_label)
                 
 def start_timer():  
     global enable_start_timer    
@@ -12808,11 +12817,12 @@ def start_timer():
         print("rodando........")
 
         global actual_timer
-        actual_timer.set("rodando........")
+        # actual_timer.set("rodando........")
 
         timer_state = 4
         global run_inspecton
         run_inspecton = False
+        atualizar_label()
     
 def stop_timer(): 
     
