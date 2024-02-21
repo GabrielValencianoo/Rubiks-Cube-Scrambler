@@ -253,234 +253,100 @@ Buffer_pyra = np.full((3, 5), 0)
 #-------------------------------------------------------------------------------------------
  
 
-Br_color_2 = np.array([["white","white"],                       
-                       ["white","white"]])
+Br_color_2 = np.full((2, 2), "white")
 
-Lr_color_2 = np.array([["orange","orange"],                       
-                       ["orange","orange"]]) 
+Lr_color_2 =  np.full((2, 2), "orange")
 
-Vd_color_2 = np.array([["green","green"],                       
-                       ["green","green"]])
+Vd_color_2 =  np.full((2, 2), "green")
 
-Vm_color_2 = np.array([["red","red"],                       
-                       ["red","red"]])
+Vm_color_2 =  np.full((2, 2), "red")
 
-Az_color_2 = np.array([["blue","blue"],                       
-                       ["blue","blue"]])
+Az_color_2 =  np.full((2, 2), "blue")
 
-Am_color_2 = np.array([["yellow","yellow"],                       
-                       ["yellow","yellow"]])
+Am_color_2 =  np.full((2, 2), "yellow")
 
 # ------------------------------------------------------
 
-Br_color_3 = np.array([["white","white","white"],
-                       ["white","white","white"],
-                       ["white","white","white"]])
+Br_color_3 = np.full((3, 3), "white")
 
-Lr_color_3 = np.array([["orange","orange","orange"],
-                       ["orange","orange","orange"],
-                       ["orange","orange","orange"]]) 
+Lr_color_3 = np.full((3, 3), "orange")
 
-Vd_color_3 = np.array([["green","green","green"],
-                       ["green","green","green"],
-                       ["green","green","green"]])
+Vd_color_3 = np.full((3, 3), "green")
 
-Vm_color_3 = np.array([["red","red","red"],
-                       ["red","red","red"],
-                       ["red","red","red"]])
+Vm_color_3 = np.full((3, 3), "red")
 
-Az_color_3 = np.array([["blue","blue","blue"],
-                       ["blue","blue","blue"],
-                       ["blue","blue","blue"]])
+Az_color_3 = np.full((3, 3), "blue")
 
-Am_color_3 = np.array([["yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow"]])
+Am_color_3 = np.full((3, 3), "yellow")
 
 
 # ------------------------------------------------------
 
-Br_color_4 = np.array([["white","white","white","white"],
-                       ["white","white","white","white"],
-                       ["white","white","white","white"],
-                       ["white","white","white","white"]])
+Br_color_4 = np.full((4, 4), "white")
 
-Lr_color_4 = np.array([["orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange"]]) 
+Lr_color_4 = np.full((4, 4), "orange")
 
-Vd_color_4 = np.array([["green","green","green","green"],
-                       ["green","green","green","green"],
-                       ["green","green","green","green"],
-                       ["green","green","green","green"]])
+Vd_color_4 = np.full((4, 4), "green")
 
-Vm_color_4 = np.array([["red","red","red","red"],
-                       ["red","red","red","red"],
-                       ["red","red","red","red"],
-                       ["red","red","red","red"]])
+Vm_color_4 = np.full((4, 4), "red")
 
-Az_color_4 = np.array([["blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue"]])
+Az_color_4 = np.full((4, 4), "blue")
 
-Am_color_4 = np.array([["yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow"]])
+Am_color_4 = np.full((4, 4), "yellow")
 
 # ------------------------------------------------------------
 
-Br_color_5 = np.array([["white","white","white","white","white"],
-                       ["white","white","white","white","white"],
-                       ["white","white","white","white","white"],
-                       ["white","white","white","white","white"],
-                       ["white","white","white","white","white"]])
+Br_color_5 = np.full((5, 5), "white")
 
-Lr_color_5 = np.array([["orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange"]]) 
+Lr_color_5 = np.full((5, 5), "orange")
 
-Vd_color_5 = np.array([["green","green","green","green","green"],
-                       ["green","green","green","green","green"],
-                       ["green","green","green","green","green"],
-                       ["green","green","green","green","green"],
-                       ["green","green","green","green","green"]])
+Vd_color_5 = np.full((5, 5), "green")
 
-Vm_color_5 = np.array([["red","red","red","red","red"],
-                       ["red","red","red","red","red"],
-                       ["red","red","red","red","red"],
-                       ["red","red","red","red","red"],
-                       ["red","red","red","red","red"]])
+Vm_color_5 = np.full((5, 5), "red")
 
-Az_color_5 = np.array([["blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue"]])
+Az_color_5 = np.full((5, 5), "blue")
 
-Am_color_5 = np.array([["yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow"]])
+Am_color_5 = np.full((5, 5), "yellow")
                        
 
 #-------------------------------------------------------------------
 
-Br_color_6 = np.array([["white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white"]])
+Br_color_6 = np.full((6, 6), "white")
 
-Lr_color_6 = np.array([["orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange"]]) 
+Lr_color_6 = np.full((6, 6), "orange")
 
-Vd_color_6 = np.array([["green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green"]])
+Vd_color_6 = np.full((6, 6), "green")
 
-Vm_color_6 = np.array([["red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red"]])
+Vm_color_6 = np.full((6, 6), "red")
 
-Az_color_6 = np.array([["blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue"]])
+Az_color_6 = np.full((6, 6), "blue")
 
-Am_color_6 = np.array([["yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow"]])
+Am_color_6 = np.full((6, 6), "yellow")
 
 
 # -----------------------------------------------------------------------
 
-Br_color_7 = np.array([["white","white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white","white"],
-                       ["white","white","white","white","white","white","white"]])
+Br_color_7 = np.full((7, 7), "white")
 
-Lr_color_7 = np.array([["orange","orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange","orange"],
-                       ["orange","orange","orange","orange","orange","orange","orange"]]) 
+Lr_color_7 = np.full((7, 7), "orange")
 
-Vd_color_7 = np.array([["green","green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green","green"],
-                       ["green","green","green","green","green","green","green"]])
+Vd_color_7 = np.full((7, 7), "green")
 
-Vm_color_7 = np.array([["red","red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red","red"],
-                       ["red","red","red","red","red","red","red"]])
+Vm_color_7 = np.full((7, 7), "red")
 
-Az_color_7 = np.array([["blue","blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue","blue","blue"]])
+Az_color_7 = np.full((7, 7), "blue")
 
-Am_color_7 = np.array([["yellow","yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow","yellow","yellow"]])
+Am_color_7 = np.full((7, 7), "yellow")
 
 # -----------------------------------------------------------------------
 
-Vd_color_pyra = np.array([["green","green","green","green","green"],
-                       ["green","green","green","green","green"],                       
-                       ["green","green","green","green","green"]])
+Vd_color_pyra = np.full((3, 5), "green")
 
-Vm_color_pyra = np.array([["red","red","red","red","red"],
-                       ["red","red","red","red","red"],                       
-                       ["red","red","red","red","red"]])
+Vm_color_pyra = np.full((3, 5), "red")
 
-Az_color_pyra = np.array([["blue","blue","blue","blue","blue"],
-                       ["blue","blue","blue","blue","blue"],                       
-                       ["blue","blue","blue","blue","blue"]])
+Az_color_pyra = np.full((3, 5), "blue")
 
-Am_color_pyra = np.array([["yellow","yellow","yellow","yellow","yellow"],
-                       ["yellow","yellow","yellow","yellow","yellow"],                       
-                       ["yellow","yellow","yellow","yellow","yellow"]])
+Am_color_pyra = np.full((3, 5), "yellow")
 
 def trunc(n, decimals=0):
     
