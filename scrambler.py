@@ -253,90 +253,6 @@ Buffer_pyra = np.full((3, 5), 0)
 #-------------------------------------------------------------------------------------------
  
 
-Br_color_2 = np.full((2, 2), "white")
-
-Lr_color_2 =  np.full((2, 2), "orange")
-
-Vd_color_2 =  np.full((2, 2), "green")
-
-Vm_color_2 =  np.full((2, 2), "red")
-
-Az_color_2 =  np.full((2, 2), "blue")
-
-Am_color_2 =  np.full((2, 2), "yellow")
-
-# ------------------------------------------------------
-
-Br_color_3 = np.full((3, 3), "white")
-
-Lr_color_3 = np.full((3, 3), "orange")
-
-Vd_color_3 = np.full((3, 3), "green")
-
-Vm_color_3 = np.full((3, 3), "red")
-
-Az_color_3 = np.full((3, 3), "blue")
-
-Am_color_3 = np.full((3, 3), "yellow")
-
-
-# ------------------------------------------------------
-
-Br_color_4 = np.full((4, 4), "white")
-
-Lr_color_4 = np.full((4, 4), "orange")
-
-Vd_color_4 = np.full((4, 4), "green")
-
-Vm_color_4 = np.full((4, 4), "red")
-
-Az_color_4 = np.full((4, 4), "blue")
-
-Am_color_4 = np.full((4, 4), "yellow")
-
-# ------------------------------------------------------------
-
-Br_color_5 = np.full((5, 5), "white")
-
-Lr_color_5 = np.full((5, 5), "orange")
-
-Vd_color_5 = np.full((5, 5), "green")
-
-Vm_color_5 = np.full((5, 5), "red")
-
-Az_color_5 = np.full((5, 5), "blue")
-
-Am_color_5 = np.full((5, 5), "yellow")
-                       
-
-#-------------------------------------------------------------------
-
-Br_color_6 = np.full((6, 6), "white")
-
-Lr_color_6 = np.full((6, 6), "orange")
-
-Vd_color_6 = np.full((6, 6), "green")
-
-Vm_color_6 = np.full((6, 6), "red")
-
-Az_color_6 = np.full((6, 6), "blue")
-
-Am_color_6 = np.full((6, 6), "yellow")
-
-
-# -----------------------------------------------------------------------
-
-Br_color_7 = np.full((7, 7), "white")
-
-Lr_color_7 = np.full((7, 7), "orange")
-
-Vd_color_7 = np.full((7, 7), "green")
-
-Vm_color_7 = np.full((7, 7), "red")
-
-Az_color_7 = np.full((7, 7), "blue")
-
-Am_color_7 = np.full((7, 7), "yellow")
 
 # -----------------------------------------------------------------------
 
@@ -9342,49 +9258,7 @@ def draw_scramble(cube):
     global Vm_pyra
     global Az_pyra
     global Am_pyra
-
-    global Br_color_2 
-    global Lr_color_2 
-    global Vd_color_2 
-    global Vm_color_2 
-    global Az_color_2 
-    global Am_color_2    
-
-    global Br_color_3 
-    global Lr_color_3 
-    global Vd_color_3 
-    global Vm_color_3 
-    global Az_color_3 
-    global Am_color_3 
-
-    global Br_color_4  
-    global Lr_color_4    
-    global Vd_color_4    
-    global Vm_color_4    
-    global Az_color_4    
-    global Am_color_4
-
-    global Br_color_5  
-    global Lr_color_5    
-    global Vd_color_5    
-    global Vm_color_5    
-    global Az_color_5    
-    global Am_color_5
-
-    global Br_color_6  
-    global Lr_color_6    
-    global Vd_color_6    
-    global Vm_color_6    
-    global Az_color_6    
-    global Am_color_6          
-
-    global Br_color_7  
-    global Lr_color_7    
-    global Vd_color_7    
-    global Vm_color_7    
-    global Az_color_7    
-    global Am_color_7 
-
+    
     global Br_color_pyra 
     global Lr_color_pyra 
     global Vd_color_pyra 
@@ -9392,1325 +9266,1354 @@ def draw_scramble(cube):
     global Az_color_pyra 
     global Am_color_pyra
 
+    n = 0
+
+    if cube == "2x2":
+        n = 2
+    if cube == "3x3":
+        n = 3
+    if cube == "4x4":
+        n = 4
+    if cube == "5x5":
+        n = 5
+    if cube == "6x6":
+        n = 6
+    if cube == "7x7":
+        n = 7
+    
+    Br_color = np.full((n,n), "white")
+
+    Lr_color =  np.full((n,n), "orange")
+
+    Vd_color =  np.full((n,n), "green")
+
+    Vm_color =  np.full((n,n), "red")
+
+    Az_color =  np.full((n,n), "blue")
+
+    Am_color =  np.full((n,n), "yellow")
+
+        
+
     our_canvas.delete("all")
 
    
     if cube == "2x2":
 
-        Br_color_2 = np.where(Br_2 != 1, Br_color_2,"white")
-        Lr_color_2 = np.where(Lr_2 != 1, Lr_color_2,"white")
-        Vd_color_2 = np.where(Vd_2 != 1, Vd_color_2,"white")
-        Vm_color_2 = np.where(Vm_2 != 1, Vm_color_2,"white")
-        Az_color_2 = np.where(Az_2 != 1, Az_color_2,"white")    
-        Am_color_2 = np.where(Am_2 != 1, Am_color_2,"white")  
+        Br_color = np.where(Br_2 != 1, Br_color,"white")
+        Lr_color = np.where(Lr_2 != 1, Lr_color,"white")
+        Vd_color = np.where(Vd_2 != 1, Vd_color,"white")
+        Vm_color = np.where(Vm_2 != 1, Vm_color,"white")
+        Az_color = np.where(Az_2 != 1, Az_color,"white")    
+        Am_color = np.where(Am_2 != 1, Am_color,"white")  
 
-        Br_color_2 = np.where(Br_2 != 2, Br_color_2,"orange")
-        Lr_color_2 = np.where(Lr_2 != 2, Lr_color_2,"orange")
-        Vd_color_2 = np.where(Vd_2 != 2, Vd_color_2,"orange")
-        Vm_color_2 = np.where(Vm_2 != 2, Vm_color_2,"orange")
-        Az_color_2 = np.where(Az_2 != 2, Az_color_2,"orange")    
-        Am_color_2 = np.where(Am_2 != 2, Am_color_2,"orange")   
+        Br_color = np.where(Br_2 != 2, Br_color,"orange")
+        Lr_color = np.where(Lr_2 != 2, Lr_color,"orange")
+        Vd_color = np.where(Vd_2 != 2, Vd_color,"orange")
+        Vm_color = np.where(Vm_2 != 2, Vm_color,"orange")
+        Az_color = np.where(Az_2 != 2, Az_color,"orange")    
+        Am_color = np.where(Am_2 != 2, Am_color,"orange")   
 
-        Br_color_2 = np.where(Br_2 != 3, Br_color_2,"green")
-        Lr_color_2 = np.where(Lr_2 != 3, Lr_color_2,"green")
-        Vd_color_2 = np.where(Vd_2 != 3, Vd_color_2,"green")
-        Vm_color_2 = np.where(Vm_2 != 3, Vm_color_2,"green")
-        Az_color_2 = np.where(Az_2 != 3, Az_color_2,"green")
-        Am_color_2 = np.where(Am_2 != 3, Am_color_2,"green")
+        Br_color = np.where(Br_2 != 3, Br_color,"green")
+        Lr_color = np.where(Lr_2 != 3, Lr_color,"green")
+        Vd_color = np.where(Vd_2 != 3, Vd_color,"green")
+        Vm_color = np.where(Vm_2 != 3, Vm_color,"green")
+        Az_color = np.where(Az_2 != 3, Az_color,"green")
+        Am_color = np.where(Am_2 != 3, Am_color,"green")
 
-        Br_color_2 = np.where(Br_2 != 4, Br_color_2,"red")
-        Lr_color_2 = np.where(Lr_2 != 4, Lr_color_2,"red")
-        Vd_color_2 = np.where(Vd_2 != 4, Vd_color_2,"red")
-        Vm_color_2 = np.where(Vm_2 != 4, Vm_color_2,"red")
-        Az_color_2 = np.where(Az_2 != 4, Az_color_2,"red")
-        Am_color_2 = np.where(Am_2 != 4, Am_color_2,"red")
+        Br_color = np.where(Br_2 != 4, Br_color,"red")
+        Lr_color = np.where(Lr_2 != 4, Lr_color,"red")
+        Vd_color = np.where(Vd_2 != 4, Vd_color,"red")
+        Vm_color = np.where(Vm_2 != 4, Vm_color,"red")
+        Az_color = np.where(Az_2 != 4, Az_color,"red")
+        Am_color = np.where(Am_2 != 4, Am_color,"red")
 
-        Br_color_2 = np.where(Br_2 != 5, Br_color_2,"blue")
-        Lr_color_2 = np.where(Lr_2 != 5, Lr_color_2,"blue")
-        Vd_color_2 = np.where(Vd_2 != 5, Vd_color_2,"blue")
-        Vm_color_2 = np.where(Vm_2 != 5, Vm_color_2,"blue")
-        Az_color_2 = np.where(Az_2 != 5, Az_color_2,"blue")
-        Am_color_2 = np.where(Am_2 != 5, Am_color_2,"blue")
+        Br_color = np.where(Br_2 != 5, Br_color,"blue")
+        Lr_color = np.where(Lr_2 != 5, Lr_color,"blue")
+        Vd_color = np.where(Vd_2 != 5, Vd_color,"blue")
+        Vm_color = np.where(Vm_2 != 5, Vm_color,"blue")
+        Az_color = np.where(Az_2 != 5, Az_color,"blue")
+        Am_color = np.where(Am_2 != 5, Am_color,"blue")
 
-        Br_color_2 = np.where(Br_2 != 6, Br_color_2,"yellow")
-        Lr_color_2 = np.where(Lr_2 != 6, Lr_color_2,"yellow")
-        Vd_color_2 = np.where(Vd_2 != 6, Vd_color_2,"yellow")
-        Vm_color_2 = np.where(Vm_2 != 6, Vm_color_2,"yellow")
-        Az_color_2 = np.where(Az_2 != 6, Az_color_2,"yellow")
-        Am_color_2 = np.where(Am_2 != 6, Am_color_2,"yellow")   
+        Br_color = np.where(Br_2 != 6, Br_color,"yellow")
+        Lr_color = np.where(Lr_2 != 6, Lr_color,"yellow")
+        Vd_color = np.where(Vd_2 != 6, Vd_color,"yellow")
+        Vm_color = np.where(Vm_2 != 6, Vm_color,"yellow")
+        Az_color = np.where(Az_2 != 6, Az_color,"yellow")
+        Am_color = np.where(Am_2 != 6, Am_color,"yellow")   
 
         
         #U
-        our_canvas.create_rectangle(120,10,165,55, fill=Br_color_2[0][0])    
-        our_canvas.create_rectangle(170,10,215,55, fill=Br_color_2[0][1])
+        our_canvas.create_rectangle(120,10,165,55, fill=Br_color[0][0])    
+        our_canvas.create_rectangle(170,10,215,55, fill=Br_color[0][1])
 
-        our_canvas.create_rectangle(120,60,165,105, fill=Br_color_2[1][0])
-        our_canvas.create_rectangle(170,60,215,105, fill=Br_color_2[1][1])
+        our_canvas.create_rectangle(120,60,165,105, fill=Br_color[1][0])
+        our_canvas.create_rectangle(170,60,215,105, fill=Br_color[1][1])
 
         #L
-        our_canvas.create_rectangle(10,120,55 ,165,fill=Lr_color_2[0][0])
-        our_canvas.create_rectangle(60,120,105,165,fill=Lr_color_2[0][1])        
+        our_canvas.create_rectangle(10,120,55 ,165,fill=Lr_color[0][0])
+        our_canvas.create_rectangle(60,120,105,165,fill=Lr_color[0][1])        
 
-        our_canvas.create_rectangle(10,170,55 ,215,fill=Lr_color_2[1][0])
-        our_canvas.create_rectangle(60,170,105,215,fill=Lr_color_2[1][1])     
+        our_canvas.create_rectangle(10,170,55 ,215,fill=Lr_color[1][0])
+        our_canvas.create_rectangle(60,170,105,215,fill=Lr_color[1][1])     
 
         #F
-        our_canvas.create_rectangle(120,120,165,165,fill=Vd_color_2[0][0])
-        our_canvas.create_rectangle(170,120,215,165,fill=Vd_color_2[0][1])        
+        our_canvas.create_rectangle(120,120,165,165,fill=Vd_color[0][0])
+        our_canvas.create_rectangle(170,120,215,165,fill=Vd_color[0][1])        
 
-        our_canvas.create_rectangle(120,170,165,215,fill=Vd_color_2[1][0])
-        our_canvas.create_rectangle(170,170,215,215,fill=Vd_color_2[1][1])     
+        our_canvas.create_rectangle(120,170,165,215,fill=Vd_color[1][0])
+        our_canvas.create_rectangle(170,170,215,215,fill=Vd_color[1][1])     
 
 
         #R
-        our_canvas.create_rectangle(230,120,275,165,fill=Vm_color_2[0][0])
-        our_canvas.create_rectangle(280,120,325,165,fill=Vm_color_2[0][1])        
+        our_canvas.create_rectangle(230,120,275,165,fill=Vm_color[0][0])
+        our_canvas.create_rectangle(280,120,325,165,fill=Vm_color[0][1])        
 
-        our_canvas.create_rectangle(230,170,275,215,fill=Vm_color_2[1][0])
-        our_canvas.create_rectangle(280,170,325,215,fill=Vm_color_2[1][1])               
+        our_canvas.create_rectangle(230,170,275,215,fill=Vm_color[1][0])
+        our_canvas.create_rectangle(280,170,325,215,fill=Vm_color[1][1])               
 
         #B
-        our_canvas.create_rectangle(340,120,385,165,fill=Az_color_2[0][0])
-        our_canvas.create_rectangle(390,120,435,165,fill=Az_color_2[0][1])        
+        our_canvas.create_rectangle(340,120,385,165,fill=Az_color[0][0])
+        our_canvas.create_rectangle(390,120,435,165,fill=Az_color[0][1])        
 
-        our_canvas.create_rectangle(340,170,385,215,fill=Az_color_2[1][0])
-        our_canvas.create_rectangle(390,170,435,215,fill=Az_color_2[1][1])               
+        our_canvas.create_rectangle(340,170,385,215,fill=Az_color[1][0])
+        our_canvas.create_rectangle(390,170,435,215,fill=Az_color[1][1])               
 
         #D
-        our_canvas.create_rectangle(120,230,165,275,fill=Am_color_2[0][0])
-        our_canvas.create_rectangle(170,230,215,275,fill=Am_color_2[0][1])        
+        our_canvas.create_rectangle(120,230,165,275,fill=Am_color[0][0])
+        our_canvas.create_rectangle(170,230,215,275,fill=Am_color[0][1])        
 
-        our_canvas.create_rectangle(120,280,165,325,fill=Am_color_2[1][0])
-        our_canvas.create_rectangle(170,280,215,325,fill=Am_color_2[1][1])           
+        our_canvas.create_rectangle(120,280,165,325,fill=Am_color[1][0])
+        our_canvas.create_rectangle(170,280,215,325,fill=Am_color[1][1])           
         
 
     elif cube == "3x3":
 
-        Br_color_3 = np.where(Br_3 != 1, Br_color_3,"white")
-        Lr_color_3 = np.where(Lr_3 != 1, Lr_color_3,"white")
-        Vd_color_3 = np.where(Vd_3 != 1, Vd_color_3,"white")
-        Vm_color_3 = np.where(Vm_3 != 1, Vm_color_3,"white")
-        Az_color_3 = np.where(Az_3 != 1, Az_color_3,"white")    
-        Am_color_3 = np.where(Am_3 != 1, Am_color_3,"white")  
+        Br_color = np.where(Br_3 != 1, Br_color,"white")
+        Lr_color = np.where(Lr_3 != 1, Lr_color,"white")
+        Vd_color = np.where(Vd_3 != 1, Vd_color,"white")
+        Vm_color = np.where(Vm_3 != 1, Vm_color,"white")
+        Az_color = np.where(Az_3 != 1, Az_color,"white")    
+        Am_color = np.where(Am_3 != 1, Am_color,"white")  
 
-        Br_color_3 = np.where(Br_3 != 2, Br_color_3,"orange")
-        Lr_color_3 = np.where(Lr_3 != 2, Lr_color_3,"orange")
-        Vd_color_3 = np.where(Vd_3 != 2, Vd_color_3,"orange")
-        Vm_color_3 = np.where(Vm_3 != 2, Vm_color_3,"orange")
-        Az_color_3 = np.where(Az_3 != 2, Az_color_3,"orange")    
-        Am_color_3 = np.where(Am_3 != 2, Am_color_3,"orange")   
+        Br_color = np.where(Br_3 != 2, Br_color,"orange")
+        Lr_color = np.where(Lr_3 != 2, Lr_color,"orange")
+        Vd_color = np.where(Vd_3 != 2, Vd_color,"orange")
+        Vm_color = np.where(Vm_3 != 2, Vm_color,"orange")
+        Az_color = np.where(Az_3 != 2, Az_color,"orange")    
+        Am_color = np.where(Am_3 != 2, Am_color,"orange")   
 
-        Br_color_3 = np.where(Br_3 != 3, Br_color_3,"green")
-        Lr_color_3 = np.where(Lr_3 != 3, Lr_color_3,"green")
-        Vd_color_3 = np.where(Vd_3 != 3, Vd_color_3,"green")
-        Vm_color_3 = np.where(Vm_3 != 3, Vm_color_3,"green")
-        Az_color_3 = np.where(Az_3 != 3, Az_color_3,"green")
-        Am_color_3 = np.where(Am_3 != 3, Am_color_3,"green")
+        Br_color = np.where(Br_3 != 3, Br_color,"green")
+        Lr_color = np.where(Lr_3 != 3, Lr_color,"green")
+        Vd_color = np.where(Vd_3 != 3, Vd_color,"green")
+        Vm_color = np.where(Vm_3 != 3, Vm_color,"green")
+        Az_color = np.where(Az_3 != 3, Az_color,"green")
+        Am_color = np.where(Am_3 != 3, Am_color,"green")
 
-        Br_color_3 = np.where(Br_3 != 4, Br_color_3,"red")
-        Lr_color_3 = np.where(Lr_3 != 4, Lr_color_3,"red")
-        Vd_color_3 = np.where(Vd_3 != 4, Vd_color_3,"red")
-        Vm_color_3 = np.where(Vm_3 != 4, Vm_color_3,"red")
-        Az_color_3 = np.where(Az_3 != 4, Az_color_3,"red")
-        Am_color_3 = np.where(Am_3 != 4, Am_color_3,"red")
+        Br_color = np.where(Br_3 != 4, Br_color,"red")
+        Lr_color = np.where(Lr_3 != 4, Lr_color,"red")
+        Vd_color = np.where(Vd_3 != 4, Vd_color,"red")
+        Vm_color = np.where(Vm_3 != 4, Vm_color,"red")
+        Az_color = np.where(Az_3 != 4, Az_color,"red")
+        Am_color = np.where(Am_3 != 4, Am_color,"red")
 
-        Br_color_3 = np.where(Br_3 != 5, Br_color_3,"blue")
-        Lr_color_3 = np.where(Lr_3 != 5, Lr_color_3,"blue")
-        Vd_color_3 = np.where(Vd_3 != 5, Vd_color_3,"blue")
-        Vm_color_3 = np.where(Vm_3 != 5, Vm_color_3,"blue")
-        Az_color_3 = np.where(Az_3 != 5, Az_color_3,"blue")
-        Am_color_3 = np.where(Am_3 != 5, Am_color_3,"blue")
+        Br_color = np.where(Br_3 != 5, Br_color,"blue")
+        Lr_color = np.where(Lr_3 != 5, Lr_color,"blue")
+        Vd_color = np.where(Vd_3 != 5, Vd_color,"blue")
+        Vm_color = np.where(Vm_3 != 5, Vm_color,"blue")
+        Az_color = np.where(Az_3 != 5, Az_color,"blue")
+        Am_color = np.where(Am_3 != 5, Am_color,"blue")
 
-        Br_color_3 = np.where(Br_3 != 6, Br_color_3,"yellow")
-        Lr_color_3 = np.where(Lr_3 != 6, Lr_color_3,"yellow")
-        Vd_color_3 = np.where(Vd_3 != 6, Vd_color_3,"yellow")
-        Vm_color_3 = np.where(Vm_3 != 6, Vm_color_3,"yellow")
-        Az_color_3 = np.where(Az_3 != 6, Az_color_3,"yellow")
-        Am_color_3 = np.where(Am_3 != 6, Am_color_3,"yellow")   
+        Br_color = np.where(Br_3 != 6, Br_color,"yellow")
+        Lr_color = np.where(Lr_3 != 6, Lr_color,"yellow")
+        Vd_color = np.where(Vd_3 != 6, Vd_color,"yellow")
+        Vm_color = np.where(Vm_3 != 6, Vm_color,"yellow")
+        Az_color = np.where(Az_3 != 6, Az_color,"yellow")
+        Am_color = np.where(Am_3 != 6, Am_color,"yellow")   
 
         
         #U
-        our_canvas.create_rectangle(120,10,150,40, fill=Br_color_3[0][0])    
-        our_canvas.create_rectangle(155,10,185,40, fill=Br_color_3[0][1])
-        our_canvas.create_rectangle(190,10,220,40, fill=Br_color_3[0][2])
+        our_canvas.create_rectangle(120,10,150,40, fill=Br_color[0][0])    
+        our_canvas.create_rectangle(155,10,185,40, fill=Br_color[0][1])
+        our_canvas.create_rectangle(190,10,220,40, fill=Br_color[0][2])
         
 
-        our_canvas.create_rectangle(120,45,150,75, fill=Br_color_3[1][0])
-        our_canvas.create_rectangle(155,45,185,75, fill=Br_color_3[1][1])
-        our_canvas.create_rectangle(190,45,220,75, fill=Br_color_3[1][2])
+        our_canvas.create_rectangle(120,45,150,75, fill=Br_color[1][0])
+        our_canvas.create_rectangle(155,45,185,75, fill=Br_color[1][1])
+        our_canvas.create_rectangle(190,45,220,75, fill=Br_color[1][2])
 
-        our_canvas.create_rectangle(120,80,150,110,fill=Br_color_3[2][0])
-        our_canvas.create_rectangle(155,80,185,110,fill=Br_color_3[2][1])
-        our_canvas.create_rectangle(190,80,220,110,fill=Br_color_3[2][2])
+        our_canvas.create_rectangle(120,80,150,110,fill=Br_color[2][0])
+        our_canvas.create_rectangle(155,80,185,110,fill=Br_color[2][1])
+        our_canvas.create_rectangle(190,80,220,110,fill=Br_color[2][2])
 
 
         #L
-        our_canvas.create_rectangle(10,120,40 ,150,fill=Lr_color_3[0][0])
-        our_canvas.create_rectangle(45,120,75 ,150,fill=Lr_color_3[0][1])
-        our_canvas.create_rectangle(80,120,110,150,fill=Lr_color_3[0][2])
+        our_canvas.create_rectangle(10,120,40 ,150,fill=Lr_color[0][0])
+        our_canvas.create_rectangle(45,120,75 ,150,fill=Lr_color[0][1])
+        our_canvas.create_rectangle(80,120,110,150,fill=Lr_color[0][2])
 
-        our_canvas.create_rectangle(10,155,40 ,185,fill=Lr_color_3[1][0])
-        our_canvas.create_rectangle(45,155,75 ,185,fill=Lr_color_3[1][1])
-        our_canvas.create_rectangle(80,155,110,185,fill=Lr_color_3[1][2])
+        our_canvas.create_rectangle(10,155,40 ,185,fill=Lr_color[1][0])
+        our_canvas.create_rectangle(45,155,75 ,185,fill=Lr_color[1][1])
+        our_canvas.create_rectangle(80,155,110,185,fill=Lr_color[1][2])
 
-        our_canvas.create_rectangle(10,190,40 ,220,fill=Lr_color_3[2][0])
-        our_canvas.create_rectangle(45,190,75 ,220,fill=Lr_color_3[2][1])
-        our_canvas.create_rectangle(80,190,110,220,fill=Lr_color_3[2][2])
+        our_canvas.create_rectangle(10,190,40 ,220,fill=Lr_color[2][0])
+        our_canvas.create_rectangle(45,190,75 ,220,fill=Lr_color[2][1])
+        our_canvas.create_rectangle(80,190,110,220,fill=Lr_color[2][2])
 
 
         #F
-        our_canvas.create_rectangle(120,120,150,150,fill=Vd_color_3[0][0])
-        our_canvas.create_rectangle(155,120,185,150,fill=Vd_color_3[0][1])
-        our_canvas.create_rectangle(190,120,220,150,fill=Vd_color_3[0][2])
+        our_canvas.create_rectangle(120,120,150,150,fill=Vd_color[0][0])
+        our_canvas.create_rectangle(155,120,185,150,fill=Vd_color[0][1])
+        our_canvas.create_rectangle(190,120,220,150,fill=Vd_color[0][2])
 
-        our_canvas.create_rectangle(120,155,150,185,fill=Vd_color_3[1][0])
-        our_canvas.create_rectangle(155,155,185,185,fill=Vd_color_3[1][1])
-        our_canvas.create_rectangle(190,155,220,185,fill=Vd_color_3[1][2])
+        our_canvas.create_rectangle(120,155,150,185,fill=Vd_color[1][0])
+        our_canvas.create_rectangle(155,155,185,185,fill=Vd_color[1][1])
+        our_canvas.create_rectangle(190,155,220,185,fill=Vd_color[1][2])
 
-        our_canvas.create_rectangle(120,190,150,220,fill=Vd_color_3[2][0])
-        our_canvas.create_rectangle(155,190,185,220,fill=Vd_color_3[2][1])
-        our_canvas.create_rectangle(190,190,220,220,fill=Vd_color_3[2][2])
+        our_canvas.create_rectangle(120,190,150,220,fill=Vd_color[2][0])
+        our_canvas.create_rectangle(155,190,185,220,fill=Vd_color[2][1])
+        our_canvas.create_rectangle(190,190,220,220,fill=Vd_color[2][2])
 
 
         #R
-        our_canvas.create_rectangle(230,120,260,150,fill=Vm_color_3[0][0])
-        our_canvas.create_rectangle(265,120,295,150,fill=Vm_color_3[0][1])
-        our_canvas.create_rectangle(300,120,330,150,fill=Vm_color_3[0][2])
+        our_canvas.create_rectangle(230,120,260,150,fill=Vm_color[0][0])
+        our_canvas.create_rectangle(265,120,295,150,fill=Vm_color[0][1])
+        our_canvas.create_rectangle(300,120,330,150,fill=Vm_color[0][2])
 
-        our_canvas.create_rectangle(230,155,260,185,fill=Vm_color_3[1][0])
-        our_canvas.create_rectangle(265,155,295,185,fill=Vm_color_3[1][1])
-        our_canvas.create_rectangle(300,155,330,185,fill=Vm_color_3[1][2])
+        our_canvas.create_rectangle(230,155,260,185,fill=Vm_color[1][0])
+        our_canvas.create_rectangle(265,155,295,185,fill=Vm_color[1][1])
+        our_canvas.create_rectangle(300,155,330,185,fill=Vm_color[1][2])
 
-        our_canvas.create_rectangle(230,190,260,220,fill=Vm_color_3[2][0])
-        our_canvas.create_rectangle(265,190,295,220,fill=Vm_color_3[2][1])
-        our_canvas.create_rectangle(300,190,330,220,fill=Vm_color_3[2][2])
+        our_canvas.create_rectangle(230,190,260,220,fill=Vm_color[2][0])
+        our_canvas.create_rectangle(265,190,295,220,fill=Vm_color[2][1])
+        our_canvas.create_rectangle(300,190,330,220,fill=Vm_color[2][2])
 
 
         #B
-        our_canvas.create_rectangle(340,120,370,150,fill=Az_color_3[0][0])
-        our_canvas.create_rectangle(375,120,405,150,fill=Az_color_3[0][1])
-        our_canvas.create_rectangle(410,120,440,150,fill=Az_color_3[0][2])
+        our_canvas.create_rectangle(340,120,370,150,fill=Az_color[0][0])
+        our_canvas.create_rectangle(375,120,405,150,fill=Az_color[0][1])
+        our_canvas.create_rectangle(410,120,440,150,fill=Az_color[0][2])
 
-        our_canvas.create_rectangle(340,155,370,185,fill=Az_color_3[1][0])
-        our_canvas.create_rectangle(375,155,405,185,fill=Az_color_3[1][1])
-        our_canvas.create_rectangle(410,155,440,185,fill=Az_color_3[1][2])
+        our_canvas.create_rectangle(340,155,370,185,fill=Az_color[1][0])
+        our_canvas.create_rectangle(375,155,405,185,fill=Az_color[1][1])
+        our_canvas.create_rectangle(410,155,440,185,fill=Az_color[1][2])
 
-        our_canvas.create_rectangle(340,190,370,220,fill=Az_color_3[2][0])
-        our_canvas.create_rectangle(375,190,405,220,fill=Az_color_3[2][1])
-        our_canvas.create_rectangle(410,190,440,220,fill=Az_color_3[2][2])
+        our_canvas.create_rectangle(340,190,370,220,fill=Az_color[2][0])
+        our_canvas.create_rectangle(375,190,405,220,fill=Az_color[2][1])
+        our_canvas.create_rectangle(410,190,440,220,fill=Az_color[2][2])
 
         #D
-        our_canvas.create_rectangle(120,230,150,260,fill=Am_color_3[0][0])
-        our_canvas.create_rectangle(155,230,185,260,fill=Am_color_3[0][1])
-        our_canvas.create_rectangle(190,230,220,260,fill=Am_color_3[0][2])
+        our_canvas.create_rectangle(120,230,150,260,fill=Am_color[0][0])
+        our_canvas.create_rectangle(155,230,185,260,fill=Am_color[0][1])
+        our_canvas.create_rectangle(190,230,220,260,fill=Am_color[0][2])
 
-        our_canvas.create_rectangle(120,265,150,295,fill=Am_color_3[1][0])
-        our_canvas.create_rectangle(155,265,185,295,fill=Am_color_3[1][1])
-        our_canvas.create_rectangle(190,265,220,295,fill=Am_color_3[1][2])
+        our_canvas.create_rectangle(120,265,150,295,fill=Am_color[1][0])
+        our_canvas.create_rectangle(155,265,185,295,fill=Am_color[1][1])
+        our_canvas.create_rectangle(190,265,220,295,fill=Am_color[1][2])
 
-        our_canvas.create_rectangle(120,300,150,330,fill=Am_color_3[2][0])
-        our_canvas.create_rectangle(155,300,185,330,fill=Am_color_3[2][1])
-        our_canvas.create_rectangle(190,300,220,330,fill=Am_color_3[2][2])
+        our_canvas.create_rectangle(120,300,150,330,fill=Am_color[2][0])
+        our_canvas.create_rectangle(155,300,185,330,fill=Am_color[2][1])
+        our_canvas.create_rectangle(190,300,220,330,fill=Am_color[2][2])
 
     elif cube == "4x4":        
 
-        Br_color_4 = np.where(Br_4 != 1, Br_color_4,"white")
-        Lr_color_4 = np.where(Lr_4 != 1, Lr_color_4,"white")
-        Vd_color_4 = np.where(Vd_4 != 1, Vd_color_4,"white")
-        Vm_color_4 = np.where(Vm_4 != 1, Vm_color_4,"white")
-        Az_color_4 = np.where(Az_4 != 1, Az_color_4,"white")    
-        Am_color_4 = np.where(Am_4 != 1, Am_color_4,"white")  
+        Br_color = np.where(Br_4 != 1, Br_color,"white")
+        Lr_color = np.where(Lr_4 != 1, Lr_color,"white")
+        Vd_color = np.where(Vd_4 != 1, Vd_color,"white")
+        Vm_color = np.where(Vm_4 != 1, Vm_color,"white")
+        Az_color = np.where(Az_4 != 1, Az_color,"white")    
+        Am_color = np.where(Am_4 != 1, Am_color,"white")  
 
-        Br_color_4 = np.where(Br_4 != 2, Br_color_4,"orange")
-        Lr_color_4 = np.where(Lr_4 != 2, Lr_color_4,"orange")
-        Vd_color_4 = np.where(Vd_4 != 2, Vd_color_4,"orange")
-        Vm_color_4 = np.where(Vm_4 != 2, Vm_color_4,"orange")
-        Az_color_4 = np.where(Az_4 != 2, Az_color_4,"orange")    
-        Am_color_4 = np.where(Am_4 != 2, Am_color_4,"orange")   
+        Br_color = np.where(Br_4 != 2, Br_color,"orange")
+        Lr_color = np.where(Lr_4 != 2, Lr_color,"orange")
+        Vd_color = np.where(Vd_4 != 2, Vd_color,"orange")
+        Vm_color = np.where(Vm_4 != 2, Vm_color,"orange")
+        Az_color = np.where(Az_4 != 2, Az_color,"orange")    
+        Am_color = np.where(Am_4 != 2, Am_color,"orange")   
 
-        Br_color_4 = np.where(Br_4 != 3, Br_color_4,"green")
-        Lr_color_4 = np.where(Lr_4 != 3, Lr_color_4,"green")
-        Vd_color_4 = np.where(Vd_4 != 3, Vd_color_4,"green")
-        Vm_color_4 = np.where(Vm_4 != 3, Vm_color_4,"green")
-        Az_color_4 = np.where(Az_4 != 3, Az_color_4,"green")
-        Am_color_4 = np.where(Am_4 != 3, Am_color_4,"green")
+        Br_color = np.where(Br_4 != 3, Br_color,"green")
+        Lr_color = np.where(Lr_4 != 3, Lr_color,"green")
+        Vd_color = np.where(Vd_4 != 3, Vd_color,"green")
+        Vm_color = np.where(Vm_4 != 3, Vm_color,"green")
+        Az_color = np.where(Az_4 != 3, Az_color,"green")
+        Am_color = np.where(Am_4 != 3, Am_color,"green")
 
-        Br_color_4 = np.where(Br_4 != 4, Br_color_4,"red")
-        Lr_color_4 = np.where(Lr_4 != 4, Lr_color_4,"red")
-        Vd_color_4 = np.where(Vd_4 != 4, Vd_color_4,"red")
-        Vm_color_4 = np.where(Vm_4 != 4, Vm_color_4,"red")
-        Az_color_4 = np.where(Az_4 != 4, Az_color_4,"red")
-        Am_color_4 = np.where(Am_4 != 4, Am_color_4,"red")
+        Br_color = np.where(Br_4 != 4, Br_color,"red")
+        Lr_color = np.where(Lr_4 != 4, Lr_color,"red")
+        Vd_color = np.where(Vd_4 != 4, Vd_color,"red")
+        Vm_color = np.where(Vm_4 != 4, Vm_color,"red")
+        Az_color = np.where(Az_4 != 4, Az_color,"red")
+        Am_color = np.where(Am_4 != 4, Am_color,"red")
 
-        Br_color_4 = np.where(Br_4 != 5, Br_color_4,"blue")
-        Lr_color_4 = np.where(Lr_4 != 5, Lr_color_4,"blue")
-        Vd_color_4 = np.where(Vd_4 != 5, Vd_color_4,"blue")
-        Vm_color_4 = np.where(Vm_4 != 5, Vm_color_4,"blue")
-        Az_color_4 = np.where(Az_4 != 5, Az_color_4,"blue")
-        Am_color_4 = np.where(Am_4 != 5, Am_color_4,"blue")
+        Br_color = np.where(Br_4 != 5, Br_color,"blue")
+        Lr_color = np.where(Lr_4 != 5, Lr_color,"blue")
+        Vd_color = np.where(Vd_4 != 5, Vd_color,"blue")
+        Vm_color = np.where(Vm_4 != 5, Vm_color,"blue")
+        Az_color = np.where(Az_4 != 5, Az_color,"blue")
+        Am_color = np.where(Am_4 != 5, Am_color,"blue")
 
-        Br_color_4 = np.where(Br_4 != 6, Br_color_4,"yellow")
-        Lr_color_4 = np.where(Lr_4 != 6, Lr_color_4,"yellow")
-        Vd_color_4 = np.where(Vd_4 != 6, Vd_color_4,"yellow")
-        Vm_color_4 = np.where(Vm_4 != 6, Vm_color_4,"yellow")
-        Az_color_4 = np.where(Az_4 != 6, Az_color_4,"yellow")
-        Am_color_4 = np.where(Am_4 != 6, Am_color_4,"yellow")   
+        Br_color = np.where(Br_4 != 6, Br_color,"yellow")
+        Lr_color = np.where(Lr_4 != 6, Lr_color,"yellow")
+        Vd_color = np.where(Vd_4 != 6, Vd_color,"yellow")
+        Vm_color = np.where(Vm_4 != 6, Vm_color,"yellow")
+        Az_color = np.where(Az_4 != 6, Az_color,"yellow")
+        Am_color = np.where(Am_4 != 6, Am_color,"yellow")   
         
 
         
         #U
-        our_canvas.create_rectangle(115,10,135,30, fill=Br_color_4[0][0])    
-        our_canvas.create_rectangle(140,10,160,30, fill=Br_color_4[0][1])
-        our_canvas.create_rectangle(165,10,185,30, fill=Br_color_4[0][2])
-        our_canvas.create_rectangle(190,10,210,30, fill=Br_color_4[0][3])        
+        our_canvas.create_rectangle(115,10,135,30, fill=Br_color[0][0])    
+        our_canvas.create_rectangle(140,10,160,30, fill=Br_color[0][1])
+        our_canvas.create_rectangle(165,10,185,30, fill=Br_color[0][2])
+        our_canvas.create_rectangle(190,10,210,30, fill=Br_color[0][3])        
 
-        our_canvas.create_rectangle(115,35,135,55, fill=Br_color_4[1][0])
-        our_canvas.create_rectangle(140,35,160,55, fill=Br_color_4[1][1])
-        our_canvas.create_rectangle(165,35,185,55, fill=Br_color_4[1][2])
-        our_canvas.create_rectangle(190,35,210,55, fill=Br_color_4[1][3])
+        our_canvas.create_rectangle(115,35,135,55, fill=Br_color[1][0])
+        our_canvas.create_rectangle(140,35,160,55, fill=Br_color[1][1])
+        our_canvas.create_rectangle(165,35,185,55, fill=Br_color[1][2])
+        our_canvas.create_rectangle(190,35,210,55, fill=Br_color[1][3])
 
-        our_canvas.create_rectangle(115,60,135,80,fill=Br_color_4[2][0])
-        our_canvas.create_rectangle(140,60,160,80,fill=Br_color_4[2][1])
-        our_canvas.create_rectangle(165,60,185,80,fill=Br_color_4[2][2])
-        our_canvas.create_rectangle(190,60,210,80,fill=Br_color_4[2][3])
+        our_canvas.create_rectangle(115,60,135,80,fill=Br_color[2][0])
+        our_canvas.create_rectangle(140,60,160,80,fill=Br_color[2][1])
+        our_canvas.create_rectangle(165,60,185,80,fill=Br_color[2][2])
+        our_canvas.create_rectangle(190,60,210,80,fill=Br_color[2][3])
 
-        our_canvas.create_rectangle(115,85,135,105,fill=Br_color_4[3][0])
-        our_canvas.create_rectangle(140,85,160,105,fill=Br_color_4[3][1])
-        our_canvas.create_rectangle(165,85,185,105,fill=Br_color_4[3][2])
-        our_canvas.create_rectangle(190,85,210,105,fill=Br_color_4[3][3])
+        our_canvas.create_rectangle(115,85,135,105,fill=Br_color[3][0])
+        our_canvas.create_rectangle(140,85,160,105,fill=Br_color[3][1])
+        our_canvas.create_rectangle(165,85,185,105,fill=Br_color[3][2])
+        our_canvas.create_rectangle(190,85,210,105,fill=Br_color[3][3])
 
         #L
-        our_canvas.create_rectangle(10,115,30 ,135,fill=Lr_color_4[0][0])
-        our_canvas.create_rectangle(35,115,55 ,135,fill=Lr_color_4[0][1])
-        our_canvas.create_rectangle(60,115,80 ,135,fill=Lr_color_4[0][2])
-        our_canvas.create_rectangle(85,115,105,135,fill=Lr_color_4[0][3])
+        our_canvas.create_rectangle(10,115,30 ,135,fill=Lr_color[0][0])
+        our_canvas.create_rectangle(35,115,55 ,135,fill=Lr_color[0][1])
+        our_canvas.create_rectangle(60,115,80 ,135,fill=Lr_color[0][2])
+        our_canvas.create_rectangle(85,115,105,135,fill=Lr_color[0][3])
 
-        our_canvas.create_rectangle(10,140,30 ,160,fill=Lr_color_4[1][0])
-        our_canvas.create_rectangle(35,140,55 ,160,fill=Lr_color_4[1][1])
-        our_canvas.create_rectangle(60,140,80 ,160,fill=Lr_color_4[1][2])
-        our_canvas.create_rectangle(85,140,105,160,fill=Lr_color_4[1][3])
+        our_canvas.create_rectangle(10,140,30 ,160,fill=Lr_color[1][0])
+        our_canvas.create_rectangle(35,140,55 ,160,fill=Lr_color[1][1])
+        our_canvas.create_rectangle(60,140,80 ,160,fill=Lr_color[1][2])
+        our_canvas.create_rectangle(85,140,105,160,fill=Lr_color[1][3])
 
-        our_canvas.create_rectangle(10,165,30 ,185,fill=Lr_color_4[2][0])
-        our_canvas.create_rectangle(35,165,55 ,185,fill=Lr_color_4[2][1])
-        our_canvas.create_rectangle(60,165,80 ,185,fill=Lr_color_4[2][2])
-        our_canvas.create_rectangle(85,165,105,185,fill=Lr_color_4[2][3])
+        our_canvas.create_rectangle(10,165,30 ,185,fill=Lr_color[2][0])
+        our_canvas.create_rectangle(35,165,55 ,185,fill=Lr_color[2][1])
+        our_canvas.create_rectangle(60,165,80 ,185,fill=Lr_color[2][2])
+        our_canvas.create_rectangle(85,165,105,185,fill=Lr_color[2][3])
 
-        our_canvas.create_rectangle(10,190,30 ,210,fill=Lr_color_4[3][0])
-        our_canvas.create_rectangle(35,190,55 ,210,fill=Lr_color_4[3][1])
-        our_canvas.create_rectangle(60,190,80 ,210,fill=Lr_color_4[3][2])
-        our_canvas.create_rectangle(85,190,105,210,fill=Lr_color_4[3][3])
+        our_canvas.create_rectangle(10,190,30 ,210,fill=Lr_color[3][0])
+        our_canvas.create_rectangle(35,190,55 ,210,fill=Lr_color[3][1])
+        our_canvas.create_rectangle(60,190,80 ,210,fill=Lr_color[3][2])
+        our_canvas.create_rectangle(85,190,105,210,fill=Lr_color[3][3])
 
 
         #F
-        our_canvas.create_rectangle(115,115,135,135,fill=Vd_color_4[0][0])
-        our_canvas.create_rectangle(140,115,160,135,fill=Vd_color_4[0][1])
-        our_canvas.create_rectangle(165,115,185,135,fill=Vd_color_4[0][2])
-        our_canvas.create_rectangle(190,115,210,135,fill=Vd_color_4[0][3])
+        our_canvas.create_rectangle(115,115,135,135,fill=Vd_color[0][0])
+        our_canvas.create_rectangle(140,115,160,135,fill=Vd_color[0][1])
+        our_canvas.create_rectangle(165,115,185,135,fill=Vd_color[0][2])
+        our_canvas.create_rectangle(190,115,210,135,fill=Vd_color[0][3])
 
-        our_canvas.create_rectangle(115,140,135,160,fill=Vd_color_4[1][0])
-        our_canvas.create_rectangle(140,140,160,160,fill=Vd_color_4[1][1])
-        our_canvas.create_rectangle(165,140,185,160,fill=Vd_color_4[1][2])
-        our_canvas.create_rectangle(190,140,210,160,fill=Vd_color_4[1][3])
+        our_canvas.create_rectangle(115,140,135,160,fill=Vd_color[1][0])
+        our_canvas.create_rectangle(140,140,160,160,fill=Vd_color[1][1])
+        our_canvas.create_rectangle(165,140,185,160,fill=Vd_color[1][2])
+        our_canvas.create_rectangle(190,140,210,160,fill=Vd_color[1][3])
 
-        our_canvas.create_rectangle(115,165,135,185,fill=Vd_color_4[2][0])
-        our_canvas.create_rectangle(140,165,160,185,fill=Vd_color_4[2][1])
-        our_canvas.create_rectangle(165,165,185,185,fill=Vd_color_4[2][2])
-        our_canvas.create_rectangle(190,165,210,185,fill=Vd_color_4[2][3])
+        our_canvas.create_rectangle(115,165,135,185,fill=Vd_color[2][0])
+        our_canvas.create_rectangle(140,165,160,185,fill=Vd_color[2][1])
+        our_canvas.create_rectangle(165,165,185,185,fill=Vd_color[2][2])
+        our_canvas.create_rectangle(190,165,210,185,fill=Vd_color[2][3])
 
-        our_canvas.create_rectangle(115,190,135,210,fill=Vd_color_4[3][0])
-        our_canvas.create_rectangle(140,190,160,210,fill=Vd_color_4[3][1])
-        our_canvas.create_rectangle(165,190,185,210,fill=Vd_color_4[3][2])
-        our_canvas.create_rectangle(190,190,210,210,fill=Vd_color_4[3][3])
+        our_canvas.create_rectangle(115,190,135,210,fill=Vd_color[3][0])
+        our_canvas.create_rectangle(140,190,160,210,fill=Vd_color[3][1])
+        our_canvas.create_rectangle(165,190,185,210,fill=Vd_color[3][2])
+        our_canvas.create_rectangle(190,190,210,210,fill=Vd_color[3][3])
 
 
 
         #R
-        our_canvas.create_rectangle(220,115,240,135,fill=Vm_color_4[0][0])
-        our_canvas.create_rectangle(245,115,265,135,fill=Vm_color_4[0][1])
-        our_canvas.create_rectangle(270,115,290,135,fill=Vm_color_4[0][2])
-        our_canvas.create_rectangle(295,115,315,135,fill=Vm_color_4[0][3])
+        our_canvas.create_rectangle(220,115,240,135,fill=Vm_color[0][0])
+        our_canvas.create_rectangle(245,115,265,135,fill=Vm_color[0][1])
+        our_canvas.create_rectangle(270,115,290,135,fill=Vm_color[0][2])
+        our_canvas.create_rectangle(295,115,315,135,fill=Vm_color[0][3])
 
-        our_canvas.create_rectangle(220,140,240,160,fill=Vm_color_4[1][0])
-        our_canvas.create_rectangle(245,140,265,160,fill=Vm_color_4[1][1])
-        our_canvas.create_rectangle(270,140,290,160,fill=Vm_color_4[1][2])
-        our_canvas.create_rectangle(295,140,315,160,fill=Vm_color_4[1][3])
+        our_canvas.create_rectangle(220,140,240,160,fill=Vm_color[1][0])
+        our_canvas.create_rectangle(245,140,265,160,fill=Vm_color[1][1])
+        our_canvas.create_rectangle(270,140,290,160,fill=Vm_color[1][2])
+        our_canvas.create_rectangle(295,140,315,160,fill=Vm_color[1][3])
 
-        our_canvas.create_rectangle(220,165,240,185,fill=Vm_color_4[2][0])
-        our_canvas.create_rectangle(245,165,265,185,fill=Vm_color_4[2][1])
-        our_canvas.create_rectangle(270,165,290,185,fill=Vm_color_4[2][2])
-        our_canvas.create_rectangle(295,165,315,185,fill=Vm_color_4[2][3])
+        our_canvas.create_rectangle(220,165,240,185,fill=Vm_color[2][0])
+        our_canvas.create_rectangle(245,165,265,185,fill=Vm_color[2][1])
+        our_canvas.create_rectangle(270,165,290,185,fill=Vm_color[2][2])
+        our_canvas.create_rectangle(295,165,315,185,fill=Vm_color[2][3])
 
-        our_canvas.create_rectangle(220,190,240,210,fill=Vm_color_4[3][0])
-        our_canvas.create_rectangle(245,190,265,210,fill=Vm_color_4[3][1])
-        our_canvas.create_rectangle(270,190,290,210,fill=Vm_color_4[3][2])
-        our_canvas.create_rectangle(295,190,315,210,fill=Vm_color_4[3][3])
+        our_canvas.create_rectangle(220,190,240,210,fill=Vm_color[3][0])
+        our_canvas.create_rectangle(245,190,265,210,fill=Vm_color[3][1])
+        our_canvas.create_rectangle(270,190,290,210,fill=Vm_color[3][2])
+        our_canvas.create_rectangle(295,190,315,210,fill=Vm_color[3][3])
 
 
         #B
-        our_canvas.create_rectangle(325,115,345,135,fill=Az_color_4[0][0])
-        our_canvas.create_rectangle(350,115,370,135,fill=Az_color_4[0][1])
-        our_canvas.create_rectangle(375,115,395,135,fill=Az_color_4[0][2])
-        our_canvas.create_rectangle(400,115,420,135,fill=Az_color_4[0][3])
+        our_canvas.create_rectangle(325,115,345,135,fill=Az_color[0][0])
+        our_canvas.create_rectangle(350,115,370,135,fill=Az_color[0][1])
+        our_canvas.create_rectangle(375,115,395,135,fill=Az_color[0][2])
+        our_canvas.create_rectangle(400,115,420,135,fill=Az_color[0][3])
 
-        our_canvas.create_rectangle(325,140,345,160,fill=Az_color_4[1][0])
-        our_canvas.create_rectangle(350,140,370,160,fill=Az_color_4[1][1])
-        our_canvas.create_rectangle(375,140,395,160,fill=Az_color_4[1][2])
-        our_canvas.create_rectangle(400,140,420,160,fill=Az_color_4[1][3])
+        our_canvas.create_rectangle(325,140,345,160,fill=Az_color[1][0])
+        our_canvas.create_rectangle(350,140,370,160,fill=Az_color[1][1])
+        our_canvas.create_rectangle(375,140,395,160,fill=Az_color[1][2])
+        our_canvas.create_rectangle(400,140,420,160,fill=Az_color[1][3])
 
-        our_canvas.create_rectangle(325,165,345,185,fill=Az_color_4[2][0])
-        our_canvas.create_rectangle(350,165,370,185,fill=Az_color_4[2][1])
-        our_canvas.create_rectangle(375,165,395,185,fill=Az_color_4[2][2])
-        our_canvas.create_rectangle(400,165,420,185,fill=Az_color_4[2][3])
+        our_canvas.create_rectangle(325,165,345,185,fill=Az_color[2][0])
+        our_canvas.create_rectangle(350,165,370,185,fill=Az_color[2][1])
+        our_canvas.create_rectangle(375,165,395,185,fill=Az_color[2][2])
+        our_canvas.create_rectangle(400,165,420,185,fill=Az_color[2][3])
 
-        our_canvas.create_rectangle(325,190,345,210,fill=Az_color_4[3][0])
-        our_canvas.create_rectangle(350,190,370,210,fill=Az_color_4[3][1])
-        our_canvas.create_rectangle(375,190,395,210,fill=Az_color_4[3][2])
-        our_canvas.create_rectangle(400,190,420,210,fill=Az_color_4[3][3])
+        our_canvas.create_rectangle(325,190,345,210,fill=Az_color[3][0])
+        our_canvas.create_rectangle(350,190,370,210,fill=Az_color[3][1])
+        our_canvas.create_rectangle(375,190,395,210,fill=Az_color[3][2])
+        our_canvas.create_rectangle(400,190,420,210,fill=Az_color[3][3])
 
         #D
-        our_canvas.create_rectangle(115,220,135,240,fill=Am_color_4[0][0])
-        our_canvas.create_rectangle(140,220,160,240,fill=Am_color_4[0][1])
-        our_canvas.create_rectangle(165,220,185,240,fill=Am_color_4[0][2])
-        our_canvas.create_rectangle(190,220,210,240,fill=Am_color_4[0][3])
+        our_canvas.create_rectangle(115,220,135,240,fill=Am_color[0][0])
+        our_canvas.create_rectangle(140,220,160,240,fill=Am_color[0][1])
+        our_canvas.create_rectangle(165,220,185,240,fill=Am_color[0][2])
+        our_canvas.create_rectangle(190,220,210,240,fill=Am_color[0][3])
 
-        our_canvas.create_rectangle(115,245,135,265,fill=Am_color_4[1][0])
-        our_canvas.create_rectangle(140,245,160,265,fill=Am_color_4[1][1])
-        our_canvas.create_rectangle(165,245,185,265,fill=Am_color_4[1][2])
-        our_canvas.create_rectangle(190,245,210,265,fill=Am_color_4[1][3])
+        our_canvas.create_rectangle(115,245,135,265,fill=Am_color[1][0])
+        our_canvas.create_rectangle(140,245,160,265,fill=Am_color[1][1])
+        our_canvas.create_rectangle(165,245,185,265,fill=Am_color[1][2])
+        our_canvas.create_rectangle(190,245,210,265,fill=Am_color[1][3])
 
-        our_canvas.create_rectangle(115,270,135,290,fill=Am_color_4[2][0])
-        our_canvas.create_rectangle(140,270,160,290,fill=Am_color_4[2][1])
-        our_canvas.create_rectangle(165,270,185,290,fill=Am_color_4[2][2])
-        our_canvas.create_rectangle(190,270,210,290,fill=Am_color_4[2][3])
+        our_canvas.create_rectangle(115,270,135,290,fill=Am_color[2][0])
+        our_canvas.create_rectangle(140,270,160,290,fill=Am_color[2][1])
+        our_canvas.create_rectangle(165,270,185,290,fill=Am_color[2][2])
+        our_canvas.create_rectangle(190,270,210,290,fill=Am_color[2][3])
 
-        our_canvas.create_rectangle(115,295,135,315,fill=Am_color_4[3][0])
-        our_canvas.create_rectangle(140,295,160,315,fill=Am_color_4[3][1])
-        our_canvas.create_rectangle(165,295,185,315,fill=Am_color_4[3][2])
-        our_canvas.create_rectangle(190,295,210,315,fill=Am_color_4[3][3])
+        our_canvas.create_rectangle(115,295,135,315,fill=Am_color[3][0])
+        our_canvas.create_rectangle(140,295,160,315,fill=Am_color[3][1])
+        our_canvas.create_rectangle(165,295,185,315,fill=Am_color[3][2])
+        our_canvas.create_rectangle(190,295,210,315,fill=Am_color[3][3])
         
     elif cube == "5x5":
-        Br_color_5 = np.where(Br_5 != 1, Br_color_5,"white")
-        Lr_color_5 = np.where(Lr_5 != 1, Lr_color_5,"white")
-        Vd_color_5 = np.where(Vd_5 != 1, Vd_color_5,"white")
-        Vm_color_5 = np.where(Vm_5 != 1, Vm_color_5,"white")
-        Az_color_5 = np.where(Az_5 != 1, Az_color_5,"white")    
-        Am_color_5 = np.where(Am_5 != 1, Am_color_5,"white")  
+        Br_color = np.where(Br_5 != 1, Br_color,"white")
+        Lr_color = np.where(Lr_5 != 1, Lr_color,"white")
+        Vd_color = np.where(Vd_5 != 1, Vd_color,"white")
+        Vm_color = np.where(Vm_5 != 1, Vm_color,"white")
+        Az_color = np.where(Az_5 != 1, Az_color,"white")    
+        Am_color = np.where(Am_5 != 1, Am_color,"white")  
 
-        Br_color_5 = np.where(Br_5 != 2, Br_color_5,"orange")
-        Lr_color_5 = np.where(Lr_5 != 2, Lr_color_5,"orange")
-        Vd_color_5 = np.where(Vd_5 != 2, Vd_color_5,"orange")
-        Vm_color_5 = np.where(Vm_5 != 2, Vm_color_5,"orange")
-        Az_color_5 = np.where(Az_5 != 2, Az_color_5,"orange")    
-        Am_color_5 = np.where(Am_5 != 2, Am_color_5,"orange")   
+        Br_color = np.where(Br_5 != 2, Br_color,"orange")
+        Lr_color = np.where(Lr_5 != 2, Lr_color,"orange")
+        Vd_color = np.where(Vd_5 != 2, Vd_color,"orange")
+        Vm_color = np.where(Vm_5 != 2, Vm_color,"orange")
+        Az_color = np.where(Az_5 != 2, Az_color,"orange")    
+        Am_color = np.where(Am_5 != 2, Am_color,"orange")   
 
-        Br_color_5 = np.where(Br_5 != 3, Br_color_5,"green")
-        Lr_color_5 = np.where(Lr_5 != 3, Lr_color_5,"green")
-        Vd_color_5 = np.where(Vd_5 != 3, Vd_color_5,"green")
-        Vm_color_5 = np.where(Vm_5 != 3, Vm_color_5,"green")
-        Az_color_5 = np.where(Az_5 != 3, Az_color_5,"green")
-        Am_color_5 = np.where(Am_5 != 3, Am_color_5,"green")
+        Br_color = np.where(Br_5 != 3, Br_color,"green")
+        Lr_color = np.where(Lr_5 != 3, Lr_color,"green")
+        Vd_color = np.where(Vd_5 != 3, Vd_color,"green")
+        Vm_color = np.where(Vm_5 != 3, Vm_color,"green")
+        Az_color = np.where(Az_5 != 3, Az_color,"green")
+        Am_color = np.where(Am_5 != 3, Am_color,"green")
 
-        Br_color_5 = np.where(Br_5 != 4, Br_color_5,"red")
-        Lr_color_5 = np.where(Lr_5 != 4, Lr_color_5,"red")
-        Vd_color_5 = np.where(Vd_5 != 4, Vd_color_5,"red")
-        Vm_color_5 = np.where(Vm_5 != 4, Vm_color_5,"red")
-        Az_color_5 = np.where(Az_5 != 4, Az_color_5,"red")
-        Am_color_5 = np.where(Am_5 != 4, Am_color_5,"red")
+        Br_color = np.where(Br_5 != 4, Br_color,"red")
+        Lr_color = np.where(Lr_5 != 4, Lr_color,"red")
+        Vd_color = np.where(Vd_5 != 4, Vd_color,"red")
+        Vm_color = np.where(Vm_5 != 4, Vm_color,"red")
+        Az_color = np.where(Az_5 != 4, Az_color,"red")
+        Am_color = np.where(Am_5 != 4, Am_color,"red")
 
-        Br_color_5 = np.where(Br_5 != 5, Br_color_5,"blue")
-        Lr_color_5 = np.where(Lr_5 != 5, Lr_color_5,"blue")
-        Vd_color_5 = np.where(Vd_5 != 5, Vd_color_5,"blue")
-        Vm_color_5 = np.where(Vm_5 != 5, Vm_color_5,"blue")
-        Az_color_5 = np.where(Az_5 != 5, Az_color_5,"blue")
-        Am_color_5 = np.where(Am_5 != 5, Am_color_5,"blue")
+        Br_color = np.where(Br_5 != 5, Br_color,"blue")
+        Lr_color = np.where(Lr_5 != 5, Lr_color,"blue")
+        Vd_color = np.where(Vd_5 != 5, Vd_color,"blue")
+        Vm_color = np.where(Vm_5 != 5, Vm_color,"blue")
+        Az_color = np.where(Az_5 != 5, Az_color,"blue")
+        Am_color = np.where(Am_5 != 5, Am_color,"blue")
 
-        Br_color_5 = np.where(Br_5 != 6, Br_color_5,"yellow")
-        Lr_color_5 = np.where(Lr_5 != 6, Lr_color_5,"yellow")
-        Vd_color_5 = np.where(Vd_5 != 6, Vd_color_5,"yellow")
-        Vm_color_5 = np.where(Vm_5 != 6, Vm_color_5,"yellow")
-        Az_color_5 = np.where(Az_5 != 6, Az_color_5,"yellow")
-        Am_color_5 = np.where(Am_5 != 6, Am_color_5,"yellow")  
+        Br_color = np.where(Br_5 != 6, Br_color,"yellow")
+        Lr_color = np.where(Lr_5 != 6, Lr_color,"yellow")
+        Vd_color = np.where(Vd_5 != 6, Vd_color,"yellow")
+        Vm_color = np.where(Vm_5 != 6, Vm_color,"yellow")
+        Az_color = np.where(Az_5 != 6, Az_color,"yellow")
+        Am_color = np.where(Am_5 != 6, Am_color,"yellow")  
 
 
         #U
-        our_canvas.create_rectangle(120,10,138,28,fill=Br_color_5[0][0])    
-        our_canvas.create_rectangle(141,10,159,28,fill=Br_color_5[0][1])
-        our_canvas.create_rectangle(162,10,180,28,fill=Br_color_5[0][2])
-        our_canvas.create_rectangle(183,10,201,28,fill=Br_color_5[0][3])        
-        our_canvas.create_rectangle(204,10,222,28,fill=Br_color_5[0][4])        
+        our_canvas.create_rectangle(120,10,138,28,fill=Br_color[0][0])    
+        our_canvas.create_rectangle(141,10,159,28,fill=Br_color[0][1])
+        our_canvas.create_rectangle(162,10,180,28,fill=Br_color[0][2])
+        our_canvas.create_rectangle(183,10,201,28,fill=Br_color[0][3])        
+        our_canvas.create_rectangle(204,10,222,28,fill=Br_color[0][4])        
 
-        our_canvas.create_rectangle(120,31,138,49,fill=Br_color_5[1][0])
-        our_canvas.create_rectangle(141,31,159,49,fill=Br_color_5[1][1])
-        our_canvas.create_rectangle(162,31,180,49,fill=Br_color_5[1][2])
-        our_canvas.create_rectangle(183,31,201,49,fill=Br_color_5[1][3])
-        our_canvas.create_rectangle(204,31,222,49,fill=Br_color_5[1][4])
+        our_canvas.create_rectangle(120,31,138,49,fill=Br_color[1][0])
+        our_canvas.create_rectangle(141,31,159,49,fill=Br_color[1][1])
+        our_canvas.create_rectangle(162,31,180,49,fill=Br_color[1][2])
+        our_canvas.create_rectangle(183,31,201,49,fill=Br_color[1][3])
+        our_canvas.create_rectangle(204,31,222,49,fill=Br_color[1][4])
 
-        our_canvas.create_rectangle(120,52,138,70,fill=Br_color_5[2][0])
-        our_canvas.create_rectangle(141,52,159,70,fill=Br_color_5[2][1])
-        our_canvas.create_rectangle(162,52,180,70,fill=Br_color_5[2][2])
-        our_canvas.create_rectangle(183,52,201,70,fill=Br_color_5[2][3])
-        our_canvas.create_rectangle(204,52,222,70,fill=Br_color_5[2][4])
+        our_canvas.create_rectangle(120,52,138,70,fill=Br_color[2][0])
+        our_canvas.create_rectangle(141,52,159,70,fill=Br_color[2][1])
+        our_canvas.create_rectangle(162,52,180,70,fill=Br_color[2][2])
+        our_canvas.create_rectangle(183,52,201,70,fill=Br_color[2][3])
+        our_canvas.create_rectangle(204,52,222,70,fill=Br_color[2][4])
 
-        our_canvas.create_rectangle(120,73,138,91,fill=Br_color_5[3][0])
-        our_canvas.create_rectangle(141,73,159,91,fill=Br_color_5[3][1])
-        our_canvas.create_rectangle(162,73,180,91,fill=Br_color_5[3][2])
-        our_canvas.create_rectangle(183,73,201,91,fill=Br_color_5[3][3])
-        our_canvas.create_rectangle(204,73,222,91,fill=Br_color_5[3][4])
+        our_canvas.create_rectangle(120,73,138,91,fill=Br_color[3][0])
+        our_canvas.create_rectangle(141,73,159,91,fill=Br_color[3][1])
+        our_canvas.create_rectangle(162,73,180,91,fill=Br_color[3][2])
+        our_canvas.create_rectangle(183,73,201,91,fill=Br_color[3][3])
+        our_canvas.create_rectangle(204,73,222,91,fill=Br_color[3][4])
 
-        our_canvas.create_rectangle(120,94,138,112,fill=Br_color_5[4][0])
-        our_canvas.create_rectangle(141,94,159,112,fill=Br_color_5[4][1])
-        our_canvas.create_rectangle(162,94,180,112,fill=Br_color_5[4][2])
-        our_canvas.create_rectangle(183,94,201,112,fill=Br_color_5[4][3])
-        our_canvas.create_rectangle(204,94,222,112,fill=Br_color_5[4][4])
+        our_canvas.create_rectangle(120,94,138,112,fill=Br_color[4][0])
+        our_canvas.create_rectangle(141,94,159,112,fill=Br_color[4][1])
+        our_canvas.create_rectangle(162,94,180,112,fill=Br_color[4][2])
+        our_canvas.create_rectangle(183,94,201,112,fill=Br_color[4][3])
+        our_canvas.create_rectangle(204,94,222,112,fill=Br_color[4][4])
 
         #L
-        our_canvas.create_rectangle(12,118,30 ,136,fill=Lr_color_5[0][0])
-        our_canvas.create_rectangle(33,118,51 ,136,fill=Lr_color_5[0][1])
-        our_canvas.create_rectangle(54,118,72 ,136,fill=Lr_color_5[0][2])
-        our_canvas.create_rectangle(75,118,93 ,136,fill=Lr_color_5[0][3])
-        our_canvas.create_rectangle(96,118,114,136,fill=Lr_color_5[0][4])
+        our_canvas.create_rectangle(12,118,30 ,136,fill=Lr_color[0][0])
+        our_canvas.create_rectangle(33,118,51 ,136,fill=Lr_color[0][1])
+        our_canvas.create_rectangle(54,118,72 ,136,fill=Lr_color[0][2])
+        our_canvas.create_rectangle(75,118,93 ,136,fill=Lr_color[0][3])
+        our_canvas.create_rectangle(96,118,114,136,fill=Lr_color[0][4])
 
-        our_canvas.create_rectangle(12,139,30 ,157,fill=Lr_color_5[1][0])
-        our_canvas.create_rectangle(33,139,51 ,157,fill=Lr_color_5[1][1])
-        our_canvas.create_rectangle(54,139,72 ,157,fill=Lr_color_5[1][2])
-        our_canvas.create_rectangle(75,139,93 ,157,fill=Lr_color_5[1][3])
-        our_canvas.create_rectangle(96,139,114,157,fill=Lr_color_5[1][4])
+        our_canvas.create_rectangle(12,139,30 ,157,fill=Lr_color[1][0])
+        our_canvas.create_rectangle(33,139,51 ,157,fill=Lr_color[1][1])
+        our_canvas.create_rectangle(54,139,72 ,157,fill=Lr_color[1][2])
+        our_canvas.create_rectangle(75,139,93 ,157,fill=Lr_color[1][3])
+        our_canvas.create_rectangle(96,139,114,157,fill=Lr_color[1][4])
 
-        our_canvas.create_rectangle(12,160,30 ,178,fill=Lr_color_5[2][0])
-        our_canvas.create_rectangle(33,160,51 ,178,fill=Lr_color_5[2][1])
-        our_canvas.create_rectangle(54,160,72 ,178,fill=Lr_color_5[2][2])
-        our_canvas.create_rectangle(75,160,93 ,178,fill=Lr_color_5[2][3])
-        our_canvas.create_rectangle(96,160,114,178,fill=Lr_color_5[2][4])
+        our_canvas.create_rectangle(12,160,30 ,178,fill=Lr_color[2][0])
+        our_canvas.create_rectangle(33,160,51 ,178,fill=Lr_color[2][1])
+        our_canvas.create_rectangle(54,160,72 ,178,fill=Lr_color[2][2])
+        our_canvas.create_rectangle(75,160,93 ,178,fill=Lr_color[2][3])
+        our_canvas.create_rectangle(96,160,114,178,fill=Lr_color[2][4])
 
-        our_canvas.create_rectangle(12,181,30 ,199,fill=Lr_color_5[3][0])
-        our_canvas.create_rectangle(33,181,51 ,199,fill=Lr_color_5[3][1])
-        our_canvas.create_rectangle(54,181,72 ,199,fill=Lr_color_5[3][2])
-        our_canvas.create_rectangle(75,181,93 ,199,fill=Lr_color_5[3][3])
-        our_canvas.create_rectangle(96,181,114,199,fill=Lr_color_5[3][4])
+        our_canvas.create_rectangle(12,181,30 ,199,fill=Lr_color[3][0])
+        our_canvas.create_rectangle(33,181,51 ,199,fill=Lr_color[3][1])
+        our_canvas.create_rectangle(54,181,72 ,199,fill=Lr_color[3][2])
+        our_canvas.create_rectangle(75,181,93 ,199,fill=Lr_color[3][3])
+        our_canvas.create_rectangle(96,181,114,199,fill=Lr_color[3][4])
 
-        our_canvas.create_rectangle(12,202,30 ,220,fill=Lr_color_5[4][0])
-        our_canvas.create_rectangle(33,202,51 ,220,fill=Lr_color_5[4][1])
-        our_canvas.create_rectangle(54,202,72 ,220,fill=Lr_color_5[4][2])
-        our_canvas.create_rectangle(75,202,93 ,220,fill=Lr_color_5[4][3])
-        our_canvas.create_rectangle(96,202,114,220,fill=Lr_color_5[4][4])
+        our_canvas.create_rectangle(12,202,30 ,220,fill=Lr_color[4][0])
+        our_canvas.create_rectangle(33,202,51 ,220,fill=Lr_color[4][1])
+        our_canvas.create_rectangle(54,202,72 ,220,fill=Lr_color[4][2])
+        our_canvas.create_rectangle(75,202,93 ,220,fill=Lr_color[4][3])
+        our_canvas.create_rectangle(96,202,114,220,fill=Lr_color[4][4])
 
 
         #F
-        our_canvas.create_rectangle(120,118,138,136,fill=Vd_color_5[0][0])
-        our_canvas.create_rectangle(141,118,159,136,fill=Vd_color_5[0][1])
-        our_canvas.create_rectangle(162,118,180,136,fill=Vd_color_5[0][2])
-        our_canvas.create_rectangle(183,118,201,136,fill=Vd_color_5[0][3])
-        our_canvas.create_rectangle(204,118,222,136,fill=Vd_color_5[0][4])
+        our_canvas.create_rectangle(120,118,138,136,fill=Vd_color[0][0])
+        our_canvas.create_rectangle(141,118,159,136,fill=Vd_color[0][1])
+        our_canvas.create_rectangle(162,118,180,136,fill=Vd_color[0][2])
+        our_canvas.create_rectangle(183,118,201,136,fill=Vd_color[0][3])
+        our_canvas.create_rectangle(204,118,222,136,fill=Vd_color[0][4])
 
-        our_canvas.create_rectangle(120,139,138,157,fill=Vd_color_5[1][0])
-        our_canvas.create_rectangle(141,139,159,157,fill=Vd_color_5[1][1])
-        our_canvas.create_rectangle(162,139,180,157,fill=Vd_color_5[1][2])
-        our_canvas.create_rectangle(183,139,201,157,fill=Vd_color_5[1][3])
-        our_canvas.create_rectangle(204,139,222,157,fill=Vd_color_5[1][4])        
+        our_canvas.create_rectangle(120,139,138,157,fill=Vd_color[1][0])
+        our_canvas.create_rectangle(141,139,159,157,fill=Vd_color[1][1])
+        our_canvas.create_rectangle(162,139,180,157,fill=Vd_color[1][2])
+        our_canvas.create_rectangle(183,139,201,157,fill=Vd_color[1][3])
+        our_canvas.create_rectangle(204,139,222,157,fill=Vd_color[1][4])        
 
-        our_canvas.create_rectangle(120,160,138,178,fill=Vd_color_5[2][0])
-        our_canvas.create_rectangle(141,160,159,178,fill=Vd_color_5[2][1])
-        our_canvas.create_rectangle(162,160,180,178,fill=Vd_color_5[2][2])
-        our_canvas.create_rectangle(183,160,201,178,fill=Vd_color_5[2][3])
-        our_canvas.create_rectangle(204,160,222,178,fill=Vd_color_5[2][4])
+        our_canvas.create_rectangle(120,160,138,178,fill=Vd_color[2][0])
+        our_canvas.create_rectangle(141,160,159,178,fill=Vd_color[2][1])
+        our_canvas.create_rectangle(162,160,180,178,fill=Vd_color[2][2])
+        our_canvas.create_rectangle(183,160,201,178,fill=Vd_color[2][3])
+        our_canvas.create_rectangle(204,160,222,178,fill=Vd_color[2][4])
 
-        our_canvas.create_rectangle(120,181,138,199,fill=Vd_color_5[3][0])
-        our_canvas.create_rectangle(141,181,159,199,fill=Vd_color_5[3][1])
-        our_canvas.create_rectangle(162,181,180,199,fill=Vd_color_5[3][2])
-        our_canvas.create_rectangle(183,181,201,199,fill=Vd_color_5[3][3])
-        our_canvas.create_rectangle(204,181,222,199,fill=Vd_color_5[3][4])
+        our_canvas.create_rectangle(120,181,138,199,fill=Vd_color[3][0])
+        our_canvas.create_rectangle(141,181,159,199,fill=Vd_color[3][1])
+        our_canvas.create_rectangle(162,181,180,199,fill=Vd_color[3][2])
+        our_canvas.create_rectangle(183,181,201,199,fill=Vd_color[3][3])
+        our_canvas.create_rectangle(204,181,222,199,fill=Vd_color[3][4])
 
-        our_canvas.create_rectangle(120,202,138,220,fill=Vd_color_5[4][0])
-        our_canvas.create_rectangle(141,202,159,220,fill=Vd_color_5[4][1])
-        our_canvas.create_rectangle(162,202,180,220,fill=Vd_color_5[4][2])
-        our_canvas.create_rectangle(183,202,201,220,fill=Vd_color_5[4][3])
-        our_canvas.create_rectangle(204,202,222,220,fill=Vd_color_5[4][4])
+        our_canvas.create_rectangle(120,202,138,220,fill=Vd_color[4][0])
+        our_canvas.create_rectangle(141,202,159,220,fill=Vd_color[4][1])
+        our_canvas.create_rectangle(162,202,180,220,fill=Vd_color[4][2])
+        our_canvas.create_rectangle(183,202,201,220,fill=Vd_color[4][3])
+        our_canvas.create_rectangle(204,202,222,220,fill=Vd_color[4][4])
 
         #R
-        our_canvas.create_rectangle(228,118,246,136,fill=Vm_color_5[0][0])
-        our_canvas.create_rectangle(249,118,267,136,fill=Vm_color_5[0][1])
-        our_canvas.create_rectangle(270,118,288,136,fill=Vm_color_5[0][2])
-        our_canvas.create_rectangle(291,118,309,136,fill=Vm_color_5[0][3])
-        our_canvas.create_rectangle(312,118,330,136,fill=Vm_color_5[0][4])
+        our_canvas.create_rectangle(228,118,246,136,fill=Vm_color[0][0])
+        our_canvas.create_rectangle(249,118,267,136,fill=Vm_color[0][1])
+        our_canvas.create_rectangle(270,118,288,136,fill=Vm_color[0][2])
+        our_canvas.create_rectangle(291,118,309,136,fill=Vm_color[0][3])
+        our_canvas.create_rectangle(312,118,330,136,fill=Vm_color[0][4])
 
-        our_canvas.create_rectangle(228,139,246,157,fill=Vm_color_5[1][0])
-        our_canvas.create_rectangle(249,139,267,157,fill=Vm_color_5[1][1])
-        our_canvas.create_rectangle(270,139,288,157,fill=Vm_color_5[1][2])
-        our_canvas.create_rectangle(291,139,309,157,fill=Vm_color_5[1][3])
-        our_canvas.create_rectangle(312,139,330,157,fill=Vm_color_5[1][4])
+        our_canvas.create_rectangle(228,139,246,157,fill=Vm_color[1][0])
+        our_canvas.create_rectangle(249,139,267,157,fill=Vm_color[1][1])
+        our_canvas.create_rectangle(270,139,288,157,fill=Vm_color[1][2])
+        our_canvas.create_rectangle(291,139,309,157,fill=Vm_color[1][3])
+        our_canvas.create_rectangle(312,139,330,157,fill=Vm_color[1][4])
 
-        our_canvas.create_rectangle(228,160,246,178,fill=Vm_color_5[2][0])
-        our_canvas.create_rectangle(249,160,267,178,fill=Vm_color_5[2][1])
-        our_canvas.create_rectangle(270,160,288,178,fill=Vm_color_5[2][2])
-        our_canvas.create_rectangle(291,160,309,178,fill=Vm_color_5[2][3])
-        our_canvas.create_rectangle(312,160,330,178,fill=Vm_color_5[2][4])
+        our_canvas.create_rectangle(228,160,246,178,fill=Vm_color[2][0])
+        our_canvas.create_rectangle(249,160,267,178,fill=Vm_color[2][1])
+        our_canvas.create_rectangle(270,160,288,178,fill=Vm_color[2][2])
+        our_canvas.create_rectangle(291,160,309,178,fill=Vm_color[2][3])
+        our_canvas.create_rectangle(312,160,330,178,fill=Vm_color[2][4])
 
-        our_canvas.create_rectangle(228,181,246,199,fill=Vm_color_5[3][0])
-        our_canvas.create_rectangle(249,181,267,199,fill=Vm_color_5[3][1])
-        our_canvas.create_rectangle(270,181,288,199,fill=Vm_color_5[3][2])
-        our_canvas.create_rectangle(291,181,309,199,fill=Vm_color_5[3][3])
-        our_canvas.create_rectangle(312,181,330,199,fill=Vm_color_5[3][4])
+        our_canvas.create_rectangle(228,181,246,199,fill=Vm_color[3][0])
+        our_canvas.create_rectangle(249,181,267,199,fill=Vm_color[3][1])
+        our_canvas.create_rectangle(270,181,288,199,fill=Vm_color[3][2])
+        our_canvas.create_rectangle(291,181,309,199,fill=Vm_color[3][3])
+        our_canvas.create_rectangle(312,181,330,199,fill=Vm_color[3][4])
 
-        our_canvas.create_rectangle(228,202,246,220,fill=Vm_color_5[4][0])
-        our_canvas.create_rectangle(249,202,267,220,fill=Vm_color_5[4][1])
-        our_canvas.create_rectangle(270,202,288,220,fill=Vm_color_5[4][2])
-        our_canvas.create_rectangle(291,202,309,220,fill=Vm_color_5[4][3])
-        our_canvas.create_rectangle(312,202,330,220,fill=Vm_color_5[4][4])
+        our_canvas.create_rectangle(228,202,246,220,fill=Vm_color[4][0])
+        our_canvas.create_rectangle(249,202,267,220,fill=Vm_color[4][1])
+        our_canvas.create_rectangle(270,202,288,220,fill=Vm_color[4][2])
+        our_canvas.create_rectangle(291,202,309,220,fill=Vm_color[4][3])
+        our_canvas.create_rectangle(312,202,330,220,fill=Vm_color[4][4])
 
 
         #B
-        our_canvas.create_rectangle(336,118,354,136,fill=Az_color_5[0][0])
-        our_canvas.create_rectangle(357,118,373,136,fill=Az_color_5[0][1])
-        our_canvas.create_rectangle(376,118,395,136,fill=Az_color_5[0][2])
-        our_canvas.create_rectangle(399,118,417,136,fill=Az_color_5[0][3])
-        our_canvas.create_rectangle(420,118,438,136,fill=Az_color_5[0][4])
+        our_canvas.create_rectangle(336,118,354,136,fill=Az_color[0][0])
+        our_canvas.create_rectangle(357,118,373,136,fill=Az_color[0][1])
+        our_canvas.create_rectangle(376,118,395,136,fill=Az_color[0][2])
+        our_canvas.create_rectangle(399,118,417,136,fill=Az_color[0][3])
+        our_canvas.create_rectangle(420,118,438,136,fill=Az_color[0][4])
 
-        our_canvas.create_rectangle(336,139,354,157,fill=Az_color_5[1][0])
-        our_canvas.create_rectangle(357,139,373,157,fill=Az_color_5[1][1])
-        our_canvas.create_rectangle(376,139,395,157,fill=Az_color_5[1][2])
-        our_canvas.create_rectangle(399,139,417,157,fill=Az_color_5[1][3])
-        our_canvas.create_rectangle(420,139,438,157,fill=Az_color_5[1][4])
+        our_canvas.create_rectangle(336,139,354,157,fill=Az_color[1][0])
+        our_canvas.create_rectangle(357,139,373,157,fill=Az_color[1][1])
+        our_canvas.create_rectangle(376,139,395,157,fill=Az_color[1][2])
+        our_canvas.create_rectangle(399,139,417,157,fill=Az_color[1][3])
+        our_canvas.create_rectangle(420,139,438,157,fill=Az_color[1][4])
 
-        our_canvas.create_rectangle(336,160,354,178,fill=Az_color_5[2][0])
-        our_canvas.create_rectangle(357,160,373,178,fill=Az_color_5[2][1])
-        our_canvas.create_rectangle(376,160,395,178,fill=Az_color_5[2][2])
-        our_canvas.create_rectangle(399,160,417,178,fill=Az_color_5[2][3])
-        our_canvas.create_rectangle(420,160,438,178,fill=Az_color_5[2][4])
+        our_canvas.create_rectangle(336,160,354,178,fill=Az_color[2][0])
+        our_canvas.create_rectangle(357,160,373,178,fill=Az_color[2][1])
+        our_canvas.create_rectangle(376,160,395,178,fill=Az_color[2][2])
+        our_canvas.create_rectangle(399,160,417,178,fill=Az_color[2][3])
+        our_canvas.create_rectangle(420,160,438,178,fill=Az_color[2][4])
 
-        our_canvas.create_rectangle(336,181,354,199,fill=Az_color_5[3][0])
-        our_canvas.create_rectangle(357,181,373,199,fill=Az_color_5[3][1])
-        our_canvas.create_rectangle(376,181,395,199,fill=Az_color_5[3][2])
-        our_canvas.create_rectangle(399,181,417,199,fill=Az_color_5[3][3])
-        our_canvas.create_rectangle(420,181,438,199,fill=Az_color_5[3][4])
+        our_canvas.create_rectangle(336,181,354,199,fill=Az_color[3][0])
+        our_canvas.create_rectangle(357,181,373,199,fill=Az_color[3][1])
+        our_canvas.create_rectangle(376,181,395,199,fill=Az_color[3][2])
+        our_canvas.create_rectangle(399,181,417,199,fill=Az_color[3][3])
+        our_canvas.create_rectangle(420,181,438,199,fill=Az_color[3][4])
 
-        our_canvas.create_rectangle(336,202,354,220,fill=Az_color_5[4][0])
-        our_canvas.create_rectangle(357,202,373,220,fill=Az_color_5[4][1])
-        our_canvas.create_rectangle(376,202,395,220,fill=Az_color_5[4][2])
-        our_canvas.create_rectangle(399,202,417,220,fill=Az_color_5[4][3])
-        our_canvas.create_rectangle(420,202,438,220,fill=Az_color_5[4][4])
+        our_canvas.create_rectangle(336,202,354,220,fill=Az_color[4][0])
+        our_canvas.create_rectangle(357,202,373,220,fill=Az_color[4][1])
+        our_canvas.create_rectangle(376,202,395,220,fill=Az_color[4][2])
+        our_canvas.create_rectangle(399,202,417,220,fill=Az_color[4][3])
+        our_canvas.create_rectangle(420,202,438,220,fill=Az_color[4][4])
 
         #D
-        our_canvas.create_rectangle(120,226,138,244,fill=Am_color_5[0][0])
-        our_canvas.create_rectangle(141,226,159,244,fill=Am_color_5[0][1])
-        our_canvas.create_rectangle(162,226,180,244,fill=Am_color_5[0][2])
-        our_canvas.create_rectangle(183,226,201,244,fill=Am_color_5[0][3])
-        our_canvas.create_rectangle(204,226,222,244,fill=Am_color_5[0][4])
+        our_canvas.create_rectangle(120,226,138,244,fill=Am_color[0][0])
+        our_canvas.create_rectangle(141,226,159,244,fill=Am_color[0][1])
+        our_canvas.create_rectangle(162,226,180,244,fill=Am_color[0][2])
+        our_canvas.create_rectangle(183,226,201,244,fill=Am_color[0][3])
+        our_canvas.create_rectangle(204,226,222,244,fill=Am_color[0][4])
 
-        our_canvas.create_rectangle(120,247,138,265,fill=Am_color_5[1][0])
-        our_canvas.create_rectangle(141,247,159,265,fill=Am_color_5[1][1])
-        our_canvas.create_rectangle(162,247,180,265,fill=Am_color_5[1][2])
-        our_canvas.create_rectangle(183,247,201,265,fill=Am_color_5[1][3])
-        our_canvas.create_rectangle(204,247,222,265,fill=Am_color_5[1][4])
+        our_canvas.create_rectangle(120,247,138,265,fill=Am_color[1][0])
+        our_canvas.create_rectangle(141,247,159,265,fill=Am_color[1][1])
+        our_canvas.create_rectangle(162,247,180,265,fill=Am_color[1][2])
+        our_canvas.create_rectangle(183,247,201,265,fill=Am_color[1][3])
+        our_canvas.create_rectangle(204,247,222,265,fill=Am_color[1][4])
 
-        our_canvas.create_rectangle(120,268,138,286,fill=Am_color_5[2][0])
-        our_canvas.create_rectangle(141,268,159,286,fill=Am_color_5[2][1])
-        our_canvas.create_rectangle(162,268,180,286,fill=Am_color_5[2][2])
-        our_canvas.create_rectangle(183,268,201,286,fill=Am_color_5[2][3])
-        our_canvas.create_rectangle(204,268,222,286,fill=Am_color_5[2][4])
+        our_canvas.create_rectangle(120,268,138,286,fill=Am_color[2][0])
+        our_canvas.create_rectangle(141,268,159,286,fill=Am_color[2][1])
+        our_canvas.create_rectangle(162,268,180,286,fill=Am_color[2][2])
+        our_canvas.create_rectangle(183,268,201,286,fill=Am_color[2][3])
+        our_canvas.create_rectangle(204,268,222,286,fill=Am_color[2][4])
 
-        our_canvas.create_rectangle(120,289,138,307,fill=Am_color_5[3][0])
-        our_canvas.create_rectangle(141,289,159,307,fill=Am_color_5[3][1])
-        our_canvas.create_rectangle(162,289,180,307,fill=Am_color_5[3][2])
-        our_canvas.create_rectangle(183,289,201,307,fill=Am_color_5[3][3])
-        our_canvas.create_rectangle(204,289,222,307,fill=Am_color_5[3][4])
+        our_canvas.create_rectangle(120,289,138,307,fill=Am_color[3][0])
+        our_canvas.create_rectangle(141,289,159,307,fill=Am_color[3][1])
+        our_canvas.create_rectangle(162,289,180,307,fill=Am_color[3][2])
+        our_canvas.create_rectangle(183,289,201,307,fill=Am_color[3][3])
+        our_canvas.create_rectangle(204,289,222,307,fill=Am_color[3][4])
 
-        our_canvas.create_rectangle(120,310,138,328,fill=Am_color_5[4][0])
-        our_canvas.create_rectangle(141,310,159,328,fill=Am_color_5[4][1])
-        our_canvas.create_rectangle(162,310,180,328,fill=Am_color_5[4][2])
-        our_canvas.create_rectangle(183,310,201,328,fill=Am_color_5[4][3])
-        our_canvas.create_rectangle(204,310,222,328,fill=Am_color_5[4][4])
+        our_canvas.create_rectangle(120,310,138,328,fill=Am_color[4][0])
+        our_canvas.create_rectangle(141,310,159,328,fill=Am_color[4][1])
+        our_canvas.create_rectangle(162,310,180,328,fill=Am_color[4][2])
+        our_canvas.create_rectangle(183,310,201,328,fill=Am_color[4][3])
+        our_canvas.create_rectangle(204,310,222,328,fill=Am_color[4][4])
         
     elif cube == "6x6":
-        Br_color_6 = np.where(Br_6 != 1, Br_color_6,"white")
-        Lr_color_6 = np.where(Lr_6 != 1, Lr_color_6,"white")
-        Vd_color_6 = np.where(Vd_6 != 1, Vd_color_6,"white")
-        Vm_color_6 = np.where(Vm_6 != 1, Vm_color_6,"white")
-        Az_color_6 = np.where(Az_6 != 1, Az_color_6,"white")    
-        Am_color_6 = np.where(Am_6 != 1, Am_color_6,"white")  
+        Br_color = np.where(Br_6 != 1, Br_color,"white")
+        Lr_color = np.where(Lr_6 != 1, Lr_color,"white")
+        Vd_color = np.where(Vd_6 != 1, Vd_color,"white")
+        Vm_color = np.where(Vm_6 != 1, Vm_color,"white")
+        Az_color = np.where(Az_6 != 1, Az_color,"white")    
+        Am_color = np.where(Am_6 != 1, Am_color,"white")  
 
-        Br_color_6 = np.where(Br_6 != 2, Br_color_6,"orange")
-        Lr_color_6 = np.where(Lr_6 != 2, Lr_color_6,"orange")
-        Vd_color_6 = np.where(Vd_6 != 2, Vd_color_6,"orange")
-        Vm_color_6 = np.where(Vm_6 != 2, Vm_color_6,"orange")
-        Az_color_6 = np.where(Az_6 != 2, Az_color_6,"orange")    
-        Am_color_6 = np.where(Am_6 != 2, Am_color_6,"orange")   
+        Br_color = np.where(Br_6 != 2, Br_color,"orange")
+        Lr_color = np.where(Lr_6 != 2, Lr_color,"orange")
+        Vd_color = np.where(Vd_6 != 2, Vd_color,"orange")
+        Vm_color = np.where(Vm_6 != 2, Vm_color,"orange")
+        Az_color = np.where(Az_6 != 2, Az_color,"orange")    
+        Am_color = np.where(Am_6 != 2, Am_color,"orange")   
 
-        Br_color_6 = np.where(Br_6 != 3, Br_color_6,"green")
-        Lr_color_6 = np.where(Lr_6 != 3, Lr_color_6,"green")
-        Vd_color_6 = np.where(Vd_6 != 3, Vd_color_6,"green")
-        Vm_color_6 = np.where(Vm_6 != 3, Vm_color_6,"green")
-        Az_color_6 = np.where(Az_6 != 3, Az_color_6,"green")
-        Am_color_6 = np.where(Am_6 != 3, Am_color_6,"green")
+        Br_color = np.where(Br_6 != 3, Br_color,"green")
+        Lr_color = np.where(Lr_6 != 3, Lr_color,"green")
+        Vd_color = np.where(Vd_6 != 3, Vd_color,"green")
+        Vm_color = np.where(Vm_6 != 3, Vm_color,"green")
+        Az_color = np.where(Az_6 != 3, Az_color,"green")
+        Am_color = np.where(Am_6 != 3, Am_color,"green")
 
-        Br_color_6 = np.where(Br_6 != 4, Br_color_6,"red")
-        Lr_color_6 = np.where(Lr_6 != 4, Lr_color_6,"red")
-        Vd_color_6 = np.where(Vd_6 != 4, Vd_color_6,"red")
-        Vm_color_6 = np.where(Vm_6 != 4, Vm_color_6,"red")
-        Az_color_6 = np.where(Az_6 != 4, Az_color_6,"red")
-        Am_color_6 = np.where(Am_6 != 4, Am_color_6,"red")
+        Br_color = np.where(Br_6 != 4, Br_color,"red")
+        Lr_color = np.where(Lr_6 != 4, Lr_color,"red")
+        Vd_color = np.where(Vd_6 != 4, Vd_color,"red")
+        Vm_color = np.where(Vm_6 != 4, Vm_color,"red")
+        Az_color = np.where(Az_6 != 4, Az_color,"red")
+        Am_color = np.where(Am_6 != 4, Am_color,"red")
 
-        Br_color_6 = np.where(Br_6 != 5, Br_color_6,"blue")
-        Lr_color_6 = np.where(Lr_6 != 5, Lr_color_6,"blue")
-        Vd_color_6 = np.where(Vd_6 != 5, Vd_color_6,"blue")
-        Vm_color_6 = np.where(Vm_6 != 5, Vm_color_6,"blue")
-        Az_color_6 = np.where(Az_6 != 5, Az_color_6,"blue")
-        Am_color_6 = np.where(Am_6 != 5, Am_color_6,"blue")
+        Br_color = np.where(Br_6 != 5, Br_color,"blue")
+        Lr_color = np.where(Lr_6 != 5, Lr_color,"blue")
+        Vd_color = np.where(Vd_6 != 5, Vd_color,"blue")
+        Vm_color = np.where(Vm_6 != 5, Vm_color,"blue")
+        Az_color = np.where(Az_6 != 5, Az_color,"blue")
+        Am_color = np.where(Am_6 != 5, Am_color,"blue")
 
-        Br_color_6 = np.where(Br_6 != 6, Br_color_6,"yellow")
-        Lr_color_6 = np.where(Lr_6 != 6, Lr_color_6,"yellow")
-        Vd_color_6 = np.where(Vd_6 != 6, Vd_color_6,"yellow")
-        Vm_color_6 = np.where(Vm_6 != 6, Vm_color_6,"yellow")
-        Az_color_6 = np.where(Az_6 != 6, Az_color_6,"yellow")
-        Am_color_6 = np.where(Am_6 != 6, Am_color_6,"yellow")  
+        Br_color = np.where(Br_6 != 6, Br_color,"yellow")
+        Lr_color = np.where(Lr_6 != 6, Lr_color,"yellow")
+        Vd_color = np.where(Vd_6 != 6, Vd_color,"yellow")
+        Vm_color = np.where(Vm_6 != 6, Vm_color,"yellow")
+        Az_color = np.where(Az_6 != 6, Az_color,"yellow")
+        Am_color = np.where(Am_6 != 6, Am_color,"yellow")  
         
         
 
         #U
-        our_canvas.create_rectangle(120,10,135,25,fill=Br_color_6[0][0])    
-        our_canvas.create_rectangle(137,10,152,25,fill=Br_color_6[0][1])
-        our_canvas.create_rectangle(154,10,169,25,fill=Br_color_6[0][2])
-        our_canvas.create_rectangle(171,10,186,25,fill=Br_color_6[0][3])        
-        our_canvas.create_rectangle(188,10,203,25,fill=Br_color_6[0][4])        
-        our_canvas.create_rectangle(205,10,220,25,fill=Br_color_6[0][5])        
+        our_canvas.create_rectangle(120,10,135,25,fill=Br_color[0][0])    
+        our_canvas.create_rectangle(137,10,152,25,fill=Br_color[0][1])
+        our_canvas.create_rectangle(154,10,169,25,fill=Br_color[0][2])
+        our_canvas.create_rectangle(171,10,186,25,fill=Br_color[0][3])        
+        our_canvas.create_rectangle(188,10,203,25,fill=Br_color[0][4])        
+        our_canvas.create_rectangle(205,10,220,25,fill=Br_color[0][5])        
 
-        our_canvas.create_rectangle(120,27,135,42,fill=Br_color_6[1][0])
-        our_canvas.create_rectangle(137,27,152,42,fill=Br_color_6[1][1])
-        our_canvas.create_rectangle(154,27,169,42,fill=Br_color_6[1][2])
-        our_canvas.create_rectangle(171,27,186,42,fill=Br_color_6[1][3])
-        our_canvas.create_rectangle(188,27,203,42,fill=Br_color_6[1][4])
-        our_canvas.create_rectangle(205,27,220,42,fill=Br_color_6[1][5])
+        our_canvas.create_rectangle(120,27,135,42,fill=Br_color[1][0])
+        our_canvas.create_rectangle(137,27,152,42,fill=Br_color[1][1])
+        our_canvas.create_rectangle(154,27,169,42,fill=Br_color[1][2])
+        our_canvas.create_rectangle(171,27,186,42,fill=Br_color[1][3])
+        our_canvas.create_rectangle(188,27,203,42,fill=Br_color[1][4])
+        our_canvas.create_rectangle(205,27,220,42,fill=Br_color[1][5])
 
-        our_canvas.create_rectangle(120,44,135,59,fill=Br_color_6[2][0])
-        our_canvas.create_rectangle(137,44,152,59,fill=Br_color_6[2][1])
-        our_canvas.create_rectangle(154,44,169,59,fill=Br_color_6[2][2])
-        our_canvas.create_rectangle(171,44,186,59,fill=Br_color_6[2][3])
-        our_canvas.create_rectangle(188,44,203,59,fill=Br_color_6[2][4])
-        our_canvas.create_rectangle(205,44,220,59,fill=Br_color_6[2][5])
+        our_canvas.create_rectangle(120,44,135,59,fill=Br_color[2][0])
+        our_canvas.create_rectangle(137,44,152,59,fill=Br_color[2][1])
+        our_canvas.create_rectangle(154,44,169,59,fill=Br_color[2][2])
+        our_canvas.create_rectangle(171,44,186,59,fill=Br_color[2][3])
+        our_canvas.create_rectangle(188,44,203,59,fill=Br_color[2][4])
+        our_canvas.create_rectangle(205,44,220,59,fill=Br_color[2][5])
 
-        our_canvas.create_rectangle(120,61,135,76,fill=Br_color_6[3][0])
-        our_canvas.create_rectangle(137,61,152,76,fill=Br_color_6[3][1])
-        our_canvas.create_rectangle(154,61,169,76,fill=Br_color_6[3][2])
-        our_canvas.create_rectangle(171,61,186,76,fill=Br_color_6[3][3])
-        our_canvas.create_rectangle(188,61,203,76,fill=Br_color_6[3][4])
-        our_canvas.create_rectangle(205,61,220,76,fill=Br_color_6[3][5])
+        our_canvas.create_rectangle(120,61,135,76,fill=Br_color[3][0])
+        our_canvas.create_rectangle(137,61,152,76,fill=Br_color[3][1])
+        our_canvas.create_rectangle(154,61,169,76,fill=Br_color[3][2])
+        our_canvas.create_rectangle(171,61,186,76,fill=Br_color[3][3])
+        our_canvas.create_rectangle(188,61,203,76,fill=Br_color[3][4])
+        our_canvas.create_rectangle(205,61,220,76,fill=Br_color[3][5])
 
-        our_canvas.create_rectangle(120,78,135,93,fill=Br_color_6[4][0])
-        our_canvas.create_rectangle(137,78,152,93,fill=Br_color_6[4][1])
-        our_canvas.create_rectangle(154,78,169,93,fill=Br_color_6[4][2])
-        our_canvas.create_rectangle(171,78,186,93,fill=Br_color_6[4][3])
-        our_canvas.create_rectangle(188,78,203,93,fill=Br_color_6[4][4])
-        our_canvas.create_rectangle(205,78,220,93,fill=Br_color_6[4][5])
+        our_canvas.create_rectangle(120,78,135,93,fill=Br_color[4][0])
+        our_canvas.create_rectangle(137,78,152,93,fill=Br_color[4][1])
+        our_canvas.create_rectangle(154,78,169,93,fill=Br_color[4][2])
+        our_canvas.create_rectangle(171,78,186,93,fill=Br_color[4][3])
+        our_canvas.create_rectangle(188,78,203,93,fill=Br_color[4][4])
+        our_canvas.create_rectangle(205,78,220,93,fill=Br_color[4][5])
 
-        our_canvas.create_rectangle(120,95,135,110,fill=Br_color_6[5][0])
-        our_canvas.create_rectangle(137,95,152,110,fill=Br_color_6[5][1])
-        our_canvas.create_rectangle(154,95,169,110,fill=Br_color_6[5][2])
-        our_canvas.create_rectangle(171,95,186,110,fill=Br_color_6[5][3])
-        our_canvas.create_rectangle(188,95,203,110,fill=Br_color_6[5][4])
-        our_canvas.create_rectangle(205,95,220,110,fill=Br_color_6[5][5])
+        our_canvas.create_rectangle(120,95,135,110,fill=Br_color[5][0])
+        our_canvas.create_rectangle(137,95,152,110,fill=Br_color[5][1])
+        our_canvas.create_rectangle(154,95,169,110,fill=Br_color[5][2])
+        our_canvas.create_rectangle(171,95,186,110,fill=Br_color[5][3])
+        our_canvas.create_rectangle(188,95,203,110,fill=Br_color[5][4])
+        our_canvas.create_rectangle(205,95,220,110,fill=Br_color[5][5])
 
         #L
-        our_canvas.create_rectangle(10,120,25 ,135,fill=Lr_color_6[0][0])
-        our_canvas.create_rectangle(27,120,42 ,135,fill=Lr_color_6[0][1])
-        our_canvas.create_rectangle(44,120,59 ,135,fill=Lr_color_6[0][2])
-        our_canvas.create_rectangle(61,120,76 ,135,fill=Lr_color_6[0][3])
-        our_canvas.create_rectangle(78,120,93 ,135,fill=Lr_color_6[0][4])
-        our_canvas.create_rectangle(95,120,110,135,fill=Lr_color_6[0][5])
+        our_canvas.create_rectangle(10,120,25 ,135,fill=Lr_color[0][0])
+        our_canvas.create_rectangle(27,120,42 ,135,fill=Lr_color[0][1])
+        our_canvas.create_rectangle(44,120,59 ,135,fill=Lr_color[0][2])
+        our_canvas.create_rectangle(61,120,76 ,135,fill=Lr_color[0][3])
+        our_canvas.create_rectangle(78,120,93 ,135,fill=Lr_color[0][4])
+        our_canvas.create_rectangle(95,120,110,135,fill=Lr_color[0][5])
 
-        our_canvas.create_rectangle(10,137,25 ,152,fill=Lr_color_6[1][0])
-        our_canvas.create_rectangle(27,137,42 ,152,fill=Lr_color_6[1][1])
-        our_canvas.create_rectangle(44,137,59 ,152,fill=Lr_color_6[1][2])
-        our_canvas.create_rectangle(61,137,76 ,152,fill=Lr_color_6[1][3])
-        our_canvas.create_rectangle(78,137,93 ,152,fill=Lr_color_6[1][4])
-        our_canvas.create_rectangle(95,137,110,152,fill=Lr_color_6[1][5])
+        our_canvas.create_rectangle(10,137,25 ,152,fill=Lr_color[1][0])
+        our_canvas.create_rectangle(27,137,42 ,152,fill=Lr_color[1][1])
+        our_canvas.create_rectangle(44,137,59 ,152,fill=Lr_color[1][2])
+        our_canvas.create_rectangle(61,137,76 ,152,fill=Lr_color[1][3])
+        our_canvas.create_rectangle(78,137,93 ,152,fill=Lr_color[1][4])
+        our_canvas.create_rectangle(95,137,110,152,fill=Lr_color[1][5])
 
-        our_canvas.create_rectangle(10,155,25 ,170,fill=Lr_color_6[2][0])
-        our_canvas.create_rectangle(27,155,42 ,170,fill=Lr_color_6[2][1])
-        our_canvas.create_rectangle(44,155,59 ,170,fill=Lr_color_6[2][2])
-        our_canvas.create_rectangle(61,155,76 ,170,fill=Lr_color_6[2][3])
-        our_canvas.create_rectangle(78,155,93 ,170,fill=Lr_color_6[2][4])
-        our_canvas.create_rectangle(95,155,110,170,fill=Lr_color_6[2][5])
+        our_canvas.create_rectangle(10,155,25 ,170,fill=Lr_color[2][0])
+        our_canvas.create_rectangle(27,155,42 ,170,fill=Lr_color[2][1])
+        our_canvas.create_rectangle(44,155,59 ,170,fill=Lr_color[2][2])
+        our_canvas.create_rectangle(61,155,76 ,170,fill=Lr_color[2][3])
+        our_canvas.create_rectangle(78,155,93 ,170,fill=Lr_color[2][4])
+        our_canvas.create_rectangle(95,155,110,170,fill=Lr_color[2][5])
 
-        our_canvas.create_rectangle(10,172,25 ,187,fill=Lr_color_6[3][0])
-        our_canvas.create_rectangle(27,172,42 ,187,fill=Lr_color_6[3][1])
-        our_canvas.create_rectangle(44,172,59 ,187,fill=Lr_color_6[3][2])
-        our_canvas.create_rectangle(61,172,76 ,187,fill=Lr_color_6[3][3])
-        our_canvas.create_rectangle(78,172,93 ,187,fill=Lr_color_6[3][4])
-        our_canvas.create_rectangle(95,172,110,187,fill=Lr_color_6[3][5])
+        our_canvas.create_rectangle(10,172,25 ,187,fill=Lr_color[3][0])
+        our_canvas.create_rectangle(27,172,42 ,187,fill=Lr_color[3][1])
+        our_canvas.create_rectangle(44,172,59 ,187,fill=Lr_color[3][2])
+        our_canvas.create_rectangle(61,172,76 ,187,fill=Lr_color[3][3])
+        our_canvas.create_rectangle(78,172,93 ,187,fill=Lr_color[3][4])
+        our_canvas.create_rectangle(95,172,110,187,fill=Lr_color[3][5])
 
-        our_canvas.create_rectangle(10,189,25 ,204,fill=Lr_color_6[4][0])
-        our_canvas.create_rectangle(27,189,42 ,204,fill=Lr_color_6[4][1])
-        our_canvas.create_rectangle(44,189,59 ,204,fill=Lr_color_6[4][2])
-        our_canvas.create_rectangle(61,189,76 ,204,fill=Lr_color_6[4][3])
-        our_canvas.create_rectangle(78,189,93 ,204,fill=Lr_color_6[4][4])
-        our_canvas.create_rectangle(95,189,110,204,fill=Lr_color_6[4][5])
+        our_canvas.create_rectangle(10,189,25 ,204,fill=Lr_color[4][0])
+        our_canvas.create_rectangle(27,189,42 ,204,fill=Lr_color[4][1])
+        our_canvas.create_rectangle(44,189,59 ,204,fill=Lr_color[4][2])
+        our_canvas.create_rectangle(61,189,76 ,204,fill=Lr_color[4][3])
+        our_canvas.create_rectangle(78,189,93 ,204,fill=Lr_color[4][4])
+        our_canvas.create_rectangle(95,189,110,204,fill=Lr_color[4][5])
 
-        our_canvas.create_rectangle(10,206,25 ,221,fill=Lr_color_6[5][0])
-        our_canvas.create_rectangle(27,206,42 ,221,fill=Lr_color_6[5][1])
-        our_canvas.create_rectangle(44,206,59 ,221,fill=Lr_color_6[5][2])
-        our_canvas.create_rectangle(61,206,76 ,221,fill=Lr_color_6[5][3])
-        our_canvas.create_rectangle(78,206,93 ,221,fill=Lr_color_6[5][4])
-        our_canvas.create_rectangle(95,206,110,221,fill=Lr_color_6[5][5])
+        our_canvas.create_rectangle(10,206,25 ,221,fill=Lr_color[5][0])
+        our_canvas.create_rectangle(27,206,42 ,221,fill=Lr_color[5][1])
+        our_canvas.create_rectangle(44,206,59 ,221,fill=Lr_color[5][2])
+        our_canvas.create_rectangle(61,206,76 ,221,fill=Lr_color[5][3])
+        our_canvas.create_rectangle(78,206,93 ,221,fill=Lr_color[5][4])
+        our_canvas.create_rectangle(95,206,110,221,fill=Lr_color[5][5])
 
 
         #F
-        our_canvas.create_rectangle(120,120,135,135,fill=Vd_color_6[0][0])
-        our_canvas.create_rectangle(137,120,152,135,fill=Vd_color_6[0][1])
-        our_canvas.create_rectangle(154,120,169,135,fill=Vd_color_6[0][2])
-        our_canvas.create_rectangle(171,120,186,135,fill=Vd_color_6[0][3])
-        our_canvas.create_rectangle(188,120,203,135,fill=Vd_color_6[0][4])
-        our_canvas.create_rectangle(205,120,220,135,fill=Vd_color_6[0][5])
+        our_canvas.create_rectangle(120,120,135,135,fill=Vd_color[0][0])
+        our_canvas.create_rectangle(137,120,152,135,fill=Vd_color[0][1])
+        our_canvas.create_rectangle(154,120,169,135,fill=Vd_color[0][2])
+        our_canvas.create_rectangle(171,120,186,135,fill=Vd_color[0][3])
+        our_canvas.create_rectangle(188,120,203,135,fill=Vd_color[0][4])
+        our_canvas.create_rectangle(205,120,220,135,fill=Vd_color[0][5])
 
-        our_canvas.create_rectangle(120,137,135,152,fill=Vd_color_6[1][0])
-        our_canvas.create_rectangle(137,137,152,152,fill=Vd_color_6[1][1])
-        our_canvas.create_rectangle(154,137,169,152,fill=Vd_color_6[1][2])
-        our_canvas.create_rectangle(171,137,186,152,fill=Vd_color_6[1][3])
-        our_canvas.create_rectangle(188,137,203,152,fill=Vd_color_6[1][4])        
-        our_canvas.create_rectangle(205,137,220,152,fill=Vd_color_6[1][5])        
+        our_canvas.create_rectangle(120,137,135,152,fill=Vd_color[1][0])
+        our_canvas.create_rectangle(137,137,152,152,fill=Vd_color[1][1])
+        our_canvas.create_rectangle(154,137,169,152,fill=Vd_color[1][2])
+        our_canvas.create_rectangle(171,137,186,152,fill=Vd_color[1][3])
+        our_canvas.create_rectangle(188,137,203,152,fill=Vd_color[1][4])        
+        our_canvas.create_rectangle(205,137,220,152,fill=Vd_color[1][5])        
 
-        our_canvas.create_rectangle(120,155,135,170,fill=Vd_color_6[2][0])
-        our_canvas.create_rectangle(137,155,152,170,fill=Vd_color_6[2][1])
-        our_canvas.create_rectangle(154,155,169,170,fill=Vd_color_6[2][2])
-        our_canvas.create_rectangle(171,155,186,170,fill=Vd_color_6[2][3])
-        our_canvas.create_rectangle(188,155,203,170,fill=Vd_color_6[2][4])
-        our_canvas.create_rectangle(205,155,220,170,fill=Vd_color_6[2][5])
+        our_canvas.create_rectangle(120,155,135,170,fill=Vd_color[2][0])
+        our_canvas.create_rectangle(137,155,152,170,fill=Vd_color[2][1])
+        our_canvas.create_rectangle(154,155,169,170,fill=Vd_color[2][2])
+        our_canvas.create_rectangle(171,155,186,170,fill=Vd_color[2][3])
+        our_canvas.create_rectangle(188,155,203,170,fill=Vd_color[2][4])
+        our_canvas.create_rectangle(205,155,220,170,fill=Vd_color[2][5])
 
-        our_canvas.create_rectangle(120,172,135,187,fill=Vd_color_6[3][0])
-        our_canvas.create_rectangle(137,172,152,187,fill=Vd_color_6[3][1])
-        our_canvas.create_rectangle(154,172,169,187,fill=Vd_color_6[3][2])
-        our_canvas.create_rectangle(171,172,186,187,fill=Vd_color_6[3][3])
-        our_canvas.create_rectangle(188,172,203,187,fill=Vd_color_6[3][4])
-        our_canvas.create_rectangle(205,172,220,187,fill=Vd_color_6[3][5])
+        our_canvas.create_rectangle(120,172,135,187,fill=Vd_color[3][0])
+        our_canvas.create_rectangle(137,172,152,187,fill=Vd_color[3][1])
+        our_canvas.create_rectangle(154,172,169,187,fill=Vd_color[3][2])
+        our_canvas.create_rectangle(171,172,186,187,fill=Vd_color[3][3])
+        our_canvas.create_rectangle(188,172,203,187,fill=Vd_color[3][4])
+        our_canvas.create_rectangle(205,172,220,187,fill=Vd_color[3][5])
 
-        our_canvas.create_rectangle(120,189,135,204,fill=Vd_color_6[4][0])
-        our_canvas.create_rectangle(137,189,152,204,fill=Vd_color_6[4][1])
-        our_canvas.create_rectangle(154,189,169,204,fill=Vd_color_6[4][2])
-        our_canvas.create_rectangle(171,189,186,204,fill=Vd_color_6[4][3])
-        our_canvas.create_rectangle(188,189,203,204,fill=Vd_color_6[4][4])
-        our_canvas.create_rectangle(205,189,220,204,fill=Vd_color_6[4][5])
+        our_canvas.create_rectangle(120,189,135,204,fill=Vd_color[4][0])
+        our_canvas.create_rectangle(137,189,152,204,fill=Vd_color[4][1])
+        our_canvas.create_rectangle(154,189,169,204,fill=Vd_color[4][2])
+        our_canvas.create_rectangle(171,189,186,204,fill=Vd_color[4][3])
+        our_canvas.create_rectangle(188,189,203,204,fill=Vd_color[4][4])
+        our_canvas.create_rectangle(205,189,220,204,fill=Vd_color[4][5])
 
-        our_canvas.create_rectangle(120,206,135,221,fill=Vd_color_6[5][0])
-        our_canvas.create_rectangle(137,206,152,221,fill=Vd_color_6[5][1])
-        our_canvas.create_rectangle(154,206,169,221,fill=Vd_color_6[5][2])
-        our_canvas.create_rectangle(171,206,186,221,fill=Vd_color_6[5][3])
-        our_canvas.create_rectangle(188,206,203,221,fill=Vd_color_6[5][4])
-        our_canvas.create_rectangle(205,206,220,221,fill=Vd_color_6[5][5])
+        our_canvas.create_rectangle(120,206,135,221,fill=Vd_color[5][0])
+        our_canvas.create_rectangle(137,206,152,221,fill=Vd_color[5][1])
+        our_canvas.create_rectangle(154,206,169,221,fill=Vd_color[5][2])
+        our_canvas.create_rectangle(171,206,186,221,fill=Vd_color[5][3])
+        our_canvas.create_rectangle(188,206,203,221,fill=Vd_color[5][4])
+        our_canvas.create_rectangle(205,206,220,221,fill=Vd_color[5][5])
 
         #R
-        our_canvas.create_rectangle(230,120,245,135,fill=Vm_color_6[0][0])
-        our_canvas.create_rectangle(247,120,262,135,fill=Vm_color_6[0][1])
-        our_canvas.create_rectangle(264,120,279,135,fill=Vm_color_6[0][2])
-        our_canvas.create_rectangle(281,120,296,135,fill=Vm_color_6[0][3])
-        our_canvas.create_rectangle(298,120,313,135,fill=Vm_color_6[0][4])
-        our_canvas.create_rectangle(315,120,330,135,fill=Vm_color_6[0][5])
+        our_canvas.create_rectangle(230,120,245,135,fill=Vm_color[0][0])
+        our_canvas.create_rectangle(247,120,262,135,fill=Vm_color[0][1])
+        our_canvas.create_rectangle(264,120,279,135,fill=Vm_color[0][2])
+        our_canvas.create_rectangle(281,120,296,135,fill=Vm_color[0][3])
+        our_canvas.create_rectangle(298,120,313,135,fill=Vm_color[0][4])
+        our_canvas.create_rectangle(315,120,330,135,fill=Vm_color[0][5])
 
-        our_canvas.create_rectangle(230,137,245,152,fill=Vm_color_6[1][0])
-        our_canvas.create_rectangle(247,137,262,152,fill=Vm_color_6[1][1])
-        our_canvas.create_rectangle(264,137,279,152,fill=Vm_color_6[1][2])
-        our_canvas.create_rectangle(281,137,296,152,fill=Vm_color_6[1][3])
-        our_canvas.create_rectangle(298,137,313,152,fill=Vm_color_6[1][4])
-        our_canvas.create_rectangle(315,137,330,152,fill=Vm_color_6[1][5])
+        our_canvas.create_rectangle(230,137,245,152,fill=Vm_color[1][0])
+        our_canvas.create_rectangle(247,137,262,152,fill=Vm_color[1][1])
+        our_canvas.create_rectangle(264,137,279,152,fill=Vm_color[1][2])
+        our_canvas.create_rectangle(281,137,296,152,fill=Vm_color[1][3])
+        our_canvas.create_rectangle(298,137,313,152,fill=Vm_color[1][4])
+        our_canvas.create_rectangle(315,137,330,152,fill=Vm_color[1][5])
 
-        our_canvas.create_rectangle(230,155,245,170,fill=Vm_color_6[2][0])
-        our_canvas.create_rectangle(247,155,262,170,fill=Vm_color_6[2][1])
-        our_canvas.create_rectangle(264,155,279,170,fill=Vm_color_6[2][2])
-        our_canvas.create_rectangle(281,155,296,170,fill=Vm_color_6[2][3])
-        our_canvas.create_rectangle(298,155,313,170,fill=Vm_color_6[2][4])
-        our_canvas.create_rectangle(315,155,330,170,fill=Vm_color_6[2][5])
+        our_canvas.create_rectangle(230,155,245,170,fill=Vm_color[2][0])
+        our_canvas.create_rectangle(247,155,262,170,fill=Vm_color[2][1])
+        our_canvas.create_rectangle(264,155,279,170,fill=Vm_color[2][2])
+        our_canvas.create_rectangle(281,155,296,170,fill=Vm_color[2][3])
+        our_canvas.create_rectangle(298,155,313,170,fill=Vm_color[2][4])
+        our_canvas.create_rectangle(315,155,330,170,fill=Vm_color[2][5])
 
-        our_canvas.create_rectangle(230,172,245,187,fill=Vm_color_6[3][0])
-        our_canvas.create_rectangle(247,172,262,187,fill=Vm_color_6[3][1])
-        our_canvas.create_rectangle(264,172,279,187,fill=Vm_color_6[3][2])
-        our_canvas.create_rectangle(281,172,296,187,fill=Vm_color_6[3][3])
-        our_canvas.create_rectangle(298,172,313,187,fill=Vm_color_6[3][4])
-        our_canvas.create_rectangle(315,172,330,187,fill=Vm_color_6[3][5])
+        our_canvas.create_rectangle(230,172,245,187,fill=Vm_color[3][0])
+        our_canvas.create_rectangle(247,172,262,187,fill=Vm_color[3][1])
+        our_canvas.create_rectangle(264,172,279,187,fill=Vm_color[3][2])
+        our_canvas.create_rectangle(281,172,296,187,fill=Vm_color[3][3])
+        our_canvas.create_rectangle(298,172,313,187,fill=Vm_color[3][4])
+        our_canvas.create_rectangle(315,172,330,187,fill=Vm_color[3][5])
 
-        our_canvas.create_rectangle(230,189,245,204,fill=Vm_color_6[4][0])
-        our_canvas.create_rectangle(247,189,262,204,fill=Vm_color_6[4][1])
-        our_canvas.create_rectangle(264,189,279,204,fill=Vm_color_6[4][2])
-        our_canvas.create_rectangle(281,189,296,204,fill=Vm_color_6[4][3])
-        our_canvas.create_rectangle(298,189,313,204,fill=Vm_color_6[4][4])
-        our_canvas.create_rectangle(315,189,330,204,fill=Vm_color_6[4][5])
+        our_canvas.create_rectangle(230,189,245,204,fill=Vm_color[4][0])
+        our_canvas.create_rectangle(247,189,262,204,fill=Vm_color[4][1])
+        our_canvas.create_rectangle(264,189,279,204,fill=Vm_color[4][2])
+        our_canvas.create_rectangle(281,189,296,204,fill=Vm_color[4][3])
+        our_canvas.create_rectangle(298,189,313,204,fill=Vm_color[4][4])
+        our_canvas.create_rectangle(315,189,330,204,fill=Vm_color[4][5])
 
-        our_canvas.create_rectangle(230,206,245,221,fill=Vm_color_6[5][0])
-        our_canvas.create_rectangle(247,206,262,221,fill=Vm_color_6[5][1])
-        our_canvas.create_rectangle(264,206,279,221,fill=Vm_color_6[5][2])
-        our_canvas.create_rectangle(281,206,296,221,fill=Vm_color_6[5][3])
-        our_canvas.create_rectangle(298,206,313,221,fill=Vm_color_6[5][4])
-        our_canvas.create_rectangle(315,206,330,221,fill=Vm_color_6[5][5])
+        our_canvas.create_rectangle(230,206,245,221,fill=Vm_color[5][0])
+        our_canvas.create_rectangle(247,206,262,221,fill=Vm_color[5][1])
+        our_canvas.create_rectangle(264,206,279,221,fill=Vm_color[5][2])
+        our_canvas.create_rectangle(281,206,296,221,fill=Vm_color[5][3])
+        our_canvas.create_rectangle(298,206,313,221,fill=Vm_color[5][4])
+        our_canvas.create_rectangle(315,206,330,221,fill=Vm_color[5][5])
 
 
         #B
-        our_canvas.create_rectangle(340,120,355,135,fill=Az_color_6[0][0])
-        our_canvas.create_rectangle(357,120,372,135,fill=Az_color_6[0][1])
-        our_canvas.create_rectangle(374,120,389,135,fill=Az_color_6[0][2])
-        our_canvas.create_rectangle(391,120,406,135,fill=Az_color_6[0][3])
-        our_canvas.create_rectangle(408,120,423,135,fill=Az_color_6[0][4])
-        our_canvas.create_rectangle(425,120,440,135,fill=Az_color_6[0][5])
+        our_canvas.create_rectangle(340,120,355,135,fill=Az_color[0][0])
+        our_canvas.create_rectangle(357,120,372,135,fill=Az_color[0][1])
+        our_canvas.create_rectangle(374,120,389,135,fill=Az_color[0][2])
+        our_canvas.create_rectangle(391,120,406,135,fill=Az_color[0][3])
+        our_canvas.create_rectangle(408,120,423,135,fill=Az_color[0][4])
+        our_canvas.create_rectangle(425,120,440,135,fill=Az_color[0][5])
 
-        our_canvas.create_rectangle(340,137,355,152,fill=Az_color_6[1][0])
-        our_canvas.create_rectangle(357,137,372,152,fill=Az_color_6[1][1])
-        our_canvas.create_rectangle(374,137,389,152,fill=Az_color_6[1][2])
-        our_canvas.create_rectangle(391,137,406,152,fill=Az_color_6[1][3])
-        our_canvas.create_rectangle(408,137,423,152,fill=Az_color_6[1][4])
-        our_canvas.create_rectangle(425,137,440,152,fill=Az_color_6[1][5])
+        our_canvas.create_rectangle(340,137,355,152,fill=Az_color[1][0])
+        our_canvas.create_rectangle(357,137,372,152,fill=Az_color[1][1])
+        our_canvas.create_rectangle(374,137,389,152,fill=Az_color[1][2])
+        our_canvas.create_rectangle(391,137,406,152,fill=Az_color[1][3])
+        our_canvas.create_rectangle(408,137,423,152,fill=Az_color[1][4])
+        our_canvas.create_rectangle(425,137,440,152,fill=Az_color[1][5])
 
-        our_canvas.create_rectangle(340,155,355,170,fill=Az_color_6[2][0])
-        our_canvas.create_rectangle(357,155,372,170,fill=Az_color_6[2][1])
-        our_canvas.create_rectangle(374,155,389,170,fill=Az_color_6[2][2])
-        our_canvas.create_rectangle(391,155,406,170,fill=Az_color_6[2][3])
-        our_canvas.create_rectangle(408,155,423,170,fill=Az_color_6[2][4])
-        our_canvas.create_rectangle(425,155,440,170,fill=Az_color_6[2][5])
+        our_canvas.create_rectangle(340,155,355,170,fill=Az_color[2][0])
+        our_canvas.create_rectangle(357,155,372,170,fill=Az_color[2][1])
+        our_canvas.create_rectangle(374,155,389,170,fill=Az_color[2][2])
+        our_canvas.create_rectangle(391,155,406,170,fill=Az_color[2][3])
+        our_canvas.create_rectangle(408,155,423,170,fill=Az_color[2][4])
+        our_canvas.create_rectangle(425,155,440,170,fill=Az_color[2][5])
 
-        our_canvas.create_rectangle(340,172,355,187,fill=Az_color_6[3][0])
-        our_canvas.create_rectangle(357,172,372,187,fill=Az_color_6[3][1])
-        our_canvas.create_rectangle(374,172,389,187,fill=Az_color_6[3][2])
-        our_canvas.create_rectangle(391,172,406,187,fill=Az_color_6[3][3])
-        our_canvas.create_rectangle(408,172,423,187,fill=Az_color_6[3][4])
-        our_canvas.create_rectangle(425,172,440,187,fill=Az_color_6[3][5])
+        our_canvas.create_rectangle(340,172,355,187,fill=Az_color[3][0])
+        our_canvas.create_rectangle(357,172,372,187,fill=Az_color[3][1])
+        our_canvas.create_rectangle(374,172,389,187,fill=Az_color[3][2])
+        our_canvas.create_rectangle(391,172,406,187,fill=Az_color[3][3])
+        our_canvas.create_rectangle(408,172,423,187,fill=Az_color[3][4])
+        our_canvas.create_rectangle(425,172,440,187,fill=Az_color[3][5])
 
-        our_canvas.create_rectangle(340,189,355,204,fill=Az_color_6[4][0])
-        our_canvas.create_rectangle(357,189,372,204,fill=Az_color_6[4][1])
-        our_canvas.create_rectangle(374,189,389,204,fill=Az_color_6[4][2])
-        our_canvas.create_rectangle(391,189,406,204,fill=Az_color_6[4][3])
-        our_canvas.create_rectangle(408,189,423,204,fill=Az_color_6[4][4])
-        our_canvas.create_rectangle(425,189,440,204,fill=Az_color_6[4][5])
+        our_canvas.create_rectangle(340,189,355,204,fill=Az_color[4][0])
+        our_canvas.create_rectangle(357,189,372,204,fill=Az_color[4][1])
+        our_canvas.create_rectangle(374,189,389,204,fill=Az_color[4][2])
+        our_canvas.create_rectangle(391,189,406,204,fill=Az_color[4][3])
+        our_canvas.create_rectangle(408,189,423,204,fill=Az_color[4][4])
+        our_canvas.create_rectangle(425,189,440,204,fill=Az_color[4][5])
 
-        our_canvas.create_rectangle(340,206,355,221,fill=Az_color_6[5][0])
-        our_canvas.create_rectangle(357,206,372,221,fill=Az_color_6[5][1])
-        our_canvas.create_rectangle(374,206,389,221,fill=Az_color_6[5][2])
-        our_canvas.create_rectangle(391,206,406,221,fill=Az_color_6[5][3])
-        our_canvas.create_rectangle(408,206,423,221,fill=Az_color_6[5][4])
-        our_canvas.create_rectangle(425,206,440,221,fill=Az_color_6[5][5])
+        our_canvas.create_rectangle(340,206,355,221,fill=Az_color[5][0])
+        our_canvas.create_rectangle(357,206,372,221,fill=Az_color[5][1])
+        our_canvas.create_rectangle(374,206,389,221,fill=Az_color[5][2])
+        our_canvas.create_rectangle(391,206,406,221,fill=Az_color[5][3])
+        our_canvas.create_rectangle(408,206,423,221,fill=Az_color[5][4])
+        our_canvas.create_rectangle(425,206,440,221,fill=Az_color[5][5])
 
         #D
-        our_canvas.create_rectangle(120,230,135,245,fill=Am_color_6[0][0])
-        our_canvas.create_rectangle(137,230,152,245,fill=Am_color_6[0][1])
-        our_canvas.create_rectangle(154,230,169,245,fill=Am_color_6[0][2])
-        our_canvas.create_rectangle(171,230,186,245,fill=Am_color_6[0][3])
-        our_canvas.create_rectangle(188,230,203,245,fill=Am_color_6[0][4])
-        our_canvas.create_rectangle(205,230,220,245,fill=Am_color_6[0][5])
+        our_canvas.create_rectangle(120,230,135,245,fill=Am_color[0][0])
+        our_canvas.create_rectangle(137,230,152,245,fill=Am_color[0][1])
+        our_canvas.create_rectangle(154,230,169,245,fill=Am_color[0][2])
+        our_canvas.create_rectangle(171,230,186,245,fill=Am_color[0][3])
+        our_canvas.create_rectangle(188,230,203,245,fill=Am_color[0][4])
+        our_canvas.create_rectangle(205,230,220,245,fill=Am_color[0][5])
 
-        our_canvas.create_rectangle(120,247,135,262,fill=Am_color_6[1][0])
-        our_canvas.create_rectangle(137,247,152,262,fill=Am_color_6[1][1])
-        our_canvas.create_rectangle(154,247,169,262,fill=Am_color_6[1][2])
-        our_canvas.create_rectangle(171,247,186,262,fill=Am_color_6[1][3])
-        our_canvas.create_rectangle(188,247,203,262,fill=Am_color_6[1][4])
-        our_canvas.create_rectangle(205,247,220,262,fill=Am_color_6[1][5])
+        our_canvas.create_rectangle(120,247,135,262,fill=Am_color[1][0])
+        our_canvas.create_rectangle(137,247,152,262,fill=Am_color[1][1])
+        our_canvas.create_rectangle(154,247,169,262,fill=Am_color[1][2])
+        our_canvas.create_rectangle(171,247,186,262,fill=Am_color[1][3])
+        our_canvas.create_rectangle(188,247,203,262,fill=Am_color[1][4])
+        our_canvas.create_rectangle(205,247,220,262,fill=Am_color[1][5])
 
-        our_canvas.create_rectangle(120,264,135,279,fill=Am_color_6[2][0])
-        our_canvas.create_rectangle(137,264,152,279,fill=Am_color_6[2][1])
-        our_canvas.create_rectangle(154,264,169,279,fill=Am_color_6[2][2])
-        our_canvas.create_rectangle(171,264,186,279,fill=Am_color_6[2][3])
-        our_canvas.create_rectangle(188,264,203,279,fill=Am_color_6[2][4])
-        our_canvas.create_rectangle(205,264,220,279,fill=Am_color_6[2][5])
+        our_canvas.create_rectangle(120,264,135,279,fill=Am_color[2][0])
+        our_canvas.create_rectangle(137,264,152,279,fill=Am_color[2][1])
+        our_canvas.create_rectangle(154,264,169,279,fill=Am_color[2][2])
+        our_canvas.create_rectangle(171,264,186,279,fill=Am_color[2][3])
+        our_canvas.create_rectangle(188,264,203,279,fill=Am_color[2][4])
+        our_canvas.create_rectangle(205,264,220,279,fill=Am_color[2][5])
 
-        our_canvas.create_rectangle(120,281,135,296,fill=Am_color_6[3][0])
-        our_canvas.create_rectangle(137,281,152,296,fill=Am_color_6[3][1])
-        our_canvas.create_rectangle(154,281,169,296,fill=Am_color_6[3][2])
-        our_canvas.create_rectangle(171,281,186,296,fill=Am_color_6[3][3])
-        our_canvas.create_rectangle(188,281,203,296,fill=Am_color_6[3][4])
-        our_canvas.create_rectangle(205,281,220,296,fill=Am_color_6[3][5])
+        our_canvas.create_rectangle(120,281,135,296,fill=Am_color[3][0])
+        our_canvas.create_rectangle(137,281,152,296,fill=Am_color[3][1])
+        our_canvas.create_rectangle(154,281,169,296,fill=Am_color[3][2])
+        our_canvas.create_rectangle(171,281,186,296,fill=Am_color[3][3])
+        our_canvas.create_rectangle(188,281,203,296,fill=Am_color[3][4])
+        our_canvas.create_rectangle(205,281,220,296,fill=Am_color[3][5])
 
-        our_canvas.create_rectangle(120,298,135,313,fill=Am_color_6[4][0])
-        our_canvas.create_rectangle(137,298,152,313,fill=Am_color_6[4][1])
-        our_canvas.create_rectangle(154,298,169,313,fill=Am_color_6[4][2])
-        our_canvas.create_rectangle(171,298,186,313,fill=Am_color_6[4][3])
-        our_canvas.create_rectangle(188,298,203,313,fill=Am_color_6[4][4])
-        our_canvas.create_rectangle(205,298,220,313,fill=Am_color_6[4][5])
+        our_canvas.create_rectangle(120,298,135,313,fill=Am_color[4][0])
+        our_canvas.create_rectangle(137,298,152,313,fill=Am_color[4][1])
+        our_canvas.create_rectangle(154,298,169,313,fill=Am_color[4][2])
+        our_canvas.create_rectangle(171,298,186,313,fill=Am_color[4][3])
+        our_canvas.create_rectangle(188,298,203,313,fill=Am_color[4][4])
+        our_canvas.create_rectangle(205,298,220,313,fill=Am_color[4][5])
 
-        our_canvas.create_rectangle(120,315,135,330,fill=Am_color_6[5][0])
-        our_canvas.create_rectangle(137,315,152,330,fill=Am_color_6[5][1])
-        our_canvas.create_rectangle(154,315,169,330,fill=Am_color_6[5][2])
-        our_canvas.create_rectangle(171,315,186,330,fill=Am_color_6[5][3])
-        our_canvas.create_rectangle(188,315,203,330,fill=Am_color_6[5][4])
-        our_canvas.create_rectangle(205,315,220,330,fill=Am_color_6[5][5])
+        our_canvas.create_rectangle(120,315,135,330,fill=Am_color[5][0])
+        our_canvas.create_rectangle(137,315,152,330,fill=Am_color[5][1])
+        our_canvas.create_rectangle(154,315,169,330,fill=Am_color[5][2])
+        our_canvas.create_rectangle(171,315,186,330,fill=Am_color[5][3])
+        our_canvas.create_rectangle(188,315,203,330,fill=Am_color[5][4])
+        our_canvas.create_rectangle(205,315,220,330,fill=Am_color[5][5])
         
     elif cube == "7x7":
-        Br_color_7 = np.where(Br_7 != 1, Br_color_7,"white")
-        Lr_color_7 = np.where(Lr_7 != 1, Lr_color_7,"white")
-        Vd_color_7 = np.where(Vd_7 != 1, Vd_color_7,"white")
-        Vm_color_7 = np.where(Vm_7 != 1, Vm_color_7,"white")
-        Az_color_7 = np.where(Az_7 != 1, Az_color_7,"white")    
-        Am_color_7 = np.where(Am_7 != 1, Am_color_7,"white")  
+        Br_color = np.where(Br_7 != 1, Br_color,"white")
+        Lr_color = np.where(Lr_7 != 1, Lr_color,"white")
+        Vd_color = np.where(Vd_7 != 1, Vd_color,"white")
+        Vm_color = np.where(Vm_7 != 1, Vm_color,"white")
+        Az_color = np.where(Az_7 != 1, Az_color,"white")    
+        Am_color = np.where(Am_7 != 1, Am_color,"white")  
 
-        Br_color_7 = np.where(Br_7 != 2, Br_color_7,"orange")
-        Lr_color_7 = np.where(Lr_7 != 2, Lr_color_7,"orange")
-        Vd_color_7 = np.where(Vd_7 != 2, Vd_color_7,"orange")
-        Vm_color_7 = np.where(Vm_7 != 2, Vm_color_7,"orange")
-        Az_color_7 = np.where(Az_7 != 2, Az_color_7,"orange")    
-        Am_color_7 = np.where(Am_7 != 2, Am_color_7,"orange")   
+        Br_color = np.where(Br_7 != 2, Br_color,"orange")
+        Lr_color = np.where(Lr_7 != 2, Lr_color,"orange")
+        Vd_color = np.where(Vd_7 != 2, Vd_color,"orange")
+        Vm_color = np.where(Vm_7 != 2, Vm_color,"orange")
+        Az_color = np.where(Az_7 != 2, Az_color,"orange")    
+        Am_color = np.where(Am_7 != 2, Am_color,"orange")   
 
-        Br_color_7 = np.where(Br_7 != 3, Br_color_7,"green")
-        Lr_color_7 = np.where(Lr_7 != 3, Lr_color_7,"green")
-        Vd_color_7 = np.where(Vd_7 != 3, Vd_color_7,"green")
-        Vm_color_7 = np.where(Vm_7 != 3, Vm_color_7,"green")
-        Az_color_7 = np.where(Az_7 != 3, Az_color_7,"green")
-        Am_color_7 = np.where(Am_7 != 3, Am_color_7,"green")
+        Br_color = np.where(Br_7 != 3, Br_color,"green")
+        Lr_color = np.where(Lr_7 != 3, Lr_color,"green")
+        Vd_color = np.where(Vd_7 != 3, Vd_color,"green")
+        Vm_color = np.where(Vm_7 != 3, Vm_color,"green")
+        Az_color = np.where(Az_7 != 3, Az_color,"green")
+        Am_color = np.where(Am_7 != 3, Am_color,"green")
 
-        Br_color_7 = np.where(Br_7 != 4, Br_color_7,"red")
-        Lr_color_7 = np.where(Lr_7 != 4, Lr_color_7,"red")
-        Vd_color_7 = np.where(Vd_7 != 4, Vd_color_7,"red")
-        Vm_color_7 = np.where(Vm_7 != 4, Vm_color_7,"red")
-        Az_color_7 = np.where(Az_7 != 4, Az_color_7,"red")
-        Am_color_7 = np.where(Am_7 != 4, Am_color_7,"red")
+        Br_color = np.where(Br_7 != 4, Br_color,"red")
+        Lr_color = np.where(Lr_7 != 4, Lr_color,"red")
+        Vd_color = np.where(Vd_7 != 4, Vd_color,"red")
+        Vm_color = np.where(Vm_7 != 4, Vm_color,"red")
+        Az_color = np.where(Az_7 != 4, Az_color,"red")
+        Am_color = np.where(Am_7 != 4, Am_color,"red")
 
-        Br_color_7 = np.where(Br_7 != 5, Br_color_7,"blue")
-        Lr_color_7 = np.where(Lr_7 != 5, Lr_color_7,"blue")
-        Vd_color_7 = np.where(Vd_7 != 5, Vd_color_7,"blue")
-        Vm_color_7 = np.where(Vm_7 != 5, Vm_color_7,"blue")
-        Az_color_7 = np.where(Az_7 != 5, Az_color_7,"blue")
-        Am_color_7 = np.where(Am_7 != 5, Am_color_7,"blue")
+        Br_color = np.where(Br_7 != 5, Br_color,"blue")
+        Lr_color = np.where(Lr_7 != 5, Lr_color,"blue")
+        Vd_color = np.where(Vd_7 != 5, Vd_color,"blue")
+        Vm_color = np.where(Vm_7 != 5, Vm_color,"blue")
+        Az_color = np.where(Az_7 != 5, Az_color,"blue")
+        Am_color = np.where(Am_7 != 5, Am_color,"blue")
 
-        Br_color_7 = np.where(Br_7 != 6, Br_color_7,"yellow")
-        Lr_color_7 = np.where(Lr_7 != 6, Lr_color_7,"yellow")
-        Vd_color_7 = np.where(Vd_7 != 6, Vd_color_7,"yellow")
-        Vm_color_7 = np.where(Vm_7 != 6, Vm_color_7,"yellow")
-        Az_color_7 = np.where(Az_7 != 6, Az_color_7,"yellow")
-        Am_color_7 = np.where(Am_7 != 6, Am_color_7,"yellow")  
+        Br_color = np.where(Br_7 != 6, Br_color,"yellow")
+        Lr_color = np.where(Lr_7 != 6, Lr_color,"yellow")
+        Vd_color = np.where(Vd_7 != 6, Vd_color,"yellow")
+        Vm_color = np.where(Vm_7 != 6, Vm_color,"yellow")
+        Az_color = np.where(Az_7 != 6, Az_color,"yellow")
+        Am_color = np.where(Am_7 != 6, Am_color,"yellow")  
 
         #U
-        our_canvas.create_rectangle(120,10,133,23,fill=Br_color_7[0][0])    
-        our_canvas.create_rectangle(135,10,148,23,fill=Br_color_7[0][1])
-        our_canvas.create_rectangle(150,10,163,23,fill=Br_color_7[0][2])
-        our_canvas.create_rectangle(165,10,178,23,fill=Br_color_7[0][3])        
-        our_canvas.create_rectangle(180,10,193,23,fill=Br_color_7[0][4])        
-        our_canvas.create_rectangle(195,10,208,23,fill=Br_color_7[0][5])        
-        our_canvas.create_rectangle(210,10,223,23,fill=Br_color_7[0][6])        
+        our_canvas.create_rectangle(120,10,133,23,fill=Br_color[0][0])    
+        our_canvas.create_rectangle(135,10,148,23,fill=Br_color[0][1])
+        our_canvas.create_rectangle(150,10,163,23,fill=Br_color[0][2])
+        our_canvas.create_rectangle(165,10,178,23,fill=Br_color[0][3])        
+        our_canvas.create_rectangle(180,10,193,23,fill=Br_color[0][4])        
+        our_canvas.create_rectangle(195,10,208,23,fill=Br_color[0][5])        
+        our_canvas.create_rectangle(210,10,223,23,fill=Br_color[0][6])        
 
-        our_canvas.create_rectangle(120,25,133,38,fill=Br_color_7[1][0])
-        our_canvas.create_rectangle(135,25,148,38,fill=Br_color_7[1][1])
-        our_canvas.create_rectangle(150,25,163,38,fill=Br_color_7[1][2])
-        our_canvas.create_rectangle(165,25,178,38,fill=Br_color_7[1][3])
-        our_canvas.create_rectangle(180,25,193,38,fill=Br_color_7[1][4])
-        our_canvas.create_rectangle(195,25,208,38,fill=Br_color_7[1][5])
-        our_canvas.create_rectangle(210,25,223,38,fill=Br_color_7[1][6])
+        our_canvas.create_rectangle(120,25,133,38,fill=Br_color[1][0])
+        our_canvas.create_rectangle(135,25,148,38,fill=Br_color[1][1])
+        our_canvas.create_rectangle(150,25,163,38,fill=Br_color[1][2])
+        our_canvas.create_rectangle(165,25,178,38,fill=Br_color[1][3])
+        our_canvas.create_rectangle(180,25,193,38,fill=Br_color[1][4])
+        our_canvas.create_rectangle(195,25,208,38,fill=Br_color[1][5])
+        our_canvas.create_rectangle(210,25,223,38,fill=Br_color[1][6])
 
-        our_canvas.create_rectangle(120,40,133,53,fill=Br_color_7[2][0])
-        our_canvas.create_rectangle(135,40,148,53,fill=Br_color_7[2][1])
-        our_canvas.create_rectangle(150,40,163,53,fill=Br_color_7[2][2])
-        our_canvas.create_rectangle(165,40,178,53,fill=Br_color_7[2][3])
-        our_canvas.create_rectangle(180,40,192,53,fill=Br_color_7[2][4])
-        our_canvas.create_rectangle(195,40,208,53,fill=Br_color_7[2][5])
-        our_canvas.create_rectangle(210,40,223,53,fill=Br_color_7[2][6])
+        our_canvas.create_rectangle(120,40,133,53,fill=Br_color[2][0])
+        our_canvas.create_rectangle(135,40,148,53,fill=Br_color[2][1])
+        our_canvas.create_rectangle(150,40,163,53,fill=Br_color[2][2])
+        our_canvas.create_rectangle(165,40,178,53,fill=Br_color[2][3])
+        our_canvas.create_rectangle(180,40,192,53,fill=Br_color[2][4])
+        our_canvas.create_rectangle(195,40,208,53,fill=Br_color[2][5])
+        our_canvas.create_rectangle(210,40,223,53,fill=Br_color[2][6])
 
-        our_canvas.create_rectangle(120,55,133,68,fill=Br_color_7[3][0])
-        our_canvas.create_rectangle(135,55,148,68,fill=Br_color_7[3][1])
-        our_canvas.create_rectangle(150,55,163,68,fill=Br_color_7[3][2])
-        our_canvas.create_rectangle(165,55,178,68,fill=Br_color_7[3][3])
-        our_canvas.create_rectangle(180,55,192,68,fill=Br_color_7[3][4])
-        our_canvas.create_rectangle(195,55,208,68,fill=Br_color_7[3][5])
-        our_canvas.create_rectangle(210,55,223,68,fill=Br_color_7[3][6])
+        our_canvas.create_rectangle(120,55,133,68,fill=Br_color[3][0])
+        our_canvas.create_rectangle(135,55,148,68,fill=Br_color[3][1])
+        our_canvas.create_rectangle(150,55,163,68,fill=Br_color[3][2])
+        our_canvas.create_rectangle(165,55,178,68,fill=Br_color[3][3])
+        our_canvas.create_rectangle(180,55,192,68,fill=Br_color[3][4])
+        our_canvas.create_rectangle(195,55,208,68,fill=Br_color[3][5])
+        our_canvas.create_rectangle(210,55,223,68,fill=Br_color[3][6])
 
-        our_canvas.create_rectangle(120,70,133,83,fill=Br_color_7[4][0])
-        our_canvas.create_rectangle(135,70,148,83,fill=Br_color_7[4][1])
-        our_canvas.create_rectangle(150,70,163,83,fill=Br_color_7[4][2])
-        our_canvas.create_rectangle(165,70,178,83,fill=Br_color_7[4][3])
-        our_canvas.create_rectangle(180,70,192,83,fill=Br_color_7[4][4])
-        our_canvas.create_rectangle(195,70,208,83,fill=Br_color_7[4][5])
-        our_canvas.create_rectangle(210,70,223,83,fill=Br_color_7[4][6])
+        our_canvas.create_rectangle(120,70,133,83,fill=Br_color[4][0])
+        our_canvas.create_rectangle(135,70,148,83,fill=Br_color[4][1])
+        our_canvas.create_rectangle(150,70,163,83,fill=Br_color[4][2])
+        our_canvas.create_rectangle(165,70,178,83,fill=Br_color[4][3])
+        our_canvas.create_rectangle(180,70,192,83,fill=Br_color[4][4])
+        our_canvas.create_rectangle(195,70,208,83,fill=Br_color[4][5])
+        our_canvas.create_rectangle(210,70,223,83,fill=Br_color[4][6])
 
-        our_canvas.create_rectangle(120,85,133,98,fill=Br_color_7[5][0])
-        our_canvas.create_rectangle(135,85,148,98,fill=Br_color_7[5][1])
-        our_canvas.create_rectangle(150,85,163,98,fill=Br_color_7[5][2])
-        our_canvas.create_rectangle(165,85,178,98,fill=Br_color_7[5][3])
-        our_canvas.create_rectangle(180,85,192,98,fill=Br_color_7[5][4])
-        our_canvas.create_rectangle(195,85,208,98,fill=Br_color_7[5][5])
-        our_canvas.create_rectangle(210,85,223,98,fill=Br_color_7[5][6])
+        our_canvas.create_rectangle(120,85,133,98,fill=Br_color[5][0])
+        our_canvas.create_rectangle(135,85,148,98,fill=Br_color[5][1])
+        our_canvas.create_rectangle(150,85,163,98,fill=Br_color[5][2])
+        our_canvas.create_rectangle(165,85,178,98,fill=Br_color[5][3])
+        our_canvas.create_rectangle(180,85,192,98,fill=Br_color[5][4])
+        our_canvas.create_rectangle(195,85,208,98,fill=Br_color[5][5])
+        our_canvas.create_rectangle(210,85,223,98,fill=Br_color[5][6])
 
-        our_canvas.create_rectangle(120,100,133,113,fill=Br_color_7[6][0])
-        our_canvas.create_rectangle(135,100,148,113,fill=Br_color_7[6][1])
-        our_canvas.create_rectangle(150,100,163,113,fill=Br_color_7[6][2])
-        our_canvas.create_rectangle(165,100,178,113,fill=Br_color_7[6][3])
-        our_canvas.create_rectangle(180,100,192,113,fill=Br_color_7[6][4])
-        our_canvas.create_rectangle(195,100,208,113,fill=Br_color_7[6][5])
-        our_canvas.create_rectangle(210,100,223,113,fill=Br_color_7[6][6])
+        our_canvas.create_rectangle(120,100,133,113,fill=Br_color[6][0])
+        our_canvas.create_rectangle(135,100,148,113,fill=Br_color[6][1])
+        our_canvas.create_rectangle(150,100,163,113,fill=Br_color[6][2])
+        our_canvas.create_rectangle(165,100,178,113,fill=Br_color[6][3])
+        our_canvas.create_rectangle(180,100,192,113,fill=Br_color[6][4])
+        our_canvas.create_rectangle(195,100,208,113,fill=Br_color[6][5])
+        our_canvas.create_rectangle(210,100,223,113,fill=Br_color[6][6])
 
         #L
-        our_canvas.create_rectangle(10 ,120,23 ,133,fill=Lr_color_7[0][0])
-        our_canvas.create_rectangle(25 ,120,38 ,133,fill=Lr_color_7[0][1])
-        our_canvas.create_rectangle(40 ,120,53 ,133,fill=Lr_color_7[0][2])
-        our_canvas.create_rectangle(55 ,120,68 ,133,fill=Lr_color_7[0][3])
-        our_canvas.create_rectangle(70 ,120,83 ,133,fill=Lr_color_7[0][4])
-        our_canvas.create_rectangle(85 ,120,98 ,133,fill=Lr_color_7[0][5])
-        our_canvas.create_rectangle(100,120,113,133,fill=Lr_color_7[0][6])
+        our_canvas.create_rectangle(10 ,120,23 ,133,fill=Lr_color[0][0])
+        our_canvas.create_rectangle(25 ,120,38 ,133,fill=Lr_color[0][1])
+        our_canvas.create_rectangle(40 ,120,53 ,133,fill=Lr_color[0][2])
+        our_canvas.create_rectangle(55 ,120,68 ,133,fill=Lr_color[0][3])
+        our_canvas.create_rectangle(70 ,120,83 ,133,fill=Lr_color[0][4])
+        our_canvas.create_rectangle(85 ,120,98 ,133,fill=Lr_color[0][5])
+        our_canvas.create_rectangle(100,120,113,133,fill=Lr_color[0][6])
 
-        our_canvas.create_rectangle(10 ,135,23 ,148,fill=Lr_color_7[1][0])
-        our_canvas.create_rectangle(25 ,135,38 ,148,fill=Lr_color_7[1][1])
-        our_canvas.create_rectangle(40 ,135,53 ,148,fill=Lr_color_7[1][2])
-        our_canvas.create_rectangle(55 ,135,68 ,148,fill=Lr_color_7[1][3])
-        our_canvas.create_rectangle(70 ,135,83 ,148,fill=Lr_color_7[1][4])
-        our_canvas.create_rectangle(85 ,135,98 ,148,fill=Lr_color_7[1][5])
-        our_canvas.create_rectangle(100,135,113,148,fill=Lr_color_7[1][6])
+        our_canvas.create_rectangle(10 ,135,23 ,148,fill=Lr_color[1][0])
+        our_canvas.create_rectangle(25 ,135,38 ,148,fill=Lr_color[1][1])
+        our_canvas.create_rectangle(40 ,135,53 ,148,fill=Lr_color[1][2])
+        our_canvas.create_rectangle(55 ,135,68 ,148,fill=Lr_color[1][3])
+        our_canvas.create_rectangle(70 ,135,83 ,148,fill=Lr_color[1][4])
+        our_canvas.create_rectangle(85 ,135,98 ,148,fill=Lr_color[1][5])
+        our_canvas.create_rectangle(100,135,113,148,fill=Lr_color[1][6])
 
-        our_canvas.create_rectangle(10 ,150,23 ,163,fill=Lr_color_7[2][0])
-        our_canvas.create_rectangle(25 ,150,38 ,163,fill=Lr_color_7[2][1])
-        our_canvas.create_rectangle(40 ,150,53 ,163,fill=Lr_color_7[2][2])
-        our_canvas.create_rectangle(55 ,150,68 ,163,fill=Lr_color_7[2][3])
-        our_canvas.create_rectangle(70 ,150,83 ,163,fill=Lr_color_7[2][4])
-        our_canvas.create_rectangle(85 ,150,98 ,163,fill=Lr_color_7[2][5])
-        our_canvas.create_rectangle(100,150,113,163,fill=Lr_color_7[2][6])
+        our_canvas.create_rectangle(10 ,150,23 ,163,fill=Lr_color[2][0])
+        our_canvas.create_rectangle(25 ,150,38 ,163,fill=Lr_color[2][1])
+        our_canvas.create_rectangle(40 ,150,53 ,163,fill=Lr_color[2][2])
+        our_canvas.create_rectangle(55 ,150,68 ,163,fill=Lr_color[2][3])
+        our_canvas.create_rectangle(70 ,150,83 ,163,fill=Lr_color[2][4])
+        our_canvas.create_rectangle(85 ,150,98 ,163,fill=Lr_color[2][5])
+        our_canvas.create_rectangle(100,150,113,163,fill=Lr_color[2][6])
 
-        our_canvas.create_rectangle(10 ,165,23 ,178,fill=Lr_color_7[3][0])
-        our_canvas.create_rectangle(25 ,165,38 ,178,fill=Lr_color_7[3][1])
-        our_canvas.create_rectangle(40 ,165,53 ,178,fill=Lr_color_7[3][2])
-        our_canvas.create_rectangle(55 ,165,68 ,178,fill=Lr_color_7[3][3])
-        our_canvas.create_rectangle(70 ,165,83 ,178,fill=Lr_color_7[3][4])
-        our_canvas.create_rectangle(85 ,165,98 ,178,fill=Lr_color_7[3][5])
-        our_canvas.create_rectangle(100,165,113,178,fill=Lr_color_7[3][6])
+        our_canvas.create_rectangle(10 ,165,23 ,178,fill=Lr_color[3][0])
+        our_canvas.create_rectangle(25 ,165,38 ,178,fill=Lr_color[3][1])
+        our_canvas.create_rectangle(40 ,165,53 ,178,fill=Lr_color[3][2])
+        our_canvas.create_rectangle(55 ,165,68 ,178,fill=Lr_color[3][3])
+        our_canvas.create_rectangle(70 ,165,83 ,178,fill=Lr_color[3][4])
+        our_canvas.create_rectangle(85 ,165,98 ,178,fill=Lr_color[3][5])
+        our_canvas.create_rectangle(100,165,113,178,fill=Lr_color[3][6])
 
-        our_canvas.create_rectangle(10 ,180,23 ,193,fill=Lr_color_7[4][0])
-        our_canvas.create_rectangle(25 ,180,38 ,193,fill=Lr_color_7[4][1])
-        our_canvas.create_rectangle(40 ,180,53 ,193,fill=Lr_color_7[4][2])
-        our_canvas.create_rectangle(55 ,180,68 ,193,fill=Lr_color_7[4][3])
-        our_canvas.create_rectangle(70 ,180,83 ,193,fill=Lr_color_7[4][4])
-        our_canvas.create_rectangle(85 ,180,98 ,193,fill=Lr_color_7[4][5])
-        our_canvas.create_rectangle(100,180,113,193,fill=Lr_color_7[4][6])
+        our_canvas.create_rectangle(10 ,180,23 ,193,fill=Lr_color[4][0])
+        our_canvas.create_rectangle(25 ,180,38 ,193,fill=Lr_color[4][1])
+        our_canvas.create_rectangle(40 ,180,53 ,193,fill=Lr_color[4][2])
+        our_canvas.create_rectangle(55 ,180,68 ,193,fill=Lr_color[4][3])
+        our_canvas.create_rectangle(70 ,180,83 ,193,fill=Lr_color[4][4])
+        our_canvas.create_rectangle(85 ,180,98 ,193,fill=Lr_color[4][5])
+        our_canvas.create_rectangle(100,180,113,193,fill=Lr_color[4][6])
 
-        our_canvas.create_rectangle(10 ,195,23 ,208,fill=Lr_color_7[5][0])
-        our_canvas.create_rectangle(25 ,195,38 ,208,fill=Lr_color_7[5][1])
-        our_canvas.create_rectangle(40 ,195,53 ,208,fill=Lr_color_7[5][2])
-        our_canvas.create_rectangle(55 ,195,68 ,208,fill=Lr_color_7[5][3])
-        our_canvas.create_rectangle(70 ,195,83 ,208,fill=Lr_color_7[5][4])
-        our_canvas.create_rectangle(85 ,195,98 ,208,fill=Lr_color_7[5][5])
-        our_canvas.create_rectangle(100,195,113,208,fill=Lr_color_7[5][6])
+        our_canvas.create_rectangle(10 ,195,23 ,208,fill=Lr_color[5][0])
+        our_canvas.create_rectangle(25 ,195,38 ,208,fill=Lr_color[5][1])
+        our_canvas.create_rectangle(40 ,195,53 ,208,fill=Lr_color[5][2])
+        our_canvas.create_rectangle(55 ,195,68 ,208,fill=Lr_color[5][3])
+        our_canvas.create_rectangle(70 ,195,83 ,208,fill=Lr_color[5][4])
+        our_canvas.create_rectangle(85 ,195,98 ,208,fill=Lr_color[5][5])
+        our_canvas.create_rectangle(100,195,113,208,fill=Lr_color[5][6])
 
-        our_canvas.create_rectangle(10 ,210,23 ,223,fill=Lr_color_7[6][0])
-        our_canvas.create_rectangle(25 ,210,38 ,223,fill=Lr_color_7[6][1])
-        our_canvas.create_rectangle(40 ,210,53 ,223,fill=Lr_color_7[6][2])
-        our_canvas.create_rectangle(55 ,210,68 ,223,fill=Lr_color_7[6][3])
-        our_canvas.create_rectangle(70 ,210,83 ,223,fill=Lr_color_7[6][4])
-        our_canvas.create_rectangle(85 ,210,98 ,223,fill=Lr_color_7[6][5])
-        our_canvas.create_rectangle(100,210,113,223,fill=Lr_color_7[6][6])
+        our_canvas.create_rectangle(10 ,210,23 ,223,fill=Lr_color[6][0])
+        our_canvas.create_rectangle(25 ,210,38 ,223,fill=Lr_color[6][1])
+        our_canvas.create_rectangle(40 ,210,53 ,223,fill=Lr_color[6][2])
+        our_canvas.create_rectangle(55 ,210,68 ,223,fill=Lr_color[6][3])
+        our_canvas.create_rectangle(70 ,210,83 ,223,fill=Lr_color[6][4])
+        our_canvas.create_rectangle(85 ,210,98 ,223,fill=Lr_color[6][5])
+        our_canvas.create_rectangle(100,210,113,223,fill=Lr_color[6][6])
 
 
         #F
-        our_canvas.create_rectangle(120,120,133,133,fill=Vd_color_7[0][0])
-        our_canvas.create_rectangle(135,120,148,133,fill=Vd_color_7[0][1])
-        our_canvas.create_rectangle(150,120,163,133,fill=Vd_color_7[0][2])
-        our_canvas.create_rectangle(165,120,178,133,fill=Vd_color_7[0][3])
-        our_canvas.create_rectangle(180,120,193,133,fill=Vd_color_7[0][4])
-        our_canvas.create_rectangle(195,120,208,133,fill=Vd_color_7[0][5])
-        our_canvas.create_rectangle(210,120,223,133,fill=Vd_color_7[0][6])
+        our_canvas.create_rectangle(120,120,133,133,fill=Vd_color[0][0])
+        our_canvas.create_rectangle(135,120,148,133,fill=Vd_color[0][1])
+        our_canvas.create_rectangle(150,120,163,133,fill=Vd_color[0][2])
+        our_canvas.create_rectangle(165,120,178,133,fill=Vd_color[0][3])
+        our_canvas.create_rectangle(180,120,193,133,fill=Vd_color[0][4])
+        our_canvas.create_rectangle(195,120,208,133,fill=Vd_color[0][5])
+        our_canvas.create_rectangle(210,120,223,133,fill=Vd_color[0][6])
 
-        our_canvas.create_rectangle(120,135,133,148,fill=Vd_color_7[1][0])
-        our_canvas.create_rectangle(135,135,148,148,fill=Vd_color_7[1][1])
-        our_canvas.create_rectangle(150,135,163,148,fill=Vd_color_7[1][2])
-        our_canvas.create_rectangle(165,135,178,148,fill=Vd_color_7[1][3])
-        our_canvas.create_rectangle(180,135,193,148,fill=Vd_color_7[1][4])        
-        our_canvas.create_rectangle(195,135,208,148,fill=Vd_color_7[1][5])        
-        our_canvas.create_rectangle(210,135,223,148,fill=Vd_color_7[1][6])        
+        our_canvas.create_rectangle(120,135,133,148,fill=Vd_color[1][0])
+        our_canvas.create_rectangle(135,135,148,148,fill=Vd_color[1][1])
+        our_canvas.create_rectangle(150,135,163,148,fill=Vd_color[1][2])
+        our_canvas.create_rectangle(165,135,178,148,fill=Vd_color[1][3])
+        our_canvas.create_rectangle(180,135,193,148,fill=Vd_color[1][4])        
+        our_canvas.create_rectangle(195,135,208,148,fill=Vd_color[1][5])        
+        our_canvas.create_rectangle(210,135,223,148,fill=Vd_color[1][6])        
 
-        our_canvas.create_rectangle(120,150,133,163,fill=Vd_color_7[2][0])
-        our_canvas.create_rectangle(135,150,148,163,fill=Vd_color_7[2][1])
-        our_canvas.create_rectangle(150,150,163,163,fill=Vd_color_7[2][2])
-        our_canvas.create_rectangle(165,150,178,163,fill=Vd_color_7[2][3])
-        our_canvas.create_rectangle(180,150,193,163,fill=Vd_color_7[2][4])
-        our_canvas.create_rectangle(195,150,208,163,fill=Vd_color_7[2][5])
-        our_canvas.create_rectangle(210,150,223,163,fill=Vd_color_7[2][6])
+        our_canvas.create_rectangle(120,150,133,163,fill=Vd_color[2][0])
+        our_canvas.create_rectangle(135,150,148,163,fill=Vd_color[2][1])
+        our_canvas.create_rectangle(150,150,163,163,fill=Vd_color[2][2])
+        our_canvas.create_rectangle(165,150,178,163,fill=Vd_color[2][3])
+        our_canvas.create_rectangle(180,150,193,163,fill=Vd_color[2][4])
+        our_canvas.create_rectangle(195,150,208,163,fill=Vd_color[2][5])
+        our_canvas.create_rectangle(210,150,223,163,fill=Vd_color[2][6])
 
-        our_canvas.create_rectangle(120,165,133,178,fill=Vd_color_7[3][0])
-        our_canvas.create_rectangle(135,165,148,178,fill=Vd_color_7[3][1])
-        our_canvas.create_rectangle(150,165,163,178,fill=Vd_color_7[3][2])
-        our_canvas.create_rectangle(165,165,178,178,fill=Vd_color_7[3][3])
-        our_canvas.create_rectangle(180,165,193,178,fill=Vd_color_7[3][4])
-        our_canvas.create_rectangle(195,165,208,178,fill=Vd_color_7[3][5])
-        our_canvas.create_rectangle(210,165,223,178,fill=Vd_color_7[3][6])
+        our_canvas.create_rectangle(120,165,133,178,fill=Vd_color[3][0])
+        our_canvas.create_rectangle(135,165,148,178,fill=Vd_color[3][1])
+        our_canvas.create_rectangle(150,165,163,178,fill=Vd_color[3][2])
+        our_canvas.create_rectangle(165,165,178,178,fill=Vd_color[3][3])
+        our_canvas.create_rectangle(180,165,193,178,fill=Vd_color[3][4])
+        our_canvas.create_rectangle(195,165,208,178,fill=Vd_color[3][5])
+        our_canvas.create_rectangle(210,165,223,178,fill=Vd_color[3][6])
 
-        our_canvas.create_rectangle(120,180,133,193,fill=Vd_color_7[4][0])
-        our_canvas.create_rectangle(135,180,148,193,fill=Vd_color_7[4][1])
-        our_canvas.create_rectangle(150,180,163,193,fill=Vd_color_7[4][2])
-        our_canvas.create_rectangle(165,180,178,193,fill=Vd_color_7[4][3])
-        our_canvas.create_rectangle(180,180,193,193,fill=Vd_color_7[4][4])
-        our_canvas.create_rectangle(195,180,208,193,fill=Vd_color_7[4][5])
-        our_canvas.create_rectangle(210,180,223,193,fill=Vd_color_7[4][6])
+        our_canvas.create_rectangle(120,180,133,193,fill=Vd_color[4][0])
+        our_canvas.create_rectangle(135,180,148,193,fill=Vd_color[4][1])
+        our_canvas.create_rectangle(150,180,163,193,fill=Vd_color[4][2])
+        our_canvas.create_rectangle(165,180,178,193,fill=Vd_color[4][3])
+        our_canvas.create_rectangle(180,180,193,193,fill=Vd_color[4][4])
+        our_canvas.create_rectangle(195,180,208,193,fill=Vd_color[4][5])
+        our_canvas.create_rectangle(210,180,223,193,fill=Vd_color[4][6])
 
-        our_canvas.create_rectangle(120,195,133,208,fill=Vd_color_7[5][0])
-        our_canvas.create_rectangle(135,195,148,208,fill=Vd_color_7[5][1])
-        our_canvas.create_rectangle(150,195,163,208,fill=Vd_color_7[5][2])
-        our_canvas.create_rectangle(165,195,178,208,fill=Vd_color_7[5][3])
-        our_canvas.create_rectangle(180,195,193,208,fill=Vd_color_7[5][4])
-        our_canvas.create_rectangle(195,195,208,208,fill=Vd_color_7[5][5])
-        our_canvas.create_rectangle(210,195,223,208,fill=Vd_color_7[5][6])
+        our_canvas.create_rectangle(120,195,133,208,fill=Vd_color[5][0])
+        our_canvas.create_rectangle(135,195,148,208,fill=Vd_color[5][1])
+        our_canvas.create_rectangle(150,195,163,208,fill=Vd_color[5][2])
+        our_canvas.create_rectangle(165,195,178,208,fill=Vd_color[5][3])
+        our_canvas.create_rectangle(180,195,193,208,fill=Vd_color[5][4])
+        our_canvas.create_rectangle(195,195,208,208,fill=Vd_color[5][5])
+        our_canvas.create_rectangle(210,195,223,208,fill=Vd_color[5][6])
 
-        our_canvas.create_rectangle(120,210,133,223,fill=Vd_color_7[6][0])
-        our_canvas.create_rectangle(135,210,148,223,fill=Vd_color_7[6][1])
-        our_canvas.create_rectangle(150,210,163,223,fill=Vd_color_7[6][2])
-        our_canvas.create_rectangle(165,210,178,223,fill=Vd_color_7[6][3])
-        our_canvas.create_rectangle(180,210,193,223,fill=Vd_color_7[6][4])
-        our_canvas.create_rectangle(195,210,208,223,fill=Vd_color_7[6][5])
-        our_canvas.create_rectangle(210,210,223,223,fill=Vd_color_7[6][6])
+        our_canvas.create_rectangle(120,210,133,223,fill=Vd_color[6][0])
+        our_canvas.create_rectangle(135,210,148,223,fill=Vd_color[6][1])
+        our_canvas.create_rectangle(150,210,163,223,fill=Vd_color[6][2])
+        our_canvas.create_rectangle(165,210,178,223,fill=Vd_color[6][3])
+        our_canvas.create_rectangle(180,210,193,223,fill=Vd_color[6][4])
+        our_canvas.create_rectangle(195,210,208,223,fill=Vd_color[6][5])
+        our_canvas.create_rectangle(210,210,223,223,fill=Vd_color[6][6])
 
         #R
-        our_canvas.create_rectangle(230,120,243,133,fill=Vm_color_7[0][0])
-        our_canvas.create_rectangle(245,120,258,133,fill=Vm_color_7[0][1])
-        our_canvas.create_rectangle(260,120,273,133,fill=Vm_color_7[0][2])
-        our_canvas.create_rectangle(275,120,288,133,fill=Vm_color_7[0][3])
-        our_canvas.create_rectangle(290,120,303,133,fill=Vm_color_7[0][4])
-        our_canvas.create_rectangle(305,120,318,133,fill=Vm_color_7[0][5])
-        our_canvas.create_rectangle(320,120,333,133,fill=Vm_color_7[0][6])
+        our_canvas.create_rectangle(230,120,243,133,fill=Vm_color[0][0])
+        our_canvas.create_rectangle(245,120,258,133,fill=Vm_color[0][1])
+        our_canvas.create_rectangle(260,120,273,133,fill=Vm_color[0][2])
+        our_canvas.create_rectangle(275,120,288,133,fill=Vm_color[0][3])
+        our_canvas.create_rectangle(290,120,303,133,fill=Vm_color[0][4])
+        our_canvas.create_rectangle(305,120,318,133,fill=Vm_color[0][5])
+        our_canvas.create_rectangle(320,120,333,133,fill=Vm_color[0][6])
 
-        our_canvas.create_rectangle(230,135,243,148,fill=Vm_color_7[1][0])
-        our_canvas.create_rectangle(245,135,258,148,fill=Vm_color_7[1][1])
-        our_canvas.create_rectangle(260,135,273,148,fill=Vm_color_7[1][2])
-        our_canvas.create_rectangle(275,135,288,148,fill=Vm_color_7[1][3])
-        our_canvas.create_rectangle(290,135,303,148,fill=Vm_color_7[1][4])
-        our_canvas.create_rectangle(305,135,318,148,fill=Vm_color_7[1][5])
-        our_canvas.create_rectangle(320,135,333,148,fill=Vm_color_7[1][6])
+        our_canvas.create_rectangle(230,135,243,148,fill=Vm_color[1][0])
+        our_canvas.create_rectangle(245,135,258,148,fill=Vm_color[1][1])
+        our_canvas.create_rectangle(260,135,273,148,fill=Vm_color[1][2])
+        our_canvas.create_rectangle(275,135,288,148,fill=Vm_color[1][3])
+        our_canvas.create_rectangle(290,135,303,148,fill=Vm_color[1][4])
+        our_canvas.create_rectangle(305,135,318,148,fill=Vm_color[1][5])
+        our_canvas.create_rectangle(320,135,333,148,fill=Vm_color[1][6])
 
-        our_canvas.create_rectangle(230,150,243,163,fill=Vm_color_7[2][0])
-        our_canvas.create_rectangle(245,150,258,163,fill=Vm_color_7[2][1])
-        our_canvas.create_rectangle(260,150,273,163,fill=Vm_color_7[2][2])
-        our_canvas.create_rectangle(275,150,288,163,fill=Vm_color_7[2][3])
-        our_canvas.create_rectangle(290,150,303,163,fill=Vm_color_7[2][4])
-        our_canvas.create_rectangle(305,150,318,163,fill=Vm_color_7[2][5])
-        our_canvas.create_rectangle(320,150,333,163,fill=Vm_color_7[2][6])
+        our_canvas.create_rectangle(230,150,243,163,fill=Vm_color[2][0])
+        our_canvas.create_rectangle(245,150,258,163,fill=Vm_color[2][1])
+        our_canvas.create_rectangle(260,150,273,163,fill=Vm_color[2][2])
+        our_canvas.create_rectangle(275,150,288,163,fill=Vm_color[2][3])
+        our_canvas.create_rectangle(290,150,303,163,fill=Vm_color[2][4])
+        our_canvas.create_rectangle(305,150,318,163,fill=Vm_color[2][5])
+        our_canvas.create_rectangle(320,150,333,163,fill=Vm_color[2][6])
 
-        our_canvas.create_rectangle(230,165,243,178,fill=Vm_color_7[3][0])
-        our_canvas.create_rectangle(245,165,258,178,fill=Vm_color_7[3][1])
-        our_canvas.create_rectangle(260,165,273,178,fill=Vm_color_7[3][2])
-        our_canvas.create_rectangle(275,165,288,178,fill=Vm_color_7[3][3])
-        our_canvas.create_rectangle(290,165,303,178,fill=Vm_color_7[3][4])
-        our_canvas.create_rectangle(305,165,318,178,fill=Vm_color_7[3][5])
-        our_canvas.create_rectangle(320,165,333,178,fill=Vm_color_7[3][6])
+        our_canvas.create_rectangle(230,165,243,178,fill=Vm_color[3][0])
+        our_canvas.create_rectangle(245,165,258,178,fill=Vm_color[3][1])
+        our_canvas.create_rectangle(260,165,273,178,fill=Vm_color[3][2])
+        our_canvas.create_rectangle(275,165,288,178,fill=Vm_color[3][3])
+        our_canvas.create_rectangle(290,165,303,178,fill=Vm_color[3][4])
+        our_canvas.create_rectangle(305,165,318,178,fill=Vm_color[3][5])
+        our_canvas.create_rectangle(320,165,333,178,fill=Vm_color[3][6])
 
-        our_canvas.create_rectangle(230,180,243,193,fill=Vm_color_7[4][0])
-        our_canvas.create_rectangle(245,180,258,193,fill=Vm_color_7[4][1])
-        our_canvas.create_rectangle(260,180,273,193,fill=Vm_color_7[4][2])
-        our_canvas.create_rectangle(275,180,288,193,fill=Vm_color_7[4][3])
-        our_canvas.create_rectangle(290,180,303,193,fill=Vm_color_7[4][4])
-        our_canvas.create_rectangle(305,180,318,193,fill=Vm_color_7[4][5])
-        our_canvas.create_rectangle(320,180,333,193,fill=Vm_color_7[4][6])
+        our_canvas.create_rectangle(230,180,243,193,fill=Vm_color[4][0])
+        our_canvas.create_rectangle(245,180,258,193,fill=Vm_color[4][1])
+        our_canvas.create_rectangle(260,180,273,193,fill=Vm_color[4][2])
+        our_canvas.create_rectangle(275,180,288,193,fill=Vm_color[4][3])
+        our_canvas.create_rectangle(290,180,303,193,fill=Vm_color[4][4])
+        our_canvas.create_rectangle(305,180,318,193,fill=Vm_color[4][5])
+        our_canvas.create_rectangle(320,180,333,193,fill=Vm_color[4][6])
 
-        our_canvas.create_rectangle(230,195,243,208,fill=Vm_color_7[5][0])
-        our_canvas.create_rectangle(245,195,258,208,fill=Vm_color_7[5][1])
-        our_canvas.create_rectangle(260,195,273,208,fill=Vm_color_7[5][2])
-        our_canvas.create_rectangle(275,195,288,208,fill=Vm_color_7[5][3])
-        our_canvas.create_rectangle(290,195,303,208,fill=Vm_color_7[5][4])
-        our_canvas.create_rectangle(305,195,318,208,fill=Vm_color_7[5][5])
-        our_canvas.create_rectangle(320,195,333,208,fill=Vm_color_7[5][6])
+        our_canvas.create_rectangle(230,195,243,208,fill=Vm_color[5][0])
+        our_canvas.create_rectangle(245,195,258,208,fill=Vm_color[5][1])
+        our_canvas.create_rectangle(260,195,273,208,fill=Vm_color[5][2])
+        our_canvas.create_rectangle(275,195,288,208,fill=Vm_color[5][3])
+        our_canvas.create_rectangle(290,195,303,208,fill=Vm_color[5][4])
+        our_canvas.create_rectangle(305,195,318,208,fill=Vm_color[5][5])
+        our_canvas.create_rectangle(320,195,333,208,fill=Vm_color[5][6])
 
-        our_canvas.create_rectangle(230,210,243,223,fill=Vm_color_7[6][0])
-        our_canvas.create_rectangle(245,210,258,223,fill=Vm_color_7[6][1])
-        our_canvas.create_rectangle(260,210,273,223,fill=Vm_color_7[6][2])
-        our_canvas.create_rectangle(275,210,288,223,fill=Vm_color_7[6][3])
-        our_canvas.create_rectangle(290,210,303,223,fill=Vm_color_7[6][4])
-        our_canvas.create_rectangle(305,210,318,223,fill=Vm_color_7[6][5])
-        our_canvas.create_rectangle(320,210,333,223,fill=Vm_color_7[6][6])
+        our_canvas.create_rectangle(230,210,243,223,fill=Vm_color[6][0])
+        our_canvas.create_rectangle(245,210,258,223,fill=Vm_color[6][1])
+        our_canvas.create_rectangle(260,210,273,223,fill=Vm_color[6][2])
+        our_canvas.create_rectangle(275,210,288,223,fill=Vm_color[6][3])
+        our_canvas.create_rectangle(290,210,303,223,fill=Vm_color[6][4])
+        our_canvas.create_rectangle(305,210,318,223,fill=Vm_color[6][5])
+        our_canvas.create_rectangle(320,210,333,223,fill=Vm_color[6][6])
 
 
         #B
-        our_canvas.create_rectangle(340,120,353,133,fill=Az_color_7[0][0])
-        our_canvas.create_rectangle(355,120,368,133,fill=Az_color_7[0][1])
-        our_canvas.create_rectangle(370,120,383,133,fill=Az_color_7[0][2])
-        our_canvas.create_rectangle(385,120,398,133,fill=Az_color_7[0][3])
-        our_canvas.create_rectangle(400,120,413,133,fill=Az_color_7[0][4])
-        our_canvas.create_rectangle(415,120,428,133,fill=Az_color_7[0][5])
-        our_canvas.create_rectangle(430,120,443,133,fill=Az_color_7[0][6])
+        our_canvas.create_rectangle(340,120,353,133,fill=Az_color[0][0])
+        our_canvas.create_rectangle(355,120,368,133,fill=Az_color[0][1])
+        our_canvas.create_rectangle(370,120,383,133,fill=Az_color[0][2])
+        our_canvas.create_rectangle(385,120,398,133,fill=Az_color[0][3])
+        our_canvas.create_rectangle(400,120,413,133,fill=Az_color[0][4])
+        our_canvas.create_rectangle(415,120,428,133,fill=Az_color[0][5])
+        our_canvas.create_rectangle(430,120,443,133,fill=Az_color[0][6])
 
-        our_canvas.create_rectangle(340,135,353,148,fill=Az_color_7[1][0])
-        our_canvas.create_rectangle(355,135,368,148,fill=Az_color_7[1][1])
-        our_canvas.create_rectangle(370,135,383,148,fill=Az_color_7[1][2])
-        our_canvas.create_rectangle(385,135,398,148,fill=Az_color_7[1][3])
-        our_canvas.create_rectangle(400,135,413,148,fill=Az_color_7[1][4])
-        our_canvas.create_rectangle(415,135,428,148,fill=Az_color_7[1][5])
-        our_canvas.create_rectangle(430,135,443,148,fill=Az_color_7[1][6])
+        our_canvas.create_rectangle(340,135,353,148,fill=Az_color[1][0])
+        our_canvas.create_rectangle(355,135,368,148,fill=Az_color[1][1])
+        our_canvas.create_rectangle(370,135,383,148,fill=Az_color[1][2])
+        our_canvas.create_rectangle(385,135,398,148,fill=Az_color[1][3])
+        our_canvas.create_rectangle(400,135,413,148,fill=Az_color[1][4])
+        our_canvas.create_rectangle(415,135,428,148,fill=Az_color[1][5])
+        our_canvas.create_rectangle(430,135,443,148,fill=Az_color[1][6])
 
-        our_canvas.create_rectangle(340,150,353,163,fill=Az_color_7[2][0])
-        our_canvas.create_rectangle(355,150,368,163,fill=Az_color_7[2][1])
-        our_canvas.create_rectangle(370,150,383,163,fill=Az_color_7[2][2])
-        our_canvas.create_rectangle(385,150,398,163,fill=Az_color_7[2][3])
-        our_canvas.create_rectangle(400,150,413,163,fill=Az_color_7[2][4])
-        our_canvas.create_rectangle(415,150,428,163,fill=Az_color_7[2][5])
-        our_canvas.create_rectangle(430,150,443,163,fill=Az_color_7[2][6])
+        our_canvas.create_rectangle(340,150,353,163,fill=Az_color[2][0])
+        our_canvas.create_rectangle(355,150,368,163,fill=Az_color[2][1])
+        our_canvas.create_rectangle(370,150,383,163,fill=Az_color[2][2])
+        our_canvas.create_rectangle(385,150,398,163,fill=Az_color[2][3])
+        our_canvas.create_rectangle(400,150,413,163,fill=Az_color[2][4])
+        our_canvas.create_rectangle(415,150,428,163,fill=Az_color[2][5])
+        our_canvas.create_rectangle(430,150,443,163,fill=Az_color[2][6])
 
-        our_canvas.create_rectangle(340,165,353,178,fill=Az_color_7[3][0])
-        our_canvas.create_rectangle(355,165,368,178,fill=Az_color_7[3][1])
-        our_canvas.create_rectangle(370,165,383,178,fill=Az_color_7[3][2])
-        our_canvas.create_rectangle(385,165,398,178,fill=Az_color_7[3][3])
-        our_canvas.create_rectangle(400,165,413,178,fill=Az_color_7[3][4])
-        our_canvas.create_rectangle(415,165,428,178,fill=Az_color_7[3][5])
-        our_canvas.create_rectangle(430,165,443,178,fill=Az_color_7[3][6])
+        our_canvas.create_rectangle(340,165,353,178,fill=Az_color[3][0])
+        our_canvas.create_rectangle(355,165,368,178,fill=Az_color[3][1])
+        our_canvas.create_rectangle(370,165,383,178,fill=Az_color[3][2])
+        our_canvas.create_rectangle(385,165,398,178,fill=Az_color[3][3])
+        our_canvas.create_rectangle(400,165,413,178,fill=Az_color[3][4])
+        our_canvas.create_rectangle(415,165,428,178,fill=Az_color[3][5])
+        our_canvas.create_rectangle(430,165,443,178,fill=Az_color[3][6])
 
-        our_canvas.create_rectangle(340,180,353,193,fill=Az_color_7[4][0])
-        our_canvas.create_rectangle(355,180,368,193,fill=Az_color_7[4][1])
-        our_canvas.create_rectangle(370,180,383,193,fill=Az_color_7[4][2])
-        our_canvas.create_rectangle(385,180,398,193,fill=Az_color_7[4][3])
-        our_canvas.create_rectangle(400,180,413,193,fill=Az_color_7[4][4])
-        our_canvas.create_rectangle(415,180,428,193,fill=Az_color_7[4][5])
-        our_canvas.create_rectangle(430,180,443,193,fill=Az_color_7[4][6])
+        our_canvas.create_rectangle(340,180,353,193,fill=Az_color[4][0])
+        our_canvas.create_rectangle(355,180,368,193,fill=Az_color[4][1])
+        our_canvas.create_rectangle(370,180,383,193,fill=Az_color[4][2])
+        our_canvas.create_rectangle(385,180,398,193,fill=Az_color[4][3])
+        our_canvas.create_rectangle(400,180,413,193,fill=Az_color[4][4])
+        our_canvas.create_rectangle(415,180,428,193,fill=Az_color[4][5])
+        our_canvas.create_rectangle(430,180,443,193,fill=Az_color[4][6])
 
-        our_canvas.create_rectangle(340,195,353,208,fill=Az_color_7[5][0])
-        our_canvas.create_rectangle(355,195,368,208,fill=Az_color_7[5][1])
-        our_canvas.create_rectangle(370,195,383,208,fill=Az_color_7[5][2])
-        our_canvas.create_rectangle(385,195,398,208,fill=Az_color_7[5][3])
-        our_canvas.create_rectangle(400,195,413,208,fill=Az_color_7[5][4])
-        our_canvas.create_rectangle(415,195,428,208,fill=Az_color_7[5][5])
-        our_canvas.create_rectangle(430,195,443,208,fill=Az_color_7[5][6])
+        our_canvas.create_rectangle(340,195,353,208,fill=Az_color[5][0])
+        our_canvas.create_rectangle(355,195,368,208,fill=Az_color[5][1])
+        our_canvas.create_rectangle(370,195,383,208,fill=Az_color[5][2])
+        our_canvas.create_rectangle(385,195,398,208,fill=Az_color[5][3])
+        our_canvas.create_rectangle(400,195,413,208,fill=Az_color[5][4])
+        our_canvas.create_rectangle(415,195,428,208,fill=Az_color[5][5])
+        our_canvas.create_rectangle(430,195,443,208,fill=Az_color[5][6])
 
-        our_canvas.create_rectangle(340,210,353,223,fill=Az_color_7[6][0])
-        our_canvas.create_rectangle(355,210,368,223,fill=Az_color_7[6][1])
-        our_canvas.create_rectangle(370,210,383,223,fill=Az_color_7[6][2])
-        our_canvas.create_rectangle(385,210,398,223,fill=Az_color_7[6][3])
-        our_canvas.create_rectangle(400,210,413,223,fill=Az_color_7[6][4])
-        our_canvas.create_rectangle(415,210,428,223,fill=Az_color_7[6][5])
-        our_canvas.create_rectangle(430,210,443,223,fill=Az_color_7[6][6])
+        our_canvas.create_rectangle(340,210,353,223,fill=Az_color[6][0])
+        our_canvas.create_rectangle(355,210,368,223,fill=Az_color[6][1])
+        our_canvas.create_rectangle(370,210,383,223,fill=Az_color[6][2])
+        our_canvas.create_rectangle(385,210,398,223,fill=Az_color[6][3])
+        our_canvas.create_rectangle(400,210,413,223,fill=Az_color[6][4])
+        our_canvas.create_rectangle(415,210,428,223,fill=Az_color[6][5])
+        our_canvas.create_rectangle(430,210,443,223,fill=Az_color[6][6])
 
         #D
-        our_canvas.create_rectangle(120,230,133,243,fill=Am_color_7[0][0])
-        our_canvas.create_rectangle(135,230,148,243,fill=Am_color_7[0][1])
-        our_canvas.create_rectangle(150,230,163,243,fill=Am_color_7[0][2])
-        our_canvas.create_rectangle(165,230,178,243,fill=Am_color_7[0][3])
-        our_canvas.create_rectangle(180,230,193,243,fill=Am_color_7[0][4])
-        our_canvas.create_rectangle(195,230,208,243,fill=Am_color_7[0][5])
-        our_canvas.create_rectangle(210,230,223,243,fill=Am_color_7[0][6])
+        our_canvas.create_rectangle(120,230,133,243,fill=Am_color[0][0])
+        our_canvas.create_rectangle(135,230,148,243,fill=Am_color[0][1])
+        our_canvas.create_rectangle(150,230,163,243,fill=Am_color[0][2])
+        our_canvas.create_rectangle(165,230,178,243,fill=Am_color[0][3])
+        our_canvas.create_rectangle(180,230,193,243,fill=Am_color[0][4])
+        our_canvas.create_rectangle(195,230,208,243,fill=Am_color[0][5])
+        our_canvas.create_rectangle(210,230,223,243,fill=Am_color[0][6])
 
-        our_canvas.create_rectangle(120,245,133,258,fill=Am_color_7[1][0])
-        our_canvas.create_rectangle(135,245,148,258,fill=Am_color_7[1][1])
-        our_canvas.create_rectangle(150,245,163,258,fill=Am_color_7[1][2])
-        our_canvas.create_rectangle(165,245,178,258,fill=Am_color_7[1][3])
-        our_canvas.create_rectangle(180,245,193,258,fill=Am_color_7[1][4])
-        our_canvas.create_rectangle(195,245,208,258,fill=Am_color_7[1][5])
-        our_canvas.create_rectangle(210,245,223,258,fill=Am_color_7[1][6])
+        our_canvas.create_rectangle(120,245,133,258,fill=Am_color[1][0])
+        our_canvas.create_rectangle(135,245,148,258,fill=Am_color[1][1])
+        our_canvas.create_rectangle(150,245,163,258,fill=Am_color[1][2])
+        our_canvas.create_rectangle(165,245,178,258,fill=Am_color[1][3])
+        our_canvas.create_rectangle(180,245,193,258,fill=Am_color[1][4])
+        our_canvas.create_rectangle(195,245,208,258,fill=Am_color[1][5])
+        our_canvas.create_rectangle(210,245,223,258,fill=Am_color[1][6])
 
-        our_canvas.create_rectangle(120,260,133,273,fill=Am_color_7[2][0])
-        our_canvas.create_rectangle(135,260,148,273,fill=Am_color_7[2][1])
-        our_canvas.create_rectangle(150,260,163,273,fill=Am_color_7[2][2])
-        our_canvas.create_rectangle(165,260,178,273,fill=Am_color_7[2][3])
-        our_canvas.create_rectangle(180,260,193,273,fill=Am_color_7[2][4])
-        our_canvas.create_rectangle(195,260,208,273,fill=Am_color_7[2][5])
-        our_canvas.create_rectangle(210,260,223,273,fill=Am_color_7[2][6])
+        our_canvas.create_rectangle(120,260,133,273,fill=Am_color[2][0])
+        our_canvas.create_rectangle(135,260,148,273,fill=Am_color[2][1])
+        our_canvas.create_rectangle(150,260,163,273,fill=Am_color[2][2])
+        our_canvas.create_rectangle(165,260,178,273,fill=Am_color[2][3])
+        our_canvas.create_rectangle(180,260,193,273,fill=Am_color[2][4])
+        our_canvas.create_rectangle(195,260,208,273,fill=Am_color[2][5])
+        our_canvas.create_rectangle(210,260,223,273,fill=Am_color[2][6])
 
-        our_canvas.create_rectangle(120,275,133,288,fill=Am_color_7[3][0])
-        our_canvas.create_rectangle(135,275,148,288,fill=Am_color_7[3][1])
-        our_canvas.create_rectangle(150,275,163,288,fill=Am_color_7[3][2])
-        our_canvas.create_rectangle(165,275,178,288,fill=Am_color_7[3][3])
-        our_canvas.create_rectangle(180,275,193,288,fill=Am_color_7[3][4])
-        our_canvas.create_rectangle(195,275,208,288,fill=Am_color_7[3][5])
-        our_canvas.create_rectangle(210,275,223,288,fill=Am_color_7[3][6])
+        our_canvas.create_rectangle(120,275,133,288,fill=Am_color[3][0])
+        our_canvas.create_rectangle(135,275,148,288,fill=Am_color[3][1])
+        our_canvas.create_rectangle(150,275,163,288,fill=Am_color[3][2])
+        our_canvas.create_rectangle(165,275,178,288,fill=Am_color[3][3])
+        our_canvas.create_rectangle(180,275,193,288,fill=Am_color[3][4])
+        our_canvas.create_rectangle(195,275,208,288,fill=Am_color[3][5])
+        our_canvas.create_rectangle(210,275,223,288,fill=Am_color[3][6])
 
-        our_canvas.create_rectangle(120,290,133,303,fill=Am_color_7[4][0])
-        our_canvas.create_rectangle(135,290,148,303,fill=Am_color_7[4][1])
-        our_canvas.create_rectangle(150,290,163,303,fill=Am_color_7[4][2])
-        our_canvas.create_rectangle(165,290,178,303,fill=Am_color_7[4][3])
-        our_canvas.create_rectangle(180,290,193,303,fill=Am_color_7[4][4])
-        our_canvas.create_rectangle(195,290,208,303,fill=Am_color_7[4][5])
-        our_canvas.create_rectangle(210,290,223,303,fill=Am_color_7[4][6])
+        our_canvas.create_rectangle(120,290,133,303,fill=Am_color[4][0])
+        our_canvas.create_rectangle(135,290,148,303,fill=Am_color[4][1])
+        our_canvas.create_rectangle(150,290,163,303,fill=Am_color[4][2])
+        our_canvas.create_rectangle(165,290,178,303,fill=Am_color[4][3])
+        our_canvas.create_rectangle(180,290,193,303,fill=Am_color[4][4])
+        our_canvas.create_rectangle(195,290,208,303,fill=Am_color[4][5])
+        our_canvas.create_rectangle(210,290,223,303,fill=Am_color[4][6])
 
-        our_canvas.create_rectangle(120,305,133,318,fill=Am_color_7[5][0])
-        our_canvas.create_rectangle(135,305,148,318,fill=Am_color_7[5][1])
-        our_canvas.create_rectangle(150,305,163,318,fill=Am_color_7[5][2])
-        our_canvas.create_rectangle(165,305,178,318,fill=Am_color_7[5][3])
-        our_canvas.create_rectangle(180,305,193,318,fill=Am_color_7[5][4])
-        our_canvas.create_rectangle(195,305,208,318,fill=Am_color_7[5][5])
-        our_canvas.create_rectangle(210,305,223,318,fill=Am_color_7[5][6])
+        our_canvas.create_rectangle(120,305,133,318,fill=Am_color[5][0])
+        our_canvas.create_rectangle(135,305,148,318,fill=Am_color[5][1])
+        our_canvas.create_rectangle(150,305,163,318,fill=Am_color[5][2])
+        our_canvas.create_rectangle(165,305,178,318,fill=Am_color[5][3])
+        our_canvas.create_rectangle(180,305,193,318,fill=Am_color[5][4])
+        our_canvas.create_rectangle(195,305,208,318,fill=Am_color[5][5])
+        our_canvas.create_rectangle(210,305,223,318,fill=Am_color[5][6])
 
-        our_canvas.create_rectangle(120,320,133,333,fill=Am_color_7[6][0])
-        our_canvas.create_rectangle(135,320,148,333,fill=Am_color_7[6][1])
-        our_canvas.create_rectangle(150,320,163,333,fill=Am_color_7[6][2])
-        our_canvas.create_rectangle(165,320,178,333,fill=Am_color_7[6][3])
-        our_canvas.create_rectangle(180,320,193,333,fill=Am_color_7[6][4])
-        our_canvas.create_rectangle(195,320,208,333,fill=Am_color_7[6][5])
-        our_canvas.create_rectangle(210,320,223,333,fill=Am_color_7[6][6])
+        our_canvas.create_rectangle(120,320,133,333,fill=Am_color[6][0])
+        our_canvas.create_rectangle(135,320,148,333,fill=Am_color[6][1])
+        our_canvas.create_rectangle(150,320,163,333,fill=Am_color[6][2])
+        our_canvas.create_rectangle(165,320,178,333,fill=Am_color[6][3])
+        our_canvas.create_rectangle(180,320,193,333,fill=Am_color[6][4])
+        our_canvas.create_rectangle(195,320,208,333,fill=Am_color[6][5])
+        our_canvas.create_rectangle(210,320,223,333,fill=Am_color[6][6])
         
     elif cube == "pyraminx":            
 
@@ -10811,7 +10714,7 @@ def draw_scramble(cube):
         pass
     elif cube == "clock":
         pass
-    plot3D(cube)
+    plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color)
 
 
 def next_scramble():
@@ -12556,7 +12459,7 @@ def plot():
 
 
 
-def plot3D(cube):      
+def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):      
     
     ax = fig.add_subplot(projection='3d')      
     ax.set_aspect("auto")
@@ -12565,9 +12468,9 @@ def plot3D(cube):
     # ax.set_box_aspect(None, zoom=10)
 
     # colors = {
-    # 'x': [Lr_color_2, Vm_color_2],
-    # 'y': [Vd_color_2, Az_color_2],
-    # 'z': [Am_color_2, Br_color_2]
+    # 'x': [Lr_color, Vm_color],
+    # 'y': [Vd_color, Az_color],
+    # 'z': [Am_color, Br_color]
     # }
 
     # for z in [0, 2]:
@@ -12584,7 +12487,7 @@ def plot3D(cube):
 
         for i in range(2):
             for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color_2[1-j][1-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[1-j][1-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
 
@@ -12592,7 +12495,7 @@ def plot3D(cube):
 
         for i in range(2):
             for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color_2[1-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[1-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
 
@@ -12600,7 +12503,7 @@ def plot3D(cube):
         
         for i in range(2):
             for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color_2[j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
 
@@ -12608,7 +12511,7 @@ def plot3D(cube):
         
         for i in range(2):
             for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color_2[1-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[1-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=2, zdir='x')
 
@@ -12616,7 +12519,7 @@ def plot3D(cube):
 
         for i in range(2):
             for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color_2[1-j][1-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[1-j][1-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=2, zdir='y')
 
@@ -12624,7 +12527,7 @@ def plot3D(cube):
 
         for i in range(2):
             for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color_2[1-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[1-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=2, zdir='z') 
 
@@ -12637,7 +12540,7 @@ def plot3D(cube):
         
         for i in range(3):
             for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color_3[2-j][2-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[2-j][2-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
 
@@ -12649,7 +12552,7 @@ def plot3D(cube):
         
         for i in range(3):
             for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color_3[2-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[2-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
 
@@ -12659,7 +12562,7 @@ def plot3D(cube):
        
         for i in range(3):
             for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color_3[j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
 
@@ -12672,7 +12575,7 @@ def plot3D(cube):
        
         for i in range(3):
             for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color_3[2-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[2-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
 
@@ -12681,7 +12584,7 @@ def plot3D(cube):
         
         for i in range(3):
             for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color_3[2-j][2-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[2-j][2-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
 
@@ -12691,7 +12594,7 @@ def plot3D(cube):
        
         for i in range(3):
             for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color_3[2-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[2-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
 
@@ -12702,7 +12605,7 @@ def plot3D(cube):
        
         for i in range(4):
             for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color_4[3-j][3-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[3-j][3-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
 
@@ -12712,7 +12615,7 @@ def plot3D(cube):
         
         for i in range(4):
             for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color_4[3-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[3-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
 
@@ -12723,7 +12626,7 @@ def plot3D(cube):
                         
         for i in range(4):
             for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color_4[j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
 
@@ -12736,7 +12639,7 @@ def plot3D(cube):
                         
         for i in range(4):
             for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color_4[3-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[3-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
 
@@ -12745,7 +12648,7 @@ def plot3D(cube):
                         
         for i in range(4):
             for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color_4[3-j][3-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[3-j][3-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
 
@@ -12755,7 +12658,7 @@ def plot3D(cube):
         
         for i in range(4):
             for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color_4[3-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[3-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
          
@@ -12767,7 +12670,7 @@ def plot3D(cube):
        
         for i in range(5):
             for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color_5[4-j][4-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[4-j][4-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
 
@@ -12777,7 +12680,7 @@ def plot3D(cube):
                         
         for i in range(5):
             for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color_5[4-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[4-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
 
@@ -12788,7 +12691,7 @@ def plot3D(cube):
                
         for i in range(5):
             for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color_5[j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
 
@@ -12797,7 +12700,7 @@ def plot3D(cube):
                 
         for i in range(5):
             for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color_5[4-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[4-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
 
@@ -12806,7 +12709,7 @@ def plot3D(cube):
                 
         for i in range(5):
             for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color_5[4-j][4-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[4-j][4-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
 
@@ -12816,7 +12719,7 @@ def plot3D(cube):
                 
         for i in range(5):
             for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color_5[4-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[4-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
 
@@ -12825,7 +12728,7 @@ def plot3D(cube):
        
         for i in range(6):
             for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color_6[5-j][5-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[5-j][5-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
 
@@ -12834,7 +12737,7 @@ def plot3D(cube):
                        
         for i in range(6):
             for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color_6[5-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[5-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
 
@@ -12845,7 +12748,7 @@ def plot3D(cube):
                
         for i in range(6):
             for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color_6[j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
 
@@ -12854,7 +12757,7 @@ def plot3D(cube):
                
         for i in range(6):
             for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color_6[5-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[5-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
 
@@ -12863,7 +12766,7 @@ def plot3D(cube):
                 
         for i in range(6):
             for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color_6[5-j][5-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[5-j][5-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
 
@@ -12873,7 +12776,7 @@ def plot3D(cube):
                 
         for i in range(6):
             for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color_6[5-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[5-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
 
@@ -12883,7 +12786,7 @@ def plot3D(cube):
        
         for i in range(7):
             for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color_7[6-j][6-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[6-j][6-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
 
@@ -12892,7 +12795,7 @@ def plot3D(cube):
                
         for i in range(7):
             for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color_7[6-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[6-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
 
@@ -12903,7 +12806,7 @@ def plot3D(cube):
                 
         for i in range(7):
             for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color_7[j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
 
@@ -12912,7 +12815,7 @@ def plot3D(cube):
                 
         for i in range(7):
             for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color_7[6-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[6-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
 
@@ -12920,7 +12823,7 @@ def plot3D(cube):
                
         for i in range(7):
             for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color_7[6-j][6-i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[6-j][6-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
 
@@ -12930,7 +12833,7 @@ def plot3D(cube):
                 
         for i in range(7):
             for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color_7[6-j][i])
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[6-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
 
