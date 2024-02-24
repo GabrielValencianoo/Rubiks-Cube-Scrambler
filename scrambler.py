@@ -794,184 +794,64 @@ def reset_flags():
     flag_3Fw = 0
     flag_3Bw = 0
 
-def reset_draw():
+def createMatrix(cube,type):
 
-    global Br
-    global Lr
-    global Vd
-    global Vm
-    global Az
-    global Am
-
-    global Br
-    global Lr
-    global Vd
-    global Vm
-    global Az
-    global Am
-
-    global Br
-    global Lr
-    global Vd
-    global Vm
-    global Az
-    global Am
-
-    global Br
-    global Lr
-    global Vd
-    global Vm
-    global Az
-    global Am
-
-    global Br
-    global Lr
-    global Vd
-    global Vm
-    global Az
-    global Am
-
-    global Br
-    global Lr
-    global Vd
-    global Vm
-    global Az
-    global Am  
-
-    global Vm_pyra  
-    global Vd_pyra 
-    global Az_pyra 
-    global Am_pyra
-
+    if cube == "2x2":
+        n = 2
+    if cube == "3x3":
+        n = 3
+    if cube == "4x4":
+        n = 4
+    if cube == "5x5":
+        n = 5
+    if cube == "6x6":
+        n = 6
+    if cube == "7x7":
+        n = 7
     
-    Br = np.full((2, 2), 1)
-
-    Lr = np.full((2, 2), 2)   
-
-    Vd = np.full((2, 2), 3)
-
-    Vm = np.full((2, 2), 4)
-
-    Az = np.full((2, 2), 5)
-
-    Am = np.full((2, 2), 6)
-
-    Buffer = np.full((4, 2), 0)
-
-
-    Br = np.full((3, 3), 1)
-
-    Lr = np.full((3, 3), 2)
-
-    Vd = np.full((3, 3), 3)
-
-    Vm = np.full((3, 3), 4)
-
-    Az = np.full((3, 3), 5)
-
-    Am = np.full((3, 3), 6)
-
-    Buffer = np.full((4, 3), 0)
-
-
-    Br = np.full((4, 4), 1)
-
-    Lr = np.full((4, 4), 2)
+    if type == "color":
     
-    Vd = np.full((4, 4), 3)
+        Br_color = np.full((n,n), "#FFFFFF")
 
-    Vm = np.full((4, 4), 4)
+        Lr_color =  np.full((n,n), "#FFA500")
 
-    Az = np.full((4, 4), 5)
+        Vd_color =  np.full((n,n), "#00FF00")
 
-    Am = np.full((4, 4), 6)
+        Vm_color =  np.full((n,n), "#FF0000")
 
-    Buffer = np.full((4, 4), 0)       
+        Az_color =  np.full((n,n), "#0000FF")
 
+        Am_color =  np.full((n,n), "#FFFF00")
 
-    Br = np.full((5, 5), 1)
+        Buffer = np.full((4,n), "#000000") 
 
-    Lr = np.full((5, 5), 2)
-    
-    Vd = np.full((5, 5), 3)
+        return Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer
 
-    Vm = np.full((5, 5), 4)
+    elif type == "number":
+        Br = np.full((n,n), 1)
 
-    Az = np.full((5, 5), 5)
+        Lr = np.full((n,n), 2)
 
-    Am = np.full((5, 5), 6)
+        Vd = np.full((n,n), 3)
 
-    Buffer = np.full((4, 5), 0) 
+        Vm = np.full((n,n), 4)
 
+        Az = np.full((n,n), 5)
 
-    Br = np.full((6, 6), 1)
+        Am = np.full((n,n), 6)
 
-    Lr = np.full((6, 6), 2)
-    
-    Vd = np.full((6, 6), 3)
+        Buffer = np.full((4,n), 0) 
 
-    Vm = np.full((6, 6), 4)
-
-    Az = np.full((6, 6), 5)
-
-    Am = np.full((6, 6), 6)
-            
-    Buffer = np.full((4, 6), 0) 
+        return Br, Lr, Vd, Vm, Az, Am, Buffer
 
 
-    Br = np.full((7, 7), 1)         
-
-    Lr = np.full((7, 7), 2)
-    
-    Vd = np.full((7, 7), 3)
-
-    Vm = np.full((7, 7), 4)
-
-    Az = np.full((7, 7), 5)
-
-    Am = np.full((7, 7), 6)
-
-    Buffer = np.full((4, 7), 0) 
-
-    Vm_pyra = np.full((3, 5), 1)
-    
-    Vd_pyra = np.full((3, 5), 2)
-
-    Az_pyra = np.full((3, 5), 3)
-
-    Am_pyra = np.full((3, 5), 4)
-
-    Buffer_pyra = np.full((3, 5), 0)
     
 
     
-def turn_draw(cube,turn,Br,Lr,Vd,Vm ,Az, Am,Buffer):
-    # if cube == "2x2":
-    #     n = 2
-    # if cube == "3x3":
-    #     n = 3
-    # if cube == "4x4":
-    #     n = 4
-    # if cube == "5x5":
-    #     n = 5
-    # if cube == "6x6":
-    #     n = 6
-    # if cube == "7x7":
-    #     n = 7
     
-    # Br = np.full((n,n), 1)
 
-    # Lr = np.full((n,n), 2)
-
-    # Vd = np.full((n,n), 3)
-
-    # Vm = np.full((n,n), 4)
-
-    # Az = np.full((n,n), 5)
-
-    # Am = np.full((n,n), 6)
-
-    # Buffer = np.full((4,n), 0)    
+    
+def turn_draw(cube,turn,Br,Lr,Vd,Vm ,Az, Am,Buffer):    
 
     if cube == "2x2":
         if turn == "R":
@@ -9110,84 +8990,24 @@ def draw_scramble(cube,Br ,Lr,Vd,Vm ,Az, Am):
     global Vd_color_pyra 
     global Vm_color_pyra 
     global Az_color_pyra 
-    global Am_color_pyra
+    global Am_color_pyra    
 
-    n = 0
-
-    if cube == "2x2":
-        n = 2
-    if cube == "3x3":
-        n = 3
-    if cube == "4x4":
-        n = 4
-    if cube == "5x5":
-        n = 5
-    if cube == "6x6":
-        n = 6
-    if cube == "7x7":
-        n = 7
-    
-    Br_color = np.full((n,n), "white")
-
-    Lr_color =  np.full((n,n), "orange")
-
-    Vd_color =  np.full((n,n), "green")
-
-    Vm_color =  np.full((n,n), "red")
-
-    Az_color =  np.full((n,n), "blue")
-
-    Am_color =  np.full((n,n), "yellow")
-
-        
+    Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color, Buffer = createMatrix(cube,"color")       
 
     our_canvas.delete("all")
 
+    colorList = ["white","orange","green","red","blue","yellow"]
+
+    for index, color in enumerate(colorList,1):
+
+        Br_color = np.where(Br != index, Br_color,color)
+        Lr_color = np.where(Lr != index, Lr_color,color)
+        Vd_color = np.where(Vd != index, Vd_color,color)
+        Vm_color = np.where(Vm != index, Vm_color,color)
+        Az_color = np.where(Az != index, Az_color,color)    
+        Am_color = np.where(Am != index, Am_color,color)      
    
     if cube == "2x2":
-
-        Br_color = np.where(Br != 1, Br_color,"white")
-        Lr_color = np.where(Lr != 1, Lr_color,"white")
-        Vd_color = np.where(Vd != 1, Vd_color,"white")
-        Vm_color = np.where(Vm != 1, Vm_color,"white")
-        Az_color = np.where(Az != 1, Az_color,"white")    
-        Am_color = np.where(Am != 1, Am_color,"white")  
-
-        Br_color = np.where(Br != 2, Br_color,"orange")
-        Lr_color = np.where(Lr != 2, Lr_color,"orange")
-        Vd_color = np.where(Vd != 2, Vd_color,"orange")
-        Vm_color = np.where(Vm != 2, Vm_color,"orange")
-        Az_color = np.where(Az != 2, Az_color,"orange")    
-        Am_color = np.where(Am != 2, Am_color,"orange")   
-
-        Br_color = np.where(Br != 3, Br_color,"green")
-        Lr_color = np.where(Lr != 3, Lr_color,"green")
-        Vd_color = np.where(Vd != 3, Vd_color,"green")
-        Vm_color = np.where(Vm != 3, Vm_color,"green")
-        Az_color = np.where(Az != 3, Az_color,"green")
-        Am_color = np.where(Am != 3, Am_color,"green")
-
-        Br_color = np.where(Br != 4, Br_color,"red")
-        Lr_color = np.where(Lr != 4, Lr_color,"red")
-        Vd_color = np.where(Vd != 4, Vd_color,"red")
-        Vm_color = np.where(Vm != 4, Vm_color,"red")
-        Az_color = np.where(Az != 4, Az_color,"red")
-        Am_color = np.where(Am != 4, Am_color,"red")
-
-        Br_color = np.where(Br != 5, Br_color,"blue")
-        Lr_color = np.where(Lr != 5, Lr_color,"blue")
-        Vd_color = np.where(Vd != 5, Vd_color,"blue")
-        Vm_color = np.where(Vm != 5, Vm_color,"blue")
-        Az_color = np.where(Az != 5, Az_color,"blue")
-        Am_color = np.where(Am != 5, Am_color,"blue")
-
-        Br_color = np.where(Br != 6, Br_color,"yellow")
-        Lr_color = np.where(Lr != 6, Lr_color,"yellow")
-        Vd_color = np.where(Vd != 6, Vd_color,"yellow")
-        Vm_color = np.where(Vm != 6, Vm_color,"yellow")
-        Az_color = np.where(Az != 6, Az_color,"yellow")
-        Am_color = np.where(Am != 6, Am_color,"yellow")   
-
         
         #U
         our_canvas.create_rectangle(120,10,165,55, fill=Br_color[0][0])    
@@ -9234,49 +9054,6 @@ def draw_scramble(cube,Br ,Lr,Vd,Vm ,Az, Am):
         
 
     elif cube == "3x3":
-
-        Br_color = np.where(Br != 1, Br_color,"white")
-        Lr_color = np.where(Lr != 1, Lr_color,"white")
-        Vd_color = np.where(Vd != 1, Vd_color,"white")
-        Vm_color = np.where(Vm != 1, Vm_color,"white")
-        Az_color = np.where(Az != 1, Az_color,"white")    
-        Am_color = np.where(Am != 1, Am_color,"white")  
-
-        Br_color = np.where(Br != 2, Br_color,"orange")
-        Lr_color = np.where(Lr != 2, Lr_color,"orange")
-        Vd_color = np.where(Vd != 2, Vd_color,"orange")
-        Vm_color = np.where(Vm != 2, Vm_color,"orange")
-        Az_color = np.where(Az != 2, Az_color,"orange")    
-        Am_color = np.where(Am != 2, Am_color,"orange")   
-
-        Br_color = np.where(Br != 3, Br_color,"green")
-        Lr_color = np.where(Lr != 3, Lr_color,"green")
-        Vd_color = np.where(Vd != 3, Vd_color,"green")
-        Vm_color = np.where(Vm != 3, Vm_color,"green")
-        Az_color = np.where(Az != 3, Az_color,"green")
-        Am_color = np.where(Am != 3, Am_color,"green")
-
-        Br_color = np.where(Br != 4, Br_color,"red")
-        Lr_color = np.where(Lr != 4, Lr_color,"red")
-        Vd_color = np.where(Vd != 4, Vd_color,"red")
-        Vm_color = np.where(Vm != 4, Vm_color,"red")
-        Az_color = np.where(Az != 4, Az_color,"red")
-        Am_color = np.where(Am != 4, Am_color,"red")
-
-        Br_color = np.where(Br != 5, Br_color,"blue")
-        Lr_color = np.where(Lr != 5, Lr_color,"blue")
-        Vd_color = np.where(Vd != 5, Vd_color,"blue")
-        Vm_color = np.where(Vm != 5, Vm_color,"blue")
-        Az_color = np.where(Az != 5, Az_color,"blue")
-        Am_color = np.where(Am != 5, Am_color,"blue")
-
-        Br_color = np.where(Br != 6, Br_color,"yellow")
-        Lr_color = np.where(Lr != 6, Lr_color,"yellow")
-        Vd_color = np.where(Vd != 6, Vd_color,"yellow")
-        Vm_color = np.where(Vm != 6, Vm_color,"yellow")
-        Az_color = np.where(Az != 6, Az_color,"yellow")
-        Am_color = np.where(Am != 6, Am_color,"yellow")   
-
         
         #U
         our_canvas.create_rectangle(120,10,150,40, fill=Br_color[0][0])    
@@ -9361,52 +9138,8 @@ def draw_scramble(cube,Br ,Lr,Vd,Vm ,Az, Am):
         our_canvas.create_rectangle(155,300,185,330,fill=Am_color[2][1])
         our_canvas.create_rectangle(190,300,220,330,fill=Am_color[2][2])
 
-    elif cube == "4x4":        
+    elif cube == "4x4": 
 
-        Br_color = np.where(Br != 1, Br_color,"white")
-        Lr_color = np.where(Lr != 1, Lr_color,"white")
-        Vd_color = np.where(Vd != 1, Vd_color,"white")
-        Vm_color = np.where(Vm != 1, Vm_color,"white")
-        Az_color = np.where(Az != 1, Az_color,"white")    
-        Am_color = np.where(Am != 1, Am_color,"white")  
-
-        Br_color = np.where(Br != 2, Br_color,"orange")
-        Lr_color = np.where(Lr != 2, Lr_color,"orange")
-        Vd_color = np.where(Vd != 2, Vd_color,"orange")
-        Vm_color = np.where(Vm != 2, Vm_color,"orange")
-        Az_color = np.where(Az != 2, Az_color,"orange")    
-        Am_color = np.where(Am != 2, Am_color,"orange")   
-
-        Br_color = np.where(Br != 3, Br_color,"green")
-        Lr_color = np.where(Lr != 3, Lr_color,"green")
-        Vd_color = np.where(Vd != 3, Vd_color,"green")
-        Vm_color = np.where(Vm != 3, Vm_color,"green")
-        Az_color = np.where(Az != 3, Az_color,"green")
-        Am_color = np.where(Am != 3, Am_color,"green")
-
-        Br_color = np.where(Br != 4, Br_color,"red")
-        Lr_color = np.where(Lr != 4, Lr_color,"red")
-        Vd_color = np.where(Vd != 4, Vd_color,"red")
-        Vm_color = np.where(Vm != 4, Vm_color,"red")
-        Az_color = np.where(Az != 4, Az_color,"red")
-        Am_color = np.where(Am != 4, Am_color,"red")
-
-        Br_color = np.where(Br != 5, Br_color,"blue")
-        Lr_color = np.where(Lr != 5, Lr_color,"blue")
-        Vd_color = np.where(Vd != 5, Vd_color,"blue")
-        Vm_color = np.where(Vm != 5, Vm_color,"blue")
-        Az_color = np.where(Az != 5, Az_color,"blue")
-        Am_color = np.where(Am != 5, Am_color,"blue")
-
-        Br_color = np.where(Br != 6, Br_color,"yellow")
-        Lr_color = np.where(Lr != 6, Lr_color,"yellow")
-        Vd_color = np.where(Vd != 6, Vd_color,"yellow")
-        Vm_color = np.where(Vm != 6, Vm_color,"yellow")
-        Az_color = np.where(Az != 6, Az_color,"yellow")
-        Am_color = np.where(Am != 6, Am_color,"yellow")   
-        
-
-        
         #U
         our_canvas.create_rectangle(115,10,135,30, fill=Br_color[0][0])    
         our_canvas.create_rectangle(140,10,160,30, fill=Br_color[0][1])
@@ -9538,48 +9271,6 @@ def draw_scramble(cube,Br ,Lr,Vd,Vm ,Az, Am):
         our_canvas.create_rectangle(190,295,210,315,fill=Am_color[3][3])
         
     elif cube == "5x5":
-        Br_color = np.where(Br != 1, Br_color,"white")
-        Lr_color = np.where(Lr != 1, Lr_color,"white")
-        Vd_color = np.where(Vd != 1, Vd_color,"white")
-        Vm_color = np.where(Vm != 1, Vm_color,"white")
-        Az_color = np.where(Az != 1, Az_color,"white")    
-        Am_color = np.where(Am != 1, Am_color,"white")  
-
-        Br_color = np.where(Br != 2, Br_color,"orange")
-        Lr_color = np.where(Lr != 2, Lr_color,"orange")
-        Vd_color = np.where(Vd != 2, Vd_color,"orange")
-        Vm_color = np.where(Vm != 2, Vm_color,"orange")
-        Az_color = np.where(Az != 2, Az_color,"orange")    
-        Am_color = np.where(Am != 2, Am_color,"orange")   
-
-        Br_color = np.where(Br != 3, Br_color,"green")
-        Lr_color = np.where(Lr != 3, Lr_color,"green")
-        Vd_color = np.where(Vd != 3, Vd_color,"green")
-        Vm_color = np.where(Vm != 3, Vm_color,"green")
-        Az_color = np.where(Az != 3, Az_color,"green")
-        Am_color = np.where(Am != 3, Am_color,"green")
-
-        Br_color = np.where(Br != 4, Br_color,"red")
-        Lr_color = np.where(Lr != 4, Lr_color,"red")
-        Vd_color = np.where(Vd != 4, Vd_color,"red")
-        Vm_color = np.where(Vm != 4, Vm_color,"red")
-        Az_color = np.where(Az != 4, Az_color,"red")
-        Am_color = np.where(Am != 4, Am_color,"red")
-
-        Br_color = np.where(Br != 5, Br_color,"blue")
-        Lr_color = np.where(Lr != 5, Lr_color,"blue")
-        Vd_color = np.where(Vd != 5, Vd_color,"blue")
-        Vm_color = np.where(Vm != 5, Vm_color,"blue")
-        Az_color = np.where(Az != 5, Az_color,"blue")
-        Am_color = np.where(Am != 5, Am_color,"blue")
-
-        Br_color = np.where(Br != 6, Br_color,"yellow")
-        Lr_color = np.where(Lr != 6, Lr_color,"yellow")
-        Vd_color = np.where(Vd != 6, Vd_color,"yellow")
-        Vm_color = np.where(Vm != 6, Vm_color,"yellow")
-        Az_color = np.where(Az != 6, Az_color,"yellow")
-        Am_color = np.where(Am != 6, Am_color,"yellow")  
-
 
         #U
         our_canvas.create_rectangle(120,10,138,28,fill=Br_color[0][0])    
@@ -9769,50 +9460,7 @@ def draw_scramble(cube,Br ,Lr,Vd,Vm ,Az, Am):
         our_canvas.create_rectangle(183,310,201,328,fill=Am_color[4][3])
         our_canvas.create_rectangle(204,310,222,328,fill=Am_color[4][4])
         
-    elif cube == "6x6":
-        Br_color = np.where(Br != 1, Br_color,"white")
-        Lr_color = np.where(Lr != 1, Lr_color,"white")
-        Vd_color = np.where(Vd != 1, Vd_color,"white")
-        Vm_color = np.where(Vm != 1, Vm_color,"white")
-        Az_color = np.where(Az != 1, Az_color,"white")    
-        Am_color = np.where(Am != 1, Am_color,"white")  
-
-        Br_color = np.where(Br != 2, Br_color,"orange")
-        Lr_color = np.where(Lr != 2, Lr_color,"orange")
-        Vd_color = np.where(Vd != 2, Vd_color,"orange")
-        Vm_color = np.where(Vm != 2, Vm_color,"orange")
-        Az_color = np.where(Az != 2, Az_color,"orange")    
-        Am_color = np.where(Am != 2, Am_color,"orange")   
-
-        Br_color = np.where(Br != 3, Br_color,"green")
-        Lr_color = np.where(Lr != 3, Lr_color,"green")
-        Vd_color = np.where(Vd != 3, Vd_color,"green")
-        Vm_color = np.where(Vm != 3, Vm_color,"green")
-        Az_color = np.where(Az != 3, Az_color,"green")
-        Am_color = np.where(Am != 3, Am_color,"green")
-
-        Br_color = np.where(Br != 4, Br_color,"red")
-        Lr_color = np.where(Lr != 4, Lr_color,"red")
-        Vd_color = np.where(Vd != 4, Vd_color,"red")
-        Vm_color = np.where(Vm != 4, Vm_color,"red")
-        Az_color = np.where(Az != 4, Az_color,"red")
-        Am_color = np.where(Am != 4, Am_color,"red")
-
-        Br_color = np.where(Br != 5, Br_color,"blue")
-        Lr_color = np.where(Lr != 5, Lr_color,"blue")
-        Vd_color = np.where(Vd != 5, Vd_color,"blue")
-        Vm_color = np.where(Vm != 5, Vm_color,"blue")
-        Az_color = np.where(Az != 5, Az_color,"blue")
-        Am_color = np.where(Am != 5, Am_color,"blue")
-
-        Br_color = np.where(Br != 6, Br_color,"yellow")
-        Lr_color = np.where(Lr != 6, Lr_color,"yellow")
-        Vd_color = np.where(Vd != 6, Vd_color,"yellow")
-        Vm_color = np.where(Vm != 6, Vm_color,"yellow")
-        Az_color = np.where(Az != 6, Az_color,"yellow")
-        Am_color = np.where(Am != 6, Am_color,"yellow")  
-        
-        
+    elif cube == "6x6":        
 
         #U
         our_canvas.create_rectangle(120,10,135,25,fill=Br_color[0][0])    
@@ -10074,48 +9722,7 @@ def draw_scramble(cube,Br ,Lr,Vd,Vm ,Az, Am):
         our_canvas.create_rectangle(188,315,203,330,fill=Am_color[5][4])
         our_canvas.create_rectangle(205,315,220,330,fill=Am_color[5][5])
         
-    elif cube == "7x7":
-        Br_color = np.where(Br != 1, Br_color,"white")
-        Lr_color = np.where(Lr != 1, Lr_color,"white")
-        Vd_color = np.where(Vd != 1, Vd_color,"white")
-        Vm_color = np.where(Vm != 1, Vm_color,"white")
-        Az_color = np.where(Az != 1, Az_color,"white")    
-        Am_color = np.where(Am != 1, Am_color,"white")  
-
-        Br_color = np.where(Br != 2, Br_color,"orange")
-        Lr_color = np.where(Lr != 2, Lr_color,"orange")
-        Vd_color = np.where(Vd != 2, Vd_color,"orange")
-        Vm_color = np.where(Vm != 2, Vm_color,"orange")
-        Az_color = np.where(Az != 2, Az_color,"orange")    
-        Am_color = np.where(Am != 2, Am_color,"orange")   
-
-        Br_color = np.where(Br != 3, Br_color,"green")
-        Lr_color = np.where(Lr != 3, Lr_color,"green")
-        Vd_color = np.where(Vd != 3, Vd_color,"green")
-        Vm_color = np.where(Vm != 3, Vm_color,"green")
-        Az_color = np.where(Az != 3, Az_color,"green")
-        Am_color = np.where(Am != 3, Am_color,"green")
-
-        Br_color = np.where(Br != 4, Br_color,"red")
-        Lr_color = np.where(Lr != 4, Lr_color,"red")
-        Vd_color = np.where(Vd != 4, Vd_color,"red")
-        Vm_color = np.where(Vm != 4, Vm_color,"red")
-        Az_color = np.where(Az != 4, Az_color,"red")
-        Am_color = np.where(Am != 4, Am_color,"red")
-
-        Br_color = np.where(Br != 5, Br_color,"blue")
-        Lr_color = np.where(Lr != 5, Lr_color,"blue")
-        Vd_color = np.where(Vd != 5, Vd_color,"blue")
-        Vm_color = np.where(Vm != 5, Vm_color,"blue")
-        Az_color = np.where(Az != 5, Az_color,"blue")
-        Am_color = np.where(Am != 5, Am_color,"blue")
-
-        Br_color = np.where(Br != 6, Br_color,"yellow")
-        Lr_color = np.where(Lr != 6, Lr_color,"yellow")
-        Vd_color = np.where(Vd != 6, Vd_color,"yellow")
-        Vm_color = np.where(Vm != 6, Vm_color,"yellow")
-        Az_color = np.where(Az != 6, Az_color,"yellow")
-        Am_color = np.where(Am != 6, Am_color,"yellow")  
+    elif cube == "7x7":        
 
         #U
         our_canvas.create_rectangle(120,10,133,23,fill=Br_color[0][0])    
@@ -10594,20 +10201,7 @@ def scrambler_2x2():
     global actual_scramble 
     accepted = 0    
 
-    n = 2
-    Br = np.full((n,n), 1)
-
-    Lr = np.full((n,n), 2)
-
-    Vd = np.full((n,n), 3)
-
-    Vm = np.full((n,n), 4)
-
-    Az = np.full((n,n), 5)
-
-    Am = np.full((n,n), 6)
-
-    Buffer = np.full((4,n), 0)  
+    Br, Lr, Vd, Vm, Az, Am, Buffer = createMatrix("2x2","number")  
 
     sum_turns = []
     for i in range(12):
@@ -10678,20 +10272,8 @@ def scrambler_3x3():
     global flag_F
     global flag_B
     
-    n = 3
-    Br = np.full((n,n), 1)
-
-    Lr = np.full((n,n), 2)
-
-    Vd = np.full((n,n), 3)
-
-    Vm = np.full((n,n), 4)
-
-    Az = np.full((n,n), 5)
-
-    Am = np.full((n,n), 6)
-
-    Buffer = np.full((4,n), 0)    
+   
+    Br, Lr, Vd, Vm, Az, Am, Buffer = createMatrix("3x3","number") 
 
     sum_turns = []
     for i in range(20):
@@ -10769,8 +10351,9 @@ def scrambler_3x3():
             
         elif n_move == 18:
             turn = "B2"        
-
+        print (turn,Br ,Lr,Vd,Vm ,Az, Am,Buffer)
         Br ,Lr,Vd,Vm ,Az, Am = turn_draw("3x3",turn,Br ,Lr,Vd,Vm ,Az, Am,Buffer)
+        print (turn,Br ,Lr,Vd,Vm ,Az, Am,Buffer)
         define_flags(n_move)
 
         sum_turns.append(turn)
@@ -10803,20 +10386,7 @@ def scrambler_4x4():
     global flag_Uw    
     global flag_Fw
 
-    n = 4
-    Br = np.full((n,n), 1)
-
-    Lr = np.full((n,n), 2)
-
-    Vd = np.full((n,n), 3)
-
-    Vm = np.full((n,n), 4)
-
-    Az = np.full((n,n), 5)
-
-    Am = np.full((n,n), 6)
-
-    Buffer = np.full((4,n), 0)  
+    Br, Lr, Vd, Vm, Az, Am, Buffer = createMatrix("4x4","number") 
     
 
     sum_turns = []      
@@ -10974,20 +10544,7 @@ def scrambler_5x5():
 
     sum_turns = []   
 
-    n = 5
-    Br = np.full((n,n), 1)
-
-    Lr = np.full((n,n), 2)
-
-    Vd = np.full((n,n), 3)
-
-    Vm = np.full((n,n), 4)
-
-    Az = np.full((n,n), 5)
-
-    Am = np.full((n,n), 6)
-
-    Buffer = np.full((4,n), 0)     
+    Br, Lr, Vd, Vm, Az, Am, Buffer = createMatrix("5x5","number")    
 
     for i in range(60):
 
@@ -11182,25 +10739,13 @@ def scrambler_6x6():
 
     if flag_7_event == 1:
         movs = 100
-        n = 6
+        n = "7x7"
     else:
         movs = 80
-        n = 7
+        n = "6x6"
     
     
-    Br = np.full((n,n), 1)
-
-    Lr = np.full((n,n), 2)
-
-    Vd = np.full((n,n), 3)
-
-    Vm = np.full((n,n), 4)
-
-    Az = np.full((n,n), 5)
-
-    Am = np.full((n,n), 6)
-
-    Buffer = np.full((4,n), 0)  
+    Br, Lr, Vd, Vm, Az, Am, Buffer = createMatrix(n,"number") 
 
 
     for i in range(movs):
@@ -12094,7 +11639,7 @@ def enter_time():
     estatistica(len(tempos))
     input_timer.delete(0,tk.END)
 
-    reset_draw()
+    
     next_scramble() 
     
 
@@ -12283,7 +11828,7 @@ def stop_timer():
 
         estatistica(len(tempos))
 
-        reset_draw()
+        
         next_scramble() 
 
        
@@ -13019,7 +12564,7 @@ def resetar():
     scrambles.clear()
     datas.clear()
 
-    reset_draw()
+    
 
     global_best_solve = 9999999999
     global_worst_solve = 0
