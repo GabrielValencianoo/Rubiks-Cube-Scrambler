@@ -149,28 +149,28 @@ canvas = FigureCanvasTkAgg(fig,	master = root)
 
 
 
-Vm_pyra = np.full((3, 5), 1)
+Vm_color = np.full((3, 5), 1)
  
-Vd_pyra = np.full((3, 5), 2)
+Vd_color = np.full((3, 5), 2)
 
-Az_pyra = np.full((3, 5), 3)
+Az_color = np.full((3, 5), 3)
 
-Am_pyra = np.full((3, 5), 4)
+Am_color = np.full((3, 5), 4)
 
-Buffer_pyra = np.full((3, 5), 0)
+Buffer = np.full((3, 5), 0)
 #-------------------------------------------------------------------------------------------
  
 
 
 # -----------------------------------------------------------------------
 
-Vd_color_pyra = np.full((3, 5), "green")
+Vd_color = np.full((3, 5), "green")
 
-Vm_color_pyra = np.full((3, 5), "red")
+Vm_color = np.full((3, 5), "red")
 
-Az_color_pyra = np.full((3, 5), "blue")
+Az_color = np.full((3, 5), "blue")
 
-Am_color_pyra = np.full((3, 5), "yellow")
+Am_color = np.full((3, 5), "yellow")
 
 def trunc(n, decimals=0):
     
@@ -807,6 +807,8 @@ def createMatrix(cube,type):
     if cube == "6x6":
         n = 6
     if cube == "7x7":
+        n = 7
+    if cube == "pyraminx":
         n = 7
     
     if type == "color":
@@ -4978,565 +4980,342 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
 
     elif cube == "pyraminx":
         if turn == "R":
-            Buffer_pyra[0][0] = Vd_pyra[1,3]
-            Buffer_pyra[0][1] = Vd_pyra[2,2]
-            Buffer_pyra[0][2] = Vd_pyra[2,3]
-            Buffer_pyra[0][3] = Vd_pyra[2,4]
+            Buffer[0][0] = Vd_color[1,3]
+            Buffer[0][1] = Vd_color[2,2]
+            Buffer[0][2] = Vd_color[2,3]
+            Buffer[0][3] = Vd_color[2,4]
 
-            Buffer_pyra[1][0] = Az_pyra[1,1]
-            Buffer_pyra[1][1] = Az_pyra[1,2]
-            Buffer_pyra[1][2] = Az_pyra[1,3]
-            Buffer_pyra[1][3] = Az_pyra[2,2]
+            Buffer[1][0] = Az_color[1,1]
+            Buffer[1][1] = Az_color[1,2]
+            Buffer[1][2] = Az_color[1,3]
+            Buffer[1][3] = Az_color[2,2]
 
-            Buffer_pyra[2][0] = Am_pyra[0,2]
-            Buffer_pyra[2][1] = Am_pyra[0,3]
-            Buffer_pyra[2][2] = Am_pyra[0,4]
-            Buffer_pyra[2][3] = Am_pyra[1,3]             
+            Buffer[2][0] = Am_color[0,2]
+            Buffer[2][1] = Am_color[0,3]
+            Buffer[2][2] = Am_color[0,4]
+            Buffer[2][3] = Am_color[1,3]             
 
-            Az_pyra[1,3] = Buffer_pyra[0][0] 
-            Az_pyra[1,1] = Buffer_pyra[0][1] 
-            Az_pyra[1,2] = Buffer_pyra[0][2] 
-            Az_pyra[2,2] = Buffer_pyra[0][3] 
+            Az_color[1,3] = Buffer[0][0] 
+            Az_color[1,1] = Buffer[0][1] 
+            Az_color[1,2] = Buffer[0][2] 
+            Az_color[2,2] = Buffer[0][3] 
 
-            Am_pyra[1,3] = Buffer_pyra[1][0] 
-            Am_pyra[0,3] = Buffer_pyra[1][1] 
-            Am_pyra[0,2] = Buffer_pyra[1][2] 
-            Am_pyra[0,4] = Buffer_pyra[1][3] 
+            Am_color[1,3] = Buffer[1][0] 
+            Am_color[0,3] = Buffer[1][1] 
+            Am_color[0,2] = Buffer[1][2] 
+            Am_color[0,4] = Buffer[1][3] 
 
-            Vd_pyra[1,3] = Buffer_pyra[2][0] 
-            Vd_pyra[2,3] = Buffer_pyra[2][1] 
-            Vd_pyra[2,4] = Buffer_pyra[2][2] 
-            Vd_pyra[2,2] = Buffer_pyra[2][3]
+            Vd_color[1,3] = Buffer[2][0] 
+            Vd_color[2,3] = Buffer[2][1] 
+            Vd_color[2,4] = Buffer[2][2] 
+            Vd_color[2,2] = Buffer[2][3]
         
         elif turn == "R'":
-            Buffer_pyra[0][0] = Vd_pyra[1,3]
-            Buffer_pyra[0][1] = Vd_pyra[2,2]
-            Buffer_pyra[0][2] = Vd_pyra[2,3]
-            Buffer_pyra[0][3] = Vd_pyra[2,4]
+            for i in range(2):
+                Buffer[0][0] = Vd_color[1,3]
+                Buffer[0][1] = Vd_color[2,2]
+                Buffer[0][2] = Vd_color[2,3]
+                Buffer[0][3] = Vd_color[2,4]
 
-            Buffer_pyra[1][0] = Az_pyra[1,1]
-            Buffer_pyra[1][1] = Az_pyra[1,2]
-            Buffer_pyra[1][2] = Az_pyra[1,3]
-            Buffer_pyra[1][3] = Az_pyra[2,2]
+                Buffer[1][0] = Az_color[1,1]
+                Buffer[1][1] = Az_color[1,2]
+                Buffer[1][2] = Az_color[1,3]
+                Buffer[1][3] = Az_color[2,2]
 
-            Buffer_pyra[2][0] = Am_pyra[0,2]
-            Buffer_pyra[2][1] = Am_pyra[0,3]
-            Buffer_pyra[2][2] = Am_pyra[0,4]
-            Buffer_pyra[2][3] = Am_pyra[1,3]             
+                Buffer[2][0] = Am_color[0,2]
+                Buffer[2][1] = Am_color[0,3]
+                Buffer[2][2] = Am_color[0,4]
+                Buffer[2][3] = Am_color[1,3]             
 
-            Az_pyra[1,3] = Buffer_pyra[0][0] 
-            Az_pyra[1,1] = Buffer_pyra[0][1] 
-            Az_pyra[1,2] = Buffer_pyra[0][2] 
-            Az_pyra[2,2] = Buffer_pyra[0][3] 
+                Az_color[1,3] = Buffer[0][0] 
+                Az_color[1,1] = Buffer[0][1] 
+                Az_color[1,2] = Buffer[0][2] 
+                Az_color[2,2] = Buffer[0][3] 
 
-            Am_pyra[1,3] = Buffer_pyra[1][0] 
-            Am_pyra[0,3] = Buffer_pyra[1][1] 
-            Am_pyra[0,2] = Buffer_pyra[1][2] 
-            Am_pyra[0,4] = Buffer_pyra[1][3] 
+                Am_color[1,3] = Buffer[1][0] 
+                Am_color[0,3] = Buffer[1][1] 
+                Am_color[0,2] = Buffer[1][2] 
+                Am_color[0,4] = Buffer[1][3] 
 
-            Vd_pyra[1,3] = Buffer_pyra[2][0] 
-            Vd_pyra[2,3] = Buffer_pyra[2][1] 
-            Vd_pyra[2,4] = Buffer_pyra[2][2] 
-            Vd_pyra[2,2] = Buffer_pyra[2][3]
-
-            Buffer_pyra[0][0] = Vd_pyra[1,3]
-            Buffer_pyra[0][1] = Vd_pyra[2,2]
-            Buffer_pyra[0][2] = Vd_pyra[2,3]
-            Buffer_pyra[0][3] = Vd_pyra[2,4]
-
-            Buffer_pyra[1][0] = Az_pyra[1,1]
-            Buffer_pyra[1][1] = Az_pyra[1,2]
-            Buffer_pyra[1][2] = Az_pyra[1,3]
-            Buffer_pyra[1][3] = Az_pyra[2,2]
-
-            Buffer_pyra[2][0] = Am_pyra[0,2]
-            Buffer_pyra[2][1] = Am_pyra[0,3]
-            Buffer_pyra[2][2] = Am_pyra[0,4]
-            Buffer_pyra[2][3] = Am_pyra[1,3]             
-
-            Az_pyra[1,3] = Buffer_pyra[0][0] 
-            Az_pyra[1,1] = Buffer_pyra[0][1] 
-            Az_pyra[1,2] = Buffer_pyra[0][2] 
-            Az_pyra[2,2] = Buffer_pyra[0][3] 
-
-            Am_pyra[1,3] = Buffer_pyra[1][0] 
-            Am_pyra[0,3] = Buffer_pyra[1][1] 
-            Am_pyra[0,2] = Buffer_pyra[1][2] 
-            Am_pyra[0,4] = Buffer_pyra[1][3] 
-
-            Vd_pyra[1,3] = Buffer_pyra[2][0] 
-            Vd_pyra[2,3] = Buffer_pyra[2][1] 
-            Vd_pyra[2,4] = Buffer_pyra[2][2] 
-            Vd_pyra[2,2] = Buffer_pyra[2][3]
-           
-            
-            
-
-        
+                Vd_color[1,3] = Buffer[2][0] 
+                Vd_color[2,3] = Buffer[2][1] 
+                Vd_color[2,4] = Buffer[2][2] 
+                Vd_color[2,2] = Buffer[2][3]                               
+                    
         elif turn == "L":
-            Buffer_pyra[0][0] = Vd_pyra[1,1]
-            Buffer_pyra[0][1] = Vd_pyra[2,0]
-            Buffer_pyra[0][2] = Vd_pyra[2,1]
-            Buffer_pyra[0][3] = Vd_pyra[2,2]            
+            Buffer[0][0] = Vd_color[1,1]
+            Buffer[0][1] = Vd_color[2,0]
+            Buffer[0][2] = Vd_color[2,1]
+            Buffer[0][3] = Vd_color[2,2]            
 
-            Buffer_pyra[1][0] = Am_pyra[0,0]
-            Buffer_pyra[1][1] = Am_pyra[0,1]
-            Buffer_pyra[1][2] = Am_pyra[0,2]
-            Buffer_pyra[1][3] = Am_pyra[1,1]
+            Buffer[1][0] = Am_color[0,0]
+            Buffer[1][1] = Am_color[0,1]
+            Buffer[1][2] = Am_color[0,2]
+            Buffer[1][3] = Am_color[1,1]
 
-            Buffer_pyra[2][0] = Vm_pyra[1,1]
-            Buffer_pyra[2][1] = Vm_pyra[1,2]
-            Buffer_pyra[2][2] = Vm_pyra[1,3]
-            Buffer_pyra[2][3] = Vm_pyra[2,2] 
+            Buffer[2][0] = Vm_color[1,1]
+            Buffer[2][1] = Vm_color[1,2]
+            Buffer[2][2] = Vm_color[1,3]
+            Buffer[2][3] = Vm_color[2,2] 
 
 
-            Am_pyra[0,2] = Buffer_pyra[0][0] 
-            Am_pyra[0,0] = Buffer_pyra[0][1] 
-            Am_pyra[0,1] = Buffer_pyra[0][2] 
-            Am_pyra[1,1] = Buffer_pyra[0][3] 
+            Am_color[0,2] = Buffer[0][0] 
+            Am_color[0,0] = Buffer[0][1] 
+            Am_color[0,1] = Buffer[0][2] 
+            Am_color[1,1] = Buffer[0][3] 
 
-            Vm_pyra[2,2] = Buffer_pyra[1][0] 
-            Vm_pyra[1,2] = Buffer_pyra[1][1] 
-            Vm_pyra[1,1] = Buffer_pyra[1][2] 
-            Vm_pyra[1,3] = Buffer_pyra[1][3]             
+            Vm_color[2,2] = Buffer[1][0] 
+            Vm_color[1,2] = Buffer[1][1] 
+            Vm_color[1,1] = Buffer[1][2] 
+            Vm_color[1,3] = Buffer[1][3]             
 
-            Vd_pyra[1,1] = Buffer_pyra[2][0] 
-            Vd_pyra[2,1] = Buffer_pyra[2][1] 
-            Vd_pyra[2,2] = Buffer_pyra[2][2] 
-            Vd_pyra[2,0] = Buffer_pyra[2][3]
+            Vd_color[1,1] = Buffer[2][0] 
+            Vd_color[2,1] = Buffer[2][1] 
+            Vd_color[2,2] = Buffer[2][2] 
+            Vd_color[2,0] = Buffer[2][3]
         
         elif turn == "L'":
-            Buffer_pyra[0][0] = Vd_pyra[1,1]
-            Buffer_pyra[0][1] = Vd_pyra[2,0]
-            Buffer_pyra[0][2] = Vd_pyra[2,1]
-            Buffer_pyra[0][3] = Vd_pyra[2,2]            
+            for i in range(2):
+                Buffer[0][0] = Vd_color[1,1]
+                Buffer[0][1] = Vd_color[2,0]
+                Buffer[0][2] = Vd_color[2,1]
+                Buffer[0][3] = Vd_color[2,2]            
 
-            Buffer_pyra[1][0] = Am_pyra[0,0]
-            Buffer_pyra[1][1] = Am_pyra[0,1]
-            Buffer_pyra[1][2] = Am_pyra[0,2]
-            Buffer_pyra[1][3] = Am_pyra[1,1]
+                Buffer[1][0] = Am_color[0,0]
+                Buffer[1][1] = Am_color[0,1]
+                Buffer[1][2] = Am_color[0,2]
+                Buffer[1][3] = Am_color[1,1]
 
-            Buffer_pyra[2][0] = Vm_pyra[1,1]
-            Buffer_pyra[2][1] = Vm_pyra[1,2]
-            Buffer_pyra[2][2] = Vm_pyra[1,3]
-            Buffer_pyra[2][3] = Vm_pyra[2,2] 
-
-
-            Am_pyra[0,2] = Buffer_pyra[0][0] 
-            Am_pyra[0,0] = Buffer_pyra[0][1] 
-            Am_pyra[0,1] = Buffer_pyra[0][2] 
-            Am_pyra[1,1] = Buffer_pyra[0][3] 
-
-            Vm_pyra[2,2] = Buffer_pyra[1][0] 
-            Vm_pyra[1,2] = Buffer_pyra[1][1] 
-            Vm_pyra[1,1] = Buffer_pyra[1][2] 
-            Vm_pyra[1,3] = Buffer_pyra[1][3]             
-
-            Vd_pyra[1,1] = Buffer_pyra[2][0] 
-            Vd_pyra[2,1] = Buffer_pyra[2][1] 
-            Vd_pyra[2,2] = Buffer_pyra[2][2] 
-            Vd_pyra[2,0] = Buffer_pyra[2][3]
-
-            Buffer_pyra[0][0] = Vd_pyra[1,1]
-            Buffer_pyra[0][1] = Vd_pyra[2,0]
-            Buffer_pyra[0][2] = Vd_pyra[2,1]
-            Buffer_pyra[0][3] = Vd_pyra[2,2]            
-
-            Buffer_pyra[1][0] = Am_pyra[0,0]
-            Buffer_pyra[1][1] = Am_pyra[0,1]
-            Buffer_pyra[1][2] = Am_pyra[0,2]
-            Buffer_pyra[1][3] = Am_pyra[1,1]
-
-            Buffer_pyra[2][0] = Vm_pyra[1,1]
-            Buffer_pyra[2][1] = Vm_pyra[1,2]
-            Buffer_pyra[2][2] = Vm_pyra[1,3]
-            Buffer_pyra[2][3] = Vm_pyra[2,2] 
+                Buffer[2][0] = Vm_color[1,1]
+                Buffer[2][1] = Vm_color[1,2]
+                Buffer[2][2] = Vm_color[1,3]
+                Buffer[2][3] = Vm_color[2,2] 
 
 
-            Am_pyra[0,2] = Buffer_pyra[0][0] 
-            Am_pyra[0,0] = Buffer_pyra[0][1] 
-            Am_pyra[0,1] = Buffer_pyra[0][2] 
-            Am_pyra[1,1] = Buffer_pyra[0][3] 
+                Am_color[0,2] = Buffer[0][0] 
+                Am_color[0,0] = Buffer[0][1] 
+                Am_color[0,1] = Buffer[0][2] 
+                Am_color[1,1] = Buffer[0][3] 
 
-            Vm_pyra[2,2] = Buffer_pyra[1][0] 
-            Vm_pyra[1,2] = Buffer_pyra[1][1] 
-            Vm_pyra[1,1] = Buffer_pyra[1][2] 
-            Vm_pyra[1,3] = Buffer_pyra[1][3]             
+                Vm_color[2,2] = Buffer[1][0] 
+                Vm_color[1,2] = Buffer[1][1] 
+                Vm_color[1,1] = Buffer[1][2] 
+                Vm_color[1,3] = Buffer[1][3]             
 
-            Vd_pyra[1,1] = Buffer_pyra[2][0] 
-            Vd_pyra[2,1] = Buffer_pyra[2][1] 
-            Vd_pyra[2,2] = Buffer_pyra[2][2] 
-            Vd_pyra[2,0] = Buffer_pyra[2][3]
-            
-            
-
-
-
+                Vd_color[1,1] = Buffer[2][0] 
+                Vd_color[2,1] = Buffer[2][1] 
+                Vd_color[2,2] = Buffer[2][2] 
+                Vd_color[2,0] = Buffer[2][3]          
+                       
         elif turn == "U":
-            Buffer_pyra[0][0] = Vd_pyra[0,2]
-            Buffer_pyra[0][1] = Vd_pyra[1,1]
-            Buffer_pyra[0][2] = Vd_pyra[1,2]
-            Buffer_pyra[0][3] = Vd_pyra[1,3]                       
+            Buffer[0][0] = Vd_color[0,2]
+            Buffer[0][1] = Vd_color[1,1]
+            Buffer[0][2] = Vd_color[1,2]
+            Buffer[0][3] = Vd_color[1,3]                       
 
-            Buffer_pyra[1][0] = Vm_pyra[0,2]
-            Buffer_pyra[1][1] = Vm_pyra[0,3]
-            Buffer_pyra[1][2] = Vm_pyra[0,4]
-            Buffer_pyra[1][3] = Vm_pyra[1,3]           
+            Buffer[1][0] = Vm_color[0,2]
+            Buffer[1][1] = Vm_color[0,3]
+            Buffer[1][2] = Vm_color[0,4]
+            Buffer[1][3] = Vm_color[1,3]           
 
-            Buffer_pyra[2][0] = Az_pyra[0,0]
-            Buffer_pyra[2][1] = Az_pyra[0,1]
-            Buffer_pyra[2][2] = Az_pyra[0,2]
-            Buffer_pyra[2][3] = Az_pyra[1,1]
+            Buffer[2][0] = Az_color[0,0]
+            Buffer[2][1] = Az_color[0,1]
+            Buffer[2][2] = Az_color[0,2]
+            Buffer[2][3] = Az_color[1,1]
 
-            Vm_pyra[0,4] = Buffer_pyra[0][0] 
-            Vm_pyra[0,2] = Buffer_pyra[0][1] 
-            Vm_pyra[0,3] = Buffer_pyra[0][2] 
-            Vm_pyra[1,3] = Buffer_pyra[0][3]
+            Vm_color[0,4] = Buffer[0][0] 
+            Vm_color[0,2] = Buffer[0][1] 
+            Vm_color[0,3] = Buffer[0][2] 
+            Vm_color[1,3] = Buffer[0][3]
 
-            Az_pyra[1,1] = Buffer_pyra[1][0] 
-            Az_pyra[0,1] = Buffer_pyra[1][1] 
-            Az_pyra[0,0] = Buffer_pyra[1][2] 
-            Az_pyra[0,2] = Buffer_pyra[1][3]                          
+            Az_color[1,1] = Buffer[1][0] 
+            Az_color[0,1] = Buffer[1][1] 
+            Az_color[0,0] = Buffer[1][2] 
+            Az_color[0,2] = Buffer[1][3]                          
 
-            Vd_pyra[0,2] = Buffer_pyra[2][0] 
-            Vd_pyra[1,2] = Buffer_pyra[2][1] 
-            Vd_pyra[1,3] = Buffer_pyra[2][2] 
-            Vd_pyra[1,1] = Buffer_pyra[2][3]
+            Vd_color[0,2] = Buffer[2][0] 
+            Vd_color[1,2] = Buffer[2][1] 
+            Vd_color[1,3] = Buffer[2][2] 
+            Vd_color[1,1] = Buffer[2][3]
 
         
         elif turn == "U'":
-            Buffer_pyra[0][0] = Vd_pyra[0,2]
-            Buffer_pyra[0][1] = Vd_pyra[1,1]
-            Buffer_pyra[0][2] = Vd_pyra[1,2]
-            Buffer_pyra[0][3] = Vd_pyra[1,3]                       
+            for i in range(2):
+                Buffer[0][0] = Vd_color[0,2]
+                Buffer[0][1] = Vd_color[1,1]
+                Buffer[0][2] = Vd_color[1,2]
+                Buffer[0][3] = Vd_color[1,3]                       
 
-            Buffer_pyra[1][0] = Vm_pyra[0,2]
-            Buffer_pyra[1][1] = Vm_pyra[0,3]
-            Buffer_pyra[1][2] = Vm_pyra[0,4]
-            Buffer_pyra[1][3] = Vm_pyra[1,3]           
+                Buffer[1][0] = Vm_color[0,2]
+                Buffer[1][1] = Vm_color[0,3]
+                Buffer[1][2] = Vm_color[0,4]
+                Buffer[1][3] = Vm_color[1,3]           
 
-            Buffer_pyra[2][0] = Az_pyra[0,0]
-            Buffer_pyra[2][1] = Az_pyra[0,1]
-            Buffer_pyra[2][2] = Az_pyra[0,2]
-            Buffer_pyra[2][3] = Az_pyra[1,1]
+                Buffer[2][0] = Az_color[0,0]
+                Buffer[2][1] = Az_color[0,1]
+                Buffer[2][2] = Az_color[0,2]
+                Buffer[2][3] = Az_color[1,1]
 
-            Vm_pyra[0,4] = Buffer_pyra[0][0] 
-            Vm_pyra[0,2] = Buffer_pyra[0][1] 
-            Vm_pyra[0,3] = Buffer_pyra[0][2] 
-            Vm_pyra[1,3] = Buffer_pyra[0][3]
+                Vm_color[0,4] = Buffer[0][0] 
+                Vm_color[0,2] = Buffer[0][1] 
+                Vm_color[0,3] = Buffer[0][2] 
+                Vm_color[1,3] = Buffer[0][3]
 
-            Az_pyra[1,1] = Buffer_pyra[1][0] 
-            Az_pyra[0,1] = Buffer_pyra[1][1] 
-            Az_pyra[0,0] = Buffer_pyra[1][2] 
-            Az_pyra[0,2] = Buffer_pyra[1][3]                          
+                Az_color[1,1] = Buffer[1][0] 
+                Az_color[0,1] = Buffer[1][1] 
+                Az_color[0,0] = Buffer[1][2] 
+                Az_color[0,2] = Buffer[1][3]                          
 
-            Vd_pyra[0,2] = Buffer_pyra[2][0] 
-            Vd_pyra[1,2] = Buffer_pyra[2][1] 
-            Vd_pyra[1,3] = Buffer_pyra[2][2] 
-            Vd_pyra[1,1] = Buffer_pyra[2][3]
-
-            Buffer_pyra[0][0] = Vd_pyra[0,2]
-            Buffer_pyra[0][1] = Vd_pyra[1,1]
-            Buffer_pyra[0][2] = Vd_pyra[1,2]
-            Buffer_pyra[0][3] = Vd_pyra[1,3]                       
-
-            Buffer_pyra[1][0] = Vm_pyra[0,2]
-            Buffer_pyra[1][1] = Vm_pyra[0,3]
-            Buffer_pyra[1][2] = Vm_pyra[0,4]
-            Buffer_pyra[1][3] = Vm_pyra[1,3]           
-
-            Buffer_pyra[2][0] = Az_pyra[0,0]
-            Buffer_pyra[2][1] = Az_pyra[0,1]
-            Buffer_pyra[2][2] = Az_pyra[0,2]
-            Buffer_pyra[2][3] = Az_pyra[1,1]
-
-            Vm_pyra[0,4] = Buffer_pyra[0][0] 
-            Vm_pyra[0,2] = Buffer_pyra[0][1] 
-            Vm_pyra[0,3] = Buffer_pyra[0][2] 
-            Vm_pyra[1,3] = Buffer_pyra[0][3]
-
-            Az_pyra[1,1] = Buffer_pyra[1][0] 
-            Az_pyra[0,1] = Buffer_pyra[1][1] 
-            Az_pyra[0,0] = Buffer_pyra[1][2] 
-            Az_pyra[0,2] = Buffer_pyra[1][3]                          
-
-            Vd_pyra[0,2] = Buffer_pyra[2][0] 
-            Vd_pyra[1,2] = Buffer_pyra[2][1] 
-            Vd_pyra[1,3] = Buffer_pyra[2][2] 
-            Vd_pyra[1,1] = Buffer_pyra[2][3]
-           
-           
-
-        
+                Vd_color[0,2] = Buffer[2][0] 
+                Vd_color[1,2] = Buffer[2][1] 
+                Vd_color[1,3] = Buffer[2][2] 
+                Vd_color[1,1] = Buffer[2][3]
+                                         
         elif turn == "B":
 
-            Buffer_pyra[0][0] = Az_pyra[0,2]
-            Buffer_pyra[0][1] = Az_pyra[0,3]
-            Buffer_pyra[0][2] = Az_pyra[0,4]
-            Buffer_pyra[0][3] = Az_pyra[1,3]
+            Buffer[0][0] = Az_color[0,2]
+            Buffer[0][1] = Az_color[0,3]
+            Buffer[0][2] = Az_color[0,4]
+            Buffer[0][3] = Az_color[1,3]
 
-            Buffer_pyra[1][0] = Vm_pyra[0,0]
-            Buffer_pyra[1][1] = Vm_pyra[0,1]
-            Buffer_pyra[1][2] = Vm_pyra[0,2]
-            Buffer_pyra[1][3] = Vm_pyra[1,1]
+            Buffer[1][0] = Vm_color[0,0]
+            Buffer[1][1] = Vm_color[0,1]
+            Buffer[1][2] = Vm_color[0,2]
+            Buffer[1][3] = Vm_color[1,1]
 
-            Buffer_pyra[2][0] = Am_pyra[1,1]
-            Buffer_pyra[2][1] = Am_pyra[1,2]
-            Buffer_pyra[2][2] = Am_pyra[1,3]
-            Buffer_pyra[2][3] = Am_pyra[2,2] 
+            Buffer[2][0] = Am_color[1,1]
+            Buffer[2][1] = Am_color[1,2]
+            Buffer[2][2] = Am_color[1,3]
+            Buffer[2][3] = Am_color[2,2] 
 
-            Vm_pyra[1,1] = Buffer_pyra[0][0] 
-            Vm_pyra[0,1] = Buffer_pyra[0][1] 
-            Vm_pyra[0,0] = Buffer_pyra[0][2] 
-            Vm_pyra[0,2] = Buffer_pyra[0][3]
+            Vm_color[1,1] = Buffer[0][0] 
+            Vm_color[0,1] = Buffer[0][1] 
+            Vm_color[0,0] = Buffer[0][2] 
+            Vm_color[0,2] = Buffer[0][3]
 
-            Am_pyra[2,2] = Buffer_pyra[1][0] 
-            Am_pyra[1,2] = Buffer_pyra[1][1] 
-            Am_pyra[1,1] = Buffer_pyra[1][2] 
-            Am_pyra[1,3] = Buffer_pyra[1][3]
+            Am_color[2,2] = Buffer[1][0] 
+            Am_color[1,2] = Buffer[1][1] 
+            Am_color[1,1] = Buffer[1][2] 
+            Am_color[1,3] = Buffer[1][3]
 
-            Az_pyra[1,3] = Buffer_pyra[2][0] 
-            Az_pyra[0,3] = Buffer_pyra[2][1] 
-            Az_pyra[0,2] = Buffer_pyra[2][2] 
-            Az_pyra[0,4] = Buffer_pyra[2][3] 
+            Az_color[1,3] = Buffer[2][0] 
+            Az_color[0,3] = Buffer[2][1] 
+            Az_color[0,2] = Buffer[2][2] 
+            Az_color[0,4] = Buffer[2][3] 
 
         elif turn == "B'":
-            Buffer_pyra[0][0] = Az_pyra[0,2]
-            Buffer_pyra[0][1] = Az_pyra[0,3]
-            Buffer_pyra[0][2] = Az_pyra[0,4]
-            Buffer_pyra[0][3] = Az_pyra[1,3]
+            for i in range(2):
+                Buffer[0][0] = Az_color[0,2]
+                Buffer[0][1] = Az_color[0,3]
+                Buffer[0][2] = Az_color[0,4]
+                Buffer[0][3] = Az_color[1,3]
 
-            Buffer_pyra[1][0] = Vm_pyra[0,0]
-            Buffer_pyra[1][1] = Vm_pyra[0,1]
-            Buffer_pyra[1][2] = Vm_pyra[0,2]
-            Buffer_pyra[1][3] = Vm_pyra[1,1]
+                Buffer[1][0] = Vm_color[0,0]
+                Buffer[1][1] = Vm_color[0,1]
+                Buffer[1][2] = Vm_color[0,2]
+                Buffer[1][3] = Vm_color[1,1]
 
-            Buffer_pyra[2][0] = Am_pyra[1,1]
-            Buffer_pyra[2][1] = Am_pyra[1,2]
-            Buffer_pyra[2][2] = Am_pyra[1,3]
-            Buffer_pyra[2][3] = Am_pyra[2,2] 
+                Buffer[2][0] = Am_color[1,1]
+                Buffer[2][1] = Am_color[1,2]
+                Buffer[2][2] = Am_color[1,3]
+                Buffer[2][3] = Am_color[2,2] 
 
-            Vm_pyra[1,1] = Buffer_pyra[0][0] 
-            Vm_pyra[0,1] = Buffer_pyra[0][1] 
-            Vm_pyra[0,0] = Buffer_pyra[0][2] 
-            Vm_pyra[0,2] = Buffer_pyra[0][3]
+                Vm_color[1,1] = Buffer[0][0] 
+                Vm_color[0,1] = Buffer[0][1] 
+                Vm_color[0,0] = Buffer[0][2] 
+                Vm_color[0,2] = Buffer[0][3]
 
-            Am_pyra[2,2] = Buffer_pyra[1][0] 
-            Am_pyra[1,2] = Buffer_pyra[1][1] 
-            Am_pyra[1,1] = Buffer_pyra[1][2] 
-            Am_pyra[1,3] = Buffer_pyra[1][3]
+                Am_color[2,2] = Buffer[1][0] 
+                Am_color[1,2] = Buffer[1][1] 
+                Am_color[1,1] = Buffer[1][2] 
+                Am_color[1,3] = Buffer[1][3]
 
-            Az_pyra[1,3] = Buffer_pyra[2][0] 
-            Az_pyra[0,3] = Buffer_pyra[2][1] 
-            Az_pyra[0,2] = Buffer_pyra[2][2] 
-            Az_pyra[0,4] = Buffer_pyra[2][3] 
-
-            Buffer_pyra[0][0] = Az_pyra[0,2]
-            Buffer_pyra[0][1] = Az_pyra[0,3]
-            Buffer_pyra[0][2] = Az_pyra[0,4]
-            Buffer_pyra[0][3] = Az_pyra[1,3]
-
-            Buffer_pyra[1][0] = Vm_pyra[0,0]
-            Buffer_pyra[1][1] = Vm_pyra[0,1]
-            Buffer_pyra[1][2] = Vm_pyra[0,2]
-            Buffer_pyra[1][3] = Vm_pyra[1,1]
-
-            Buffer_pyra[2][0] = Am_pyra[1,1]
-            Buffer_pyra[2][1] = Am_pyra[1,2]
-            Buffer_pyra[2][2] = Am_pyra[1,3]
-            Buffer_pyra[2][3] = Am_pyra[2,2] 
-
-            Vm_pyra[1,1] = Buffer_pyra[0][0] 
-            Vm_pyra[0,1] = Buffer_pyra[0][1] 
-            Vm_pyra[0,0] = Buffer_pyra[0][2] 
-            Vm_pyra[0,2] = Buffer_pyra[0][3]
-
-            Am_pyra[2,2] = Buffer_pyra[1][0] 
-            Am_pyra[1,2] = Buffer_pyra[1][1] 
-            Am_pyra[1,1] = Buffer_pyra[1][2] 
-            Am_pyra[1,3] = Buffer_pyra[1][3]
-
-            Az_pyra[1,3] = Buffer_pyra[2][0] 
-            Az_pyra[0,3] = Buffer_pyra[2][1] 
-            Az_pyra[0,2] = Buffer_pyra[2][2] 
-            Az_pyra[0,4] = Buffer_pyra[2][3] 
-            
-           
-
-            
-        
+                Az_color[1,3] = Buffer[2][0] 
+                Az_color[0,3] = Buffer[2][1] 
+                Az_color[0,2] = Buffer[2][2] 
+                Az_color[0,4] = Buffer[2][3]          
+                                         
         elif turn == "r":
             
-            Buffer_pyra[0][3] = Vd_pyra[2,4]            
-            Buffer_pyra[1][3] = Az_pyra[2,2]           
-            Buffer_pyra[2][2] = Am_pyra[0,4]                
+            Buffer[0][3] = Vd_color[2,4]            
+            Buffer[1][3] = Az_color[2,2]           
+            Buffer[2][2] = Am_color[0,4]                
           
-            Az_pyra[2,2] = Buffer_pyra[0][3]            
-            Am_pyra[0,4] = Buffer_pyra[1][3]          
-            Vd_pyra[2,4] = Buffer_pyra[2][2] 
+            Az_color[2,2] = Buffer[0][3]            
+            Am_color[0,4] = Buffer[1][3]          
+            Vd_color[2,4] = Buffer[2][2] 
         
         elif turn == "r'":
+            for i in range(2):            
+                Buffer[0][3] = Vd_color[2,4]            
+                Buffer[1][3] = Az_color[2,2]           
+                Buffer[2][2] = Am_color[0,4]                
             
-            Buffer_pyra[0][3] = Vd_pyra[2,4]            
-            Buffer_pyra[1][3] = Az_pyra[2,2]           
-            Buffer_pyra[2][2] = Am_pyra[0,4]                
-          
-            Az_pyra[2,2] = Buffer_pyra[0][3]            
-            Am_pyra[0,4] = Buffer_pyra[1][3]          
-            Vd_pyra[2,4] = Buffer_pyra[2][2] 
-
-            Buffer_pyra[0][3] = Vd_pyra[2,4]            
-            Buffer_pyra[1][3] = Az_pyra[2,2]           
-            Buffer_pyra[2][2] = Am_pyra[0,4]                
-          
-            Az_pyra[2,2] = Buffer_pyra[0][3]            
-            Am_pyra[0,4] = Buffer_pyra[1][3]          
-            Vd_pyra[2,4] = Buffer_pyra[2][2] 
-        
+                Az_color[2,2] = Buffer[0][3]            
+                Am_color[0,4] = Buffer[1][3]          
+                Vd_color[2,4] = Buffer[2][2] 
+            
         elif turn == "l":
            
-            Buffer_pyra[0][1] = Vd_pyra[2,0]   
-            Buffer_pyra[1][0] = Am_pyra[0,0]  
-            Buffer_pyra[2][3] = Vm_pyra[2,2]
+            Buffer[0][1] = Vd_color[2,0]   
+            Buffer[1][0] = Am_color[0,0]  
+            Buffer[2][3] = Vm_color[2,2]
 
 
-            Am_pyra[0,0] = Buffer_pyra[0][1]         
-            Vm_pyra[2,2] = Buffer_pyra[1][0]               
-            Vd_pyra[2,0] = Buffer_pyra[2][3]
+            Am_color[0,0] = Buffer[0][1]         
+            Vm_color[2,2] = Buffer[1][0]               
+            Vd_color[2,0] = Buffer[2][3]
         
         elif turn == "l'":
-           
-            Buffer_pyra[0][1] = Vd_pyra[2,0]   
-            Buffer_pyra[1][0] = Am_pyra[0,0]  
-            Buffer_pyra[2][3] = Vm_pyra[2,2]
-            
-                      
-            Am_pyra[0,0] = Buffer_pyra[0][1]         
-            Vm_pyra[2,2] = Buffer_pyra[1][0]               
-            Vd_pyra[2,0] = Buffer_pyra[2][3]
-
-            Buffer_pyra[0][1] = Vd_pyra[2,0]   
-            Buffer_pyra[1][0] = Am_pyra[0,0]  
-            Buffer_pyra[2][3] = Vm_pyra[2,2]
-            
-                      
-            Am_pyra[0,0] = Buffer_pyra[0][1]         
-            Vm_pyra[2,2] = Buffer_pyra[1][0]               
-            Vd_pyra[2,0] = Buffer_pyra[2][3]
+            for i in range(2):           
+                Buffer[0][1] = Vd_color[2,0]   
+                Buffer[1][0] = Am_color[0,0]  
+                Buffer[2][3] = Vm_color[2,2]                
+                        
+                Am_color[0,0] = Buffer[0][1]         
+                Vm_color[2,2] = Buffer[1][0]               
+                Vd_color[2,0] = Buffer[2][3]           
         
         elif turn == "u":
-            Buffer_pyra[0][0] = Vd_pyra[0,2]                         
-            Buffer_pyra[1][2] = Vm_pyra[0,4]               
-            Buffer_pyra[2][0] = Az_pyra[0,0]
+            Buffer[0][0] = Vd_color[0,2]                         
+            Buffer[1][2] = Vm_color[0,4]               
+            Buffer[2][0] = Az_color[0,0]
            
 
-            Vm_pyra[0,4] = Buffer_pyra[0][0]   
-            Az_pyra[0,0] = Buffer_pyra[1][2]                                 
-            Vd_pyra[0,2] = Buffer_pyra[2][0]
+            Vm_color[0,4] = Buffer[0][0]   
+            Az_color[0,0] = Buffer[1][2]                                 
+            Vd_color[0,2] = Buffer[2][0]
 
         elif turn == "u'":
-            Buffer_pyra[0][0] = Vd_pyra[0,2]                         
-            Buffer_pyra[1][2] = Vm_pyra[0,4]               
-            Buffer_pyra[2][0] = Az_pyra[0,0]
-           
+            for i in range(2):
+                Buffer[0][0] = Vd_color[0,2]                         
+                Buffer[1][2] = Vm_color[0,4]               
+                Buffer[2][0] = Az_color[0,0]            
 
-            Vm_pyra[0,4] = Buffer_pyra[0][0]   
-            Az_pyra[0,0] = Buffer_pyra[1][2]                                 
-            Vd_pyra[0,2] = Buffer_pyra[2][0] 
-
-            Buffer_pyra[0][0] = Vd_pyra[0,2]                         
-            Buffer_pyra[1][2] = Vm_pyra[0,4]               
-            Buffer_pyra[2][0] = Az_pyra[0,0]
-           
-
-            Vm_pyra[0,4] = Buffer_pyra[0][0]   
-            Az_pyra[0,0] = Buffer_pyra[1][2]                                 
-            Vd_pyra[0,2] = Buffer_pyra[2][0] 
+                Vm_color[0,4] = Buffer[0][0]   
+                Az_color[0,0] = Buffer[1][2]                                 
+                Vd_color[0,2] = Buffer[2][0]            
         
         elif turn == "b":  
                         
-            Buffer_pyra[0][2] = Az_pyra[0,4]          
-            Buffer_pyra[1][0] = Vm_pyra[0,0]     
-            Buffer_pyra[2][3] = Am_pyra[2,2]
+            Buffer[0][2] = Az_color[0,4]          
+            Buffer[1][0] = Vm_color[0,0]     
+            Buffer[2][3] = Am_color[2,2]
 
-            Vm_pyra[0,0] = Buffer_pyra[0][2]        
-            Am_pyra[2,2] = Buffer_pyra[1][0]      
-            Az_pyra[0,4] = Buffer_pyra[2][3]      
+            Vm_color[0,0] = Buffer[0][2]        
+            Am_color[2,2] = Buffer[1][0]      
+            Az_color[0,4] = Buffer[2][3]      
             
         
         elif turn == "b'":
+            for i in range(2):
+                Buffer[0][2] = Az_color[0,4]          
+                Buffer[1][0] = Vm_color[0,0]     
+                Buffer[2][3] = Am_color[2,2]
 
-            Buffer_pyra[0][2] = Az_pyra[0,4]          
-            Buffer_pyra[1][0] = Vm_pyra[0,0]     
-            Buffer_pyra[2][3] = Am_pyra[2,2]
-
-            Vm_pyra[0,0] = Buffer_pyra[0][2]        
-            Am_pyra[2,2] = Buffer_pyra[1][0]      
-            Az_pyra[0,4] = Buffer_pyra[2][3]
-
-            Buffer_pyra[0][2] = Az_pyra[0,4]          
-            Buffer_pyra[1][0] = Vm_pyra[0,0]     
-            Buffer_pyra[2][3] = Am_pyra[2,2]
-
-            Vm_pyra[0,0] = Buffer_pyra[0][2]        
-            Am_pyra[2,2] = Buffer_pyra[1][0]      
-            Az_pyra[0,4] = Buffer_pyra[2][3]
-            
-                    
-
-           
-        
-                    
-           
-        
-
-       
-        
-                    
-
-           
-        
-                    
-
-
-       
-        
-         
-
-       
-        
-
-        
-         
-        
-                                  
-                                  
-
-                                  
-
-                       
-
-        
-         
-        
-                                  
-
-                                  
-
-                       
-            
-           
-
-                                  
-
-                       
-
-            
-           
-
-
-            
-           
+                Vm_color[0,0] = Buffer[0][2]        
+                Am_color[2,2] = Buffer[1][0]      
+                Az_color[0,4] = Buffer[2][3]                     
 
 
     elif cube == "megaminx":
@@ -5551,19 +5330,19 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
 
 def draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color):      
 
-    global Br_pyra
-    global Lr_pyra
-    global Vd_pyra
-    global Vm_pyra
-    global Az_pyra
-    global Am_pyra
+    # global Br_pyra
+    # global Lr_pyra
+    # global Vd_color
+    # global Vm_color
+    # global Az_color
+    # global Am_color
     
-    global Br_color_pyra 
-    global Lr_color_pyra 
-    global Vd_color_pyra 
-    global Vm_color_pyra 
-    global Az_color_pyra 
-    global Am_color_pyra    
+    # global Br_color_pyra 
+    # global Lr_color_pyra 
+    # global Vd_color 
+    # global Vm_color 
+    # global Az_color 
+    # global Am_color    
     
 
     our_canvas.delete("all")    
@@ -6631,96 +6410,96 @@ def draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
         
     elif cube == "pyraminx":            
 
-        Vd_color_pyra = np.where(Vd_pyra != 1, Vd_color_pyra,"red")
-        Vm_color_pyra = np.where(Vm_pyra != 1, Vm_color_pyra,"red")
-        Az_color_pyra = np.where(Az_pyra != 1, Az_color_pyra,"red")
-        Am_color_pyra = np.where(Am_pyra != 1, Am_color_pyra,"red")  
+        # Vd_color = np.where(Vd_color != 1, Vd_color,"red")
+        # Vm_color = np.where(Vm_color != 1, Vm_color,"red")
+        # Az_color = np.where(Az_color != 1, Az_color,"red")
+        # Am_color = np.where(Am_color != 1, Am_color,"red")  
         
-        Vd_color_pyra = np.where(Vd_pyra != 2, Vd_color_pyra,"green")
-        Vm_color_pyra = np.where(Vm_pyra != 2, Vm_color_pyra,"green")
-        Az_color_pyra = np.where(Az_pyra != 2, Az_color_pyra,"green")
-        Am_color_pyra = np.where(Am_pyra != 2, Am_color_pyra,"green")
+        # Vd_color = np.where(Vd_color != 2, Vd_color,"green")
+        # Vm_color = np.where(Vm_color != 2, Vm_color,"green")
+        # Az_color = np.where(Az_color != 2, Az_color,"green")
+        # Am_color = np.where(Am_color != 2, Am_color,"green")
 
-        Vd_color_pyra = np.where(Vd_pyra != 3, Vd_color_pyra,"blue")
-        Vm_color_pyra = np.where(Vm_pyra != 3, Vm_color_pyra,"blue")
-        Az_color_pyra = np.where(Az_pyra != 3, Az_color_pyra,"blue")
-        Am_color_pyra = np.where(Am_pyra != 3, Am_color_pyra,"blue") 
+        # Vd_color = np.where(Vd_color != 3, Vd_color,"blue")
+        # Vm_color = np.where(Vm_color != 3, Vm_color,"blue")
+        # Az_color = np.where(Az_color != 3, Az_color,"blue")
+        # Am_color = np.where(Am_color != 3, Am_color,"blue") 
                
-        Vd_color_pyra = np.where(Vd_pyra != 4, Vd_color_pyra,"yellow")
-        Vm_color_pyra = np.where(Vm_pyra != 4, Vm_color_pyra,"yellow")
-        Az_color_pyra = np.where(Az_pyra != 4, Az_color_pyra,"yellow")
-        Am_color_pyra = np.where(Am_pyra != 4, Am_color_pyra,"yellow")      
+        # Vd_color = np.where(Vd_color != 4, Vd_color,"yellow")
+        # Vm_color = np.where(Vm_color != 4, Vm_color,"yellow")
+        # Az_color = np.where(Az_color != 4, Az_color,"yellow")
+        # Am_color = np.where(Am_color != 4, Am_color,"yellow")      
 
          
 
         #L
-        our_canvas.create_polygon(10,10,50 ,10,30 ,45,fill=Vm_color_pyra[0][0])        
-        our_canvas.create_polygon(52,10,92 ,10,72 ,45,fill=Vm_color_pyra[0][2])
-        our_canvas.create_polygon(94,10,134,10,114,45,fill=Vm_color_pyra[0][4])
+        our_canvas.create_polygon(10,10,50 ,10,30 ,45,fill=Vm_color[0][0])        
+        our_canvas.create_polygon(52,10,92 ,10,72 ,45,fill=Vm_color[0][2])
+        our_canvas.create_polygon(94,10,134,10,114,45,fill=Vm_color[0][4])
         
-        our_canvas.create_polygon(31,46,71 ,46,51,11,fill=Vm_color_pyra[0][1])
-        our_canvas.create_polygon(73,46,113,46,93,11,fill=Vm_color_pyra[0][3])
+        our_canvas.create_polygon(31,46,71 ,46,51,11,fill=Vm_color[0][1])
+        our_canvas.create_polygon(73,46,113,46,93,11,fill=Vm_color[0][3])
 
 
-        our_canvas.create_polygon(30,48,71 ,48,51,83,fill=Vm_color_pyra[1][1])
-        our_canvas.create_polygon(73,48,113,48,93,83,fill=Vm_color_pyra[1][3])
+        our_canvas.create_polygon(30,48,71 ,48,51,83,fill=Vm_color[1][1])
+        our_canvas.create_polygon(73,48,113,48,93,83,fill=Vm_color[1][3])
 
-        our_canvas.create_polygon(52,84,92,84,72,48,fill=Vm_color_pyra[1][2])
+        our_canvas.create_polygon(52,84,92,84,72,48,fill=Vm_color[1][2])
 
-        our_canvas.create_polygon(52,86,92,86,72,119,fill=Vm_color_pyra[2][2])
+        our_canvas.create_polygon(52,86,92,86,72,119,fill=Vm_color[2][2])
                
         
         #R
-        our_canvas.create_polygon(154,10,194,10,174,45,fill=Az_color_pyra[0][0])        
-        our_canvas.create_polygon(196,10,236,10,216,45,fill=Az_color_pyra[0][2])        
-        our_canvas.create_polygon(238,10,278,10,258,45,fill=Az_color_pyra[0][4])        
+        our_canvas.create_polygon(154,10,194,10,174,45,fill=Az_color[0][0])        
+        our_canvas.create_polygon(196,10,236,10,216,45,fill=Az_color[0][2])        
+        our_canvas.create_polygon(238,10,278,10,258,45,fill=Az_color[0][4])        
 
-        our_canvas.create_polygon(175,46,215,46,195,11,fill=Az_color_pyra[0][1])        
-        our_canvas.create_polygon(217,46,257,46,237,11,fill=Az_color_pyra[0][3])    
+        our_canvas.create_polygon(175,46,215,46,195,11,fill=Az_color[0][1])        
+        our_canvas.create_polygon(217,46,257,46,237,11,fill=Az_color[0][3])    
 
 
 
-        our_canvas.create_polygon(175,48,215,48,195,83,fill=Az_color_pyra[1][1])        
-        our_canvas.create_polygon(217,48,257,48,237,83,fill=Az_color_pyra[1][3])  
+        our_canvas.create_polygon(175,48,215,48,195,83,fill=Az_color[1][1])        
+        our_canvas.create_polygon(217,48,257,48,237,83,fill=Az_color[1][3])  
 
-        our_canvas.create_polygon(196,84,236,84,216,49,fill=Az_color_pyra[1][2])  
+        our_canvas.create_polygon(196,84,236,84,216,49,fill=Az_color[1][2])  
 
-        our_canvas.create_polygon(196,86,236,86,216,119,fill=Az_color_pyra[2][2])  
+        our_canvas.create_polygon(196,86,236,86,216,119,fill=Az_color[2][2])  
 
         
         #F        
 
-        our_canvas.create_polygon(124,45,164,45,144,10,fill=Vd_color_pyra[0][2]) 
+        our_canvas.create_polygon(124,45,164,45,144,10,fill=Vd_color[0][2]) 
 
 
-        our_canvas.create_polygon(124,48,164,48,144,83,fill=Vd_color_pyra[1][2])  
+        our_canvas.create_polygon(124,48,164,48,144,83,fill=Vd_color[1][2])  
 
-        our_canvas.create_polygon(103,84,143,84,123,48,fill=Vd_color_pyra[1][1])  
-        our_canvas.create_polygon(145,84,185,84,165,48,fill=Vd_color_pyra[1][3])  
+        our_canvas.create_polygon(103,84,143,84,123,48,fill=Vd_color[1][1])  
+        our_canvas.create_polygon(145,84,185,84,165,48,fill=Vd_color[1][3])  
 
-        our_canvas.create_polygon(103,86,143,86,123,119,fill=Vd_color_pyra[2][1])  
-        our_canvas.create_polygon(145,86,185,86,165,119,fill=Vd_color_pyra[2][3])  
+        our_canvas.create_polygon(103,86,143,86,123,119,fill=Vd_color[2][1])  
+        our_canvas.create_polygon(145,86,185,86,165,119,fill=Vd_color[2][3])  
 
-        our_canvas.create_polygon(81 ,120,121,120,101,87,fill=Vd_color_pyra[2][0])  
-        our_canvas.create_polygon(124,120,164,120,144,87,fill=Vd_color_pyra[2][2])  
-        our_canvas.create_polygon(166,120,206,120,186,87,fill=Vd_color_pyra[2][4])  
+        our_canvas.create_polygon(81 ,120,121,120,101,87,fill=Vd_color[2][0])  
+        our_canvas.create_polygon(124,120,164,120,144,87,fill=Vd_color[2][2])  
+        our_canvas.create_polygon(166,120,206,120,186,87,fill=Vd_color[2][4])  
 
        
         #D
-        our_canvas.create_polygon(81,130,121,130,101,165,fill=Am_color_pyra[0][0])  
-        our_canvas.create_polygon(124,130,164,130,144,165,fill=Am_color_pyra[0][2])  
-        our_canvas.create_polygon(166,130,206,130,186,165,fill=Am_color_pyra[0][4]) 
+        our_canvas.create_polygon(81,130,121,130,101,165,fill=Am_color[0][0])  
+        our_canvas.create_polygon(124,130,164,130,144,165,fill=Am_color[0][2])  
+        our_canvas.create_polygon(166,130,206,130,186,165,fill=Am_color[0][4]) 
 
-        our_canvas.create_polygon(103,165,143,165,123,131,fill=Am_color_pyra[0][1])  
-        our_canvas.create_polygon(145,165,185,165,165,131,fill=Am_color_pyra[0][3])  
+        our_canvas.create_polygon(103,165,143,165,123,131,fill=Am_color[0][1])  
+        our_canvas.create_polygon(145,165,185,165,165,131,fill=Am_color[0][3])  
 
 
-        our_canvas.create_polygon(103,167,143,167,123,201,fill=Am_color_pyra[1][1])  
-        our_canvas.create_polygon(145,167,185,167,165,201,fill=Am_color_pyra[1][3])  
+        our_canvas.create_polygon(103,167,143,167,123,201,fill=Am_color[1][1])  
+        our_canvas.create_polygon(145,167,185,167,165,201,fill=Am_color[1][3])  
 
-        our_canvas.create_polygon(124,201,164,201,144,167,fill=Am_color_pyra[1][2])  
+        our_canvas.create_polygon(124,201,164,201,144,167,fill=Am_color[1][2])  
 
-        our_canvas.create_polygon(124,203,164,203,144,238,fill=Am_color_pyra[2][2]) 
+        our_canvas.create_polygon(124,203,164,203,144,238,fill=Am_color[2][2]) 
 
     elif cube == "megaminx":
         pass
@@ -7545,6 +7324,8 @@ def scrambler_pyraminx():
     global actual_scramble 
     accepted = 0    
 
+    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("pyraminx","color") 
+
     sum_turns = []
     for i in range(12):
 
@@ -7590,8 +7371,8 @@ def scrambler_pyraminx():
         
         sum_turns.append(turn)
         pr_move = n_move
-        turn_draw("pyraminx",turn)
-        draw_scramble("pyraminx")
+        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("pyraminx",turn,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
+        draw_scramble("pyraminx",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
         # print(turn) 
         accepted = 0
 
@@ -7654,8 +7435,8 @@ def scrambler_pyraminx():
         
         sum_turns.append(turn)
         pr_move = n_move
-        turn_draw("pyraminx",turn)
-        draw_scramble("pyraminx")
+        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("pyraminx",turn,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
+        draw_scramble("pyraminx",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)        
         
         # print(turn) 
         accepted = 0
