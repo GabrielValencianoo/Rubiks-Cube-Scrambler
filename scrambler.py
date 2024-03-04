@@ -8212,41 +8212,28 @@ def change_event(event):
     flag_change_event = False   
     write_txt_setting()       
 
-def plot():   
-    
+def plot():       
 
 	# the figure that will contain the plot 
     window = tk.Toplevel(root)
+    window.geometry('1200x700+1200+200') 
 
     # global tempos 
-    fig = Figure(figsize = (5, 5),dpi = 100) 
-
-	# list of squares 
-    x = tempos  
-    y = mo_3
-    z = ao_5
-    a = ao_12   
-
+    fig = Figure(figsize = (8, 8),dpi = 100)   
 
 	# adding the subplot 
     plot1 = fig.add_subplot(111) 
 
 	# plotting the graph 
-    plot1.plot(x) 
+    plot1.plot(tempos) 
     
-    plot1.plot(y) 
+    plot1.plot(mo_3) 
     
-    plot1.plot(z) 
+    plot1.plot(ao_5) 
     
-    plot1.plot(a) 
+    plot1.plot(ao_12) 
 
-
-    if len(mo_3) >= 3:
-        plot1.plot(y) 
-    if len(ao_5) >= 5:
-        plot1.plot(z) 
-    if len(ao_12) >= 12:
-        plot1.plot(a) 
+    plot1.legend(['Tempos', 'mo3','ao5','ao12']) 
 
 	# creating the Tkinter canvas 
 	# containing the Matplotlib figure 
