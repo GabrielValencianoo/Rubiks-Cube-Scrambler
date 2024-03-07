@@ -35,8 +35,8 @@ NavigationToolbar2Tk)
 import requests
 import json
 
-# import certifi
-# import urllib3
+import icecream
+import mplcursors
 
 from zipfile import ZipFile
 
@@ -8235,6 +8235,7 @@ def plot():
 
     plot1.legend(['Tempos', 'mo3','ao5','ao12']) 
 
+    mplcursors.cursor(plot1)
 	# creating the Tkinter canvas 
 	# containing the Matplotlib figure 
     canvas = FigureCanvasTkAgg(fig,	master = window) 
