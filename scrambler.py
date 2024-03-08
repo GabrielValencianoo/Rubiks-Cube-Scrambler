@@ -831,2932 +831,63 @@ def createMatrix(cube,type):
     
 
     
-def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer):    
+def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer):  
 
     if cube == "2x2":
-        if turn == "R":
-            Buffer[0] = Vd_color[:,1]
-            Buffer[1] = np.flip(Br_color[:,1],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,1]            
-
-            Br_color[:,1] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,1] = Buffer[2]
-            Vd_color[:,1] = Buffer[3]
-
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-        elif turn == "R'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Br_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,1]            
-
-                Br_color[:,1] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]          
-                             
-            Vm_color = np.rot90(Vm_color,-1,(1,0))
-        elif turn == "R2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Br_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,1]            
-
-                Br_color[:,1] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]         
-                            
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-        
-        elif turn == "U":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "U'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]            
-
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "U2":
-            for i in range(2):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]           
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        
-        elif turn == "F":
-            Buffer[0] = Br_color[1]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,1],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,1] = Buffer[2]
-            Br_color[1]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "F'":
-            for i in range(3):
-                Buffer[0] = Br_color[1]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,1],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,1] = Buffer[2]
-                Br_color[1]   = Buffer[3]          
-            
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "F2":
-            for i in range(2):
-                Buffer[0] = Br_color[1]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,1],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,1] = Buffer[2]
-                Br_color[1]   = Buffer[3]                  
-
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-        
-
-    elif cube == "3x3":
-
-        if turn == "R":
-            Buffer[0] = Vd_color[:,2]
-            Buffer[1] = np.flip(Br_color[:,2],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,2]            
-
-            Br_color[:,2] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,2] = Buffer[2]
-            Vd_color[:,2] = Buffer[3]
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-        elif turn == "R'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,2]
-                Buffer[1] = np.flip(Br_color[:,2],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,2]
-
-                Br_color[:,2] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,2] = Buffer[2]
-                Vd_color[:,2] = Buffer[3]
-                Buffer[0] = Vd_color[:,2]            
-
-            Vm_color = np.rot90(Vm_color,-1,(1,0))
-        elif turn == "R2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,2]
-                Buffer[1] = np.flip(Br_color[:,2],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,2]
-
-                Br_color[:,2] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,2] = Buffer[2]
-                Vd_color[:,2] = Buffer[3]            
-
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-        elif turn == "L":
-            Buffer[0] = Vd_color[:,0]
-            Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,2],0)
-            Buffer[3] = Br_color[:,0]
-
-            Am_color[:,0] = Buffer[0]
-            Az_color[:,2] = Buffer[1]
-            Br_color[:,0] = Buffer[2]
-            Vd_color[:,0] = Buffer[3]
-
-            Lr_color = np.rot90(Lr_color,1,(1,0))
-        elif turn == "L'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,2],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,2] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]            
-
-            Lr_color = np.rot90(Lr_color,-1,(1,0))
-        elif turn == "L2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,2],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,2] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]            
-
-            Lr_color = np.rot90(Lr_color,2,(1,0))
-        elif turn == "U":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "U'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]            
-
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "U2":
-            for i in range(2):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]            
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        elif turn == "D":
-            Buffer[0] = Vd_color[2]
-            Buffer[1] = Vm_color[2]
-            Buffer[2] = Az_color[2]
-            Buffer[3] = Lr_color[2]
-
-            Vm_color[2] = Buffer[0]
-            Az_color[2] = Buffer[1]
-            Lr_color[2] = Buffer[2]
-            Vd_color[2] = Buffer[3]
-
-            Am_color = np.rot90(Am_color,1,(1,0))
-        elif turn == "D'":
-            for i in range(3):
-                Buffer[0] = Vd_color[2]
-                Buffer[1] = Vm_color[2]
-                Buffer[2] = Az_color[2]
-                Buffer[3] = Lr_color[2]
-
-                Vm_color[2] = Buffer[0]
-                Az_color[2] = Buffer[1]
-                Lr_color[2] = Buffer[2]
-                Vd_color[2] = Buffer[3]            
-
-            Am_color = np.rot90(Am_color,-1,(1,0))
-        elif turn == "D2":
-            for i in range(2):
-                Buffer[0] = Vd_color[2]
-                Buffer[1] = Vm_color[2]
-                Buffer[2] = Az_color[2]
-                Buffer[3] = Lr_color[2]
-
-                Vm_color[2] = Buffer[0]
-                Az_color[2] = Buffer[1]
-                Lr_color[2] = Buffer[2]
-                Vd_color[2] = Buffer[3]            
-
-            Am_color = np.rot90(Am_color,2,(1,0))
-        elif turn == "F":
-            Buffer[0] = Br_color[2]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,2],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,2] = Buffer[2]
-            Br_color[2]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "F'":
-            for i in range(3):
-                Buffer[0] = Br_color[2]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,2],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,2] = Buffer[2]
-                Br_color[2]   = Buffer[3]            
-
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "F2":
-            for i in range(2):
-                Buffer[0] = Br_color[2]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,2],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,2] = Buffer[2]
-                Br_color[2]   = Buffer[3]            
-
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-        elif turn == "B":
-            Buffer[0] = np.flip(Br_color[0],0)
-            Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[2],0)
-            Buffer[3] = Vm_color[:,2]
-
-            Lr_color[:,0] = Buffer[0]
-            Am_color[2]   = Buffer[1]
-            Vm_color[:,2] = Buffer[2]
-            Br_color[0]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,1,(1,0))
-
-        elif turn == "B'":
-            for i in range(3):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[2],0)
-                Buffer[3] = Vm_color[:,2]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[2]   = Buffer[1]
-                Vm_color[:,2] = Buffer[2]
-                Br_color[0]   = Buffer[3]            
-
-            Az_color = np.rot90(Az_color,-1,(1,0))
-        elif turn == "B2":
-            for i in range(2):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[2],0)
-                Buffer[3] = Vm_color[:,2]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[2]   = Buffer[1]
-                Vm_color[:,2] = Buffer[2]
-                Br_color[0]   = Buffer[3]           
-
-            Az_color = np.rot90(Az_color,2,(1,0))
-        
-    
-    elif cube == "4x4":
-
-        if turn == "R":
-            Buffer[0] = Vd_color[:,3]
-            Buffer[1] = np.flip(Br_color[:,3],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,3]           
-
-            Br_color[:,3] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,3] = Buffer[2]
-            Vd_color[:,3] = Buffer[3]
-            
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-
-        elif turn == "R'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,3]
-                Buffer[1] = np.flip(Br_color[:,3],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,3]
-
-                Br_color[:,3] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,3] = Buffer[2]
-                Vd_color[:,3] = Buffer[3]            
-            
-            Vm_color = np.rot90(Vm_color,-1,(1,0))
-        elif turn == "R2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,3]
-                Buffer[1] = np.flip(Br_color[:,3],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,3]
-
-                Br_color[:,3] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,3] = Buffer[2]
-                Vd_color[:,3] = Buffer[3]           
-
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-        elif turn == "L":
-            Buffer[0] = Vd_color[:,0]
-            Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,3],0)
-            Buffer[3] = Br_color[:,0]
-
-            Am_color[:,0] = Buffer[0]
-            Az_color[:,3] = Buffer[1]
-            Br_color[:,0] = Buffer[2]
-            Vd_color[:,0] = Buffer[3]
-
-            Lr_color = np.rot90(Lr_color,1,(1,0))
-        elif turn == "L'":
-            for i in range(3):
-
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,3],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,3] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]                  
-
-            Lr_color = np.rot90(Lr_color,-1,(1,0))
-        elif turn == "L2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,3],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,3] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]           
-
-            Lr_color = np.rot90(Lr_color,2,(1,0))
-        elif turn == "U":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "U'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]            
-
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "U2":
-            for i in range(2):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]           
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        elif turn == "D":
-            Buffer[0] = Vd_color[3]
-            Buffer[1] = Vm_color[3]
-            Buffer[2] = Az_color[3]
-            Buffer[3] = Lr_color[3]
-
-            Vm_color[3] = Buffer[0]
-            Az_color[3] = Buffer[1]
-            Lr_color[3] = Buffer[2]
-            Vd_color[3] = Buffer[3]
-
-            Am_color = np.rot90(Am_color,1,(1,0))
-        elif turn == "D'":
-            for i in range(3):
-                Buffer[0] = Vd_color[3]
-                Buffer[1] = Vm_color[3]
-                Buffer[2] = Az_color[3]
-                Buffer[3] = Lr_color[3]
-
-                Vm_color[3] = Buffer[0]
-                Az_color[3] = Buffer[1]
-                Lr_color[3] = Buffer[2]
-                Vd_color[3] = Buffer[3]            
-
-            Am_color = np.rot90(Am_color,-1,(1,0))
-        elif turn == "D2":
-            for i in range(2):
-                Buffer[0] = Vd_color[3]
-                Buffer[1] = Vm_color[3]
-                Buffer[2] = Az_color[3]
-                Buffer[3] = Lr_color[3]
-
-                Vm_color[3] = Buffer[0]
-                Az_color[3] = Buffer[1]
-                Lr_color[3] = Buffer[2]
-                Vd_color[3] = Buffer[3]            
-
-            Am_color = np.rot90(Am_color,2,(1,0))
-        elif turn == "F":
-            Buffer[0] = Br_color[3]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,3],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,3] = Buffer[2]
-            Br_color[3]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "F'":
-            for i in range(3):
-                Buffer[0] = Br_color[3]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,3],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,3] = Buffer[2]
-                Br_color[3]   = Buffer[3]           
-
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "F2":
-            for i in range(2):
-                Buffer[0] = Br_color[3]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,3],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,3] = Buffer[2]
-                Br_color[3]   = Buffer[3]           
-
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-        elif turn == "B":
-            Buffer[0] = np.flip(Br_color[0],0)
-            Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[3],0)
-            Buffer[3] = Vm_color[:,3]
-
-            Lr_color[:,0] = Buffer[0]
-            Am_color[3]   = Buffer[1]
-            Vm_color[:,3] = Buffer[2]
-            Br_color[0]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,1,(1,0))
-
-        elif turn == "B'":
-            for i in range(3):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[3],0)
-                Buffer[3] = Vm_color[:,3]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[3]   = Buffer[1]
-                Vm_color[:,3] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,-1,(1,0))
-        elif turn == "B2":
-            for i in range(2):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[3],0)
-                Buffer[3] = Vm_color[:,3]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[3]   = Buffer[1]
-                Vm_color[:,3] = Buffer[2]
-                Br_color[0]   = Buffer[3]            
-
-            Az_color = np.rot90(Az_color,2,(1,0))
-
-        if turn == "Rw":
-            Buffer[0] = Vd_color[:,3]
-            Buffer[1] = np.flip(Br_color[:,3],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,3]           
-
-            Br_color[:,3] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,3] = Buffer[2]
-            Vd_color[:,3] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,2]
-            Buffer[1] = np.flip(Br_color[:,2],0)
-            Buffer[2] = np.flip(Az_color[:,1],0)
-            Buffer[3] = Am_color[:,2]           
-
-            Br_color[:,2] = Buffer[0]
-            Az_color[:,1] = Buffer[1]
-            Am_color[:,2] = Buffer[2]
-            Vd_color[:,2] = Buffer[3]
-            
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-
-        elif turn == "Rw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,3]
-                Buffer[1] = np.flip(Br_color[:,3],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,3]           
-
-                Br_color[:,3] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,3] = Buffer[2]
-                Vd_color[:,3] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,2]
-                Buffer[1] = np.flip(Br_color[:,2],0)
-                Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,2]           
-
-                Br_color[:,2] = Buffer[0]
-                Az_color[:,1] = Buffer[1]
-                Am_color[:,2] = Buffer[2]
-                Vd_color[:,2] = Buffer[3] 
-            
-            Vm_color = np.rot90(Vm_color,-1,(1,0))
-        elif turn == "Rw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,3]
-                Buffer[1] = np.flip(Br_color[:,3],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,3]           
-
-                Br_color[:,3] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,3] = Buffer[2]
-                Vd_color[:,3] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,2]
-                Buffer[1] = np.flip(Br_color[:,2],0)
-                Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,2]           
-
-                Br_color[:,2] = Buffer[0]
-                Az_color[:,1] = Buffer[1]
-                Am_color[:,2] = Buffer[2]
-                Vd_color[:,2] = Buffer[3]        
-            
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-
-        elif turn == "Lw":
-            Buffer[0] = Vd_color[:,0]
-            Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,3],0)
-            Buffer[3] = Br_color[:,0]
-
-            Am_color[:,0] = Buffer[0]
-            Az_color[:,3] = Buffer[1]
-            Br_color[:,0] = Buffer[2]
-            Vd_color[:,0] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,1]
-            Buffer[1] = np.flip(Am_color[:,1],0)
-            Buffer[2] = np.flip(Az_color[:,2],0)
-            Buffer[3] = Br_color[:,1]
-
-            Am_color[:,1] = Buffer[0]
-            Az_color[:,2] = Buffer[1]
-            Br_color[:,1] = Buffer[2]
-            Vd_color[:,1] = Buffer[3]
-
-            Lr_color = np.rot90(Lr_color,1,(1,0))
-        elif turn == "Lw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,3],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,3] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,2],0)
-                Buffer[3] = Br_color[:,1]
-
-                Am_color[:,1] = Buffer[0]
-                Az_color[:,2] = Buffer[1]
-                Br_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]                 
-
-            Lr_color = np.rot90(Lr_color,-1,(1,0))
-        elif turn == "Lw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,3],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,3] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,2],0)
-                Buffer[3] = Br_color[:,1]
-
-                Am_color[:,1] = Buffer[0]
-                Az_color[:,2] = Buffer[1]
-                Br_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]           
-
-            Lr_color = np.rot90(Lr_color,2,(1,0))
-        elif turn == "Uw":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Buffer[0] = Vd_color[1]
-            Buffer[1] = Lr_color[1]
-            Buffer[2] = Az_color[1]
-            Buffer[3] = Vm_color[1]
-
-            Lr_color[1] = Buffer[0]
-            Az_color[1] = Buffer[1]
-            Vm_color[1] = Buffer[2]
-            Vd_color[1] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "Uw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-
-                Buffer[0] = Vd_color[1]
-                Buffer[1] = Lr_color[1]
-                Buffer[2] = Az_color[1]
-                Buffer[3] = Vm_color[1]
-
-                Lr_color[1] = Buffer[0]
-                Az_color[1] = Buffer[1]
-                Vm_color[1] = Buffer[2]
-                Vd_color[1] = Buffer[3]         
-
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "Uw2":
-            for i in range(2):
-
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-
-                Buffer[0] = Vd_color[1]
-                Buffer[1] = Lr_color[1]
-                Buffer[2] = Az_color[1]
-                Buffer[3] = Vm_color[1]
-
-                Lr_color[1] = Buffer[0]
-                Az_color[1] = Buffer[1]
-                Vm_color[1] = Buffer[2]
-                Vd_color[1] = Buffer[3]          
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        elif turn == "Dw":
-            Buffer[0] = Vd_color[3]
-            Buffer[1] = Vm_color[3]
-            Buffer[2] = Az_color[3]
-            Buffer[3] = Lr_color[3]
-
-            Vm_color[3] = Buffer[0]
-            Az_color[3] = Buffer[1]
-            Lr_color[3] = Buffer[2]
-            Vd_color[3] = Buffer[3]
-
-            Buffer[0] = Vd_color[2]
-            Buffer[1] = Vm_color[2]
-            Buffer[2] = Az_color[2]
-            Buffer[3] = Lr_color[2]
-
-            Vm_color[2] = Buffer[0]
-            Az_color[2] = Buffer[1]
-            Lr_color[2] = Buffer[2]
-            Vd_color[2] = Buffer[3]
-
-            Am_color = np.rot90(Am_color,1,(1,0))
-        elif turn == "Dw'":
-            for i in range(3):
-
-                Buffer[0] = Vd_color[3]
-                Buffer[1] = Vm_color[3]
-                Buffer[2] = Az_color[3]
-                Buffer[3] = Lr_color[3]
-
-                Vm_color[3] = Buffer[0]
-                Az_color[3] = Buffer[1]
-                Lr_color[3] = Buffer[2]
-                Vd_color[3] = Buffer[3]
-
-                Buffer[0] = Vd_color[2]
-                Buffer[1] = Vm_color[2]
-                Buffer[2] = Az_color[2]
-                Buffer[3] = Lr_color[2]
-
-                Vm_color[2] = Buffer[0]
-                Az_color[2] = Buffer[1]
-                Lr_color[2] = Buffer[2]
-                Vd_color[2] = Buffer[3]            
-
-            Am_color = np.rot90(Am_color,-1,(1,0))
-        elif turn == "Dw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[3]
-                Buffer[1] = Vm_color[3]
-                Buffer[2] = Az_color[3]
-                Buffer[3] = Lr_color[3]
-
-                Vm_color[3] = Buffer[0]
-                Az_color[3] = Buffer[1]
-                Lr_color[3] = Buffer[2]
-                Vd_color[3] = Buffer[3]
-
-                Buffer[0] = Vd_color[2]
-                Buffer[1] = Vm_color[2]
-                Buffer[2] = Az_color[2]
-                Buffer[3] = Lr_color[2]
-
-                Vm_color[2] = Buffer[0]
-                Az_color[2] = Buffer[1]
-                Lr_color[2] = Buffer[2]
-                Vd_color[2] = Buffer[3]            
-
-            Am_color = np.rot90(Am_color,2,(1,0))
-        elif turn == "Fw":
-            Buffer[0] = Br_color[3]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,3],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,3] = Buffer[2]
-            Br_color[3]   = Buffer[3]
-
-            Buffer[0] = Br_color[2]
-            Buffer[1] = np.flip(Vm_color[:,1],0)
-            Buffer[2] = Am_color[1]
-            Buffer[3] = np.flip(Lr_color[:,2],0)
-
-            Vm_color[:,1] = Buffer[0]
-            Am_color[1]   = Buffer[1]
-            Lr_color[:,2] = Buffer[2]
-            Br_color[2]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "Fw'":
-            for i in range(3):
-                Buffer[0] = Br_color[3]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,3],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,3] = Buffer[2]
-                Br_color[3]   = Buffer[3]
-
-                Buffer[0] = Br_color[2]
-                Buffer[1] = np.flip(Vm_color[:,1],0)
-                Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,2],0)
-
-                Vm_color[:,1] = Buffer[0]
-                Am_color[1]   = Buffer[1]
-                Lr_color[:,2] = Buffer[2]
-                Br_color[2]   = Buffer[3]     
-            
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "Fw2":
-            for i in range(2):
-                Buffer[0] = Br_color[3]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,3],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,3] = Buffer[2]
-                Br_color[3]   = Buffer[3]
-
-                Buffer[0] = Br_color[2]
-                Buffer[1] = np.flip(Vm_color[:,1],0)
-                Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,2],0)
-
-                Vm_color[:,1] = Buffer[0]
-                Am_color[1]   = Buffer[1]
-                Lr_color[:,2] = Buffer[2]
-                Br_color[2]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-
-        elif turn == "Bw":
-            Buffer[0] = np.flip(Br_color[0],0)
-            Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[3],0)
-            Buffer[3] = Vm_color[:,3]
-
-            Lr_color[:,0] = Buffer[0]
-            Am_color[3]   = Buffer[1]
-            Vm_color[:,3] = Buffer[2]
-            Br_color[0]   = Buffer[3]
-
-            Buffer[0] = np.flip(Br_color[1],0)
-            Buffer[1] = Lr_color[:,1]
-            Buffer[2] = np.flip(Am_color[2],0)
-            Buffer[3] = Vm_color[:,2]
-
-            Lr_color[:,1] = Buffer[0]
-            Am_color[2]   = Buffer[1]
-            Vm_color[:,2] = Buffer[2]
-            Br_color[1]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,1,(1,0))
-
-        elif turn == "Bw'":
-            for i in range(3):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[3],0)
-                Buffer[3] = Vm_color[:,3]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[3]   = Buffer[1]
-                Vm_color[:,3] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[1],0)
-                Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[2],0)
-                Buffer[3] = Vm_color[:,2]
-
-                Lr_color[:,1] = Buffer[0]
-                Am_color[2]   = Buffer[1]
-                Vm_color[:,2] = Buffer[2]
-                Br_color[1]   = Buffer[3]         
-            
-            Az_color = np.rot90(Az_color,-1,(1,0))
-        elif turn == "Bw2":
-            for i in range(2):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[3],0)
-                Buffer[3] = Vm_color[:,3]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[3]   = Buffer[1]
-                Vm_color[:,3] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[1],0)
-                Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[2],0)
-                Buffer[3] = Vm_color[:,2]
-
-                Lr_color[:,1] = Buffer[0]
-                Am_color[2]   = Buffer[1]
-                Vm_color[:,2] = Buffer[2]
-                Br_color[1]   = Buffer[3]                      
-
-            Az_color = np.rot90(Az_color,2,(1,0))
+        FL = 0
+        LL = 1
+        cubeN = 'n'
+    if cube == "3x3":
+        FL = 0
+        LL = 2
+        cubeN = 'n'
+    if cube == "4x4":
+        FL = 0
+        LL = 3
+        cubeN = 'n'
+    if cube == "5x5":
+        FL = 0
+        LL = 4
+        cubeN = 'n'
+    if cube == "6x6":
+        FL = 0
+        LL = 5
+        cubeN = 'n'
+    if cube == "7x7":
+        FL = 0
+        LL = 6
+        cubeN = 'n'
+    if cube == "pyraminx":
+        cubeN = 'nn' 
 
         
-    elif cube == "5x5":
-         
-        if turn == "R":
-            Buffer[0] = Vd_color[:,4]
-            Buffer[1] = np.flip(Br_color[:,4],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,4]           
-
-            Br_color[:,4] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,4] = Buffer[2]
-            Vd_color[:,4] = Buffer[3]
-            
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-
-        elif turn == "R'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,4]           
-
-                Br_color[:,4] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]       
-                        
-            Vm_color = np.rot90(Vm_color,-1,(1,0))
-        elif turn == "R2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,4]           
-
-                Br_color[:,4] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]           
-            
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-        elif turn == "L":
-            Buffer[0] = Vd_color[:,0]
-            Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,4],0)
-            Buffer[3] = Br_color[:,0]
-
-            Am_color[:,0] = Buffer[0]
-            Az_color[:,4] = Buffer[1]
-            Br_color[:,0] = Buffer[2]
-            Vd_color[:,0] = Buffer[3]
-
-            Lr_color = np.rot90(Lr_color,1,(1,0))
-        elif turn == "L'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]                                
-
-            Lr_color = np.rot90(Lr_color,-1,(1,0))
-        elif turn == "L2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]                    
-
-            Lr_color = np.rot90(Lr_color,2,(1,0))
-        elif turn == "U":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "U'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-           
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "U2":
-            for i in range(2):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]          
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        elif turn == "D":
-            Buffer[0] = Vd_color[4]
-            Buffer[1] = Vm_color[4]
-            Buffer[2] = Az_color[4]
-            Buffer[3] = Lr_color[4]
-
-            Vm_color[4] = Buffer[0]
-            Az_color[4] = Buffer[1]
-            Lr_color[4] = Buffer[2]
-            Vd_color[4] = Buffer[3]
-
-            Am_color = np.rot90(Am_color,1,(1,0))
-        elif turn == "D'":
-            for i in range(3):
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
-
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]                       
-
-            Am_color = np.rot90(Am_color,-1,(1,0))
-        elif turn == "D2":
-            for i in range(2):
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
-
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]     
-                     
-            Am_color = np.rot90(Am_color,2,(1,0))
-        elif turn == "F":
-            Buffer[0] = Br_color[4]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,4],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,4] = Buffer[2]
-            Br_color[4]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "F'":
-            for i in range(3):
-                Buffer[0] = Br_color[4]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]       
-                     
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "F2":
-            for i in range(2):
-                Buffer[0] = Br_color[4]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]          
-           
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-        elif turn == "B":
-            Buffer[0] = np.flip(Br_color[0],0)
-            Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[4],0)
-            Buffer[3] = Vm_color[:,4]
-
-            Lr_color[:,0] = Buffer[0]
-            Am_color[4]   = Buffer[1]
-            Vm_color[:,4] = Buffer[2]
-            Br_color[0]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,1,(1,0))
-
-        elif turn == "B'":
-            for i in range(3):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
-                Br_color[0]   = Buffer[3]          
-                        
-            Az_color = np.rot90(Az_color,-1,(1,0))
-        elif turn == "B2":
-            for i in range(2):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
-                Br_color[0]   = Buffer[3]         
-                       
-            Az_color = np.rot90(Az_color,2,(1,0))
-
-        elif turn == "Rw":
-            Buffer[0] = Vd_color[:,4]
-            Buffer[1] = np.flip(Br_color[:,4],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,4]           
-
-            Br_color[:,4] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,4] = Buffer[2]
-            Vd_color[:,4] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,3]
-            Buffer[1] = np.flip(Br_color[:,3],0)
-            Buffer[2] = np.flip(Az_color[:,1],0)
-            Buffer[3] = Am_color[:,3]           
-
-            Br_color[:,3] = Buffer[0]
-            Az_color[:,1] = Buffer[1]
-            Am_color[:,3] = Buffer[2]
-            Vd_color[:,3] = Buffer[3]
-            
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-
-        elif turn == "Rw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,4]           
-
-                Br_color[:,4] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,3]
-                Buffer[1] = np.flip(Br_color[:,3],0)
-                Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,3]           
-
-                Br_color[:,3] = Buffer[0]
-                Az_color[:,1] = Buffer[1]
-                Am_color[:,3] = Buffer[2]
-                Vd_color[:,3] = Buffer[3]           
-            
-            Vm_color = np.rot90(Vm_color,-1,(1,0))
-        elif turn == "Rw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,4]           
-
-                Br_color[:,4] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,3]
-                Buffer[1] = np.flip(Br_color[:,3],0)
-                Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,3]           
-
-                Br_color[:,3] = Buffer[0]
-                Az_color[:,1] = Buffer[1]
-                Am_color[:,3] = Buffer[2]
-                Vd_color[:,3] = Buffer[3]
-                     
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-
-        elif turn == "Lw":
-            Buffer[0] = Vd_color[:,0]
-            Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,4],0)
-            Buffer[3] = Br_color[:,0]
-
-            Am_color[:,0] = Buffer[0]
-            Az_color[:,4] = Buffer[1]
-            Br_color[:,0] = Buffer[2]
-            Vd_color[:,0] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,1]
-            Buffer[1] = np.flip(Am_color[:,1],0)
-            Buffer[2] = np.flip(Az_color[:,3],0)
-            Buffer[3] = Br_color[:,1]
-
-            Am_color[:,1] = Buffer[0]
-            Az_color[:,3] = Buffer[1]
-            Br_color[:,1] = Buffer[2]
-            Vd_color[:,1] = Buffer[3]
-
-            Lr_color = np.rot90(Lr_color,1,(1,0))
-        elif turn == "Lw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,3],0)
-                Buffer[3] = Br_color[:,1]
-
-                Am_color[:,1] = Buffer[0]
-                Az_color[:,3] = Buffer[1]
-                Br_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]
-                          
-            Lr_color = np.rot90(Lr_color,-1,(1,0))
-        elif turn == "Lw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,3],0)
-                Buffer[3] = Br_color[:,1]
-
-                Am_color[:,1] = Buffer[0]
-                Az_color[:,3] = Buffer[1]
-                Br_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]                    
-
-            Lr_color = np.rot90(Lr_color,2,(1,0))
-        elif turn == "Uw":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Buffer[0] = Vd_color[1]
-            Buffer[1] = Lr_color[1]
-            Buffer[2] = Az_color[1]
-            Buffer[3] = Vm_color[1]
-
-            Lr_color[1] = Buffer[0]
-            Az_color[1] = Buffer[1]
-            Vm_color[1] = Buffer[2]
-            Vd_color[1] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "Uw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-
-                Buffer[0] = Vd_color[1]
-                Buffer[1] = Lr_color[1]
-                Buffer[2] = Az_color[1]
-                Buffer[3] = Vm_color[1]
-
-                Lr_color[1] = Buffer[0]
-                Az_color[1] = Buffer[1]
-                Vm_color[1] = Buffer[2]
-                Vd_color[1] = Buffer[3]                      
-
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "Uw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-
-                Buffer[0] = Vd_color[1]
-                Buffer[1] = Lr_color[1]
-                Buffer[2] = Az_color[1]
-                Buffer[3] = Vm_color[1]
-
-                Lr_color[1] = Buffer[0]
-                Az_color[1] = Buffer[1]
-                Vm_color[1] = Buffer[2]
-                Vd_color[1] = Buffer[3]                     
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        elif turn == "Dw":
-            Buffer[0] = Vd_color[4]
-            Buffer[1] = Vm_color[4]
-            Buffer[2] = Az_color[4]
-            Buffer[3] = Lr_color[4]
-
-            Vm_color[4] = Buffer[0]
-            Az_color[4] = Buffer[1]
-            Lr_color[4] = Buffer[2]
-            Vd_color[4] = Buffer[3]
-
-            Buffer[0] = Vd_color[3]
-            Buffer[1] = Vm_color[3]
-            Buffer[2] = Az_color[3]
-            Buffer[3] = Lr_color[3]
-
-            Vm_color[3] = Buffer[0]
-            Az_color[3] = Buffer[1]
-            Lr_color[3] = Buffer[2]
-            Vd_color[3] = Buffer[3]
-
-            Am_color = np.rot90(Am_color,1,(1,0))
-        elif turn == "Dw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
-
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]
-
-                Buffer[0] = Vd_color[3]
-                Buffer[1] = Vm_color[3]
-                Buffer[2] = Az_color[3]
-                Buffer[3] = Lr_color[3]
-
-                Vm_color[3] = Buffer[0]
-                Az_color[3] = Buffer[1]
-                Lr_color[3] = Buffer[2]
-                Vd_color[3] = Buffer[3]                 
-            
-            Am_color = np.rot90(Am_color,-1,(1,0))
-        elif turn == "Dw2":
-            for i in range(2):
-
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
-
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]
-
-                Buffer[0] = Vd_color[3]
-                Buffer[1] = Vm_color[3]
-                Buffer[2] = Az_color[3]
-                Buffer[3] = Lr_color[3]
-
-                Vm_color[3] = Buffer[0]
-                Az_color[3] = Buffer[1]
-                Lr_color[3] = Buffer[2]
-                Vd_color[3] = Buffer[3]
-                    
-            Am_color = np.rot90(Am_color,2,(1,0))
-        elif turn == "Fw":
-            Buffer[0] = Br_color[4]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,4],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,4] = Buffer[2]
-            Br_color[4]   = Buffer[3]
-
-            Buffer[0] = Br_color[3]
-            Buffer[1] = np.flip(Vm_color[:,1],0)
-            Buffer[2] = Am_color[1]
-            Buffer[3] = np.flip(Lr_color[:,3],0)
-
-            Vm_color[:,1] = Buffer[0]
-            Am_color[1]   = Buffer[1]
-            Lr_color[:,3] = Buffer[2]
-            Br_color[3]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "Fw'":     
-            for i in range(3):
-                Buffer[0] = Br_color[4]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]
-
-                Buffer[0] = Br_color[3]
-                Buffer[1] = np.flip(Vm_color[:,1],0)
-                Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,3],0)
-
-                Vm_color[:,1] = Buffer[0]
-                Am_color[1]   = Buffer[1]
-                Lr_color[:,3] = Buffer[2]
-                Br_color[3]   = Buffer[3]           
-                       
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "Fw2":
-            for i in range(2):
-                Buffer[0] = Br_color[4]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]
-
-                Buffer[0] = Br_color[3]
-                Buffer[1] = np.flip(Vm_color[:,1],0)
-                Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,3],0)
-
-                Vm_color[:,1] = Buffer[0]
-                Am_color[1]   = Buffer[1]
-                Lr_color[:,3] = Buffer[2]
-                Br_color[3]   = Buffer[3]            
-                              
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-
-        elif turn == "Bw":
-            Buffer[0] = np.flip(Br_color[0],0)
-            Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[4],0)
-            Buffer[3] = Vm_color[:,4]
-
-            Lr_color[:,0] = Buffer[0]
-            Am_color[4]   = Buffer[1]
-            Vm_color[:,4] = Buffer[2]
-            Br_color[0]   = Buffer[3]
-
-            Buffer[0] = np.flip(Br_color[1],0)
-            Buffer[1] = Lr_color[:,1]
-            Buffer[2] = np.flip(Am_color[3],0)
-            Buffer[3] = Vm_color[:,3]
-
-            Lr_color[:,1] = Buffer[0]
-            Am_color[3]   = Buffer[1]
-            Vm_color[:,3] = Buffer[2]
-            Br_color[1]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,1,(1,0))
-
-        elif turn == "Bw'":
-            for i in range(3):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[1],0)
-                Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[3],0)
-                Buffer[3] = Vm_color[:,3]
-
-                Lr_color[:,1] = Buffer[0]
-                Am_color[3]   = Buffer[1]
-                Vm_color[:,3] = Buffer[2]
-                Br_color[1]   = Buffer[3]    
-                         
-            Az_color = np.rot90(Az_color,-1,(1,0))
-        elif turn == "Bw2":
-            for i in range(2):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[1],0)
-                Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[3],0)
-                Buffer[3] = Vm_color[:,3]
-
-                Lr_color[:,1] = Buffer[0]
-                Am_color[3]   = Buffer[1]
-                Vm_color[:,3] = Buffer[2]
-                Br_color[1]   = Buffer[3]      
-                             
-            Az_color = np.rot90(Az_color,2,(1,0))
-
-        
-    elif cube == "6x6":
-        
+    if cubeN == "n":
         if turn == "R":
             
-            Buffer[0] = Vd_color[:,5]
-            Buffer[1] = np.flip(Br_color[:,5],0)
+            Buffer[0] = Vd_color[:,LL]
+            Buffer[1] = np.flip(Br_color[:,LL],0)
             Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,5]           
+            Buffer[3] = Am_color[:,LL]           
 
-            Br_color[:,5] = Buffer[0]
+            Br_color[:,LL] = Buffer[0]
             Az_color[:,0] = Buffer[1]
-            Am_color[:,5] = Buffer[2]
-            Vd_color[:,5] = Buffer[3]
+            Am_color[:,LL] = Buffer[2]
+            Vd_color[:,LL] = Buffer[3]
             
             
             Vm_color = np.rot90(Vm_color,1,(1,0))
 
         elif turn == "R'":
             for i in range(3):
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,5]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,5] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,0] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]            
-
-            Vm_color = np.rot90(Vm_color,-1,(1,0))                 
-                        
-            
-        elif turn == "R2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,5]           
-
-                Br_color[:,5] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]
-           
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-           
-        elif turn == "L":
-            Buffer[0] = Vd_color[:,0]
-            Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,5],0)
-            Buffer[3] = Br_color[:,0]
-
-            Am_color[:,0] = Buffer[0]
-            Az_color[:,5] = Buffer[1]
-            Br_color[:,0] = Buffer[2]
-            Vd_color[:,0] = Buffer[3]
-
-            Lr_color = np.rot90(Lr_color,1,(1,0))
-        elif turn == "L'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]                           
-
-            Lr_color = np.rot90(Lr_color,-1,(1,0))
-        elif turn == "L2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]            
-           
-            Lr_color = np.rot90(Lr_color,2,(1,0))
-        elif turn == "U":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "U'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]           
-
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "U2":
-            for i in range(2):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]          
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        elif turn == "D":
-            Buffer[0] = Vd_color[5]
-            Buffer[1] = Vm_color[5]
-            Buffer[2] = Az_color[5]
-            Buffer[3] = Lr_color[5]
-
-            Vm_color[5] = Buffer[0]
-            Az_color[5] = Buffer[1]
-            Lr_color[5] = Buffer[2]
-            Vd_color[5] = Buffer[3]
-
-            Am_color = np.rot90(Am_color,1,(1,0))
-        elif turn == "D'":
-            for i in range(3):
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
-
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]         
-            
-            Am_color = np.rot90(Am_color,-1,(1,0))
-        elif turn == "D2":
-            for i in range(2):
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
-
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]                     
-            
-            Am_color = np.rot90(Am_color,2,(1,0))
-        elif turn == "F":
-            Buffer[0] = Br_color[5]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,5],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,5] = Buffer[2]
-            Br_color[5]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "F'":
-            for i in range(3):
-                Buffer[0] = Br_color[5]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]                     
-            
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "F2":
-            for i in range(2):
-                Buffer[0] = Br_color[5]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]           
-           
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-        elif turn == "B":
-            Buffer[0] = np.flip(Br_color[0],0)
-            Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[5],0)
-            Buffer[3] = Vm_color[:,5]
-
-            Lr_color[:,0] = Buffer[0]
-            Am_color[5]   = Buffer[1]
-            Vm_color[:,5] = Buffer[2]
-            Br_color[0]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,1,(1,0))
-
-        elif turn == "B'":
-            for i in range(3):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
-                Br_color[0]   = Buffer[3]          
-                        
-            Az_color = np.rot90(Az_color,-1,(1,0))
-        elif turn == "B2":
-            for i in range(2):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
-                Br_color[0]   = Buffer[3]        
-                     
-            Az_color = np.rot90(Az_color,2,(1,0))
-
-        elif turn == "Rw":
-            Buffer[0] = Vd_color[:,5]
-            Buffer[1] = np.flip(Br_color[:,5],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,5]           
-
-            Br_color[:,5] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,5] = Buffer[2]
-            Vd_color[:,5] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,4]
-            Buffer[1] = np.flip(Br_color[:,4],0)
-            Buffer[2] = np.flip(Az_color[:,1],0)
-            Buffer[3] = Am_color[:,4]           
-
-            Br_color[:,4] = Buffer[0]
-            Az_color[:,1] = Buffer[1]
-            Am_color[:,4] = Buffer[2]
-            Vd_color[:,4] = Buffer[3]
-            
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-
-        elif turn == "Rw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,5]           
-
-                Br_color[:,5] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
-                Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,4]           
-
-                Br_color[:,4] = Buffer[0]
-                Az_color[:,1] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]      
-                      
-            Vm_color = np.rot90(Vm_color,-1,(1,0))
-        elif turn == "Rw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,5]           
-
-                Br_color[:,5] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
-                Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,4]           
-
-                Br_color[:,4] = Buffer[0]
-                Az_color[:,1] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]                  
-
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-
-        elif turn == "Lw":
-            Buffer[0] = Vd_color[:,0]
-            Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,5],0)
-            Buffer[3] = Br_color[:,0]
-
-            Am_color[:,0] = Buffer[0]
-            Az_color[:,5] = Buffer[1]
-            Br_color[:,0] = Buffer[2]
-            Vd_color[:,0] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,1]
-            Buffer[1] = np.flip(Am_color[:,1],0)
-            Buffer[2] = np.flip(Az_color[:,4],0)
-            Buffer[3] = Br_color[:,1]
-
-            Am_color[:,1] = Buffer[0]
-            Az_color[:,4] = Buffer[1]
-            Br_color[:,1] = Buffer[2]
-            Vd_color[:,1] = Buffer[3]
-
-            Lr_color = np.rot90(Lr_color,1,(1,0))
-        elif turn == "Lw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
-                Buffer[3] = Br_color[:,1]
-
-                Am_color[:,1] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
-                Br_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]                    
-
-            Lr_color = np.rot90(Lr_color,-1,(1,0))
-        elif turn == "Lw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
-                Buffer[3] = Br_color[:,1]
-
-                Am_color[:,1] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
-                Br_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]             
-
-            Lr_color = np.rot90(Lr_color,2,(1,0))
-        elif turn == "Uw":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Buffer[0] = Vd_color[1]
-            Buffer[1] = Lr_color[1]
-            Buffer[2] = Az_color[1]
-            Buffer[3] = Vm_color[1]
-
-            Lr_color[1] = Buffer[0]
-            Az_color[1] = Buffer[1]
-            Vm_color[1] = Buffer[2]
-            Vd_color[1] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "Uw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-
-                Buffer[0] = Vd_color[1]
-                Buffer[1] = Lr_color[1]
-                Buffer[2] = Az_color[1]
-                Buffer[3] = Vm_color[1]
-
-                Lr_color[1] = Buffer[0]
-                Az_color[1] = Buffer[1]
-                Vm_color[1] = Buffer[2]
-                Vd_color[1] = Buffer[3]                     
-
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "Uw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-
-                Buffer[0] = Vd_color[1]
-                Buffer[1] = Lr_color[1]
-                Buffer[2] = Az_color[1]
-                Buffer[3] = Vm_color[1]
-
-                Lr_color[1] = Buffer[0]
-                Az_color[1] = Buffer[1]
-                Vm_color[1] = Buffer[2]
-                Vd_color[1] = Buffer[3]                      
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        elif turn == "Dw":
-            Buffer[0] = Vd_color[5]
-            Buffer[1] = Vm_color[5]
-            Buffer[2] = Az_color[5]
-            Buffer[3] = Lr_color[5]
-
-            Vm_color[5] = Buffer[0]
-            Az_color[5] = Buffer[1]
-            Lr_color[5] = Buffer[2]
-            Vd_color[5] = Buffer[3]
-
-            Buffer[0] = Vd_color[4]
-            Buffer[1] = Vm_color[4]
-            Buffer[2] = Az_color[4]
-            Buffer[3] = Lr_color[4]
-
-            Vm_color[4] = Buffer[0]
-            Az_color[4] = Buffer[1]
-            Lr_color[4] = Buffer[2]
-            Vd_color[4] = Buffer[3]
-
-            Am_color = np.rot90(Am_color,1,(1,0))
-        elif turn == "Dw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
-
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]
-
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
-
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]             
-            
-            Am_color = np.rot90(Am_color,-1,(1,0))
-        elif turn == "Dw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
-
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]
-
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
-
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]                    
-
-            Am_color = np.rot90(Am_color,2,(1,0))
-        elif turn == "Fw":
-            Buffer[0] = Br_color[5]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,5],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,5] = Buffer[2]
-            Br_color[5]   = Buffer[3]
-
-            Buffer[0] = Br_color[4]
-            Buffer[1] = np.flip(Vm_color[:,1],0)
-            Buffer[2] = Am_color[1]
-            Buffer[3] = np.flip(Lr_color[:,4],0)
-
-            Vm_color[:,1] = Buffer[0]
-            Am_color[1]   = Buffer[1]
-            Lr_color[:,4] = Buffer[2]
-            Br_color[4]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "Fw'":   
-            for i in range(3):  
-                Buffer[0] = Br_color[5]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]
-
-                Buffer[0] = Br_color[4]
-                Buffer[1] = np.flip(Vm_color[:,1],0)
-                Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
-
-                Vm_color[:,1] = Buffer[0]
-                Am_color[1]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]        
-                       
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "Fw2":
-            for i in range(2):
-                Buffer[0] = Br_color[5]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]
-
-                Buffer[0] = Br_color[4]
-                Buffer[1] = np.flip(Vm_color[:,1],0)
-                Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
-
-                Vm_color[:,1] = Buffer[0]
-                Am_color[1]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]           
-                              
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-
-        elif turn == "Bw":
-            Buffer[0] = np.flip(Br_color[0],0)
-            Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[5],0)
-            Buffer[3] = Vm_color[:,5]
-
-            Lr_color[:,0] = Buffer[0]
-            Am_color[5]   = Buffer[1]
-            Vm_color[:,5] = Buffer[2]
-            Br_color[0]   = Buffer[3]
-
-            Buffer[0] = np.flip(Br_color[1],0)
-            Buffer[1] = Lr_color[:,1]
-            Buffer[2] = np.flip(Am_color[4],0)
-            Buffer[3] = Vm_color[:,4]
-
-            Lr_color[:,1] = Buffer[0]
-            Am_color[4]   = Buffer[1]
-            Vm_color[:,4] = Buffer[2]
-            Br_color[1]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,1,(1,0))
-
-        elif turn == "Bw'":
-            for i in range(3):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[1],0)
-                Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
-
-                Lr_color[:,1] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
-                Br_color[1]   = Buffer[3]           
-            
-            Az_color = np.rot90(Az_color,-1,(1,0))
-        elif turn == "Bw2":
-            for i in range(2):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[1],0)
-                Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
-
-                Lr_color[:,1] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
-                Br_color[1]   = Buffer[3]                
-                      
-            Az_color = np.rot90(Az_color,2,(1,0))
-        
-        elif turn == "3Rw":
-        
-            Buffer[0] = Vd_color[:,5]
-            Buffer[1] = np.flip(Br_color[:,5],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,5]           
-
-            Br_color[:,5] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,5] = Buffer[2]
-            Vd_color[:,5] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,4]
-            Buffer[1] = np.flip(Br_color[:,4],0)
-            Buffer[2] = np.flip(Az_color[:,1],0)
-            Buffer[3] = Am_color[:,4]           
-
-            Br_color[:,4] = Buffer[0]
-            Az_color[:,1] = Buffer[1]
-            Am_color[:,4] = Buffer[2]
-            Vd_color[:,4] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,3]
-            Buffer[1] = np.flip(Br_color[:,3],0)
-            Buffer[2] = np.flip(Az_color[:,2],0)
-            Buffer[3] = Am_color[:,3]           
-
-            Br_color[:,3] = Buffer[0]
-            Az_color[:,2] = Buffer[1]
-            Am_color[:,3] = Buffer[2]
-            Vd_color[:,3] = Buffer[3]
-            
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-
-        elif turn == "3Rw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,5]           
-
-                Br_color[:,5] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
-                Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,4]           
-
-                Br_color[:,4] = Buffer[0]
-                Az_color[:,1] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,3]
-                Buffer[1] = np.flip(Br_color[:,3],0)
-                Buffer[2] = np.flip(Az_color[:,2],0)
-                Buffer[3] = Am_color[:,3]           
-
-                Br_color[:,3] = Buffer[0]
-                Az_color[:,2] = Buffer[1]
-                Am_color[:,3] = Buffer[2]
-                Vd_color[:,3] = Buffer[3]           
-                       
-            Vm_color = np.rot90(Vm_color,-1,(1,0))
-        elif turn == "3Rw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,5]           
-
-                Br_color[:,5] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
-                Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,4]           
-
-                Br_color[:,4] = Buffer[0]
-                Az_color[:,1] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,3]
-                Buffer[1] = np.flip(Br_color[:,3],0)
-                Buffer[2] = np.flip(Az_color[:,2],0)
-                Buffer[3] = Am_color[:,3]           
-
-                Br_color[:,3] = Buffer[0]
-                Az_color[:,2] = Buffer[1]
-                Am_color[:,3] = Buffer[2]
-                Vd_color[:,3] = Buffer[3]            
-
-            Vm_color = np.rot90(Vm_color,2,(1,0))
-
-        elif turn == "3Lw":
-            Buffer[0] = Vd_color[:,0]
-            Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,5],0)
-            Buffer[3] = Br_color[:,0]
-
-            Am_color[:,0] = Buffer[0]
-            Az_color[:,5] = Buffer[1]
-            Br_color[:,0] = Buffer[2]
-            Vd_color[:,0] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,1]
-            Buffer[1] = np.flip(Am_color[:,1],0)
-            Buffer[2] = np.flip(Az_color[:,4],0)
-            Buffer[3] = Br_color[:,1]
-
-            Am_color[:,1] = Buffer[0]
-            Az_color[:,4] = Buffer[1]
-            Br_color[:,1] = Buffer[2]
-            Vd_color[:,1] = Buffer[3]
-
-            Buffer[0] = Vd_color[:,2]
-            Buffer[1] = np.flip(Am_color[:,2],0)
-            Buffer[2] = np.flip(Az_color[:,3],0)
-            Buffer[3] = Br_color[:,2]
-
-            Am_color[:,2] = Buffer[0]
-            Az_color[:,3] = Buffer[1]
-            Br_color[:,2] = Buffer[2]
-            Vd_color[:,2] = Buffer[3]
-
-            Lr_color = np.rot90(Lr_color,1,(1,0))
-        elif turn == "3Lw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
-                Buffer[3] = Br_color[:,1]
-
-                Am_color[:,1] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
-                Br_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,2]
-                Buffer[1] = np.flip(Am_color[:,2],0)
-                Buffer[2] = np.flip(Az_color[:,3],0)
-                Buffer[3] = Br_color[:,2]
-
-                Am_color[:,2] = Buffer[0]
-                Az_color[:,3] = Buffer[1]
-                Br_color[:,2] = Buffer[2]
-                Vd_color[:,2] = Buffer[3]                 
-
-            Lr_color = np.rot90(Lr_color,-1,(1,0))
-        elif turn == "3Lw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[:,0]
-                Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
-                Buffer[3] = Br_color[:,0]
-
-                Am_color[:,0] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
-                Br_color[:,0] = Buffer[2]
-                Vd_color[:,0] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,1]
-                Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
-                Buffer[3] = Br_color[:,1]
-
-                Am_color[:,1] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
-                Br_color[:,1] = Buffer[2]
-                Vd_color[:,1] = Buffer[3]
-
-                Buffer[0] = Vd_color[:,2]
-                Buffer[1] = np.flip(Am_color[:,2],0)
-                Buffer[2] = np.flip(Az_color[:,3],0)
-                Buffer[3] = Br_color[:,2]
-
-                Am_color[:,2] = Buffer[0]
-                Az_color[:,3] = Buffer[1]
-                Br_color[:,2] = Buffer[2]
-                Vd_color[:,2] = Buffer[3]           
-
-            Lr_color = np.rot90(Lr_color,2,(1,0))
-        elif turn == "3Uw":
-            Buffer[0] = Vd_color[0]
-            Buffer[1] = Lr_color[0]
-            Buffer[2] = Az_color[0]
-            Buffer[3] = Vm_color[0]
-
-            Lr_color[0] = Buffer[0]
-            Az_color[0] = Buffer[1]
-            Vm_color[0] = Buffer[2]
-            Vd_color[0] = Buffer[3]
-
-            Buffer[0] = Vd_color[1]
-            Buffer[1] = Lr_color[1]
-            Buffer[2] = Az_color[1]
-            Buffer[3] = Vm_color[1]
-
-            Lr_color[1] = Buffer[0]
-            Az_color[1] = Buffer[1]
-            Vm_color[1] = Buffer[2]
-            Vd_color[1] = Buffer[3]
-
-            Buffer[0] = Vd_color[2]
-            Buffer[1] = Lr_color[2]
-            Buffer[2] = Az_color[2]
-            Buffer[3] = Vm_color[2]
-
-            Lr_color[2] = Buffer[0]
-            Az_color[2] = Buffer[1]
-            Vm_color[2] = Buffer[2]
-            Vd_color[2] = Buffer[3]
-
-            Br_color = np.rot90(Br_color,1,(1,0))
-        elif turn == "3Uw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-
-                Buffer[0] = Vd_color[1]
-                Buffer[1] = Lr_color[1]
-                Buffer[2] = Az_color[1]
-                Buffer[3] = Vm_color[1]
-
-                Lr_color[1] = Buffer[0]
-                Az_color[1] = Buffer[1]
-                Vm_color[1] = Buffer[2]
-                Vd_color[1] = Buffer[3]
-
-                Buffer[0] = Vd_color[2]
-                Buffer[1] = Lr_color[2]
-                Buffer[2] = Az_color[2]
-                Buffer[3] = Vm_color[2]
-
-                Lr_color[2] = Buffer[0]
-                Az_color[2] = Buffer[1]
-                Vm_color[2] = Buffer[2]
-                Vd_color[2] = Buffer[3]                   
-
-            Br_color = np.rot90(Br_color,-1,(1,0))
-        elif turn == "3Uw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[0]
-                Buffer[1] = Lr_color[0]
-                Buffer[2] = Az_color[0]
-                Buffer[3] = Vm_color[0]
-
-                Lr_color[0] = Buffer[0]
-                Az_color[0] = Buffer[1]
-                Vm_color[0] = Buffer[2]
-                Vd_color[0] = Buffer[3]
-
-                Buffer[0] = Vd_color[1]
-                Buffer[1] = Lr_color[1]
-                Buffer[2] = Az_color[1]
-                Buffer[3] = Vm_color[1]
-
-                Lr_color[1] = Buffer[0]
-                Az_color[1] = Buffer[1]
-                Vm_color[1] = Buffer[2]
-                Vd_color[1] = Buffer[3]
-
-                Buffer[0] = Vd_color[2]
-                Buffer[1] = Lr_color[2]
-                Buffer[2] = Az_color[2]
-                Buffer[3] = Vm_color[2]
-
-                Lr_color[2] = Buffer[0]
-                Az_color[2] = Buffer[1]
-                Vm_color[2] = Buffer[2]
-                Vd_color[2] = Buffer[3]                 
-
-            Br_color = np.rot90(Br_color,2,(1,0))
-        elif turn == "3Dw":
-            Buffer[0] = Vd_color[5]
-            Buffer[1] = Vm_color[5]
-            Buffer[2] = Az_color[5]
-            Buffer[3] = Lr_color[5]
-
-            Vm_color[5] = Buffer[0]
-            Az_color[5] = Buffer[1]
-            Lr_color[5] = Buffer[2]
-            Vd_color[5] = Buffer[3]
-
-            Buffer[0] = Vd_color[4]
-            Buffer[1] = Vm_color[4]
-            Buffer[2] = Az_color[4]
-            Buffer[3] = Lr_color[4]
-
-            Vm_color[4] = Buffer[0]
-            Az_color[4] = Buffer[1]
-            Lr_color[4] = Buffer[2]
-            Vd_color[4] = Buffer[3]
-
-            Buffer[0] = Vd_color[3]
-            Buffer[1] = Vm_color[3]
-            Buffer[2] = Az_color[3]
-            Buffer[3] = Lr_color[3]
-
-            Vm_color[3] = Buffer[0]
-            Az_color[3] = Buffer[1]
-            Lr_color[3] = Buffer[2]
-            Vd_color[3] = Buffer[3]
-
-            Am_color = np.rot90(Am_color,1,(1,0))
-        elif turn == "3Dw'":
-            for i in range(3):
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
-
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]
-
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
-
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]
-
-                Buffer[0] = Vd_color[3]
-                Buffer[1] = Vm_color[3]
-                Buffer[2] = Az_color[3]
-                Buffer[3] = Lr_color[3]
-
-                Vm_color[3] = Buffer[0]
-                Az_color[3] = Buffer[1]
-                Lr_color[3] = Buffer[2]
-                Vd_color[3] = Buffer[3]           
-            
-            Am_color = np.rot90(Am_color,-1,(1,0))
-        elif turn == "3Dw2":
-            for i in range(2):
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
-
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]
-
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
-
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]
-
-                Buffer[0] = Vd_color[3]
-                Buffer[1] = Vm_color[3]
-                Buffer[2] = Az_color[3]
-                Buffer[3] = Lr_color[3]
-
-                Vm_color[3] = Buffer[0]
-                Az_color[3] = Buffer[1]
-                Lr_color[3] = Buffer[2]
-                Vd_color[3] = Buffer[3]           
-
-            Am_color = np.rot90(Am_color,2,(1,0))
-        elif turn == "3Fw":
-            Buffer[0] = Br_color[5]
-            Buffer[1] = np.flip(Vm_color[:,0],0)
-            Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,5],0)
-
-            Vm_color[:,0] = Buffer[0]
-            Am_color[0]   = Buffer[1]
-            Lr_color[:,5] = Buffer[2]
-            Br_color[5]   = Buffer[3]
-
-            Buffer[0] = Br_color[4]
-            Buffer[1] = np.flip(Vm_color[:,1],0)
-            Buffer[2] = Am_color[1]
-            Buffer[3] = np.flip(Lr_color[:,4],0)
-
-            Vm_color[:,1] = Buffer[0]
-            Am_color[1]   = Buffer[1]
-            Lr_color[:,4] = Buffer[2]
-            Br_color[4]   = Buffer[3]
-
-            Buffer[0] = Br_color[3]
-            Buffer[1] = np.flip(Vm_color[:,2],0)
-            Buffer[2] = Am_color[2]
-            Buffer[3] = np.flip(Lr_color[:,3],0)
-
-            Vm_color[:,2] = Buffer[0]
-            Am_color[2]   = Buffer[1]
-            Lr_color[:,3] = Buffer[2]
-            Br_color[3]   = Buffer[3]
-
-            Vd_color = np.rot90(Vd_color,1,(1,0))
-        elif turn == "3Fw'":    
-            for i in range(3): 
-                Buffer[0] = Br_color[5]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]
-
-                Buffer[0] = Br_color[4]
-                Buffer[1] = np.flip(Vm_color[:,1],0)
-                Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
-
-                Vm_color[:,1] = Buffer[0]
-                Am_color[1]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]
-
-                Buffer[0] = Br_color[3]
-                Buffer[1] = np.flip(Vm_color[:,2],0)
-                Buffer[2] = Am_color[2]
-                Buffer[3] = np.flip(Lr_color[:,3],0)
-
-                Vm_color[:,2] = Buffer[0]
-                Am_color[2]   = Buffer[1]
-                Lr_color[:,3] = Buffer[2]
-                Br_color[3]   = Buffer[3]                      
-            
-            Vd_color = np.rot90(Vd_color,-1,(1,0))
-        elif turn == "3Fw2":
-            for i in range(2):
-                Buffer[0] = Br_color[5]
-                Buffer[1] = np.flip(Vm_color[:,0],0)
-                Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
-
-                Vm_color[:,0] = Buffer[0]
-                Am_color[0]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]
-
-                Buffer[0] = Br_color[4]
-                Buffer[1] = np.flip(Vm_color[:,1],0)
-                Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
-
-                Vm_color[:,1] = Buffer[0]
-                Am_color[1]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]
-
-                Buffer[0] = Br_color[3]
-                Buffer[1] = np.flip(Vm_color[:,2],0)
-                Buffer[2] = Am_color[2]
-                Buffer[3] = np.flip(Lr_color[:,3],0)
-
-                Vm_color[:,2] = Buffer[0]
-                Am_color[2]   = Buffer[1]
-                Lr_color[:,3] = Buffer[2]
-                Br_color[3]   = Buffer[3]           
-                              
-            Vd_color = np.rot90(Vd_color,2,(1,0))
-
-        elif turn == "3Bw":
-            Buffer[0] = np.flip(Br_color[0],0)
-            Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[5],0)
-            Buffer[3] = Vm_color[:,5]
-
-            Lr_color[:,0] = Buffer[0]
-            Am_color[5]   = Buffer[1]
-            Vm_color[:,5] = Buffer[2]
-            Br_color[0]   = Buffer[3]
-
-            Buffer[0] = np.flip(Br_color[1],0)
-            Buffer[1] = Lr_color[:,1]
-            Buffer[2] = np.flip(Am_color[4],0)
-            Buffer[3] = Vm_color[:,4]
-
-            Lr_color[:,1] = Buffer[0]
-            Am_color[4]   = Buffer[1]
-            Vm_color[:,4] = Buffer[2]
-            Br_color[1]   = Buffer[3]
-
-            Buffer[0] = np.flip(Br_color[2],0)
-            Buffer[1] = Lr_color[:,2]
-            Buffer[2] = np.flip(Am_color[3],0)
-            Buffer[3] = Vm_color[:,3]
-
-            Lr_color[:,2] = Buffer[0]
-            Am_color[3]   = Buffer[1]
-            Vm_color[:,3] = Buffer[2]
-            Br_color[2]   = Buffer[3]
-
-            Az_color = np.rot90(Az_color,1,(1,0))
-
-        elif turn == "3Bw'":
-            for i in range(3):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[1],0)
-                Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
-
-                Lr_color[:,1] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
-                Br_color[1]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[2],0)
-                Buffer[1] = Lr_color[:,2]
-                Buffer[2] = np.flip(Am_color[3],0)
-                Buffer[3] = Vm_color[:,3]
-
-                Lr_color[:,2] = Buffer[0]
-                Am_color[3]   = Buffer[1]
-                Vm_color[:,3] = Buffer[2]
-                Br_color[2]   = Buffer[3]           
-            
-            Az_color = np.rot90(Az_color,-1,(1,0))
-        elif turn == "3Bw2":
-            for i in range(2):
-                Buffer[0] = np.flip(Br_color[0],0)
-                Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
-
-                Lr_color[:,0] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
-                Br_color[0]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[1],0)
-                Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
-
-                Lr_color[:,1] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
-                Br_color[1]   = Buffer[3]
-
-                Buffer[0] = np.flip(Br_color[2],0)
-                Buffer[1] = Lr_color[:,2]
-                Buffer[2] = np.flip(Am_color[3],0)
-                Buffer[3] = Vm_color[:,3]
-
-                Lr_color[:,2] = Buffer[0]
-                Am_color[3]   = Buffer[1]
-                Vm_color[:,3] = Buffer[2]
-                Br_color[2]   = Buffer[3]                               
-
-            Az_color = np.rot90(Az_color,2,(1,0))
-
-  
-        
-    elif cube == "7x7":
-        if turn == "R":
-            
-            Buffer[0] = Vd_color[:,6]
-            Buffer[1] = np.flip(Br_color[:,6],0)
-            Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,6]           
-
-            Br_color[:,6] = Buffer[0]
-            Az_color[:,0] = Buffer[1]
-            Am_color[:,6] = Buffer[2]
-            Vd_color[:,6] = Buffer[3]
-            
-            
-            Vm_color = np.rot90(Vm_color,1,(1,0))
-
-        elif turn == "R'":
-            for i in range(3):
-                Buffer[0] = Vd_color[:,6]
-                Buffer[1] = np.flip(Br_color[:,6],0)
-                Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,6]           
-
-                Br_color[:,6] = Buffer[0]
-                Az_color[:,0] = Buffer[1]
-                Am_color[:,6] = Buffer[2]
-                Vd_color[:,6] = Buffer[3]            
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]            
 
             Vm_color = np.rot90(Vm_color,-1,(1,0))
                    
@@ -3764,15 +895,15 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             
         elif turn == "R2":
             for i in range(2):
-                Buffer[0] = Vd_color[:,6]
-                Buffer[1] = np.flip(Br_color[:,6],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,6]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,6] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,0] = Buffer[1]
-                Am_color[:,6] = Buffer[2]
-                Vd_color[:,6] = Buffer[3]
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]
             
 
             Vm_color = np.rot90(Vm_color,2,(1,0))
@@ -3780,11 +911,11 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
         elif turn == "L":
             Buffer[0] = Vd_color[:,0]
             Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,6],0)
+            Buffer[2] = np.flip(Az_color[:,LL],0)
             Buffer[3] = Br_color[:,0]
 
             Am_color[:,0] = Buffer[0]
-            Az_color[:,6] = Buffer[1]
+            Az_color[:,LL] = Buffer[1]
             Br_color[:,0] = Buffer[2]
             Vd_color[:,0] = Buffer[3]
 
@@ -3793,11 +924,11 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(3):
                 Buffer[0] = Vd_color[:,0]
                 Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,6],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,0]
 
                 Am_color[:,0] = Buffer[0]
-                Az_color[:,6] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,0] = Buffer[2]
                 Vd_color[:,0] = Buffer[3]                     
 
@@ -3806,11 +937,11 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(2):
                 Buffer[0] = Vd_color[:,0]
                 Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,6],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,0]
 
                 Am_color[:,0] = Buffer[0]
-                Az_color[:,6] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,0] = Buffer[2]
                 Vd_color[:,0] = Buffer[3]             
            
@@ -3854,90 +985,90 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
 
             Br_color = np.rot90(Br_color,2,(1,0))
         elif turn == "D":
-            Buffer[0] = Vd_color[6]
-            Buffer[1] = Vm_color[6]
-            Buffer[2] = Az_color[6]
-            Buffer[3] = Lr_color[6]
+            Buffer[0] = Vd_color[LL]
+            Buffer[1] = Vm_color[LL]
+            Buffer[2] = Az_color[LL]
+            Buffer[3] = Lr_color[LL]
 
-            Vm_color[6] = Buffer[0]
-            Az_color[6] = Buffer[1]
-            Lr_color[6] = Buffer[2]
-            Vd_color[6] = Buffer[3]
+            Vm_color[LL] = Buffer[0]
+            Az_color[LL] = Buffer[1]
+            Lr_color[LL] = Buffer[2]
+            Vd_color[LL] = Buffer[3]
 
             Am_color = np.rot90(Am_color,1,(1,0))
         elif turn == "D'":
             for i in range(3):
-                Buffer[0] = Vd_color[6]
-                Buffer[1] = Vm_color[6]
-                Buffer[2] = Az_color[6]
-                Buffer[3] = Lr_color[6]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[6] = Buffer[0]
-                Az_color[6] = Buffer[1]
-                Lr_color[6] = Buffer[2]
-                Vd_color[6] = Buffer[3]          
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]          
             
             Am_color = np.rot90(Am_color,-1,(1,0))
         elif turn == "D2":
             for i in range(2):
-                Buffer[0] = Vd_color[6]
-                Buffer[1] = Vm_color[6]
-                Buffer[2] = Az_color[6]
-                Buffer[3] = Lr_color[6]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[6] = Buffer[0]
-                Az_color[6] = Buffer[1]
-                Lr_color[6] = Buffer[2]
-                Vd_color[6] = Buffer[3]              
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]              
             
             Am_color = np.rot90(Am_color,2,(1,0))
         elif turn == "F":
-            Buffer[0] = Br_color[6]
+            Buffer[0] = Br_color[LL]
             Buffer[1] = np.flip(Vm_color[:,0],0)
             Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,6],0)
+            Buffer[3] = np.flip(Lr_color[:,LL],0)
 
             Vm_color[:,0] = Buffer[0]
             Am_color[0]   = Buffer[1]
-            Lr_color[:,6] = Buffer[2]
-            Br_color[6]   = Buffer[3]
+            Lr_color[:,LL] = Buffer[2]
+            Br_color[LL]   = Buffer[3]
 
             Vd_color = np.rot90(Vd_color,1,(1,0))
         elif turn == "F'":
             for i in range(3):
-                Buffer[0] = Br_color[6]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,0],0)
                 Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,6],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,0] = Buffer[0]
                 Am_color[0]   = Buffer[1]
-                Lr_color[:,6] = Buffer[2]
-                Br_color[6]   = Buffer[3]          
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]          
                      
             Vd_color = np.rot90(Vd_color,-1,(1,0))
         elif turn == "F2":
             for i in range(2):
-                Buffer[0] = Br_color[6]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,0],0)
                 Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,6],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,0] = Buffer[0]
                 Am_color[0]   = Buffer[1]
-                Lr_color[:,6] = Buffer[2]
-                Br_color[6]   = Buffer[3]           
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]           
            
             Vd_color = np.rot90(Vd_color,2,(1,0))
         elif turn == "B":
             Buffer[0] = np.flip(Br_color[0],0)
             Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[6],0)
-            Buffer[3] = Vm_color[:,6]
+            Buffer[2] = np.flip(Am_color[LL],0)
+            Buffer[3] = Vm_color[:,LL]
 
             Lr_color[:,0] = Buffer[0]
-            Am_color[6]   = Buffer[1]
-            Vm_color[:,6] = Buffer[2]
+            Am_color[LL]   = Buffer[1]
+            Vm_color[:,LL] = Buffer[2]
             Br_color[0]   = Buffer[3]
 
             Az_color = np.rot90(Az_color,1,(1,0))
@@ -3946,12 +1077,12 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(3):
                 Buffer[0] = np.flip(Br_color[0],0)
                 Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[6],0)
-                Buffer[3] = Vm_color[:,6]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,0] = Buffer[0]
-                Am_color[6]   = Buffer[1]
-                Vm_color[:,6] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[0]   = Buffer[3]            
                         
             Az_color = np.rot90(Az_color,-1,(1,0))
@@ -3959,104 +1090,118 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(2):
                 Buffer[0] = np.flip(Br_color[0],0)
                 Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[6],0)
-                Buffer[3] = Vm_color[:,6]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,0] = Buffer[0]
-                Am_color[6]   = Buffer[1]
-                Vm_color[:,6] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[0]   = Buffer[3]                                 
 
             Az_color = np.rot90(Az_color,2,(1,0))
 
         elif turn == "Rw":
-            Buffer[0] = Vd_color[:,6]
-            Buffer[1] = np.flip(Br_color[:,6],0)
+            Buffer[0] = Vd_color[:,LL]
+            Buffer[1] = np.flip(Br_color[:,LL],0)
             Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,6]           
+            Buffer[3] = Am_color[:,LL]           
 
-            Br_color[:,6] = Buffer[0]
+            Br_color[:,LL] = Buffer[0]
             Az_color[:,0] = Buffer[1]
-            Am_color[:,6] = Buffer[2]
-            Vd_color[:,6] = Buffer[3]
+            Am_color[:,LL] = Buffer[2]
+            Vd_color[:,LL] = Buffer[3]
 
-            Buffer[0] = Vd_color[:,5]
-            Buffer[1] = np.flip(Br_color[:,5],0)
+            FL += 1
+            LL -= 1
+
+            Buffer[0] = Vd_color[:,LL]
+            Buffer[1] = np.flip(Br_color[:,LL],0)
             Buffer[2] = np.flip(Az_color[:,1],0)
-            Buffer[3] = Am_color[:,5]           
+            Buffer[3] = Am_color[:,LL]           
 
-            Br_color[:,5] = Buffer[0]
+            Br_color[:,LL] = Buffer[0]
             Az_color[:,1] = Buffer[1]
-            Am_color[:,5] = Buffer[2]
-            Vd_color[:,5] = Buffer[3]
+            Am_color[:,LL] = Buffer[2]
+            Vd_color[:,LL] = Buffer[3]
             
             Vm_color = np.rot90(Vm_color,1,(1,0))
 
         elif turn == "Rw'":
             for i in range(3):
-                Buffer[0] = Vd_color[:,6]
-                Buffer[1] = np.flip(Br_color[:,6],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,6]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,6] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,0] = Buffer[1]
-                Am_color[:,6] = Buffer[2]
-                Vd_color[:,6] = Buffer[3]
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(3):
 
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,5]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,5] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,1] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]           
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]           
                        
             Vm_color = np.rot90(Vm_color,-1,(1,0))
         elif turn == "Rw2":
             for i in range(2):
-                Buffer[0] = Vd_color[:,6]
-                Buffer[1] = np.flip(Br_color[:,6],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,6]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,6] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,0] = Buffer[1]
-                Am_color[:,6] = Buffer[2]
-                Vd_color[:,6] = Buffer[3]
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]
 
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
+            FL += 1
+            LL -= 1
+            for i in range(2):
+
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,5]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,5] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,1] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]              
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]              
 
             Vm_color = np.rot90(Vm_color,2,(1,0))
 
         elif turn == "Lw":
             Buffer[0] = Vd_color[:,0]
             Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,6],0)
+            Buffer[2] = np.flip(Az_color[:,LL],0)
             Buffer[3] = Br_color[:,0]
 
             Am_color[:,0] = Buffer[0]
-            Az_color[:,6] = Buffer[1]
+            Az_color[:,LL] = Buffer[1]
             Br_color[:,0] = Buffer[2]
             Vd_color[:,0] = Buffer[3]
 
+            FL += 1
+            LL -= 1
+
             Buffer[0] = Vd_color[:,1]
             Buffer[1] = np.flip(Am_color[:,1],0)
-            Buffer[2] = np.flip(Az_color[:,5],0)
+            Buffer[2] = np.flip(Az_color[:,LL],0)
             Buffer[3] = Br_color[:,1]
 
             Am_color[:,1] = Buffer[0]
-            Az_color[:,5] = Buffer[1]
+            Az_color[:,LL] = Buffer[1]
             Br_color[:,1] = Buffer[2]
             Vd_color[:,1] = Buffer[3]
 
@@ -4065,21 +1210,25 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(3):
                 Buffer[0] = Vd_color[:,0]
                 Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,6],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,0]
 
                 Am_color[:,0] = Buffer[0]
-                Az_color[:,6] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,0] = Buffer[2]
                 Vd_color[:,0] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(3):
 
                 Buffer[0] = Vd_color[:,1]
                 Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,1]
 
                 Am_color[:,1] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,1] = Buffer[2]
                 Vd_color[:,1] = Buffer[3]
             
@@ -4088,21 +1237,25 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(2):
                 Buffer[0] = Vd_color[:,0]
                 Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,6],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,0]
 
                 Am_color[:,0] = Buffer[0]
-                Az_color[:,6] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,0] = Buffer[2]
                 Vd_color[:,0] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
                 Buffer[0] = Vd_color[:,1]
                 Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,1]
 
                 Am_color[:,1] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,1] = Buffer[2]
                 Vd_color[:,1] = Buffer[3]          
 
@@ -4176,161 +1329,185 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
 
             Br_color = np.rot90(Br_color,2,(1,0))
         elif turn == "Dw":
-            Buffer[0] = Vd_color[6]
-            Buffer[1] = Vm_color[6]
-            Buffer[2] = Az_color[6]
-            Buffer[3] = Lr_color[6]
+            Buffer[0] = Vd_color[LL]
+            Buffer[1] = Vm_color[LL]
+            Buffer[2] = Az_color[LL]
+            Buffer[3] = Lr_color[LL]
 
-            Vm_color[6] = Buffer[0]
-            Az_color[6] = Buffer[1]
-            Lr_color[6] = Buffer[2]
-            Vd_color[6] = Buffer[3]
+            Vm_color[LL] = Buffer[0]
+            Az_color[LL] = Buffer[1]
+            Lr_color[LL] = Buffer[2]
+            Vd_color[LL] = Buffer[3]
 
-            Buffer[0] = Vd_color[5]
-            Buffer[1] = Vm_color[5]
-            Buffer[2] = Az_color[5]
-            Buffer[3] = Lr_color[5]
+            FL += 1
+            LL -= 1
 
-            Vm_color[5] = Buffer[0]
-            Az_color[5] = Buffer[1]
-            Lr_color[5] = Buffer[2]
-            Vd_color[5] = Buffer[3]
+            Buffer[0] = Vd_color[LL]
+            Buffer[1] = Vm_color[LL]
+            Buffer[2] = Az_color[LL]
+            Buffer[3] = Lr_color[LL]
+
+            Vm_color[LL] = Buffer[0]
+            Az_color[LL] = Buffer[1]
+            Lr_color[LL] = Buffer[2]
+            Vd_color[LL] = Buffer[3]
 
             Am_color = np.rot90(Am_color,1,(1,0))
         elif turn == "Dw'":
             for i in range(3):
-                Buffer[0] = Vd_color[6]
-                Buffer[1] = Vm_color[6]
-                Buffer[2] = Az_color[6]
-                Buffer[3] = Lr_color[6]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[6] = Buffer[0]
-                Az_color[6] = Buffer[1]
-                Lr_color[6] = Buffer[2]
-                Vd_color[6] = Buffer[3]
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(3):                
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
-
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]             
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]             
             
             Am_color = np.rot90(Am_color,-1,(1,0))
         elif turn == "Dw2":
             for i in range(2):
-                Buffer[0] = Vd_color[6]
-                Buffer[1] = Vm_color[6]
-                Buffer[2] = Az_color[6]
-                Buffer[3] = Lr_color[6]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[6] = Buffer[0]
-                Az_color[6] = Buffer[1]
-                Lr_color[6] = Buffer[2]
-                Vd_color[6] = Buffer[3]
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]                
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]                
 
             Am_color = np.rot90(Am_color,2,(1,0))
         elif turn == "Fw":
-            Buffer[0] = Br_color[6]
+            Buffer[0] = Br_color[LL]
             Buffer[1] = np.flip(Vm_color[:,0],0)
             Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,6],0)
+            Buffer[3] = np.flip(Lr_color[:,LL],0)
 
             Vm_color[:,0] = Buffer[0]
             Am_color[0]   = Buffer[1]
-            Lr_color[:,6] = Buffer[2]
-            Br_color[6]   = Buffer[3]
+            Lr_color[:,LL] = Buffer[2]
+            Br_color[LL]   = Buffer[3]
 
-            Buffer[0] = Br_color[5]
+            FL += 1
+            LL -= 1
+
+            Buffer[0] = Br_color[LL]
             Buffer[1] = np.flip(Vm_color[:,1],0)
             Buffer[2] = Am_color[1]
-            Buffer[3] = np.flip(Lr_color[:,5],0)
+            Buffer[3] = np.flip(Lr_color[:,LL],0)
 
             Vm_color[:,1] = Buffer[0]
             Am_color[1]   = Buffer[1]
-            Lr_color[:,5] = Buffer[2]
-            Br_color[5]   = Buffer[3]
+            Lr_color[:,LL] = Buffer[2]
+            Br_color[LL]   = Buffer[3]
 
             Vd_color = np.rot90(Vd_color,1,(1,0))
         elif turn == "Fw'": 
             for i in range(3):  
-                Buffer[0] = Br_color[6]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,0],0)
                 Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,6],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,0] = Buffer[0]
                 Am_color[0]   = Buffer[1]
-                Lr_color[:,6] = Buffer[2]
-                Br_color[6]   = Buffer[3]
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]
 
-                Buffer[0] = Br_color[5]
+            FL += 1
+            LL -= 1
+            for i in range(3):
+
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,1],0)
                 Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,1] = Buffer[0]
                 Am_color[1]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]        
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]        
                       
             Vd_color = np.rot90(Vd_color,-1,(1,0))
         elif turn == "Fw2":
             for i in range(2):
-                Buffer[0] = Br_color[6]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,0],0)
                 Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,6],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,0] = Buffer[0]
                 Am_color[0]   = Buffer[1]
-                Lr_color[:,6] = Buffer[2]
-                Br_color[6]   = Buffer[3]
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
-                Buffer[0] = Br_color[5]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,1],0)
                 Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,1] = Buffer[0]
                 Am_color[1]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]           
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]           
                               
             Vd_color = np.rot90(Vd_color,2,(1,0))
 
         elif turn == "Bw":
             Buffer[0] = np.flip(Br_color[0],0)
             Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[6],0)
-            Buffer[3] = Vm_color[:,6]
+            Buffer[2] = np.flip(Am_color[LL],0)
+            Buffer[3] = Vm_color[:,LL]
 
             Lr_color[:,0] = Buffer[0]
-            Am_color[6]   = Buffer[1]
-            Vm_color[:,6] = Buffer[2]
+            Am_color[LL]   = Buffer[1]
+            Vm_color[:,LL] = Buffer[2]
             Br_color[0]   = Buffer[3]
+
+            FL += 1
+            LL -= 1
 
             Buffer[0] = np.flip(Br_color[1],0)
             Buffer[1] = Lr_color[:,1]
-            Buffer[2] = np.flip(Am_color[5],0)
-            Buffer[3] = Vm_color[:,5]
+            Buffer[2] = np.flip(Am_color[LL],0)
+            Buffer[3] = Vm_color[:,LL]
 
             Lr_color[:,1] = Buffer[0]
-            Am_color[5]   = Buffer[1]
-            Vm_color[:,5] = Buffer[2]
+            Am_color[LL]   = Buffer[1]
+            Vm_color[:,LL] = Buffer[2]
             Br_color[1]   = Buffer[3]
 
             Az_color = np.rot90(Az_color,1,(1,0))
@@ -4339,22 +1516,25 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(3):
                 Buffer[0] = np.flip(Br_color[0],0)
                 Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[6],0)
-                Buffer[3] = Vm_color[:,6]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,0] = Buffer[0]
-                Am_color[6]   = Buffer[1]
-                Vm_color[:,6] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[0]   = Buffer[3]
-
+            
+            FL += 1
+            LL -= 1
+            for i in range(3):
                 Buffer[0] = np.flip(Br_color[1],0)
                 Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,1] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[1]   = Buffer[3]            
             
             Az_color = np.rot90(Az_color,-1,(1,0))
@@ -4362,155 +1542,185 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(2):
                 Buffer[0] = np.flip(Br_color[0],0)
                 Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[6],0)
-                Buffer[3] = Vm_color[:,6]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,0] = Buffer[0]
-                Am_color[6]   = Buffer[1]
-                Vm_color[:,6] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[0]   = Buffer[3]
+
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
                 Buffer[0] = np.flip(Br_color[1],0)
                 Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,1] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[1]   = Buffer[3]               
                       
             Az_color = np.rot90(Az_color,2,(1,0))
         
         elif turn == "3Rw":
         
-            Buffer[0] = Vd_color[:,6]
-            Buffer[1] = np.flip(Br_color[:,6],0)
+            Buffer[0] = Vd_color[:,LL]
+            Buffer[1] = np.flip(Br_color[:,LL],0)
             Buffer[2] = np.flip(Az_color[:,0],0)
-            Buffer[3] = Am_color[:,6]           
+            Buffer[3] = Am_color[:,LL]           
 
-            Br_color[:,6] = Buffer[0]
+            Br_color[:,LL] = Buffer[0]
             Az_color[:,0] = Buffer[1]
-            Am_color[:,6] = Buffer[2]
-            Vd_color[:,6] = Buffer[3]
+            Am_color[:,LL] = Buffer[2]
+            Vd_color[:,LL] = Buffer[3]
 
-            Buffer[0] = Vd_color[:,5]
-            Buffer[1] = np.flip(Br_color[:,5],0)
+            FL += 1
+            LL -= 1            
+
+            Buffer[0] = Vd_color[:,LL]
+            Buffer[1] = np.flip(Br_color[:,LL],0)
             Buffer[2] = np.flip(Az_color[:,1],0)
-            Buffer[3] = Am_color[:,5]           
+            Buffer[3] = Am_color[:,LL]           
 
-            Br_color[:,5] = Buffer[0]
+            Br_color[:,LL] = Buffer[0]
             Az_color[:,1] = Buffer[1]
-            Am_color[:,5] = Buffer[2]
-            Vd_color[:,5] = Buffer[3]
+            Am_color[:,LL] = Buffer[2]
+            Vd_color[:,LL] = Buffer[3]
 
-            Buffer[0] = Vd_color[:,4]
-            Buffer[1] = np.flip(Br_color[:,4],0)
+            FL += 1
+            LL -= 1  
+
+            Buffer[0] = Vd_color[:,LL]
+            Buffer[1] = np.flip(Br_color[:,LL],0)
             Buffer[2] = np.flip(Az_color[:,2],0)
-            Buffer[3] = Am_color[:,4]           
+            Buffer[3] = Am_color[:,LL]           
 
-            Br_color[:,4] = Buffer[0]
+            Br_color[:,LL] = Buffer[0]
             Az_color[:,2] = Buffer[1]
-            Am_color[:,4] = Buffer[2]
-            Vd_color[:,4] = Buffer[3]
+            Am_color[:,LL] = Buffer[2]
+            Vd_color[:,LL] = Buffer[3]
             
             Vm_color = np.rot90(Vm_color,1,(1,0))
 
         elif turn == "3Rw'":
             for i in range(3):
-                Buffer[0] = Vd_color[:,6]
-                Buffer[1] = np.flip(Br_color[:,6],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,6]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,6] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,0] = Buffer[1]
-                Am_color[:,6] = Buffer[2]
-                Vd_color[:,6] = Buffer[3]
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]
 
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
+            FL += 1
+            LL -= 1
+            for i in range(3):
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,5]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,5] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,1] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]
 
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
+            FL += 1
+            LL -= 1
+            for i in range(3):
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,2],0)
-                Buffer[3] = Am_color[:,4]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,4] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,2] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]           
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]           
                        
             Vm_color = np.rot90(Vm_color,-1,(1,0))
         elif turn == "3Rw2":
             for i in range(2):
-                Buffer[0] = Vd_color[:,6]
-                Buffer[1] = np.flip(Br_color[:,6],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,0],0)
-                Buffer[3] = Am_color[:,6]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,6] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,0] = Buffer[1]
-                Am_color[:,6] = Buffer[2]
-                Vd_color[:,6] = Buffer[3]
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
-                Buffer[0] = Vd_color[:,5]
-                Buffer[1] = np.flip(Br_color[:,5],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,1],0)
-                Buffer[3] = Am_color[:,5]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,5] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,1] = Buffer[1]
-                Am_color[:,5] = Buffer[2]
-                Vd_color[:,5] = Buffer[3]
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
-                Buffer[0] = Vd_color[:,4]
-                Buffer[1] = np.flip(Br_color[:,4],0)
+                Buffer[0] = Vd_color[:,LL]
+                Buffer[1] = np.flip(Br_color[:,LL],0)
                 Buffer[2] = np.flip(Az_color[:,2],0)
-                Buffer[3] = Am_color[:,4]           
+                Buffer[3] = Am_color[:,LL]           
 
-                Br_color[:,4] = Buffer[0]
+                Br_color[:,LL] = Buffer[0]
                 Az_color[:,2] = Buffer[1]
-                Am_color[:,4] = Buffer[2]
-                Vd_color[:,4] = Buffer[3]           
+                Am_color[:,LL] = Buffer[2]
+                Vd_color[:,LL] = Buffer[3]           
 
             Vm_color = np.rot90(Vm_color,2,(1,0))
 
         elif turn == "3Lw":
             Buffer[0] = Vd_color[:,0]
             Buffer[1] = np.flip(Am_color[:,0],0)
-            Buffer[2] = np.flip(Az_color[:,6],0)
+            Buffer[2] = np.flip(Az_color[:,LL],0)
             Buffer[3] = Br_color[:,0]
 
             Am_color[:,0] = Buffer[0]
-            Az_color[:,6] = Buffer[1]
+            Az_color[:,LL] = Buffer[1]
             Br_color[:,0] = Buffer[2]
             Vd_color[:,0] = Buffer[3]
 
+            FL += 1
+            LL -= 1
+
             Buffer[0] = Vd_color[:,1]
             Buffer[1] = np.flip(Am_color[:,1],0)
-            Buffer[2] = np.flip(Az_color[:,5],0)
+            Buffer[2] = np.flip(Az_color[:,LL],0)
             Buffer[3] = Br_color[:,1]
 
             Am_color[:,1] = Buffer[0]
-            Az_color[:,5] = Buffer[1]
+            Az_color[:,LL] = Buffer[1]
             Br_color[:,1] = Buffer[2]
             Vd_color[:,1] = Buffer[3]
 
+            FL += 1
+            LL -= 1
+
             Buffer[0] = Vd_color[:,2]
             Buffer[1] = np.flip(Am_color[:,2],0)
-            Buffer[2] = np.flip(Az_color[:,4],0)
+            Buffer[2] = np.flip(Az_color[:,LL],0)
             Buffer[3] = Br_color[:,2]
 
             Am_color[:,2] = Buffer[0]
-            Az_color[:,4] = Buffer[1]
+            Az_color[:,LL] = Buffer[1]
             Br_color[:,2] = Buffer[2]
             Vd_color[:,2] = Buffer[3]
 
@@ -4519,31 +1729,39 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(3):
                 Buffer[0] = Vd_color[:,0]
                 Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,6],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,0]
 
                 Am_color[:,0] = Buffer[0]
-                Az_color[:,6] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,0] = Buffer[2]
                 Vd_color[:,0] = Buffer[3]
 
+            FL += 1
+            LL -= 1
+            for i in range(3):
+
                 Buffer[0] = Vd_color[:,1]
                 Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,1]
 
                 Am_color[:,1] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,1] = Buffer[2]
                 Vd_color[:,1] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(3):
 
                 Buffer[0] = Vd_color[:,2]
                 Buffer[1] = np.flip(Am_color[:,2],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,2]
 
                 Am_color[:,2] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,2] = Buffer[2]
                 Vd_color[:,2] = Buffer[3]                  
 
@@ -4552,31 +1770,39 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(2):
                 Buffer[0] = Vd_color[:,0]
                 Buffer[1] = np.flip(Am_color[:,0],0)
-                Buffer[2] = np.flip(Az_color[:,6],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,0]
 
                 Am_color[:,0] = Buffer[0]
-                Az_color[:,6] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,0] = Buffer[2]
                 Vd_color[:,0] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
                 Buffer[0] = Vd_color[:,1]
                 Buffer[1] = np.flip(Am_color[:,1],0)
-                Buffer[2] = np.flip(Az_color[:,5],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,1]
 
                 Am_color[:,1] = Buffer[0]
-                Az_color[:,5] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,1] = Buffer[2]
                 Vd_color[:,1] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
                 Buffer[0] = Vd_color[:,2]
                 Buffer[1] = np.flip(Am_color[:,2],0)
-                Buffer[2] = np.flip(Az_color[:,4],0)
+                Buffer[2] = np.flip(Az_color[:,LL],0)
                 Buffer[3] = Br_color[:,2]
 
                 Am_color[:,2] = Buffer[0]
-                Az_color[:,4] = Buffer[1]
+                Az_color[:,LL] = Buffer[1]
                 Br_color[:,2] = Buffer[2]
                 Vd_color[:,2] = Buffer[3]            
 
@@ -4680,231 +1906,281 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
 
             Br_color = np.rot90(Br_color,2,(1,0))
         elif turn == "3Dw":
-            Buffer[0] = Vd_color[6]
-            Buffer[1] = Vm_color[6]
-            Buffer[2] = Az_color[6]
-            Buffer[3] = Lr_color[6]
+            Buffer[0] = Vd_color[LL]
+            Buffer[1] = Vm_color[LL]
+            Buffer[2] = Az_color[LL]
+            Buffer[3] = Lr_color[LL]
 
-            Vm_color[6] = Buffer[0]
-            Az_color[6] = Buffer[1]
-            Lr_color[6] = Buffer[2]
-            Vd_color[6] = Buffer[3]
+            Vm_color[LL] = Buffer[0]
+            Az_color[LL] = Buffer[1]
+            Lr_color[LL] = Buffer[2]
+            Vd_color[LL] = Buffer[3]
 
-            Buffer[0] = Vd_color[5]
-            Buffer[1] = Vm_color[5]
-            Buffer[2] = Az_color[5]
-            Buffer[3] = Lr_color[5]
+            FL += 1
+            LL -= 1
 
-            Vm_color[5] = Buffer[0]
-            Az_color[5] = Buffer[1]
-            Lr_color[5] = Buffer[2]
-            Vd_color[5] = Buffer[3]
+            Buffer[0] = Vd_color[LL]
+            Buffer[1] = Vm_color[LL]
+            Buffer[2] = Az_color[LL]
+            Buffer[3] = Lr_color[LL]
 
-            Buffer[0] = Vd_color[4]
-            Buffer[1] = Vm_color[4]
-            Buffer[2] = Az_color[4]
-            Buffer[3] = Lr_color[4]
+            Vm_color[LL] = Buffer[0]
+            Az_color[LL] = Buffer[1]
+            Lr_color[LL] = Buffer[2]
+            Vd_color[LL] = Buffer[3]
 
-            Vm_color[4] = Buffer[0]
-            Az_color[4] = Buffer[1]
-            Lr_color[4] = Buffer[2]
-            Vd_color[4] = Buffer[3]
+            FL += 1
+            LL -= 1
+
+            Buffer[0] = Vd_color[LL]
+            Buffer[1] = Vm_color[LL]
+            Buffer[2] = Az_color[LL]
+            Buffer[3] = Lr_color[LL]
+
+            Vm_color[LL] = Buffer[0]
+            Az_color[LL] = Buffer[1]
+            Lr_color[LL] = Buffer[2]
+            Vd_color[LL] = Buffer[3]
 
             Am_color = np.rot90(Am_color,1,(1,0))
         elif turn == "3Dw'":
             for i in range(3):
-                Buffer[0] = Vd_color[6]
-                Buffer[1] = Vm_color[6]
-                Buffer[2] = Az_color[6]
-                Buffer[3] = Lr_color[6]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[6] = Buffer[0]
-                Az_color[6] = Buffer[1]
-                Lr_color[6] = Buffer[2]
-                Vd_color[6] = Buffer[3]
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]
 
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
+            FL += 1
+            LL -= 1
+            for i in range(3):
 
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]
 
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]           
+            FL += 1
+            LL -= 1
+            for i in range(3):
+
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
+
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]           
             
             Am_color = np.rot90(Am_color,-1,(1,0))
         elif turn == "3Dw2":
             for i in range(2):
-                Buffer[0] = Vd_color[6]
-                Buffer[1] = Vm_color[6]
-                Buffer[2] = Az_color[6]
-                Buffer[3] = Lr_color[6]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[6] = Buffer[0]
-                Az_color[6] = Buffer[1]
-                Lr_color[6] = Buffer[2]
-                Vd_color[6] = Buffer[3]
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
-                Buffer[0] = Vd_color[5]
-                Buffer[1] = Vm_color[5]
-                Buffer[2] = Az_color[5]
-                Buffer[3] = Lr_color[5]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[5] = Buffer[0]
-                Az_color[5] = Buffer[1]
-                Lr_color[5] = Buffer[2]
-                Vd_color[5] = Buffer[3]
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
-                Buffer[0] = Vd_color[4]
-                Buffer[1] = Vm_color[4]
-                Buffer[2] = Az_color[4]
-                Buffer[3] = Lr_color[4]
+                Buffer[0] = Vd_color[LL]
+                Buffer[1] = Vm_color[LL]
+                Buffer[2] = Az_color[LL]
+                Buffer[3] = Lr_color[LL]
 
-                Vm_color[4] = Buffer[0]
-                Az_color[4] = Buffer[1]
-                Lr_color[4] = Buffer[2]
-                Vd_color[4] = Buffer[3]           
+                Vm_color[LL] = Buffer[0]
+                Az_color[LL] = Buffer[1]
+                Lr_color[LL] = Buffer[2]
+                Vd_color[LL] = Buffer[3]           
 
             Am_color = np.rot90(Am_color,2,(1,0))
         elif turn == "3Fw":
-            Buffer[0] = Br_color[6]
+            Buffer[0] = Br_color[LL]
             Buffer[1] = np.flip(Vm_color[:,0],0)
             Buffer[2] = Am_color[0]
-            Buffer[3] = np.flip(Lr_color[:,6],0)
+            Buffer[3] = np.flip(Lr_color[:,LL],0)
 
             Vm_color[:,0] = Buffer[0]
             Am_color[0]   = Buffer[1]
-            Lr_color[:,6] = Buffer[2]
-            Br_color[6]   = Buffer[3]
+            Lr_color[:,LL] = Buffer[2]
+            Br_color[LL]   = Buffer[3]
 
-            Buffer[0] = Br_color[5]
+            FL += 1
+            LL -= 1
+
+            Buffer[0] = Br_color[LL]
             Buffer[1] = np.flip(Vm_color[:,1],0)
             Buffer[2] = Am_color[1]
-            Buffer[3] = np.flip(Lr_color[:,5],0)
+            Buffer[3] = np.flip(Lr_color[:,LL],0)
 
             Vm_color[:,1] = Buffer[0]
             Am_color[1]   = Buffer[1]
-            Lr_color[:,5] = Buffer[2]
-            Br_color[5]   = Buffer[3]
+            Lr_color[:,LL] = Buffer[2]
+            Br_color[LL]   = Buffer[3]
 
-            Buffer[0] = Br_color[4]
+            FL += 1
+            LL -= 1
+
+            Buffer[0] = Br_color[LL]
             Buffer[1] = np.flip(Vm_color[:,2],0)
             Buffer[2] = Am_color[2]
-            Buffer[3] = np.flip(Lr_color[:,4],0)
+            Buffer[3] = np.flip(Lr_color[:,LL],0)
 
             Vm_color[:,2] = Buffer[0]
             Am_color[2]   = Buffer[1]
-            Lr_color[:,4] = Buffer[2]
-            Br_color[4]   = Buffer[3]
+            Lr_color[:,LL] = Buffer[2]
+            Br_color[LL]   = Buffer[3]
 
             Vd_color = np.rot90(Vd_color,1,(1,0))
         elif turn == "3Fw'":    
             for i in range(3): 
-                Buffer[0] = Br_color[6]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,0],0)
                 Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,6],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,0] = Buffer[0]
                 Am_color[0]   = Buffer[1]
-                Lr_color[:,6] = Buffer[2]
-                Br_color[6]   = Buffer[3]
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]
 
-                Buffer[0] = Br_color[5]
+            FL += 1
+            LL -= 1
+            for i in range(3):
+
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,1],0)
                 Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,1] = Buffer[0]
                 Am_color[1]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(3):
 
-                Buffer[0] = Br_color[4]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,2],0)
                 Buffer[2] = Am_color[2]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,2] = Buffer[0]
                 Am_color[2]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]           
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]           
                       
             Vd_color = np.rot90(Vd_color,-1,(1,0))
         elif turn == "3Fw2":
             for i in range(2):
-                Buffer[0] = Br_color[6]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,0],0)
                 Buffer[2] = Am_color[0]
-                Buffer[3] = np.flip(Lr_color[:,6],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,0] = Buffer[0]
                 Am_color[0]   = Buffer[1]
-                Lr_color[:,6] = Buffer[2]
-                Br_color[6]   = Buffer[3]
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
-                Buffer[0] = Br_color[5]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,1],0)
                 Buffer[2] = Am_color[1]
-                Buffer[3] = np.flip(Lr_color[:,5],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,1] = Buffer[0]
                 Am_color[1]   = Buffer[1]
-                Lr_color[:,5] = Buffer[2]
-                Br_color[5]   = Buffer[3]
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
-                Buffer[0] = Br_color[4]
+                Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,2],0)
                 Buffer[2] = Am_color[2]
-                Buffer[3] = np.flip(Lr_color[:,4],0)
+                Buffer[3] = np.flip(Lr_color[:,LL],0)
 
                 Vm_color[:,2] = Buffer[0]
                 Am_color[2]   = Buffer[1]
-                Lr_color[:,4] = Buffer[2]
-                Br_color[4]   = Buffer[3]            
+                Lr_color[:,LL] = Buffer[2]
+                Br_color[LL]   = Buffer[3]            
                               
             Vd_color = np.rot90(Vd_color,2,(1,0))
 
         elif turn == "3Bw":
             Buffer[0] = np.flip(Br_color[0],0)
             Buffer[1] = Lr_color[:,0]
-            Buffer[2] = np.flip(Am_color[6],0)
-            Buffer[3] = Vm_color[:,6]
+            Buffer[2] = np.flip(Am_color[LL],0)
+            Buffer[3] = Vm_color[:,LL]
 
             Lr_color[:,0] = Buffer[0]
-            Am_color[6]   = Buffer[1]
-            Vm_color[:,6] = Buffer[2]
+            Am_color[LL]   = Buffer[1]
+            Vm_color[:,LL] = Buffer[2]
             Br_color[0]   = Buffer[3]
+
+            FL += 1
+            LL -= 1
 
             Buffer[0] = np.flip(Br_color[1],0)
             Buffer[1] = Lr_color[:,1]
-            Buffer[2] = np.flip(Am_color[5],0)
-            Buffer[3] = Vm_color[:,5]
+            Buffer[2] = np.flip(Am_color[LL],0)
+            Buffer[3] = Vm_color[:,LL]
 
             Lr_color[:,1] = Buffer[0]
-            Am_color[5]   = Buffer[1]
-            Vm_color[:,5] = Buffer[2]
+            Am_color[LL]   = Buffer[1]
+            Vm_color[:,LL] = Buffer[2]
             Br_color[1]   = Buffer[3]
+
+            FL += 1
+            LL -= 1
 
             Buffer[0] = np.flip(Br_color[2],0)
             Buffer[1] = Lr_color[:,2]
-            Buffer[2] = np.flip(Am_color[4],0)
-            Buffer[3] = Vm_color[:,4]
+            Buffer[2] = np.flip(Am_color[LL],0)
+            Buffer[3] = Vm_color[:,LL]
 
             Lr_color[:,2] = Buffer[0]
-            Am_color[4]   = Buffer[1]
-            Vm_color[:,4] = Buffer[2]
+            Am_color[LL]   = Buffer[1]
+            Vm_color[:,LL] = Buffer[2]
             Br_color[2]   = Buffer[3]
 
             Az_color = np.rot90(Az_color,1,(1,0))
@@ -4913,32 +2189,40 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(3):
                 Buffer[0] = np.flip(Br_color[0],0)
                 Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[6],0)
-                Buffer[3] = Vm_color[:,6]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,0] = Buffer[0]
-                Am_color[6]   = Buffer[1]
-                Vm_color[:,6] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[0]   = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(3):
 
                 Buffer[0] = np.flip(Br_color[1],0)
                 Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,1] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[1]   = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(3):
 
                 Buffer[0] = np.flip(Br_color[2],0)
                 Buffer[1] = Lr_color[:,2]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,2] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[2]   = Buffer[3]
            
             
@@ -4947,32 +2231,40 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             for i in range(2):
                 Buffer[0] = np.flip(Br_color[0],0)
                 Buffer[1] = Lr_color[:,0]
-                Buffer[2] = np.flip(Am_color[6],0)
-                Buffer[3] = Vm_color[:,6]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,0] = Buffer[0]
-                Am_color[6]   = Buffer[1]
-                Vm_color[:,6] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[0]   = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
                 Buffer[0] = np.flip(Br_color[1],0)
                 Buffer[1] = Lr_color[:,1]
-                Buffer[2] = np.flip(Am_color[5],0)
-                Buffer[3] = Vm_color[:,5]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,1] = Buffer[0]
-                Am_color[5]   = Buffer[1]
-                Vm_color[:,5] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[1]   = Buffer[3]
+            
+            FL += 1
+            LL -= 1
+            for i in range(2):
 
                 Buffer[0] = np.flip(Br_color[2],0)
                 Buffer[1] = Lr_color[:,2]
-                Buffer[2] = np.flip(Am_color[4],0)
-                Buffer[3] = Vm_color[:,4]
+                Buffer[2] = np.flip(Am_color[LL],0)
+                Buffer[3] = Vm_color[:,LL]
 
                 Lr_color[:,2] = Buffer[0]
-                Am_color[4]   = Buffer[1]
-                Vm_color[:,4] = Buffer[2]
+                Am_color[LL]   = Buffer[1]
+                Vm_color[:,LL] = Buffer[2]
                 Br_color[2]   = Buffer[3]
                             
             Az_color = np.rot90(Az_color,2,(1,0))
@@ -7302,14 +4594,15 @@ def scrambler_6x6():
         
         Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("6x6",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer) if flag_7_event == 0 else turn_draw("7x7",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
         # draw_scramble("6x6") if flag_7_event == 0 else draw_scramble("7x7")
-        sum_turns.append(turn)
+        sum_turns.append(turn)        
+        print (turn)
         pr_move = n_move
         accepted = 0
     
     reset_flags()      
     draw_scramble("6x6",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) if flag_7_event == 0 else draw_scramble("7x7",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
     # turn_draw("6x6","R2")
-    # draw_scramble("6x6")
+    # draw_scramble("6x6")    
     
     actual_scramble.set(" ".join(sum_turns))
     
