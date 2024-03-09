@@ -1480,22 +1480,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
     return Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color
 
 
-def draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color):      
-
-    # global Br_pyra
-    # global Lr_pyra
-    # global Vd_color
-    # global Vm_color
-    # global Az_color
-    # global Am_color
-    
-    # global Br_color_pyra 
-    # global Lr_color_pyra 
-    # global Vd_color 
-    # global Vm_color 
-    # global Az_color 
-    # global Am_color    
-    
+def draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color):           
 
     our_canvas.delete("all")    
    
@@ -2560,30 +2545,8 @@ def draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
         our_canvas.create_rectangle(195,320,208,333,fill=Am_color[6][5])
         our_canvas.create_rectangle(210,320,223,333,fill=Am_color[6][6])
         
-    elif cube == "pyraminx":            
-
-        # Vd_color = np.where(Vd_color != 1, Vd_color,"red")
-        # Vm_color = np.where(Vm_color != 1, Vm_color,"red")
-        # Az_color = np.where(Az_color != 1, Az_color,"red")
-        # Am_color = np.where(Am_color != 1, Am_color,"red")  
-        
-        # Vd_color = np.where(Vd_color != 2, Vd_color,"green")
-        # Vm_color = np.where(Vm_color != 2, Vm_color,"green")
-        # Az_color = np.where(Az_color != 2, Az_color,"green")
-        # Am_color = np.where(Am_color != 2, Am_color,"green")
-
-        # Vd_color = np.where(Vd_color != 3, Vd_color,"blue")
-        # Vm_color = np.where(Vm_color != 3, Vm_color,"blue")
-        # Az_color = np.where(Az_color != 3, Az_color,"blue")
-        # Am_color = np.where(Am_color != 3, Am_color,"blue") 
-               
-        # Vd_color = np.where(Vd_color != 4, Vd_color,"yellow")
-        # Vm_color = np.where(Vm_color != 4, Vm_color,"yellow")
-        # Az_color = np.where(Az_color != 4, Az_color,"yellow")
-        # Am_color = np.where(Am_color != 4, Am_color,"yellow")      
-
-         
-
+    elif cube == "pyraminx":               
+       
         #L
         our_canvas.create_polygon(10,10,50 ,10,30 ,45,fill=Vm_color[0][0])        
         our_canvas.create_polygon(52,10,92 ,10,72 ,45,fill=Vm_color[0][2])
@@ -4432,369 +4395,81 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     #                 ax.add_patch(side)
     #                 art3d.pathpatch_2d_to_3d(side, z=z, zdir=axis)
 
+    if cube == "2x2":        
+        length = 2
+        LL = 1
+        cubeN = 'n'
+    elif cube == "3x3":        
+        LL = 2
+        length = 3
+        cubeN = 'n'
+    elif cube == "4x4":        
+        LL = 3
+        length = 4
+        cubeN = 'n'
+    elif cube == "5x5":        
+        LL = 4
+        length = 5
+        cubeN = 'n'
+    elif cube == "6x6":        
+        LL = 5
+        length = 6
+        cubeN = 'n'
+    elif cube == "7x7":        
+        LL = 6
+        length = 7
+        cubeN = 'n'
 
-    if cube == "2x2":
+
+    if cubeN == "n":
         # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX         
 
-        for i in range(2):
-            for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[1-j][1-i])
+        for i in range(length):
+            for j in range(length):
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[LL-j][LL-i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
 
         # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY        
 
-        for i in range(2):
-            for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[1-j][i])
+        for i in range(length):
+            for j in range(length):
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[LL-j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
 
         # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
         
-        for i in range(2):
-            for j in range(2):
+        for i in range(length):
+            for j in range(length):
                 side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
 
         # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
         
-        for i in range(2):
-            for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[1-j][i])
+        for i in range(length):
+            for j in range(length):
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[LL-j][i])
                 ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=2, zdir='x')
+                art3d.pathpatch_2d_to_3d(side, z=length, zdir='x')
 
         # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY        
 
-        for i in range(2):
-            for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[1-j][1-i])
+        for i in range(length):
+            for j in range(length):
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[LL-j][LL-i])
                 ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=2, zdir='y')
+                art3d.pathpatch_2d_to_3d(side, z=length, zdir='y')
 
         # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ           
 
-        for i in range(2):
-            for j in range(2):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[1-j][i])
+        for i in range(length):
+            for j in range(length):
+                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[LL-j][i])
                 ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=2, zdir='z') 
-
-
-
- 
-    
-    if cube == "3x3":
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        
-        for i in range(3):
-            for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[2-j][2-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
-
-
-     
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-        
-        for i in range(3):
-            for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[2-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-       
-        for i in range(3):
-            for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
-
-
-
-
-
-
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-       
-        for i in range(3):
-            for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[2-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=3, zdir='x')
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-        
-        for i in range(3):
-            for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[2-j][2-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=3, zdir='y')
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-       
-        for i in range(3):
-            for j in range(3):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[2-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=3, zdir='z')
-
-    
-    
-    if cube == "4x4":
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-       
-        for i in range(4):
-            for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[3-j][3-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
-
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-        
-        for i in range(4):
-            for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[3-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
-
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-                        
-        for i in range(4):
-            for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
-
-
-
-
-
-
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                        
-        for i in range(4):
-            for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[3-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=4, zdir='x')
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                        
-        for i in range(4):
-            for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[3-j][3-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=4, zdir='y')
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-        
-        for i in range(4):
-            for j in range(4):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[3-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=4, zdir='z')
-         
-                
-
-
-    if cube == "5x5":
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-       
-        for i in range(5):
-            for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[4-j][4-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
-
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                        
-        for i in range(5):
-            for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[4-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
-
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-               
-        for i in range(5):
-            for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
-
-
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                
-        for i in range(5):
-            for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[4-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=5, zdir='x')
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                
-        for i in range(5):
-            for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[4-j][4-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=5, zdir='y')
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-                
-        for i in range(5):
-            for j in range(5):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[4-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=5, zdir='z')
-
-    if cube == "6x6":
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-       
-        for i in range(6):
-            for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[5-j][5-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                       
-        for i in range(6):
-            for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[5-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
-
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-               
-        for i in range(6):
-            for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
-
-
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-               
-        for i in range(6):
-            for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[5-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=6, zdir='x')
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                
-        for i in range(6):
-            for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[5-j][5-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=6, zdir='y')
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-                
-        for i in range(6):
-            for j in range(6):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[5-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=6, zdir='z')
-
-
-    if cube == "7x7":
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-       
-        for i in range(7):
-            for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Lr_color[6-j][6-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='x')
-
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-               
-        for i in range(7):
-            for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vd_color[6-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='y')
-
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-                
-        for i in range(7):
-            for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Am_color[j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=0, zdir='z')
-
-
-        # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                
-        for i in range(7):
-            for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Vm_color[6-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=7, zdir='x')
-
-        # Eixo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-               
-        for i in range(7):
-            for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Az_color[6-j][6-i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=7, zdir='y')
-
-
-
-        # Eixo ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-                
-        for i in range(7):
-            for j in range(7):
-                side = Rectangle((i, j), 1, 1, edgecolor='k', facecolor=Br_color[6-j][i])
-                ax.add_patch(side)
-                art3d.pathpatch_2d_to_3d(side, z=7, zdir='z')
-
-
-
-
-
-
-
-
+                art3d.pathpatch_2d_to_3d(side, z=length, zdir='z') 
+   
 
     # Hide axes ticks
     ax.set_xticks([])
@@ -4802,7 +4477,6 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     ax.set_zticks([])
     # ax.set_visible(False)
     # ax.set_facecolor('pink')    
-
 	
     canvas.draw() 
 
@@ -5388,8 +5062,6 @@ tb_stat.heading("melhor",text="melhor",anchor=tk.CENTER)
 tb_stat.grid(column = 0, row = 0)
 
 
-scrambler_3x3()
-
 
 root.bind("<KeyPress-space>",on_press_space)
 root.bind("<KeyRelease-space>",on_release_space)
@@ -5443,10 +5115,6 @@ tb_ranking.heading("NRA",text="NR",anchor=tk.CENTER)
 
 # our_canvas.pack(side = tk.RIGHT,anchor = tk.S)
 # delete_button.pack(side = tk.LEFT)
-
-
-
-
 
 menubar = tk.Menu(root)
 filemenu = tk.Menu(menubar, tearoff=0)
@@ -5615,7 +5283,6 @@ def write_txt_setting():
    
     f.writelines(L)
     f.close()
-
 
 
 read_txt_setting()
