@@ -1,0 +1,10 @@
+Tempo de inspecao = True
+Desenho Scrambler = True
+Disparador cronometro = 2
+Precisao = 1
+Tempo hold = 3
+Modalidade = 1
+Habilitar Ranking = False
+Gênero =0
+Salvar tempo = False
+Ranking Path =

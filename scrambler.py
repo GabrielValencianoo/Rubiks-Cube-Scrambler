@@ -149,29 +149,6 @@ canvas = FigureCanvasTkAgg(fig,	master = root)
 
 
 
-Vm_color = np.full((3, 5), 1)
- 
-Vd_color = np.full((3, 5), 2)
-
-Az_color = np.full((3, 5), 3)
-
-Am_color = np.full((3, 5), 4)
-
-Buffer = np.full((3, 5), 0)
-#-------------------------------------------------------------------------------------------
- 
-
-
-# -----------------------------------------------------------------------
-
-Vd_color = np.full((3, 5), "green")
-
-Vm_color = np.full((3, 5), "red")
-
-Az_color = np.full((3, 5), "blue")
-
-Am_color = np.full((3, 5), "yellow")
-
 def trunc(n, decimals=0):
     
     multiplier = 10 ** decimals
