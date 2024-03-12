@@ -35,7 +35,7 @@ NavigationToolbar2Tk)
 import requests
 import json
 
-import icecream
+from icecream import ic
 import mplcursors
 
 from zipfile import ZipFile
@@ -4600,7 +4600,7 @@ def importar_tempos():
         name_file = askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
                             filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
     elif first_scan == True or flag_change_event == True:
-        name_file = eventos.get() + '.csv'
+        name_file = eventos.get() + '.csv' 
     
 
 
@@ -4802,7 +4802,7 @@ def on_press_enter(event):
 
 
 def inputVar_change():
-    
+    global first_scan
     plot_button.grid_forget() 
     reset_button.grid_forget()
     delete_button.grid_forget()
@@ -4822,11 +4822,12 @@ def inputVar_change():
     reset_button.grid (row = 2, column = 0, sticky = tk.W, pady = 2)
     delete_button.grid(row = 3, column = 0, sticky = tk.W, pady = 2)
 
-    write_txt_setting()
+    if first_scan == False:      
+        write_txt_setting()
 
     
-
 def precisionVar_change():
+    global first_scan
     global precisionTimer
     if precisionVar.get() == 1:
         precisionTimer = 2
@@ -4835,10 +4836,11 @@ def precisionVar_change():
     elif precisionVar.get() == 2:
         precisionTimer = 3  
 
-    write_txt_setting()  
-
+    if first_scan == False:      
+        write_txt_setting()
 
 def holdVar_change():
+    global first_scan
     global holdSpace
 
     if holdVar.get() == 1:
@@ -4853,9 +4855,11 @@ def holdVar_change():
     elif holdVar.get() == 4:
         holdSpace = 1000
     
-    write_txt_setting()
+    if first_scan == False:      
+        write_txt_setting()
     
 def inspecionVar_change():
+    global first_scan
     global timer_state 
     
     if inspecionVar.get() == 0:
@@ -4864,9 +4868,11 @@ def inspecionVar_change():
     elif inspecionVar.get() == 1:
         timer_state = 0
     
-    write_txt_setting()
+    if first_scan == False:      
+        write_txt_setting()
 
-def scrambleVar_change():    
+def scrambleVar_change(): 
+    global first_scan   
     
     if scrambleVar.get() == 0:
         our_canvas.grid_forget() 
@@ -4874,9 +4880,11 @@ def scrambleVar_change():
     elif scrambleVar.get() == 1:                
         our_canvas.grid(row = 5, column = 1, sticky = tk.E, pady = 2)
     
-    write_txt_setting()
+    if first_scan == False:      
+        write_txt_setting()
     
-def scramble3DVar_change():    
+def scramble3DVar_change(): 
+    global first_scan   
     
     if scramble3DVar.get() == 0:
         canvas.get_tk_widget().pack_forget()
@@ -4884,7 +4892,8 @@ def scramble3DVar_change():
     elif scramble3DVar.get() == 1:                   
         canvas.get_tk_widget().pack()                 
     
-    write_txt_setting()
+    if first_scan == False:      
+        write_txt_setting()
 
 def savetimeVar_change():
     global saveTime 
@@ -4895,14 +4904,16 @@ def savetimeVar_change():
         
     elif savetimeVar.get() == 1:       
         saveTime = 1
-        # if first_scan == True:
-        #     importar_tempos()
-        # elif first_scan == False:
-        #     guardar_tempos()         
-    
-    write_txt_setting()
+        if first_scan == True:
+            importar_tempos()
+        elif first_scan == False:
+            guardar_tempos()    
+
+    if first_scan == False:      
+        write_txt_setting()
   
 def rankingVar_change():
+    global first_scan
     global timer_state 
     global enableRanking
     
@@ -4919,6 +4930,7 @@ def rankingVar_change():
    
 def genderVar_change():
     global gender
+    global first_scan
     
     if genderVar.get() == 1:
         gender = 1  
@@ -4931,24 +4943,26 @@ def genderVar_change():
         
         
     create_ranking()
-    write_txt_setting()   
+    # ic(first_scan)
+    if first_scan == False:      
+        write_txt_setting()
+    
+        for i in tb_stat.get_children():
+            tb_stat.delete(i) 
 
-    for i in tb_stat.get_children():
-        tb_stat.delete(i) 
-
-    for i in tb_times.get_children():
-        tb_times.delete(i) 
+        for i in tb_times.get_children():
+            tb_times.delete(i) 
 
 
-    for i in tb_ranking.get_children():
-        tb_ranking.delete(i) 
+        for i in tb_ranking.get_children():
+            tb_ranking.delete(i) 
 
-    s1 = 0
-    for solve in range(len(tempos)):
-        s1 += 1
-        
-        # print(s1)
-        estatistica(s1)
+        s1 = 0
+        for solve in range(len(tempos)):
+            s1 += 1
+            
+            # print(s1)
+            estatistica(s1)
 
 def donothing():
    filewin = tk.Toplevel(root)
@@ -5171,7 +5185,7 @@ gendermenu.add_radiobutton(label="f", value=3, variable=genderVar, command= gend
 helpmenu.add_command(label="Help Index", command=download_data)
 helpmenu.add_command(label="About...", command=donothing)
 
-
+jsonSettings = {}
 
 def read_txt_setting():
 
@@ -5181,32 +5195,21 @@ def read_txt_setting():
     first_scan = True
     try:
         if first_scan == True:
-            f = open("Scrambler_Settings.txt", "r")  
-            L = f.readlines()       
             
-            L0 = L[0].split('=')
-            L1 = L[1].split('=')
-            L2 = L[2].split('=')
-            L3 = L[3].split('=')
-            L4 = L[4].split('=')
-            L5 = L[5].split('=')
-            L6 = L[6].split('=')
-            L7 = L[7].split('=')        
-            L8 = L[8].split('=')        
-            L9 = L[9].split('=')    
-            L10 = L[10].split('=')         
+            with open('Scrambler_Settings.json', 'r') as openfile:
+                jsonSettings = json.load(openfile)                  
             
-            inspecionVar.set(L0[1].strip())
-            scrambleVar.set(L1[1].strip())        
-            inputVar.set(L2[1])
-            precisionVar.set(L3[1])
-            holdVar.set(L4[1])           
-            eventos.current(L5[1])           
-            rankingVar.set(L6[1].strip())
-            genderVar.set(L7[1])                           
-            savetimeVar.set(L8[1].strip())        
-            rankingPath = L9[1]
-            scramble3DVar.set(L10[1].strip()) 
+            inspecionVar.set(jsonSettings['Tempo de inspecao'])
+            scrambleVar.set(jsonSettings['Desenho Scrambler'])        
+            inputVar.set(jsonSettings['Disparador cronometro'])
+            precisionVar.set(jsonSettings['Precisao'])
+            holdVar.set(jsonSettings['Tempo hold'])           
+            eventos.current(jsonSettings['Modalidade'])           
+            rankingVar.set(jsonSettings['Habilitar Ranking'])
+            genderVar.set(jsonSettings['Genero'])                           
+            savetimeVar.set(jsonSettings['Salvar tempo'])        
+            rankingPath = jsonSettings['Ranking Path']
+            scramble3DVar.set(jsonSettings['Desenho Scrambler 3D']) 
             
 
             inputVar_change()
@@ -5214,18 +5217,19 @@ def read_txt_setting():
             holdVar_change()
             inspecionVar_change()
             scrambleVar_change()
-            change_event(L5[1])
+            change_event(jsonSettings['Modalidade'])
             genderVar_change()  
             savetimeVar_change()         
             rankingVar_change()   
             scramble3DVar_change()          
             
-            f.close()    
+            with open('Scrambler_Settings.json', 'w') as openfile:
+                jsonSettings = json.dump(jsonSettings,openfile)  
 
-
-    except:
-        if first_scan == True:
-            f = open("Scrambler_Settings.txt", "w")
+    except Exception as error:
+        print("An error occurred:", error) # An error occurred: name 'x' is not defined:
+        if first_scan == True:  
+            
             
             inspecionVar.set(1)
             inputVar.set(2) 
@@ -5249,7 +5253,7 @@ def read_txt_setting():
             savetimeVar_change()         
             create_ranking()
             scramble3DVar_change()
-            f.close()
+            
             
             write_txt_setting()
     first_scan = False
@@ -5257,27 +5261,26 @@ def read_txt_setting():
 
 def write_txt_setting():
     global rankingPath    
-    global gender
+    global gender    
+    jsonSettings = {}
+      
+    jsonSettings['Tempo de inspecao']= str(inspecionVar.get())
+    jsonSettings['Desenho Scrambler'] = str(scrambleVar.get())
+    jsonSettings['Disparador cronometro'] = str(inputVar.get())
+    jsonSettings['Precisao'] = str(precisionVar.get())
+    jsonSettings['Tempo hold'] = str(holdVar.get())
+    jsonSettings['Modalidade'] =  str(eventos.current())    
+    jsonSettings['Habilitar Ranking'] = str(rankingVar.get())
+    jsonSettings['Genero'] = str(gender)
+    jsonSettings['Salvar tempo'] = str(savetimeVar.get())
+    jsonSettings['Ranking Path'] = str(rankingPath)
+    jsonSettings['Desenho Scrambler 3D'] = str(scramble3DVar.get())  
 
-    f = open("Scrambler_Settings.txt","w")
-    L = []    
-    L.append('Tempo de inspecao = ' + str(inspecionVar.get()))
-    L.append('\nDesenho Scrambler = ' + str(scrambleVar.get()))
-    L.append('\nDisparador cronometro = ' + str(inputVar.get()))
-    L.append('\nPrecisao = ' + str(precisionVar.get()))
-    L.append('\nTempo hold = ' + str(holdVar.get())) 
-    L.append('\nModalidade = ' + str(eventos.current()))     
-    L.append('\nHabilitar Ranking = ' + str(rankingVar.get())) 
-    L.append('\nGênero =' + str(gender))     
-    L.append('\nSalvar tempo = ' + str(savetimeVar.get()))
-    L.append('\nRanking Path =' + str(rankingPath)) 
-    L.append('\nDesenho Scrambler 3D = ' + str(scramble3DVar.get()))
+    with open('Scrambler_Settings.json', 'w') as openfile:
+        jsonSettings = json.dump(jsonSettings,openfile)    
     
-   
-    f.writelines(L)
-    f.close()
 
-
+# ic(first_scan)
 read_txt_setting()
 root.config(menu=menubar)
 root.mainloop() 
