@@ -4458,7 +4458,7 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     canvas.draw() 
 
 	# placing the canvas on the Tkinter root 
-    canvas.get_tk_widget().pack()      
+    # canvas.get_tk_widget().pack()      
 
 
 	# creating the Matplotlib toolbar 
@@ -4876,7 +4876,15 @@ def scrambleVar_change():
     
     write_txt_setting()
     
-
+def scramble3DVar_change():    
+    
+    if scramble3DVar.get() == 0:
+        canvas.get_tk_widget().pack_forget()
+        
+    elif scramble3DVar.get() == 1:                   
+        canvas.get_tk_widget().pack()                 
+    
+    write_txt_setting()
 
 def savetimeVar_change():
     global saveTime 
@@ -5118,6 +5126,7 @@ filemenu.add_command(label="Sair", command=exportar_tempos)
 
 inspecionVar = tk.BooleanVar()
 scrambleVar = tk.BooleanVar()
+scramble3DVar = tk.BooleanVar()
 savetimeVar = tk.BooleanVar()
 rankingVar = tk.BooleanVar()
 inputVar = tk.IntVar()
@@ -5128,6 +5137,7 @@ genderVar = tk.IntVar()
 
 optionmenu.add_checkbutton(label="Tempo de Inspeção", onvalue=1, offvalue=0, variable=inspecionVar, command= inspecionVar_change)
 optionmenu.add_checkbutton(label="Desenho scramble", onvalue=1, offvalue=0, variable=scrambleVar, command= scrambleVar_change)
+optionmenu.add_checkbutton(label="Desenho 3D scramble", onvalue=1, offvalue=0, variable=scramble3DVar, command= scramble3DVar_change)
 optionmenu.add_checkbutton(label="Guardar tempos", onvalue=1, offvalue=0, variable=savetimeVar, command= savetimeVar_change)
 optionmenu.add_cascade(label="Disparador cronômetro", menu=inputmenu)
 optionmenu.add_cascade(label="Precisão timer", menu=precisionmenu)
@@ -5183,7 +5193,8 @@ def read_txt_setting():
             L6 = L[6].split('=')
             L7 = L[7].split('=')        
             L8 = L[8].split('=')        
-            L9 = L[9].split('=')        
+            L9 = L[9].split('=')    
+            L10 = L[10].split('=')         
             
             inspecionVar.set(L0[1].strip())
             scrambleVar.set(L1[1].strip())        
@@ -5195,6 +5206,7 @@ def read_txt_setting():
             genderVar.set(L7[1])                           
             savetimeVar.set(L8[1].strip())        
             rankingPath = L9[1]
+            scramble3DVar.set(L10[1].strip()) 
             
 
             inputVar_change()
@@ -5205,7 +5217,8 @@ def read_txt_setting():
             change_event(L5[1])
             genderVar_change()  
             savetimeVar_change()         
-            rankingVar_change()             
+            rankingVar_change()   
+            scramble3DVar_change()          
             
             f.close()    
 
@@ -5223,7 +5236,8 @@ def read_txt_setting():
             rankingVar.set(0)
             genderVar.set(0)
             inspecionVar.set(1)
-            savetimeVar.set(0)        
+            savetimeVar.set(0)  
+            scramble3DVar.set(1)      
 
             inputVar_change()
             precisionVar_change()
@@ -5234,6 +5248,7 @@ def read_txt_setting():
             rankingVar_change()
             savetimeVar_change()         
             create_ranking()
+            scramble3DVar_change()
             f.close()
             
             write_txt_setting()
@@ -5256,6 +5271,7 @@ def write_txt_setting():
     L.append('\nGênero =' + str(gender))     
     L.append('\nSalvar tempo = ' + str(savetimeVar.get()))
     L.append('\nRanking Path =' + str(rankingPath)) 
+    L.append('\nDesenho Scrambler 3D = ' + str(scramble3DVar.get()))
     
    
     f.writelines(L)

@@ -8,3 +8,5 @@ Habilitar Ranking = False
 Gênero =0
 Salvar tempo = False
 Ranking Path =
+
+Desenho Scrambler 3D = False
