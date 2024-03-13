@@ -21,6 +21,7 @@ from tkinter import filedialog
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfile
 from tkinter.filedialog import askdirectory
+import customtkinter as ctk
 
 import datetime
 import csv
@@ -45,17 +46,20 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import mpl_toolkits.mplot3d.art3d as art3d
 
-root = tk.Tk() 
+root = ctk.CTk() 
 root.title('timezinho') 
 root.geometry('1200x700+1200+200') 
+
+ctk.set_appearance_mode("dark")  # Modes: system (default), light, dark
+ctk.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
 # root.geometry('1000x600') 
 # root.iconphoto(False, tk.PhotoImage(file='/path/to/ico/icon.png'))
 
 # Label 
-row1 = ttk.LabelFrame(root)
-row2 = ttk.LabelFrame(root)
-row3 = ttk.LabelFrame(root)
-row4 = ttk.LabelFrame(root)
+row1 = ctk.CTkFrame(root)
+row2 = ctk.CTkFrame(root)
+row3 = ctk.CTkFrame(root)
+row4 = ctk.CTkFrame(root)
 # row3 = ttk.Frame(root)
 
 row1.pack()
@@ -367,7 +371,7 @@ def estatistica(index):
     if saveTime == 1 and first_scan == False and flag_change_event == False:
         update_file_tempos()    
 
-    ch_event = eventos.get()    
+    ch_event = eventsComboBox.get()    
   
     if enableRanking == 1:
         if ch_event == '6x6' or ch_event == '7x7':
@@ -2603,7 +2607,7 @@ def draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
 
 
 def next_scramble():
-    ch_event = eventos.get()
+    ch_event = eventsComboBox.get()
     
     if ch_event == '2x2':
         scrambler_2x2()
@@ -3842,7 +3846,7 @@ def create_ranking():
     # print(world_Person)
 
 
-    ch_event = eventos.get()
+    ch_event = eventsComboBox.get()
 
     if ch_event == '2x2':
         modalidade = "222"  
@@ -4270,6 +4274,7 @@ def stop_timer():
 def change_event(event):  
     global flag_change_event
     flag_change_event = True
+    print("entroo")
 
     resetar()     
     create_ranking()   
@@ -4278,7 +4283,8 @@ def change_event(event):
     
     global flag_7_event 
     flag_7_event = 0        
-    ch_event = eventos.get()
+    ch_event = eventsComboBox.get()
+    print(ch_event)
     if ch_event == '2x2':
         scrambler_2x2()                 
     elif ch_event == '3x3':
@@ -4376,26 +4382,32 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
         length = 2
         LL = 1
         cubeN = 'n'
+        # ax.set_box_aspect(None, zoom=20)
     elif cube == "3x3":        
         LL = 2
         length = 3
         cubeN = 'n'
+        # ax.set_box_aspect(None, zoom=30)
     elif cube == "4x4":        
         LL = 3
         length = 4
         cubeN = 'n'
+        # ax.set_box_aspect(None, zoom=40)
     elif cube == "5x5":        
         LL = 4
         length = 5
         cubeN = 'n'
+        # ax.set_box_aspect(None, zoom=50)
     elif cube == "6x6":        
         LL = 5
         length = 6
         cubeN = 'n'
+        # ax.set_box_aspect(None, zoom=60)
     elif cube == "7x7":        
         LL = 6
         length = 7
         cubeN = 'n'
+        # ax.set_box_aspect(None, zoom=70)
 
 
     if cubeN == "n":
@@ -4452,6 +4464,7 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     ax.set_xticks([])
     ax.set_yticks([])
     ax.set_zticks([])
+    # ax.dist = 70
     # ax.set_visible(False)
     # ax.set_facecolor('pink')    
 	
@@ -4600,7 +4613,8 @@ def importar_tempos():
         name_file = askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
                             filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
     elif first_scan == True or flag_change_event == True:
-        name_file = eventos.get() + '.csv' 
+        name_file = str(eventsComboBox.get()) + '.csv'
+
     
 
 
@@ -4611,7 +4625,7 @@ def importar_tempos():
             resetar()
             for row in csv_reader:                         
                 # print(f'\t{row["No."]} ; {row["Time"]} ; {row["Scramble"]} ; {row["Date"]}.')            
-                    
+                        
                 tempos.append(float(row["Time"]))            
                 scrambles.append(row["Scramble"])
                 datas.append(row["Date"])
@@ -4619,7 +4633,7 @@ def importar_tempos():
 
                 line_count += 1
                 estatistica(line_count)
-                
+                    
 
             print(f'Processed {line_count} lines.')
     except:        
@@ -4642,7 +4656,7 @@ def exportar_tempos():
     messagebox.showinfo( "Warning", "Export completo.")
      
 def update_file_tempos():    
-    name_file = eventos.get()  
+    name_file = eventsComboBox.get()  
     name_file = name_file + '.csv'
 
     with open(name_file, mode='a') as employee_file:
@@ -4652,7 +4666,7 @@ def update_file_tempos():
 
 def guardar_tempos():    
     events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
-    name_file = eventos.get() 
+    name_file = eventsComboBox.get() 
     name_file = name_file + '.csv'  
     for event in events:
         name_file = event
@@ -4661,7 +4675,7 @@ def guardar_tempos():
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             employee_writer.writerow(["No.", "Time", "Scramble","Date"])
             
-            if event == eventos.get():
+            if event == eventsComboBox.get():
                 for i in range(len(tempos)):
                     employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i]])
     
@@ -4727,7 +4741,7 @@ def resetar():
         tb_ranking.delete(i) 
     
     if flag_change_event == False and first_scan == False:    
-        name_file = eventos.get() 
+        name_file = eventsComboBox.get() 
         name_file = name_file + '.csv'  
         with open(name_file, mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -4994,20 +5008,21 @@ def donothing_event(event):
        print_valor.pack()       
 
 
-ttk.Label(row1, text = "Modalidade :").grid(column = 0,row = 0) 
+ctk.CTkLabel(row1, text = "Modalidade :").grid(column = 0,row = 0) 
 
 # n = tk.StringVar() 
 # eventos = ttk.Combobox(row1, width = 10,textvariable = n,state = "readonly") 
-eventos = ttk.Combobox(row1, width = 10,state = "readonly") 
+eventosValues = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
+eventsComboBox = ctk.CTkComboBox(row1,state = "readonly", values = eventosValues, command=change_event) 
 # Adding combobox drop down list 
-eventos['values'] = ('2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock') 
 
-eventos.grid(column = 1, row = 0) 
-eventos.bind('<<ComboboxSelected>>',change_event)
+
+eventsComboBox.grid(column = 1, row = 0) 
+# eventos.bind('<<ComboboxSelected>>',change_event)
 # Shows number as a default value 
-eventos.current(1) 
+# eventsComboBox.set('3x3') 
 
-
+print(eventsComboBox.get())
 
 
 # img = tk.PhotoImage(file = r"C:\Users\gabri\OneDrive\Documentos\VScode\lena.png")
@@ -5015,7 +5030,7 @@ eventos.current(1)
 # label_img.pack(expand = "yes",anchor = tk.SE)
 # label_img.pack(fill = "both", expand = "yes",side=tk.TOP , anchor = tk.S)
 
-print_scramble = tk.Label(row2,textvariable = actual_scramble,wraplength = 500)
+print_scramble = ctk.CTkLabel(row2,textvariable = actual_scramble,wraplength = 500)
 print_scramble.grid(column = 0, row = 0)
 
 
@@ -5070,19 +5085,20 @@ root.bind("<KeyPress-Return>",on_press_enter)
 
 actual_timer.set("0:00")
 
-print_timer = tk.Label(row4,textvariable = actual_timer)
+print_timer = ctk.CTkLabel(row4,textvariable = actual_timer)
 # print_timer.pack(anchor=tk.CENTER)
 # print_timer.pack(side = tk.LEFT,anchor=tk.N)
 
-input_timer  = tk.Entry(row4)
+input_timer  = ctk.CTkEntry(row4)
 
-plot_button = tk.Button(master = row4,command = plot,	height = 2, width = 10, text = "Plot") 
+plot_button = ctk.CTkButton(master = row4,command = plot,	height = 2, width = 10, text = "Plot") 
+# plot_button.pack(anchor = tk.CENTER) 
 # plot_button.pack(side = tk.LEFT,anchor = tk.W) 
 
-reset_button  = tk.Button(master = row4,command = resetar,	height = 2, width = 10, text = "Reset") 
+reset_button  = ctk.CTkButton(master = row4,command = resetar,	height = 2, width = 10, text = "Reset") 
 # reset_button.pack(side = tk.LEFT,anchor = tk.W)
 
-delete_button  = tk.Button(master = row4,command = deletar,	height = 2, width = 10, text = "Delete") 
+delete_button  = ctk.CTkButton(master = row4,command = deletar,	height = 2, width = 10, text = "Delete") 
 # delete_button.pack(side = tk.LEFT,anchor = tk.W)
 
 tb_ranking = ttk.Treeview(row4, height=2)
@@ -5195,6 +5211,7 @@ def read_txt_setting():
     first_scan = True
     try:
         if first_scan == True:
+
             
             with open('Scrambler_Settings.json', 'r') as openfile:
                 jsonSettings = json.load(openfile)                  
@@ -5210,6 +5227,8 @@ def read_txt_setting():
             savetimeVar.set(jsonSettings['Salvar tempo'])        
             rankingPath = jsonSettings['Ranking Path']
             scramble3DVar.set(jsonSettings['Desenho Scrambler 3D']) 
+
+
             
 
             inputVar_change()
@@ -5236,7 +5255,7 @@ def read_txt_setting():
             precisionVar.set(1)
             holdVar.set(3)
             scrambleVar.set(1)
-            eventos.current(1) 
+            eventsComboBox.set('3x3') 
             rankingVar.set(0)
             genderVar.set(0)
             inspecionVar.set(1)
@@ -5261,6 +5280,7 @@ def read_txt_setting():
 
 def write_txt_setting():
     global rankingPath    
+
     global gender    
     jsonSettings = {}
       
@@ -5278,9 +5298,7 @@ def write_txt_setting():
 
     with open('Scrambler_Settings.json', 'w') as openfile:
         jsonSettings = json.dump(jsonSettings,openfile)    
-    
 
-# ic(first_scan)
 read_txt_setting()
 root.config(menu=menubar)
 root.mainloop() 
