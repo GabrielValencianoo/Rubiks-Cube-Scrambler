@@ -50,9 +50,6 @@ root = ctk.CTk()
 root.title('timezinho') 
 root.geometry('1200x700+1200+200') 
 
-ctk.set_appearance_mode("dark")  # Modes: system (default), light, dark
-ctk.set_default_color_theme("green")  # Themes: blue (default), dark-blue, green
-# root.geometry('1000x600') 
 # root.iconphoto(False, tk.PhotoImage(file='/path/to/ico/icon.png'))
 
 # Label 
@@ -4978,6 +4975,32 @@ def genderVar_change():
             # print(s1)
             estatistica(s1)
 
+def ModeVar_change():    
+    
+    if ModeVar.get() == 1:
+        ctk.set_appearance_mode("system")
+        
+    elif ModeVar.get() == 2:
+        ctk.set_appearance_mode("light")
+    
+    elif ModeVar.get() == 3:
+        ctk.set_appearance_mode("dark")
+    
+    if first_scan == False:      
+        write_txt_setting()
+
+def themeVar_change():    
+    
+    if themeVar.get() == 1:        
+        ctk.set_default_color_theme("blue")
+        
+    elif themeVar.get() == 2:        
+        ctk.set_default_color_theme("green")
+    
+    
+    if first_scan == False:      
+        write_txt_setting()
+
 def donothing():
    filewin = tk.Toplevel(root)
    button = tk.Button(filewin, text="Do nothing button")
@@ -5139,11 +5162,15 @@ inputmenu = tk.Menu(menubar, tearoff=0)
 holdmenu = tk.Menu(menubar, tearoff=0)
 rankingmenu = tk.Menu(menubar, tearoff=0)
 gendermenu = tk.Menu(menubar, tearoff=0)
+UImenu = tk.Menu(menubar, tearoff=0)
+modemenu = tk.Menu(menubar, tearoff=0)
+thememenu = tk.Menu(menubar, tearoff=0)
 helpmenu = tk.Menu(menubar, tearoff=0)
 
 menubar.add_cascade(label="File", menu=filemenu)
 menubar.add_cascade(label="Opções", menu=optionmenu)
 menubar.add_cascade(label="Ranking", menu=rankingmenu)
+menubar.add_cascade(label="UI", menu=UImenu)
 menubar.add_cascade(label="Help", menu=helpmenu)
 
 
@@ -5163,6 +5190,8 @@ inputVar = tk.IntVar()
 precisionVar = tk.IntVar()
 holdVar = tk.IntVar()
 genderVar = tk.IntVar()
+ModeVar = tk.IntVar()
+themeVar = tk.IntVar()
 
 
 optionmenu.add_checkbutton(label="Tempo de Inspeção", onvalue=1, offvalue=0, variable=inspecionVar, command= inspecionVar_change)
@@ -5198,6 +5227,16 @@ gendermenu.add_radiobutton(label="*", value=1, variable=genderVar, command= gend
 gendermenu.add_radiobutton(label="m", value=2, variable=genderVar, command= genderVar_change)
 gendermenu.add_radiobutton(label="f", value=3, variable=genderVar, command= genderVar_change)
 
+UImenu.add_cascade(label="Mode", menu=modemenu)
+UImenu.add_cascade(label="Color Theme", menu=thememenu)
+
+modemenu.add_radiobutton(label="System", value=1, variable=ModeVar, command= ModeVar_change)
+modemenu.add_radiobutton(label="Light", value=2, variable=ModeVar, command= ModeVar_change)
+modemenu.add_radiobutton(label="Dark", value=3, variable=ModeVar, command= ModeVar_change)
+
+thememenu.add_radiobutton(label="Blue", value=1, variable=themeVar, command= themeVar_change)
+thememenu.add_radiobutton(label="Green", value=2, variable=themeVar, command= themeVar_change)
+
 helpmenu.add_command(label="Help Index", command=download_data)
 helpmenu.add_command(label="About...", command=donothing)
 
@@ -5221,12 +5260,14 @@ def read_txt_setting():
             inputVar.set(jsonSettings['Disparador cronometro'])
             precisionVar.set(jsonSettings['Precisao'])
             holdVar.set(jsonSettings['Tempo hold'])           
-            eventos.current(jsonSettings['Modalidade'])           
+            eventsComboBox.set(jsonSettings['Modalidade'])           
             rankingVar.set(jsonSettings['Habilitar Ranking'])
             genderVar.set(jsonSettings['Genero'])                           
             savetimeVar.set(jsonSettings['Salvar tempo'])        
             rankingPath = jsonSettings['Ranking Path']
             scramble3DVar.set(jsonSettings['Desenho Scrambler 3D']) 
+            ModeVar.set(jsonSettings['Mode']) 
+            themeVar.set(jsonSettings['colorTheme']) 
 
 
             
@@ -5240,7 +5281,9 @@ def read_txt_setting():
             genderVar_change()  
             savetimeVar_change()         
             rankingVar_change()   
-            scramble3DVar_change()          
+            scramble3DVar_change()  
+            ModeVar_change() 
+            themeVar_change()         
             
             with open('Scrambler_Settings.json', 'w') as openfile:
                 jsonSettings = json.dump(jsonSettings,openfile)  
@@ -5272,6 +5315,8 @@ def read_txt_setting():
             savetimeVar_change()         
             create_ranking()
             scramble3DVar_change()
+            ModeVar_change()
+            themeVar_change()
             
             
             write_txt_setting()
@@ -5289,12 +5334,14 @@ def write_txt_setting():
     jsonSettings['Disparador cronometro'] = str(inputVar.get())
     jsonSettings['Precisao'] = str(precisionVar.get())
     jsonSettings['Tempo hold'] = str(holdVar.get())
-    jsonSettings['Modalidade'] =  str(eventos.current())    
+    jsonSettings['Modalidade'] =  str(eventsComboBox.get())    
     jsonSettings['Habilitar Ranking'] = str(rankingVar.get())
     jsonSettings['Genero'] = str(gender)
     jsonSettings['Salvar tempo'] = str(savetimeVar.get())
     jsonSettings['Ranking Path'] = str(rankingPath)
     jsonSettings['Desenho Scrambler 3D'] = str(scramble3DVar.get())  
+    jsonSettings['Mode'] = str(ModeVar.get())  
+    jsonSettings['colorTheme'] = str(themeVar.get())  
 
     with open('Scrambler_Settings.json', 'w') as openfile:
         jsonSettings = json.dump(jsonSettings,openfile)    
