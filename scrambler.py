@@ -22,6 +22,7 @@ from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfile
 from tkinter.filedialog import askdirectory
 import customtkinter as ctk
+from tkinter import colorchooser
 
 import datetime
 import csv
@@ -102,6 +103,8 @@ ao_5  = []
 ao_12 = []
 scrambles = []
 datas = []
+
+faceColors = {'1':'#FFFFFF','2':'#FFA500','3':'#00FF00','4':'#FF0000','5':'#0000FF','6':'#FFFF00'}
 
 first_scan = False
 flag_change_event = False   
@@ -773,6 +776,7 @@ def reset_flags():
     flag_3Bw = 0
 
 def createMatrix(cube,type):
+    global faceColors
 
     if cube == "2x2":
         n = 2
@@ -790,18 +794,19 @@ def createMatrix(cube,type):
         n = 7
     
     if type == "color":
+        # print(type(faceColors["1"]))
     
-        Br_color = np.full((n,n), "#FFFFFF")
+        Br_color = np.full((n,n), faceColors["1"])
 
-        Lr_color =  np.full((n,n), "#FFA500")
+        Lr_color = np.full((n,n), faceColors["2"])
 
-        Vd_color =  np.full((n,n), "#00FF00")
+        Vd_color = np.full((n,n), faceColors["3"])
 
-        Vm_color =  np.full((n,n), "#FF0000")
+        Vm_color = np.full((n,n), faceColors["4"])
 
-        Az_color =  np.full((n,n), "#0000FF")
+        Az_color = np.full((n,n), faceColors["5"])
 
-        Am_color =  np.full((n,n), "#FFFF00")
+        Am_color = np.full((n,n), faceColors["6"])
 
         Buffer = np.full((4,n), "#000000") 
 
@@ -4679,7 +4684,46 @@ def guardar_tempos():
     messagebox.showinfo( "Warning", "Export completo.")
 
     
+def changeColorScramble1():
+    faceColors['1'] = colorchooser.askcolor(faceColors['1'])[1]
     
+    if first_scan == False:      
+        write_txt_setting()
+
+
+def changeColorScramble2():
+    faceColors['2'] = colorchooser.askcolor(faceColors['2'])[1]
+    
+    if first_scan == False:      
+        write_txt_setting()
+
+
+def changeColorScramble3():
+    faceColors['3'] = colorchooser.askcolor(faceColors['3'])[1]
+
+    if first_scan == False:      
+        write_txt_setting()
+
+
+def changeColorScramble4():
+    faceColors['4'] = colorchooser.askcolor(faceColors['4'])[1]
+
+    if first_scan == False:      
+        write_txt_setting()
+
+
+def changeColorScramble5():
+    faceColors['5'] = colorchooser.askcolor(faceColors['5'])[1]
+    
+    if first_scan == False:      
+        write_txt_setting()
+
+
+def changeColorScramble6():
+    faceColors['6'] = colorchooser.askcolor(faceColors['6'])[1]
+    
+    if first_scan == False:      
+        write_txt_setting()
 
 
 def resetar():
@@ -5158,6 +5202,7 @@ menubar = tk.Menu(root)
 filemenu = tk.Menu(menubar, tearoff=0)
 optionmenu = tk.Menu(menubar, tearoff=0)
 precisionmenu = tk.Menu(menubar, tearoff=0)
+colormenu = tk.Menu(menubar, tearoff=0)
 inputmenu = tk.Menu(menubar, tearoff=0)
 holdmenu = tk.Menu(menubar, tearoff=0)
 rankingmenu = tk.Menu(menubar, tearoff=0)
@@ -5193,15 +5238,22 @@ genderVar = tk.IntVar()
 ModeVar = tk.IntVar()
 themeVar = tk.IntVar()
 
-
+optionmenu.add_checkbutton(label="Guardar tempos", onvalue=1, offvalue=0, variable=savetimeVar, command= savetimeVar_change)
 optionmenu.add_checkbutton(label="Tempo de Inspeção", onvalue=1, offvalue=0, variable=inspecionVar, command= inspecionVar_change)
 optionmenu.add_checkbutton(label="Desenho scramble", onvalue=1, offvalue=0, variable=scrambleVar, command= scrambleVar_change)
 optionmenu.add_checkbutton(label="Desenho 3D scramble", onvalue=1, offvalue=0, variable=scramble3DVar, command= scramble3DVar_change)
-optionmenu.add_checkbutton(label="Guardar tempos", onvalue=1, offvalue=0, variable=savetimeVar, command= savetimeVar_change)
+optionmenu.add_cascade(label="Change color scramble", menu=colormenu)
 optionmenu.add_cascade(label="Disparador cronômetro", menu=inputmenu)
 optionmenu.add_cascade(label="Precisão timer", menu=precisionmenu)
 optionmenu.add_cascade(label="Tempo segurar Espaço", menu=holdmenu)
 
+
+colormenu.add_command(label="Face 1", command=changeColorScramble1)
+colormenu.add_command(label="Face 2", command=changeColorScramble2)
+colormenu.add_command(label="Face 3", command=changeColorScramble3)
+colormenu.add_command(label="Face 4", command=changeColorScramble4)
+colormenu.add_command(label="Face 5", command=changeColorScramble5)
+colormenu.add_command(label="Face 6", command=changeColorScramble6)
 
 inputmenu.add_radiobutton(label="Manual input", value=1, variable=inputVar, command=inputVar_change)
 inputmenu.add_radiobutton(label="Tecla Espaço", value=2, variable=inputVar, command=inputVar_change)
@@ -5246,6 +5298,7 @@ def read_txt_setting():
 
     global rankingPath
     global first_scan
+    global faceColors
 
     first_scan = True
     try:
@@ -5267,10 +5320,8 @@ def read_txt_setting():
             rankingPath = jsonSettings['Ranking Path']
             scramble3DVar.set(jsonSettings['Desenho Scrambler 3D']) 
             ModeVar.set(jsonSettings['Mode']) 
-            themeVar.set(jsonSettings['colorTheme']) 
-
-
-            
+            themeVar.set(jsonSettings['colorTheme'])                 
+            faceColors = json.loads(jsonSettings["colors"].replace("'", '"'))        
 
             inputVar_change()
             precisionVar_change()
@@ -5286,7 +5337,7 @@ def read_txt_setting():
             themeVar_change()         
             
             with open('Scrambler_Settings.json', 'w') as openfile:
-                jsonSettings = json.dump(jsonSettings,openfile)  
+                jsonSettings = json.dump(jsonSettings,openfile,indent=4)  
 
     except Exception as error:
         print("An error occurred:", error) # An error occurred: name 'x' is not defined:
@@ -5325,6 +5376,7 @@ def read_txt_setting():
 
 def write_txt_setting():
     global rankingPath    
+    global faceColors
 
     global gender    
     jsonSettings = {}
@@ -5342,9 +5394,10 @@ def write_txt_setting():
     jsonSettings['Desenho Scrambler 3D'] = str(scramble3DVar.get())  
     jsonSettings['Mode'] = str(ModeVar.get())  
     jsonSettings['colorTheme'] = str(themeVar.get())  
+    jsonSettings['colors'] = str(faceColors)  
 
     with open('Scrambler_Settings.json', 'w') as openfile:
-        jsonSettings = json.dump(jsonSettings,openfile)    
+        jsonSettings = json.dump(jsonSettings,openfile,indent=4)    
 
 read_txt_setting()
 root.config(menu=menubar)
