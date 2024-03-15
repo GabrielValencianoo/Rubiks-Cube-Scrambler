@@ -23,6 +23,7 @@ from tkinter.filedialog import asksaveasfile
 from tkinter.filedialog import askdirectory
 import customtkinter as ctk
 from tkinter import colorchooser
+import lovelyplots as lp
 
 import datetime
 import csv
