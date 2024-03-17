@@ -13,6 +13,7 @@
 
 import random
 import time
+import statistics
 # from msvcrt import getch
 import tkinter as tk
 from tkinter import ttk 
@@ -104,7 +105,8 @@ ao_5  = []
 ao_12 = []
 scrambles = []
 datas = []
-
+des_padrao = []
+mediana = []
 faceColors = {'1':'#FFFFFF','2':'#FFA500','3':'#00FF00','4':'#FF0000','5':'#0000FF','6':'#FFFF00'}
 
 first_scan = False
@@ -266,6 +268,8 @@ def estatistica(index):
     global index_best_ao12
     global enableRanking
     global rankingPath   
+    global mediana
+    global des_padrao
 
     
     # global tempos
@@ -274,6 +278,11 @@ def estatistica(index):
     media_3  = mo3(index)  if index >= 3  else media_3
     media_5  = ao5(index)  if index >= 5  else media_5
     media_12 = ao12(index) if index >= 12 else media_12
+
+    mediana = statistics.median(tempos)
+    ic(mediana)
+    des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
+    ic(des_padrao)
 
    
     global_best_solve,global_worst_solve = best_worst(tempos,"global")
@@ -4639,7 +4648,8 @@ def importar_tempos():
                     
 
             print(f'Processed {line_count} lines.')
-    except:        
+    except Exception as error: 
+        print("An error occurred:", error) # An error occurred: name 'x' is not defined:      
         print("nao foi possivel importar")
         
 
