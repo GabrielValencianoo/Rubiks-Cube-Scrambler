@@ -4330,41 +4330,44 @@ def plot():
 
     # global tempos 
     fig = Figure(figsize = (8, 8),dpi = 100)   
+    fig2 = Figure(figsize = (8, 8),dpi = 100)   
 
 	# adding the subplot 
     plot1 = fig.add_subplot(111) 
+    plot2 = fig2.add_subplot(111) 
 
 	# plotting the graph 
-    plot1.plot(tempos) 
-    
-    plot1.plot(mo_3) 
-    
-    plot1.plot(ao_5) 
-    
-    plot1.plot(ao_12) 
-
+    plot2.hist(tempos)     
+    plot1.plot(tempos)     
+    plot1.plot(mo_3)     
+    plot1.plot(ao_5)     
+    plot1.plot(ao_12)
     plot1.legend(['Tempos', 'mo3','ao5','ao12']) 
 
     mplcursors.cursor(plot1)
 	# creating the Tkinter canvas 
 	# containing the Matplotlib figure 
     canvas = FigureCanvasTkAgg(fig,	master = window) 
+    canvas2 = FigureCanvasTkAgg(fig2,	master = window) 
     canvas.draw() 
+    canvas2.draw() 
 
 	# placing the canvas on the Tkinter root 
-    canvas.get_tk_widget().pack()  
+    canvas.get_tk_widget().pack(side = tk.LEFT)  
+    canvas2.get_tk_widget().pack(side = tk.RIGHT)  
 
     
 
 
 	# creating the Matplotlib toolbar 
-    # toolbar = NavigationToolbar2Tk(canvas,root) 
-    # toolbar.update() 
+    toolbar = NavigationToolbar2Tk(canvas,window) 
+    toolbar.update() 
 
 	# placing the toolbar on the Tkinter root 
     # canvas.get_tk_widget().pack() 
 
     canvas.flush_events()
+    canvas2.flush_events()
 
 
 
@@ -4374,6 +4377,7 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     ax.set_aspect("auto")
     ax.set_autoscale_on(True)  
     ax.dist = 20
+    ax.axis('off') 
     # ax.set_box_aspect(None, zoom=10)
 
     # colors = {
