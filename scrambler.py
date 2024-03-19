@@ -51,7 +51,7 @@ import mpl_toolkits.mplot3d.art3d as art3d
 
 root = ctk.CTk() 
 root.title('timezinho') 
-root.geometry('1200x700+1200+200') 
+root.geometry('1600x700+1200+200') 
 
 # root.iconphoto(False, tk.PhotoImage(file='/path/to/ico/icon.png'))
 
@@ -4375,8 +4375,8 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     
     ax = fig.add_subplot(projection='3d')      
     ax.set_aspect("auto")
-    ax.set_autoscale_on(True)  
-    ax.dist = 20
+    # ax.set_autoscale_on(True)  
+    # ax.dist = 20
     ax.axis('off') 
     # ax.set_box_aspect(None, zoom=10)
 
@@ -4480,7 +4480,7 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     ax.set_xticks([])
     ax.set_yticks([])
     ax.set_zticks([])
-    # ax.dist = 70
+    ax.dist = 70
     # ax.set_visible(False)
     # ax.set_facecolor('pink')    
 	
@@ -5103,8 +5103,6 @@ eventsComboBox.grid(column = 1, row = 0)
 # eventos.bind('<<ComboboxSelected>>',change_event)
 # Shows number as a default value 
 # eventsComboBox.set('3x3') 
-
-print(eventsComboBox.get())
 
 
 # img = tk.PhotoImage(file = r"C:\Users\gabri\OneDrive\Documentos\VScode\lena.png")
