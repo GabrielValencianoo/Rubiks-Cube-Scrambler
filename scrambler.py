@@ -801,7 +801,9 @@ def createMatrix(cube,type):
     elif cube == "7x7":
         n = 7
     elif cube == "pyraminx":
-        n = 7
+        n = 5
+    elif cube == "clock":
+        n = 3
     else:
         n = 4
     
@@ -3642,93 +3644,27 @@ def scrambler_skewb():
 def scrambler_clock():    
     accepted = 0  
     sum_turns = []
-    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("skewb","color")     
+    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("clock","color")  
 
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("UR"+number+signal)
+    moves1 = ["UR","DR","DL","UL","U","R","D","L","ALL"]
+    moves2 = ["U","R","D","L","ALL"]   
 
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("DR"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("DL"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("UL"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("U"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("R"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("D"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("L"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("ALL"+number+signal)
+    for move in moves1:
+        number = random.randrange(0+7+1)
+        number = str(number)
+        signal = random.randrange(0+2+1)
+        signal = "+" if signal == 1 else  "-"        
+        sum_turns.append(move+number+signal)    
 
     sum_turns.append("y2")
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("U"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("R"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("D"+number+signal)
-
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("L"+number+signal)
     
-    number = random.randrange(0+7+1)
-    number = str(number)
-    signal = random.randrange(0+2+1)
-    signal = "+" if signal == 1 else  "-"        
-    sum_turns.append("ALL"+number+signal)
+    for move in moves2:
+        number = random.randrange(0+7+1)
+        number = str(number)
+        signal = random.randrange(0+2+1)
+        signal = "+" if signal == 1 else  "-"        
+        sum_turns.append(move+number+signal)
+    
 
     n_caps = random.randrange(1,5,1)
 
