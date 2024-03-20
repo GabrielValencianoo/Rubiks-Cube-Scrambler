@@ -790,37 +790,38 @@ def createMatrix(cube,type):
 
     if cube == "2x2":
         n = 2
-    if cube == "3x3":
+    elif cube == "3x3":
         n = 3
-    if cube == "4x4":
+    elif cube == "4x4":
         n = 4
-    if cube == "5x5":
+    elif cube == "5x5":
         n = 5
-    if cube == "6x6":
+    elif cube == "6x6":
         n = 6
-    if cube == "7x7":
+    elif cube == "7x7":
         n = 7
-    if cube == "pyraminx":
+    elif cube == "pyraminx":
         n = 7
+    else:
+        n = 4
     
-    if type == "color":
-        # print(type(faceColors["1"]))
     
-        Br_color = np.full((n,n), faceColors["1"])
+    
+    Br_color = np.full((n,n), faceColors["1"])
 
-        Lr_color = np.full((n,n), faceColors["2"])
+    Lr_color = np.full((n,n), faceColors["2"])
 
-        Vd_color = np.full((n,n), faceColors["3"])
+    Vd_color = np.full((n,n), faceColors["3"])
 
-        Vm_color = np.full((n,n), faceColors["4"])
+    Vm_color = np.full((n,n), faceColors["4"])
 
-        Az_color = np.full((n,n), faceColors["5"])
+    Az_color = np.full((n,n), faceColors["5"])
 
-        Am_color = np.full((n,n), faceColors["6"])
+    Am_color = np.full((n,n), faceColors["6"])
 
-        Buffer = np.full((4,n), "#000000") 
+    Buffer = np.full((4,n), "#000000") 
 
-        return Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer    
+    return Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer    
     
 
     
@@ -3557,6 +3558,7 @@ def scrambler_pyraminx():
 
 def scrambler_megaminx():
     sum_turns = []
+    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("megaminx","color")  
 
     for i in range(7):
         for j in range(5):
@@ -3573,7 +3575,7 @@ def scrambler_megaminx():
         sum_turns.append(turn)
     
     # print(sum_turns)
-    draw_scramble("megaminx")
+    draw_scramble("megaminx",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
     
     actual_scramble.set(" ".join(sum_turns))
           
@@ -3583,6 +3585,7 @@ def scrambler_skewb():
     pr_move = 0 #previous turn
     global actual_scramble 
     accepted = 0    
+    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("skewb","color") 
 
     sum_turns = []
     for i in range(12):
@@ -3632,13 +3635,14 @@ def scrambler_skewb():
         pr_move = n_move
         accepted = 0
     # print(actual_scramble)    
-    draw_scramble("skewb")
+    draw_scramble("skewb",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
     actual_scramble.set(" ".join(sum_turns))
     
 
 def scrambler_clock():    
     accepted = 0  
     sum_turns = []
+    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("skewb","color")     
 
     number = random.randrange(0+7+1)
     number = str(number)
@@ -3771,7 +3775,7 @@ def scrambler_clock():
 
     # print(sum_turns)
     # print(actual_scramble)   
-    draw_scramble("clock")
+    draw_scramble("clock",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
     
     actual_scramble.set(" ".join(sum_turns))
     
@@ -4423,6 +4427,9 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
         LL = 6
         length = 7
         cubeN = 'n'
+        # ax.set_box_aspect(None, zoom=70)
+    else:
+        cubeN = 'nn'
         # ax.set_box_aspect(None, zoom=70)
 
 
