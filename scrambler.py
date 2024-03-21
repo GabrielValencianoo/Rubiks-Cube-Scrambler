@@ -850,7 +850,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
     elif cube == "pyraminx":
         cubeN = 'nn' 
     
-    FL = 0
+    
 
     if "'" in turn:
         loop = 3        
@@ -943,11 +943,10 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Br_color[0]   = Buffer[3]
 
                 Az_color = np.rot90(Az_color,1,(1,0))        
-
-        if "Rw" in turn:            
-            FL += 1
-            LL -= 1           
-
+        
+        LL -= 1           
+        if "Rw" in turn:   
+                        
             for i in range(loop):
                 Buffer[0] = Vd_color[:,LL]
                 Buffer[1] = np.flip(Br_color[:,LL],0)
@@ -959,10 +958,8 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Am_color[:,LL] = Buffer[2]
                 Vd_color[:,LL] = Buffer[3]     
                 
-        elif "Lw" in turn:        
-            FL += 1
-            LL -= 1
-
+        elif "Lw" in turn:       
+            
             for i in range(loop):
 
                 Buffer[0] = Vd_color[:,1]
@@ -989,10 +986,8 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Vm_color[1] = Buffer[2]
                 Vd_color[1] = Buffer[3]              
         
-        elif "Dw" in turn:             
-
-            FL += 1
-            LL -= 1
+        elif "Dw" in turn:            
+            
             for i in range(loop):
                 Buffer[0] = Vd_color[LL]
                 Buffer[1] = Vm_color[LL]
@@ -1005,8 +1000,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Vd_color[LL] = Buffer[3]
                        
         elif "Fw" in turn:      
-            FL += 1
-            LL -= 1
+           
             for i in range(loop):
                 Buffer[0] = Br_color[LL]
                 Buffer[1] = np.flip(Vm_color[:,1],0)
@@ -1019,9 +1013,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Br_color[LL]   = Buffer[3]
                 
         elif "Bw" in turn:          
-
-            FL += 1
-            LL -= 1
+            
             for i in range(loop):
 
                 Buffer[0] = np.flip(Br_color[1],0)
@@ -1033,12 +1025,10 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Am_color[LL]   = Buffer[1]
                 Vm_color[:,LL] = Buffer[2]
                 Br_color[1]   = Buffer[3]
-                        
-        if "3Rw" in turn:            
 
-            FL += 1
-            LL -= 1  
-
+        LL -= 1                        
+        if "3Rw" in turn:           
+            
             for i in range(loop):
                 Buffer[0] = Vd_color[:,LL]
                 Buffer[1] = np.flip(Br_color[:,LL],0)
@@ -1051,8 +1041,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Vd_color[:,LL] = Buffer[3]        
             
         elif "3Lw" in turn:            
-            FL += 1
-            LL -= 1
+            
             for i in range(loop):
                 Buffer[0] = Vd_color[:,2]
                 Buffer[1] = np.flip(Am_color[:,2],0)
@@ -1078,9 +1067,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Vd_color[2] = Buffer[3]            
        
         elif "3Dw" in turn:            
-            FL += 1
-            LL -= 1
-
+            
             for i in range(loop):     
 
                 Buffer[0] = Vd_color[LL]
@@ -1094,9 +1081,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Vd_color[LL] = Buffer[3]            
        
         elif "3Fw" in turn:            
-
-            FL += 1
-            LL -= 1
+            
             for i in range(loop):    
 
                 Buffer[0] = Br_color[LL]
@@ -1110,9 +1095,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Br_color[LL]   = Buffer[3]   
         
         elif "3Bw" in turn:            
-
-            FL += 1
-            LL -= 1
+            
             for i in range(loop):  
 
                 Buffer[0] = np.flip(Br_color[2],0)
