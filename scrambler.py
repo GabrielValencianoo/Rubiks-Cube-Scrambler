@@ -2641,14 +2641,16 @@ def scrambler_2x2():
     for i in range(12):
 
         while accepted == 0:
-            n_move = random.randrange(1,10,1)
+            n_move = random.randrange(1,19,1)
             # print(n_move)
 
             if (n_move == 1 or n_move == 2 or n_move == 3) and (pr_move == 1 or pr_move == 2 or pr_move == 3):
                 accepted = 0
-            elif (n_move == 4 or n_move == 5 or n_move == 6) and (pr_move == 4 or pr_move == 5 or pr_move == 6):
-                accepted = 0
             elif (n_move == 7 or n_move == 8 or n_move == 9) and (pr_move == 7 or pr_move == 8 or pr_move == 9):
+                accepted = 0
+            elif (n_move == 13 or n_move == 14 or n_move == 15) and (pr_move == 13 or pr_move == 14 or pr_move == 15):
+                accepted = 0            
+            elif (n_move == 4 or n_move == 5 or n_move == 6 or n_move == 10 or n_move == 11 or n_move == 12 or n_move == 16 or n_move == 17 or n_move == 18): 
                 accepted = 0            
             else:
                 accepted = 1
@@ -2662,22 +2664,22 @@ def scrambler_2x2():
         elif n_move == 3:
             turn = "R2"
             
-        elif n_move == 4:
+        elif n_move == 7:
             turn = "U"
             
-        elif n_move == 5:
+        elif n_move == 8:
             turn = "U'"
            
-        elif n_move == 6:
+        elif n_move == 9:
             turn = "U2"
             
-        elif n_move == 7:
+        elif n_move == 13:
             turn = "F"
             
-        elif n_move == 8:
+        elif n_move == 14:
             turn = "F'"
             
-        elif n_move == 9:
+        elif n_move == 15:
             turn = "F2"
             
         
@@ -2828,7 +2830,7 @@ def scrambler_4x4():
     for i in range(44):
 
         while accepted == 0:
-            n_move = random.randrange(1, 34,1)
+            n_move = random.randrange(1, 37,1)
             #34
             # print(n_move)            
 
@@ -2851,7 +2853,7 @@ def scrambler_4x4():
                 accepted = 0
             elif (n_move == 31 or n_move == 32 or n_move == 33) and (pr_move == 31 or pr_move == 32 or pr_move == 33 or flag_Fw == 1):
                 accepted = 0
-            elif (n_move == 22 or n_move == 23 or n_move == 24 or n_move == 28 or n_move == 29 or n_move == 30):
+            elif (n_move == 22 or n_move == 23 or n_move == 24 or n_move == 28 or n_move == 29 or n_move == 30 or n_move == 34 or n_move == 35 or n_move == 36):
                 accepted = 0           
             else:
                 accepted = 1
