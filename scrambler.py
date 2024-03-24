@@ -4031,6 +4031,7 @@ def on_press_esc(event):
     
     actual_timer.set("0:00")   
     print("parou....")
+    print_timer.configure(text_color= "white")
 
 
 def inspection():
@@ -4068,7 +4069,7 @@ def on_press_space(event):
         timer_state = 1
     
     if timer_state == 2:
-        pass
+        print_timer.configure(text_color= "yellow")
 
     if timer_state == 4:
         stop_timer()
@@ -4114,6 +4115,8 @@ def do_space_longpress():
         global enable_start_timer
         enable_start_timer = True
         timer_state = 3
+        print_timer.configure(text_color= "green")
+        #DEIXAR VERDEEEEE
 
 
 # cancels long press events
@@ -4125,6 +4128,7 @@ def cancel_do_space_longpress():
     _short_press = None
     if _do_space_longpress:
         root.after_cancel(_do_space_longpress)
+        print_timer.configure(text_color= "white")
 
 def atualizar_label():
     global t0
@@ -4146,6 +4150,7 @@ def start_timer():
         t0 = time.time()
         
         print("rodando........")
+        print_timer.configure(text_color= "white")
 
         global actual_timer
         # actual_timer.set("rodando........")
@@ -5038,7 +5043,7 @@ eventsComboBox.grid(column = 1, row = 0)
 # label_img.pack(expand = "yes",anchor = tk.SE)
 # label_img.pack(fill = "both", expand = "yes",side=tk.TOP , anchor = tk.S)
 
-print_scramble = ctk.CTkLabel(row2,textvariable = actual_scramble,wraplength = 500)
+print_scramble = ctk.CTkLabel(row2,textvariable = actual_scramble,wraplength = 500,font = ("Arial", 18))
 print_scramble.grid(column = 0, row = 0)
 
 
@@ -5093,7 +5098,7 @@ root.bind("<KeyPress-Return>",on_press_enter)
 
 actual_timer.set("0:00")
 
-print_timer = ctk.CTkLabel(row4,textvariable = actual_timer)
+print_timer = ctk.CTkLabel(row4,textvariable = actual_timer, font = ("Arial", 24))
 # print_timer.pack(anchor=tk.CENTER)
 # print_timer.pack(side = tk.LEFT,anchor=tk.N)
 
