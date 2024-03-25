@@ -97,7 +97,6 @@ flag_3Dw = 0
 flag_3Fw = 0
 flag_3Bw = 0
 
-flag_7_event = 0
 
 tempos = []
 mo_3  = []
@@ -411,7 +410,7 @@ def estatistica(index):
 
     
 
-def define_flags(n_move):
+def define_flags(cube,n_move):
 
     global flag_R
     global flag_L
@@ -740,6 +739,17 @@ def define_flags(n_move):
         flag_Lw = 0
         flag_Dw = 0
         flag_Uw = 0
+    
+    if cube == "2x2":
+        flag_L = 1
+        flag_D = 1
+        flag_B = 1
+    
+    if cube == "4x4":
+        flag_Lw = 1
+        flag_Dw = 1
+        flag_Bw = 1
+
 
 def reset_flags():
         
@@ -2608,17 +2618,17 @@ def next_scramble():
     ch_event = eventsComboBox.get()
     
     if ch_event == '2x2':
-        scrambler_2x2()
+        scrambler_NxN("2x2")                 
     elif ch_event == '3x3':
-        scrambler_3x3()
-    elif ch_event == '4x4':
-        scrambler_4x4()
-    elif ch_event == '5x5':
-        scrambler_5x5()
-    elif ch_event == '6x6':
-        scrambler_6x6()
-    elif ch_event == '7x7':
-        scrambler_7x7()
+        scrambler_NxN("3x3")
+    elif ch_event == '4x4':                        
+        scrambler_NxN("4x4")  
+    elif ch_event == '5x5':          
+        scrambler_NxN("5x5")
+    elif ch_event == '6x6':                        
+        scrambler_NxN("6x6")
+    elif ch_event == '7x7':         
+        scrambler_NxN("7x7")
     elif ch_event == 'pyraminx':
         scrambler_pyraminx()
     elif ch_event == 'megaminx':
@@ -2628,519 +2638,8 @@ def next_scramble():
     elif ch_event == 'clock':
         scrambler_clock()
 
-def scrambler_2x2():
-    turn = "" #actual turn (string)
-    n_move = 0 #actual turn
-    pr_move = 0 #previous turn
-    global actual_scramble 
-    accepted = 0    
 
-    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("2x2","color")  
-
-    sum_turns = []
-    for i in range(12):
-
-        while accepted == 0:
-            n_move = random.randrange(1,19,1)
-            # print(n_move)
-
-            if (n_move == 1 or n_move == 2 or n_move == 3) and (pr_move == 1 or pr_move == 2 or pr_move == 3):
-                accepted = 0
-            elif (n_move == 7 or n_move == 8 or n_move == 9) and (pr_move == 7 or pr_move == 8 or pr_move == 9):
-                accepted = 0
-            elif (n_move == 13 or n_move == 14 or n_move == 15) and (pr_move == 13 or pr_move == 14 or pr_move == 15):
-                accepted = 0            
-            elif (n_move == 4 or n_move == 5 or n_move == 6 or n_move == 10 or n_move == 11 or n_move == 12 or n_move == 16 or n_move == 17 or n_move == 18): 
-                accepted = 0            
-            else:
-                accepted = 1
-
-        if n_move == 1:
-            turn = "R"
-            
-        elif n_move == 2:
-            turn = "R'"
-            
-        elif n_move == 3:
-            turn = "R2"
-            
-        elif n_move == 7:
-            turn = "U"
-            
-        elif n_move == 8:
-            turn = "U'"
-           
-        elif n_move == 9:
-            turn = "U2"
-            
-        elif n_move == 13:
-            turn = "F"
-            
-        elif n_move == 14:
-            turn = "F'"
-            
-        elif n_move == 15:
-            turn = "F2"
-            
-        
-        
-        
-        sum_turns.append(turn)
-        pr_move = n_move
-        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("2x2",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
-        accepted = 0
-    # print(actual_scramble)    
-    
-    actual_scramble.set(" ".join(sum_turns))    # print_scramble.update() 
-    draw_scramble("2x2",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
-
-def scrambler_3x3():
-    turn = "" #actual turn (string)
-    n_move = 0 #actual turn
-    pr_move = 0 #previous turn
-    global actual_scramble 
-    accepted = 0
-
-    global flag_R
-    global flag_L
-    global flag_U
-    global flag_D
-    global flag_F
-    global flag_B
-    
-   
-    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("3x3","color") 
-
-    sum_turns = []
-    for i in range(20):
-
-        while accepted == 0:
-            n_move = random.randrange(1, 19,1)
-            # print(n_move)            
-
-
-            if (n_move == 1 or n_move == 2 or n_move == 3) and (pr_move == 1 or pr_move == 2 or pr_move == 3 or flag_R == 1):
-                accepted = 0
-            elif (n_move == 4 or n_move == 5 or n_move == 6) and (pr_move == 4 or pr_move == 5 or pr_move == 6 or flag_L == 1):
-                accepted = 0
-            elif (n_move == 7 or n_move == 8 or n_move == 9) and (pr_move == 7 or pr_move == 8 or pr_move == 9 or flag_U == 1):
-                accepted = 0
-            elif (n_move == 10 or n_move == 11 or n_move == 12) and (pr_move == 10 or pr_move == 11 or pr_move == 12 or flag_D == 1):
-                accepted = 0
-            elif (n_move == 13 or n_move == 14 or n_move == 15) and (pr_move == 13 or pr_move == 14 or pr_move == 15 or flag_F == 1):
-                accepted = 0
-            elif (n_move == 16 or n_move == 17 or n_move == 18) and (pr_move == 16 or pr_move == 17 or pr_move == 18 or flag_B == 1):
-                accepted = 0
-            else:
-                accepted = 1
-
-        if n_move == 1:
-            turn = "R"            
-            
-        elif n_move == 2:
-            turn = "R'"            
-            
-        elif n_move == 3:
-            turn = "R2"            
-            
-        elif n_move == 4:
-            turn = "L"            
-            
-        elif n_move == 5:
-            turn = "L'"            
-            
-        elif n_move == 6:
-            turn = "L2"            
-            
-        elif n_move == 7:
-            turn = "U"            
-            
-        elif n_move == 8:
-            turn = "U'"            
-            
-        elif n_move == 9:
-            turn = "U2"            
-            
-        elif n_move == 10:
-            turn = "D"            
-            
-        elif n_move == 11:
-            turn = "D'"            
-            
-        elif n_move == 12:
-            turn = "D2"            
-           
-        elif n_move == 13:
-            turn = "F"            
-            
-        elif n_move == 14:
-            turn = "F'"            
-            
-        elif n_move == 15:
-            turn = "F2"            
-            
-        elif n_move == 16:
-            turn = "B"            
-            
-        elif n_move == 17:
-            turn = "B'"            
-            
-        elif n_move == 18:
-            turn = "B2"        
-        
-        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("3x3",turn,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
-        
-        define_flags(n_move)
-
-        sum_turns.append(turn)
-        pr_move = n_move
-        accepted = 0
-
-    # print(actual_scramble)    
-    reset_flags()
-    
-    
-    
-    actual_scramble.set(" ".join(sum_turns))
-    draw_scramble("3x3",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
-    
-
-def scrambler_4x4():
-    turn = "" #actual turn (string)
-    n_move = 0 #actual turn
-    pr_move = 0 #previous turn
-    global actual_scramble 
-    accepted = 0
-    global flag_R
-    global flag_L
-    global flag_U
-    global flag_D
-    global flag_F
-    global flag_B
-
-    global flag_Rw    
-    global flag_Uw    
-    global flag_Fw
-
-    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("4x4","color") 
-    
-
-    sum_turns = []      
-
-    for i in range(44):
-
-        while accepted == 0:
-            n_move = random.randrange(1, 37,1)
-            #34
-            # print(n_move)            
-
-
-            if (n_move == 1 or n_move == 2 or n_move == 3) and (pr_move == 1 or pr_move == 2 or pr_move == 3 or flag_R == 1):
-                accepted = 0
-            elif (n_move == 4 or n_move == 5 or n_move == 6) and (pr_move == 4 or pr_move == 5 or pr_move == 6 or flag_L == 1):
-                accepted = 0
-            elif (n_move == 7 or n_move == 8 or n_move == 9) and (pr_move == 7 or pr_move == 8 or pr_move == 9 or flag_U == 1):
-                accepted = 0
-            elif (n_move == 10 or n_move == 11 or n_move == 12) and (pr_move == 10 or pr_move == 11 or pr_move == 12 or flag_D == 1):
-                accepted = 0
-            elif (n_move == 13 or n_move == 14 or n_move == 15) and (pr_move == 13 or pr_move == 14 or pr_move == 15 or flag_F == 1):
-                accepted = 0
-            elif (n_move == 16 or n_move == 17 or n_move == 18) and (pr_move == 16 or pr_move == 17 or pr_move == 18 or flag_B == 1):
-                accepted = 0
-            elif (n_move == 19 or n_move == 20 or n_move == 21) and (pr_move == 19 or pr_move == 20 or pr_move == 21 or flag_Rw == 1):
-                accepted = 0
-            elif (n_move == 25 or n_move == 26 or n_move == 27) and (pr_move == 25 or pr_move == 26 or pr_move == 27 or flag_Uw == 1):
-                accepted = 0
-            elif (n_move == 31 or n_move == 32 or n_move == 33) and (pr_move == 31 or pr_move == 32 or pr_move == 33 or flag_Fw == 1):
-                accepted = 0
-            elif (n_move == 22 or n_move == 23 or n_move == 24 or n_move == 28 or n_move == 29 or n_move == 30 or n_move == 34 or n_move == 35 or n_move == 36):
-                accepted = 0           
-            else:
-                accepted = 1
-
-
-        if n_move == 1:
-            turn = "R"
-           
-        elif n_move == 2:
-            turn = "R'"
-            
-        elif n_move == 3:
-            turn = "R2"
-            
-        elif n_move == 4:
-            turn = "L"
-           
-        elif n_move == 5:
-            turn = "L'"
-            
-        elif n_move == 6:
-            turn = "L2"
-            
-        elif n_move == 7:
-            turn = "U"
-           
-        elif n_move == 8:
-            turn = "U'"
-            
-        elif n_move == 9:
-            turn = "U2"
-           
-        elif n_move == 10:
-            turn = "D"
-            
-        elif n_move == 11:
-            turn = "D'"
-           
-        elif n_move == 12:
-            turn = "D2"
-            
-        elif n_move == 13:
-            turn = "F"
-           
-        elif n_move == 14:
-            turn = "F'"
-            
-        elif n_move == 15:
-            turn = "F2"
-           
-        elif n_move == 16:
-            turn = "B"
-            
-        elif n_move == 17:
-            turn = "B'"
-            
-        elif n_move == 18:
-            turn = "B2"
-
-           
-        if n_move == 19:
-            turn = "Rw"
-            
-        elif n_move == 20:
-            turn = "Rw'"
-            
-        elif n_move == 21:
-            turn = "Rw2"                   
-            
-        elif n_move == 25:
-            turn = "Uw"
-            
-        elif n_move == 26:
-            turn = "Uw'"
-            
-        elif n_move == 27:
-            turn = "Uw2"        
-
-        elif n_move == 31:
-            turn = "Fw"
-            
-        elif n_move == 32:
-            turn = "Fw'"
-            
-        elif n_move == 33:
-            turn = "Fw2"       
-        
-        define_flags(n_move)
-        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("4x4",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
-        sum_turns.append(turn)
-        pr_move = n_move
-        accepted = 0
-
-    reset_flags()
-    
-    # turn_draw("4x4","Fw")
-    
-    draw_scramble("4x4",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
-   
-    # print(actual_scramble)    
-    
-    actual_scramble.set(" ".join(sum_turns))
-    
-    
-def scrambler_5x5():
-    turn = "" #actual turn (string)
-    n_move = 0 #actual turn
-    pr_move = 0 #previous turn
-    global actual_scramble 
-    accepted = 0
-    global flag_R
-    global flag_L
-    global flag_U
-    global flag_D
-    global flag_F
-    global flag_B
-
-    global flag_Rw
-    global flag_Lw
-    global flag_Uw
-    global flag_Dw
-    global flag_Fw
-    global flag_Bw
-
-    sum_turns = []   
-
-    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("5x5","color")    
-
-    for i in range(60):
-
-        while accepted == 0:
-            n_move = random.randrange(1, 37,1)
-            # print(n_move)            
-
-
-            if (n_move == 1 or n_move == 2 or n_move == 3) and (pr_move == 1 or pr_move == 2 or pr_move == 3 or flag_R == 1):
-                accepted = 0
-            elif (n_move == 4 or n_move == 5 or n_move == 6) and (pr_move == 4 or pr_move == 5 or pr_move == 6 or flag_L == 1):
-                accepted = 0
-            elif (n_move == 7 or n_move == 8 or n_move == 9) and (pr_move == 7 or pr_move == 8 or pr_move == 9 or flag_U == 1):
-                accepted = 0
-            elif (n_move == 10 or n_move == 11 or n_move == 12) and (pr_move == 10 or pr_move == 11 or pr_move == 12 or flag_D == 1):
-                accepted = 0
-            elif (n_move == 13 or n_move == 14 or n_move == 15) and (pr_move == 13 or pr_move == 14 or pr_move == 15 or flag_F == 1):
-                accepted = 0
-            elif (n_move == 16 or n_move == 17 or n_move == 18) and (pr_move == 16 or pr_move == 17 or pr_move == 18 or flag_B == 1):
-                accepted = 0
-            elif (n_move == 19 or n_move == 20 or n_move == 21) and (pr_move == 19 or pr_move == 20 or pr_move == 21 or flag_Rw == 1):
-                accepted = 0
-            elif (n_move == 22 or n_move == 23 or n_move == 24) and (pr_move == 22 or pr_move == 23 or pr_move == 24 or flag_Lw == 1):
-                accepted = 0
-            elif (n_move == 25 or n_move == 26 or n_move == 27) and (pr_move == 25 or pr_move == 26 or pr_move == 27 or flag_Uw == 1):
-                accepted = 0
-            elif (n_move == 28 or n_move == 29 or n_move == 30) and (pr_move == 28 or pr_move == 29 or pr_move == 30 or flag_Dw == 1):
-                accepted = 0
-            elif (n_move == 31 or n_move == 32 or n_move == 33) and (pr_move == 31 or pr_move == 32 or pr_move == 33 or flag_Fw == 1):
-                accepted = 0
-            elif (n_move == 34 or n_move == 35 or n_move == 36) and (pr_move == 34 or pr_move == 35 or pr_move == 36 or flag_Bw == 1):
-                accepted = 0
-            else:
-                accepted = 1
-
-
-        if n_move == 1:
-            turn = "R"
-           
-        elif n_move == 2:
-            turn = "R'"
-            
-        elif n_move == 3:
-            turn = "R2"
-            
-        elif n_move == 4:
-            turn = "L"
-           
-        elif n_move == 5:
-            turn = "L'"
-            
-        elif n_move == 6:
-            turn = "L2"
-            
-        elif n_move == 7:
-            turn = "U"
-           
-        elif n_move == 8:
-            turn = "U'"
-            
-        elif n_move == 9:
-            turn = "U2"
-           
-        elif n_move == 10:
-            turn = "D"
-            
-        elif n_move == 11:
-            turn = "D'"
-           
-        elif n_move == 12:
-            turn = "D2"
-            
-        elif n_move == 13:
-            turn = "F"
-           
-        elif n_move == 14:
-            turn = "F'"
-            
-        elif n_move == 15:
-            turn = "F2"
-           
-        elif n_move == 16:
-            turn = "B"
-            
-        elif n_move == 17:
-            turn = "B'"
-            
-        elif n_move == 18:
-            turn = "B2"
-
-           
-        if n_move == 19:
-            turn = "Rw"
-            
-        elif n_move == 20:
-            turn = "Rw'"
-            
-        elif n_move == 21:
-            turn = "Rw2"            
-
-        elif n_move == 22:
-            turn = "Lw"
-            
-        elif n_move == 23:
-            turn = "Lw'"
-            
-        elif n_move == 24:
-            turn = "Lw2"
-            
-        elif n_move == 25:
-            turn = "Uw"
-            
-        elif n_move == 26:
-            turn = "Uw'"
-            
-        elif n_move == 27:
-            turn = "Uw2"            
-
-        elif n_move == 28:
-            turn = "Dw"
-            
-        elif n_move == 29:
-            turn = "Dw'"
-           
-        elif n_move == 30:
-            turn = "Dw2"           
-
-        elif n_move == 31:
-            turn = "Fw"
-            
-        elif n_move == 32:
-            turn = "Fw'"
-            
-        elif n_move == 33:
-            turn = "Fw2"            
-
-        elif n_move == 34:
-            turn = "Bw"
-            
-        elif n_move == 35:
-            turn = "Bw'"
-            
-        elif n_move == 36:
-            turn = "Bw2"    
-        
-        define_flags(n_move)
-        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("5x5",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
-        sum_turns.append(turn)
-        pr_move = n_move
-        accepted = 0
-
-    reset_flags()    
-    # turn_draw("5x5","R")
-    draw_scramble("5x5",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
-    # print(actual_scramble)    
-    
-    actual_scramble.set(" ".join(sum_turns))
-    
-
-def scrambler_6x6():
+def scrambler_NxN(cube):
     turn = "" #actual turn (string)
     n_move = 0 #actual turn
     pr_move = 0 #previous turn
@@ -3167,27 +2666,38 @@ def scrambler_6x6():
     global flag_3Uw
     global flag_3Dw
     global flag_3Fw
-    global flag_3Bw
-
-    global flag_7_event
+    global flag_3Bw    
 
     sum_turns = []
 
-    if flag_7_event == 1:
-        movs = 100
-        n = "7x7"
-    else:
+    if cube == "2x2":
+        movs = 12
+        range_turn = 19
+    elif cube == "3x3":
+        movs = 20
+        range_turn = 19
+    elif cube == "4x4":
+       movs = 44
+       range_turn = 37
+    elif cube == "5x5":
+        movs = 60
+        range_turn = 37
+    elif cube == "6x6":
         movs = 80
-        n = "6x6"
+        range_turn = 55
+    elif cube == "7x7":
+        movs = 100
+        range_turn = 55    
     
-    
-    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix(n,"color") 
+    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix(cube,"color") 
+
+    define_flags(cube,n_move)
 
 
     for i in range(movs):
 
         while accepted == 0:
-            n_move = random.randrange(1, 55,1)
+            n_move = random.randrange(1, range_turn,1)
             # print(n_move)
 
             if (n_move == 1 or n_move == 2 or n_move == 3) and (pr_move == 1 or pr_move == 2 or pr_move == 3 or flag_R == 1):
@@ -3394,24 +2904,20 @@ def scrambler_6x6():
         elif n_move == 54:
             turn = "3Bw2"    
         
-        define_flags(n_move)
+        define_flags(cube,n_move)
         
-        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("6x6",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer) if flag_7_event == 0 else turn_draw("7x7",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
-        # draw_scramble("6x6") if flag_7_event == 0 else draw_scramble("7x7")
+        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
+        
         sum_turns.append(turn)             
         pr_move = n_move
         accepted = 0
     
     reset_flags()      
-    draw_scramble("6x6",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) if flag_7_event == 0 else draw_scramble("7x7",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
-    # turn_draw("6x6","R2")
-    # draw_scramble("6x6")    
+    draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)    
     
     actual_scramble.set(" ".join(sum_turns))
-    
-   
-def scrambler_7x7():    
-    scrambler_6x6()
+
+
 
 def scrambler_pyraminx():
     turn = "" #actual turn (string)
@@ -4221,25 +3727,22 @@ def change_event(event):
     resetar()     
     create_ranking()   
     # guardar_tempos() 
-    importar_tempos()
-    
-    global flag_7_event 
-    flag_7_event = 0        
+    importar_tempos()    
+        
     ch_event = eventsComboBox.get()
     print(ch_event)
     if ch_event == '2x2':
-        scrambler_2x2()                 
+        scrambler_NxN("2x2")                 
     elif ch_event == '3x3':
-        scrambler_3x3()         
+        scrambler_NxN("3x3")
     elif ch_event == '4x4':                        
-        scrambler_4x4()            
+        scrambler_NxN("4x4")  
     elif ch_event == '5x5':          
-        scrambler_5x5()          
+        scrambler_NxN("5x5")
     elif ch_event == '6x6':                        
-        scrambler_6x6()
+        scrambler_NxN("6x6")
     elif ch_event == '7x7':         
-        flag_7_event = 1
-        scrambler_7x7()        
+        scrambler_NxN("7x7")
     elif ch_event == 'pyraminx':
         scrambler_pyraminx()            
     elif ch_event == 'megaminx':                

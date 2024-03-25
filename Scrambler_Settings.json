@@ -3,14 +3,14 @@
     "Desenho Scrambler": "True",
     "Disparador cronometro": "2",
     "Precisao": "1",
-    "Tempo hold": "4",
-    "Modalidade": "5x5",
+    "Tempo hold": "3",
+    "Modalidade": "3x3",
     "Habilitar Ranking": "False",
     "Genero": "0",
-    "Salvar tempo": "True",
+    "Salvar tempo": "False",
     "Ranking Path": "",
     "Desenho Scrambler 3D": "True",
     "Mode": "3",
     "colorTheme": "0",
-    "colors": "{'1': '#FFFFFF', '2': '#FFA500', '3': '#379b64', '4': '#FF0000', '5': '#0000FF', '6': '#e7ec13'}"
+    "colors": "{'1': '#FFFFFF', '2': '#FFA500', '3': '#00ff00', '4': '#FF0000', '5': '#0000FF', '6': '#FFFF00'}"
 }
