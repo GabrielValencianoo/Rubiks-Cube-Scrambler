@@ -384,31 +384,27 @@ def estatistica(index):
   
     if enableRanking == 1:
         if ch_event == '6x6' or ch_event == '7x7':
-        
-            current_ranking = ranking_position(tempos[index-1],media_3)
-            best_ranking = ranking_position(global_best_solve,best_mo3)
-
-            tb_ranking.insert(parent='',index='end',iid=0,text='',
-            values=(str(best_ranking[2]),str(best_ranking[1]),str(best_ranking[0]),str(pglobal_best_solve),str(pbest_mo3),
-                str(best_ranking[3]),str(best_ranking[4]),str(best_ranking[5])))
-
-            tb_ranking.insert(parent='',index='end',iid=1,text='',
-            values=(str(current_ranking[2]),str(current_ranking[1]),str(current_ranking[0]),str(ptempo),str(pmedia_3),
-                str(current_ranking[3]),str(current_ranking[4]),str(current_ranking[5])))
-        
+            media = media_3
+            best = best_mo3
+            pmedia = pmedia_3
+            pbest = pbest_mo3
         else:
-            current_ranking = ranking_position(tempos[index-1],media_5)
-            best_ranking = ranking_position(global_best_solve,best_ao5)
+            media = media_5
+            best = best_ao5
+            pmedia = pmedia_5
+            pbest = pbest_ao5      
+               
+        current_ranking = ranking_position(tempos[index-1],media)
+        best_ranking = ranking_position(global_best_solve,best)
 
-            tb_ranking.insert(parent='',index='end',iid=0,text='',
-            values=(str(best_ranking[2]),str(best_ranking[1]),str(best_ranking[0]),str(pglobal_best_solve),str(pbest_ao5),
-                    str(best_ranking[3]),str(best_ranking[4]),str(best_ranking[5])))
+        tb_ranking.insert(parent='',index='end',iid=0,text='',
+        values=(str(best_ranking[2]),str(best_ranking[1]),str(best_ranking[0]),str(pglobal_best_solve),str(pbest),
+            str(best_ranking[3]),str(best_ranking[4]),str(best_ranking[5])))
 
-            tb_ranking.insert(parent='',index='end',iid=1,text='',
-            values=(str(current_ranking[2]),str(current_ranking[1]),str(current_ranking[0]),str(ptempo),str(pmedia_5),
-                    str(current_ranking[3]),str(current_ranking[4]),str(current_ranking[5])))
-
-    
+        tb_ranking.insert(parent='',index='end',iid=1,text='',
+        values=(str(current_ranking[2]),str(current_ranking[1]),str(current_ranking[0]),str(ptempo),str(pmedia),
+            str(current_ranking[3]),str(current_ranking[4]),str(current_ranking[5])))
+            
 
 def define_flags(cube,n_move):
 
@@ -1464,7 +1460,25 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
     elif cube == "skewb":
         pass
     elif cube == "clock":
-        pass
+        if "UR" in turn:
+            pass
+        elif "DR" in turn:
+            pass
+        elif "DL" in turn:
+            pass
+        elif "UL" in turn:
+            pass
+        elif "ALL" in turn:
+            pass
+        elif "U" in turn:
+            pass
+        elif "R" in turn:
+            pass
+        elif "D" in turn:
+            pass
+        elif "L" in turn:
+            pass
+        
 
     return Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color
 
@@ -3145,7 +3159,9 @@ def scrambler_clock():
         number = str(number)
         signal = random.randrange(0+2+1)
         signal = "+" if signal == 1 else  "-"        
-        sum_turns.append(move+number+signal)    
+        sum_turns.append(move+number+signal)   
+        turn =  move+number+signal
+        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("clock",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
 
     sum_turns.append("y2")
     
