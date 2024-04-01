@@ -855,6 +855,12 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
         cubeN = 'n'
     elif cube == "pyraminx":
         cubeN = 'nn' 
+    elif cube == "megaminx":
+        cubeN = 'nn' 
+    elif cube == "skewb":
+        cubeN = 'nn' 
+    elif cube == "clock":
+        cubeN = 'nn' 
     
     
 
