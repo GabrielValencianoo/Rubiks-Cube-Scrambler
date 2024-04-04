@@ -19,9 +19,9 @@ import tkinter as tk
 from tkinter import ttk 
 from tkinter import messagebox
 from tkinter import filedialog
-from tkinter.filedialog import askopenfilename
-from tkinter.filedialog import asksaveasfile
-from tkinter.filedialog import askdirectory
+# from tkinter.filedialog import askopenfilename
+# from tkinter.filedialog import asksaveasfile
+# from tkinter.filedialog import askdirectory
 import customtkinter as ctk
 from tkinter import colorchooser
 import lovelyplots as lp
@@ -4084,7 +4084,7 @@ def importar_tempos():
     global first_scan
     global flag_change_event
     if first_scan == False and flag_change_event == False:
-        name_file = askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
+        name_file = filedialog.askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
                             filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
     elif first_scan == True or flag_change_event == True:
         name_file = str(eventsComboBox.get()) + '.csv'
