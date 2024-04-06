@@ -162,8 +162,11 @@ def trunc(n, decimals=0):
 
 def time_convert(time):
     global precisionTimer    
+
+    if precisionTimer == 1:        
+        time /= 10
     
-    if precisionTimer == 2:        
+    elif precisionTimer == 2:        
         time /= 100
 
     elif precisionTimer == 3:        
@@ -178,26 +181,22 @@ def time_convert(time):
         m = time // 60        
         m = int(m)    
 
-        s = time % 60             
+        s = time % 60          
 
-        if precisionTimer == 2:                  
+        if precisionTimer == 1:                  
+            sStr = format(s,'.1f')              
 
-            if s < 10:          
-                s = format(s,'.2f')         
-                presult = str(m) + ":0" + str(s)    
-                
-            else:
-                s = format(s,'.2f') 
-                presult = str(m) + ":" + str(s)                
-
+        if precisionTimer == 2:
+            sStr = format(s,'.2f')      
+               
         elif precisionTimer == 3:
-            if s < 10:
-                s = format(s,'.3f')   
-                presult = str(m) + ":0" + str(s)    
-                
-            else:                
-                s = format(s,'.3f')   
-                presult = str(m) + ":" + str(s)
+            sStr = format(s,'.3f')
+
+        if s < 10:                   
+            presult = str(m) + ":0" + sStr    
+            
+        else:                                
+            presult = str(m) + ":" + sStr
             
         
     return presult
@@ -3472,22 +3471,38 @@ def enter_time():
     chars = set('.')
     if any((c in chars) for c in input_timer.get()):    #encontrou o ponto
         chars = set(':')
-        if any((c in chars) for c in input_timer.get()) and precisionTimer == 2:        #encontrou o ponto e dois ponto  1:23.54 e com centesimos
+        if precisionTimer == 1:
+            multiplier = 10
+        elif precisionTimer == 2:
+            multiplier = 100
+        elif precisionTimer == 3:
+            multiplier = 1000
+
+        if any((c in chars) for c in input_timer.get()):        #encontrou o ponto e dois ponto  1:23.54 
             t = input_timer.get().split(':')        
             t = float(t[0]) * 60 + float(t[1])    
-            t *=100
-        elif not(any((c in chars) for c in input_timer.get())) and precisionTimer == 2:                                         #encontrou o ponto e nao o dois pontos   12.43
-            t = int(float(input_timer.get())*100)
+            t *=multiplier
+        elif not(any((c in chars) for c in input_timer.get())):      #encontrou o ponto e nao o dois pontos   12.43
+            t = int(float(input_timer.get())*multiplier)
         
-        if any((c in chars) for c in input_timer.get()) and precisionTimer == 3:        #encontrou o ponto e dois ponto  1:23.54 e com milesimos
-            t = input_timer.get().split(':')        
-            t = float(t[0]) * 60 + float(t[1])    
-            t *=1000
-        elif not(any((c in chars) for c in input_timer.get())) and precisionTimer == 3:                                    #encontrou o ponto e nao o dois pontos   12.43
-            t = int(float(input_timer.get())*1000)
 
 
     else:        #escrita sem ponto   1354
+
+        if int(input_timer.get()) >= 1000 and precisionTimer == 1:        #escrita sem ponto (11268) maior que 60 segundo e com decimos        
+            t = int(input_timer.get()) 
+            # print(t)
+            x = [int(a) for a in str(t)]
+            # print(x)
+            m = x[0]
+            s = x[1]*10 + x[2]
+            c = (x[3])/10
+            t = m*60 + s + c 
+            t *=10
+            # print(t)                                
+        elif int(input_timer.get()) < 1000 and precisionTimer == 1: #escrita sem ponto (1354) menor que 60 segundo e com decimos
+            t = int(input_timer.get())
+        
         if int(input_timer.get()) >= 10000 and precisionTimer == 2:        #escrita sem ponto (11268) maior que 60 segundo e com centesimos        
             t = int(input_timer.get()) 
             # print(t)
@@ -3512,7 +3527,7 @@ def enter_time():
             t *=1000
             # print(t)                                
         elif int(input_timer.get()) < 100000 and precisionTimer == 3:    #escrita sem ponto (13546) menor que 60 segundo e com milesimos   
-            t = float(input_timer.get())
+            t = int(input_timer.get())
         
                
     
@@ -3700,7 +3715,16 @@ def stop_timer():
         global t0        
         global enable_start_timer 
 
-        dt = (t1-t0)*100
+        global precisionTimer  
+
+        if precisionTimer == 1:
+            multiplier = 10
+        elif precisionTimer == 2:
+            multiplier = 100
+        elif precisionTimer == 3:
+            multiplier = 1000
+
+        dt = (t1-t0)*multiplier
         tempo = dt
         print(tempo)
 
@@ -3714,7 +3738,7 @@ def stop_timer():
         global countdown 
         countdown = 15
 
-        global precisionTimer
+        
 
         tempo = trunc(tempo,precisionTimer)
         tempos.append(tempo)
@@ -4357,11 +4381,14 @@ def inputVar_change():
 def precisionVar_change():
     global first_scan
     global precisionTimer
+
     if precisionVar.get() == 1:
-        precisionTimer = 2
+        precisionTimer = 1
+
+    if precisionVar.get() == 2:
+        precisionTimer = 2        
         
-        
-    elif precisionVar.get() == 2:
+    elif precisionVar.get() == 3:
         precisionTimer = 3  
 
     if first_scan == False:      
@@ -4730,9 +4757,9 @@ inputmenu.add_radiobutton(label="Manual input", value=1, variable=inputVar, comm
 inputmenu.add_radiobutton(label="Tecla Espaço", value=2, variable=inputVar, command=inputVar_change)
 inputmenu.add_radiobutton(label="Stackmat", value=3, variable=inputVar, command=inputVar_change)
 
-
-precisionmenu.add_radiobutton(label="0.01", value=1, variable=precisionVar, command= precisionVar_change)
-precisionmenu.add_radiobutton(label="0.001", value=2, variable=precisionVar, command= precisionVar_change)
+precisionmenu.add_radiobutton(label="0.1", value=1, variable=precisionVar, command= precisionVar_change)
+precisionmenu.add_radiobutton(label="0.01", value=2, variable=precisionVar, command= precisionVar_change)
+precisionmenu.add_radiobutton(label="0.001", value=3, variable=precisionVar, command= precisionVar_change)
 
 holdmenu.add_radiobutton(label="0", value=1, variable=holdVar, command= holdVar_change)
 holdmenu.add_radiobutton(label="0.3", value=2, variable=holdVar, command= holdVar_change)
