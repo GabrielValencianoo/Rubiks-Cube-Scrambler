@@ -24,7 +24,7 @@ from tkinter import filedialog
 # from tkinter.filedialog import askdirectory
 import customtkinter as ctk
 from tkinter import colorchooser
-import lovelyplots as lp
+# import lovelyplots as lp
 
 import datetime
 import csv
@@ -3490,33 +3490,25 @@ def enter_time():
     else:        #escrita sem ponto   1354
 
         if int(input_timer.get()) >= 1000 and precisionTimer == 1:        #escrita sem ponto (11268) maior que 60 segundo e com decimos        
-            t = int(input_timer.get()) 
-            # print(t)
-            x = [int(a) for a in str(t)]
-            # print(x)
+            t = int(input_timer.get())             
+            x = [int(a) for a in str(t)]            
             m = x[0]
             s = x[1]*10 + x[2]
             c = (x[3])/10
             t = m*60 + s + c 
-            t *=10
-            # print(t)                                
-        elif int(input_timer.get()) < 1000 and precisionTimer == 1: #escrita sem ponto (1354) menor que 60 segundo e com decimos
-            t = int(input_timer.get())
+            t *=10            
+       
         
         if int(input_timer.get()) >= 10000 and precisionTimer == 2:        #escrita sem ponto (11268) maior que 60 segundo e com centesimos        
-            t = int(input_timer.get()) 
-            # print(t)
-            x = [int(a) for a in str(t)]
-            # print(x)
+            t = int(input_timer.get())             
+            x = [int(a) for a in str(t)]            
             m = x[0]
             s = x[1]*10 + x[2]
             c = (x[3]*10 + x[4])/100
             t = m*60 + s + c 
             t *=100
-            # print(t)                                
-        elif int(input_timer.get()) < 10000 and precisionTimer == 2: #escrita sem ponto (1354) menor que 60 segundo e com centesimos
-            t = int(input_timer.get())
-        
+           
+                
         elif int(input_timer.get()) >= 100000 and precisionTimer == 3:           #escrita sem ponto (135460) maior que 60 segundo e com milesimos   
             t = int(input_timer.get()) 
             x = [int(a) for a in str(t)]
@@ -3525,8 +3517,8 @@ def enter_time():
             c = (x[3]*100 + x[4]*10 + x[5])/1000
             t = m*60 + s + c 
             t *=1000
-            # print(t)                                
-        elif int(input_timer.get()) < 100000 and precisionTimer == 3:    #escrita sem ponto (13546) menor que 60 segundo e com milesimos   
+            
+        else:    #escrita sem ponto (13546) menor que 60 segundo   
             t = int(input_timer.get())
         
                
@@ -3574,7 +3566,7 @@ def on_press_esc(event):
     
     actual_timer.set("0:00")   
     print("parou....")
-    print_timer.configure(text_color= "white")
+    print_timer.configure(text_color= ("black","white"))
 
 
 def inspection():
@@ -3671,7 +3663,7 @@ def cancel_do_space_longpress():
     _short_press = None
     if _do_space_longpress:
         root.after_cancel(_do_space_longpress)
-        print_timer.configure(text_color= "white")
+        print_timer.configure(text_color= ("black","white"))
 
 def atualizar_label():
     global t0
@@ -4181,44 +4173,20 @@ def guardar_tempos():
     messagebox.showinfo( "Warning", "Export completo.")
 
     
-def changeColorScramble1():
-    faceColors['1'] = colorchooser.askcolor(faceColors['1'])[1]
+def changeColorScramble(side):
+    choose = colorchooser.askcolor(faceColors[side])[1] 
+    if choose != None:
+        faceColors[side] = choose
     
     if first_scan == False:      
         write_txt_setting()
 
-
-def changeColorScramble2():
-    faceColors['2'] = colorchooser.askcolor(faceColors['2'])[1]
     
-    if first_scan == False:      
-        write_txt_setting()
-
-
-def changeColorScramble3():
-    faceColors['3'] = colorchooser.askcolor(faceColors['3'])[1]
-
-    if first_scan == False:      
-        write_txt_setting()
-
-
-def changeColorScramble4():
-    faceColors['4'] = colorchooser.askcolor(faceColors['4'])[1]
-
-    if first_scan == False:      
-        write_txt_setting()
-
-
-def changeColorScramble5():
-    faceColors['5'] = colorchooser.askcolor(faceColors['5'])[1]
-    
-    if first_scan == False:      
-        write_txt_setting()
-
-
-def changeColorScramble6():
-    faceColors['6'] = colorchooser.askcolor(faceColors['6'])[1]
-    
+def ResetColorScramble():
+    global faceColors
+    global first_scan
+    faceColors = {'1':'#FFFFFF','2':'#FFA500','3':'#00FF00','4':'#FF0000','5':'#0000FF','6':'#FFFF00'}
+        
     if first_scan == False:      
         write_txt_setting()
 
@@ -4746,12 +4714,13 @@ optionmenu.add_cascade(label="Precisão timer", menu=precisionmenu)
 optionmenu.add_cascade(label="Tempo segurar Espaço", menu=holdmenu)
 
 
-colormenu.add_command(label="Face 1", command=changeColorScramble1)
-colormenu.add_command(label="Face 2", command=changeColorScramble2)
-colormenu.add_command(label="Face 3", command=changeColorScramble3)
-colormenu.add_command(label="Face 4", command=changeColorScramble4)
-colormenu.add_command(label="Face 5", command=changeColorScramble5)
-colormenu.add_command(label="Face 6", command=changeColorScramble6)
+colormenu.add_command(label="Face 1", command= lambda: changeColorScramble('1'))
+colormenu.add_command(label="Face 2", command= lambda: changeColorScramble('2'))
+colormenu.add_command(label="Face 3", command= lambda: changeColorScramble('3'))
+colormenu.add_command(label="Face 4", command= lambda: changeColorScramble('4'))
+colormenu.add_command(label="Face 5", command= lambda: changeColorScramble('5'))
+colormenu.add_command(label="Face 6", command= lambda: changeColorScramble('6'))
+colormenu.add_command(label="Reset Colors", command= ResetColorScramble)
 
 inputmenu.add_radiobutton(label="Manual input", value=1, variable=inputVar, command=inputVar_change)
 inputmenu.add_radiobutton(label="Tecla Espaço", value=2, variable=inputVar, command=inputVar_change)
