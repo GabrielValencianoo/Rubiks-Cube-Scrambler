@@ -103,6 +103,7 @@ mo_3  = []
 ao_5  = []
 ao_12 = []
 scrambles = []
+status = []
 datas = []
 des_padrao = []
 mediana = []
@@ -174,7 +175,7 @@ def time_convert(time):
 
     
     if time < 60:
-        presult = time
+        presult = str(time)
         
     else:
         # m, s = divmod(time, 60)
@@ -268,6 +269,7 @@ def estatistica(index):
     global rankingPath   
     global mediana
     global des_padrao
+    global statusFlag
 
     
     # global tempos
@@ -326,6 +328,12 @@ def estatistica(index):
     pbest_mo3  = pbest_mo3 if index >= 3 else 0
     pbest_ao5  = pbest_ao5 if index >= 5 else 0
     pbest_ao12 = pbest_ao12 if index >= 12 else 0
+
+    
+    if status[index-1] == "DNF":
+        ptempo = "DNF"
+    elif status[index-1] == "+2":
+        ptempo += "+"
 
     
     # tb_stat.insert(tk.END,"n° solves: " + str(len(tempos)))   
@@ -3546,6 +3554,10 @@ def enter_time():
 
     scrambles.append(actual_scramble.get())  
 
+    global statusFlag
+    statusFlag = "OK"
+    status.append(statusFlag)
+
     estatistica(len(tempos))
     input_timer.delete(0,tk.END)
 
@@ -3573,6 +3585,7 @@ def inspection():
     
     global countdown
     global run_inspecton
+    global statusFlag
     if run_inspecton:
         print("inspeção")   
         # Just beore starting        
@@ -3583,6 +3596,17 @@ def inspection():
         actual_timer.set(countdown)
         
         print(countdown)
+       
+        if countdown <= -2:
+            statusFlag = "DNF"
+            actual_timer.set("DNF")
+        elif countdown <= 0:
+            statusFlag = "+2"
+            actual_timer.set("+2")
+        else:
+            statusFlag = "OK"
+
+
         #Increment the count after
         #every 1 second
         root.after(1000, inspection)
@@ -3675,8 +3699,7 @@ def atualizar_label():
         actual_timer.set(f"{int(minutos):02d}:{int(segundos):02d}:{int(centesimos*100):02d}")
         root.after(10, atualizar_label)
                 
-def start_timer():  
-    global enable_start_timer    
+def start_timer():     
     
     global t0
     global timer_state
@@ -3686,10 +3709,7 @@ def start_timer():
         
         print("rodando........")
         print_timer.configure(text_color= "white")
-
-        global actual_timer
-        # actual_timer.set("rodando........")
-
+        
         timer_state = 4
         global run_inspecton
         run_inspecton = False
@@ -3711,10 +3731,13 @@ def stop_timer():
 
         if precisionTimer == 1:
             multiplier = 10
+            penalty = 20
         elif precisionTimer == 2:
             multiplier = 100
+            penalty = 200
         elif precisionTimer == 3:
             multiplier = 1000
+            penalty = 2000
 
         dt = (t1-t0)*multiplier
         tempo = dt
@@ -3728,9 +3751,16 @@ def stop_timer():
         timer_state = 5                
         
         global countdown 
+        
         countdown = 15
 
-        
+        global statusFlag
+        ic(statusFlag)
+        ic(tempo)
+        if statusFlag == "+2":            
+            tempo+=penalty
+        ic(tempo)
+        status.append(statusFlag)
 
         tempo = trunc(tempo,precisionTimer)
         tempos.append(tempo)
@@ -4119,6 +4149,7 @@ def importar_tempos():
                 tempos.append(float(row["Time"]))            
                 scrambles.append(row["Scramble"])
                 datas.append(row["Date"])
+                status.append(row["Status"])
 
 
                 line_count += 1
@@ -4153,7 +4184,7 @@ def update_file_tempos():
     with open(name_file, mode='a') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow([len(tempos), tempos[-1], scrambles[-1], datas[-1]])
+        employee_writer.writerow([len(tempos), tempos[-1], scrambles[-1], datas[-1],status[-1]])
 
 def guardar_tempos():    
     events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
@@ -4164,7 +4195,7 @@ def guardar_tempos():
         name_file = name_file + '.csv' 
         with open(name_file, mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            employee_writer.writerow(["No.", "Time", "Scramble","Date"])
+            employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
             
             if event == eventsComboBox.get():
                 for i in range(len(tempos)):
@@ -4216,6 +4247,7 @@ def resetar():
     ao_12.clear()
     scrambles.clear()
     datas.clear()
+    status.clear()
 
     
 
@@ -4251,7 +4283,7 @@ def resetar():
         name_file = name_file + '.csv'  
         with open(name_file, mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            employee_writer.writerow(["No.", "Time", "Scramble","Date"])
+            employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
 
 def deletar():
     global tempos
@@ -4278,6 +4310,7 @@ def deletar():
     del tempos[selected-1]
     del scrambles[selected-1]
     del datas[selected-1]
+    del status[selected-1]
 
     mo_3.clear()
     ao_5.clear()
@@ -4427,9 +4460,9 @@ def savetimeVar_change():
         
     elif savetimeVar.get() == 1:       
         saveTime = 1
-        if first_scan == True:
-            importar_tempos()
-        elif first_scan == False:
+        # if first_scan == True:
+        #     importar_tempos()
+        if first_scan == False:
             guardar_tempos()    
 
     if first_scan == False:      
@@ -4526,6 +4559,7 @@ def donothing_event(event):
    
    except:       
        filewin = tk.Toplevel(root)
+       filewin.geometry('600x300+1200+200') 
        button = tk.Button(filewin, text="Do nothing button")
        button.pack()
        selected = tb_times.focus()   
