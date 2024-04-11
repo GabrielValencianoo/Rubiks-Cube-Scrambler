@@ -47,6 +47,7 @@ from zipfile import ZipFile
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import mpl_toolkits.mplot3d.art3d as art3d
 
 root = ctk.CTk() 
@@ -3927,6 +3928,7 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
         
     else:
         cubeN = 'nn'
+        length = 3
         
 
     if cubeN == "n":
@@ -3978,6 +3980,86 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
                 ax.add_patch(side)
                 art3d.pathpatch_2d_to_3d(side, z=length, zdir='z') 
    
+    if cube == "skewb":
+        trianglesyellow =  [
+
+        ((0,0,0),(1,0,0),(0,1,0)),
+        ((1,0,0),(2,0,0),(2,1,0)),
+        ((0,1,0),(0,2,0),(1,2,0)),
+        ((2,1,0),(2,2,0),(1,2,0)),
+
+        ((1,0,0),(0,1,0),(1,2,0),(2,1,0)),
+
+        ]
+
+        triangleswhite =  [
+
+        ((0,0,2),(1,0,2),(0,1,2)),
+        ((1,0,2),(2,0,2),(2,1,2)),
+        ((0,1,2),(0,2,2),(1,2,2)),
+        ((2,1,2),(2,2,2),(1,2,2)),
+
+        ((1,0,2),(0,1,2),(1,2,2),(2,1,2)),
+
+        ]
+
+
+        trianglesgreen =  [
+
+        ((0,0,0),(1,0,0),(0,0,1)),
+        ((1,0,0),(2,0,0),(2,0,1)),
+        ((0,0,1),(0,0,2),(1,0,2)),
+        ((2,0,1),(2,0,2),(1,0,2)),
+
+        ((1,0,0),(0,0,1),(1,0,2),(2,0,1)),
+
+        ]
+
+        trianglesred =  [
+
+        ((2,0,0),(2,1,0),(2,0,1)),
+        ((2,1,0),(2,2,0),(2,2,1)),
+        ((2,0,1),(2,0,2),(2,1,2)),
+        ((2,2,1),(2,2,2),(2,1,2)),
+
+        ((2,1,0),(2,0,1),(2,1,2),(2,2,1)),
+
+        ]
+
+        trianglesblue =  [
+
+        ((0,2,0),(1,2,0),(0,2,1)),
+        ((1,2,0),(2,2,0),(2,2,1)),
+        ((0,2,1),(0,2,2),(1,2,2)),
+        ((2,2,1),(2,2,2),(1,2,2)),
+
+        ((1,2,0),(0,2,1),(1,2,2),(2,2,1)),
+
+        ]
+
+        trianglesorange =  [
+
+        ((0,0,0),(0,1,0),(0,0,1)),
+        ((0,1,0),(0,2,0),(0,2,1)),
+        ((0,0,1),(0,0,2),(0,1,2)),
+        ((0,2,1),(0,2,2),(0,1,2)),
+
+        ((0,1,0),(0,0,1),(0,1,2),(0,2,1)),
+
+        ]
+
+        ax.add_collection(Poly3DCollection(trianglesyellow, edgecolor='k',facecolor='y'))    
+
+        ax.add_collection(Poly3DCollection(trianglesgreen, edgecolor='k',facecolor='g'))        
+
+        ax.add_collection(Poly3DCollection(trianglesred, edgecolor='k',facecolor='r'))    
+
+        ax.add_collection(Poly3DCollection(trianglesblue, edgecolor='k',facecolor='b'))    
+
+        ax.add_collection(Poly3DCollection(trianglesorange, edgecolor='k',facecolor='#FFA500'))    
+
+        ax.add_collection(Poly3DCollection(triangleswhite, edgecolor='k',facecolor='w')) 
+
 
     # Hide axes ticks
     ax.set_xticks([])
