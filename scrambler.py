@@ -3896,39 +3896,38 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     #                 art3d.pathpatch_2d_to_3d(side, z=z, zdir=axis)
 
     if cube == "2x2":        
-        length = 2
         LL = 1
+        length = 2        
         cubeN = 'n'
-        # ax.set_box_aspect(None, zoom=20)
+        
     elif cube == "3x3":        
         LL = 2
         length = 3
         cubeN = 'n'
-        # ax.set_box_aspect(None, zoom=30)
+        
     elif cube == "4x4":        
         LL = 3
         length = 4
         cubeN = 'n'
-        # ax.set_box_aspect(None, zoom=40)
+        
     elif cube == "5x5":        
         LL = 4
         length = 5
         cubeN = 'n'
-        # ax.set_box_aspect(None, zoom=50)
+        
     elif cube == "6x6":        
         LL = 5
         length = 6
         cubeN = 'n'
-        # ax.set_box_aspect(None, zoom=60)
+        
     elif cube == "7x7":        
         LL = 6
         length = 7
         cubeN = 'n'
-        # ax.set_box_aspect(None, zoom=70)
+        
     else:
         cubeN = 'nn'
-        # ax.set_box_aspect(None, zoom=70)
-
+        
 
     if cubeN == "n":
         # Eixo XXXXXXXXXXXXXXXXXXXXXXXXXXXX         
@@ -3984,7 +3983,10 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
     ax.set_xticks([])
     ax.set_yticks([])
     ax.set_zticks([])
-    ax.dist = 70
+    ax.set_xlim([0,length])
+    ax.set_ylim([0,length])
+    ax.set_zlim([0,length])
+    
     # ax.set_visible(False)
     # ax.set_facecolor('pink')    
 	
