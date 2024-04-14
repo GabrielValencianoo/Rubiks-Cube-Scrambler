@@ -4,13 +4,13 @@
     "Disparador cronometro": "2",
     "Precisao": "2",
     "Tempo hold": "3",
-    "Modalidade": "7x7",
+    "Modalidade": "skewb",
     "Habilitar Ranking": "False",
     "Genero": "0",
     "Salvar tempo": "True",
     "Ranking Path": "D:/Projetos",
     "Desenho Scrambler 3D": "True",
-    "Mode": "2",
+    "Mode": "3",
     "colorTheme": "0",
     "colors": "{'1': '#FFFFFF', '2': '#FFA500', '3': '#00ff00', '4': '#FF0000', '5': '#0000FF', '6': '#FFFF00'}"
 }

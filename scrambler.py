@@ -3925,7 +3925,12 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
         LL = 6
         length = 7
         cubeN = 'n'
-        
+    elif cube == "pyraminx":  
+        cubeN = 'nn'
+        length = 5
+    elif cube == "skewb":  
+        cubeN = 'nn'
+        length = 3
     else:
         cubeN = 'nn'
         length = 3
