@@ -4063,13 +4063,92 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
 
         ]
 
-        ax.add_collection(Poly3DCollection(trianglesyellow, edgecolor='k',facecolor='y'))    
 
-        ax.add_collection(Poly3DCollection(trianglesgreen, edgecolor='k',facecolor='g'))    
+        posyellow =  [
+            (Am_color[0,0]),
+            (Am_color[0,2]),
+            (Am_color[0,4]),
 
-        ax.add_collection(Poly3DCollection(trianglesred, edgecolor='k',facecolor='r'))    
+            (Am_color[0,1]),
+            (Am_color[0,3]),
 
-        ax.add_collection(Poly3DCollection(trianglesblue, edgecolor='k',facecolor='b'))    
+            (Am_color[1,1]),
+            (Am_color[1,3]),
+
+            (Am_color[1,2]),
+
+            (Am_color[2,2]),
+
+            ]
+
+
+        posgreen =  [
+
+            (Vd_color[2,0]),
+            (Vd_color[2,2]),
+            (Vd_color[2,4]),
+
+            (Vd_color[2,1]),
+            (Vd_color[2,3]),
+
+            (Vd_color[1,1]),
+            (Vd_color[1,3]),
+
+            (Vd_color[1,2]),
+
+            (Vd_color[0,2]),
+
+            ]
+
+        posred =  [
+
+            (Vm_color[2,2]),
+            (Vm_color[1,1]),
+            (Vm_color[0,0]),
+
+            (Vm_color[1,2]),
+            (Vm_color[0,1]),
+
+            (Vm_color[1,3]),
+            (Vm_color[0,2]),
+
+            (Vm_color[0,3]),
+
+            (Vm_color[0,4]),
+
+
+            ]
+
+        posblue =  [
+
+            (Az_color[2,2]),
+            (Az_color[1,3]),
+            (Az_color[0,4]),
+
+            (Az_color[1,2]),
+            (Az_color[0,3]),
+
+            (Az_color[1,1]),
+            (Az_color[0,2]),
+
+            (Az_color[0,1]),
+
+            (Az_color[0,0]),
+
+            ]
+        
+
+
+
+        # for i in range(posgreen):
+        ax.add_collection(Poly3DCollection(trianglesgreen, edgecolor='k',facecolor=posgreen)) 
+
+
+        ax.add_collection(Poly3DCollection(trianglesyellow, edgecolor='k',facecolor=posyellow))               
+
+        ax.add_collection(Poly3DCollection(trianglesred, edgecolor='k',facecolor=posred))    
+
+        ax.add_collection(Poly3DCollection(trianglesblue, edgecolor='k',facecolor=posblue))    
 
 
     elif cube == "skewb":
