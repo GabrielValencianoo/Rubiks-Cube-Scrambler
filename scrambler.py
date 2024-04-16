@@ -816,6 +816,8 @@ def createMatrix(cube,type):
         n = 7
     elif cube == "pyraminx":
         n = 5
+    elif cube == "skewb":
+        n = 4
     elif cube == "clock":
         n = 3
     else:
@@ -1472,7 +1474,351 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
     elif cube == "megaminx":
         pass
     elif cube == "skewb":
-        pass
+        if turn == "R":
+
+            Buffer[0][0] = Vm_color[0,2]
+            Buffer[0][1] = Vm_color[1,1]
+            Buffer[0][2] = Vm_color[2,0]
+            Buffer[0][3] = Vm_color[2,2]
+
+            Buffer[1][0] = Az_color[0,0]
+            Buffer[1][1] = Az_color[1,1]
+            Buffer[1][2] = Az_color[2,0]
+            Buffer[1][3] = Az_color[2,2]
+
+
+            Buffer[2][0] = Am_color[0,2]
+            Buffer[2][1] = Am_color[1,1]
+            Buffer[2][2] = Am_color[2,0]
+            Buffer[2][3] = Am_color[2,2]           
+
+            Buffer[3][0] = Vd_color[2,2]
+            Buffer[3][1] = Br_color[0,2]            
+            Buffer[3][2] = Lr_color[2,0]
+
+            #  =============================================================
+
+            Az_color[2,2] = Buffer[0][0] 
+            Az_color[1,1] = Buffer[0][1] 
+            Az_color[0,0] = Buffer[0][2] 
+            Az_color[2,0] = Buffer[0][3] 
+
+            Am_color[2,2] = Buffer[1][0] 
+            Am_color[1,1] = Buffer[1][1] 
+            Am_color[2,2] = Buffer[1][2] 
+            Am_color[0,2] = Buffer[1][3] 
+
+            Vm_color[0,2] = Buffer[2][0] 
+            Vm_color[1,1] = Buffer[2][1] 
+            Vm_color[2,0] = Buffer[2][2] 
+            Vm_color[2,2] = Buffer[2][3]
+
+            Br_color[0,2] = Buffer[3][0]
+            Lr_color[2,0] = Buffer[3][1]
+            Vd_color[2,2] = Buffer[3][2]
+        
+        elif turn == "R'":
+            for i in range(2):
+                Buffer[0][0] = Vm_color[0,2]
+                Buffer[0][1] = Vm_color[1,1]
+                Buffer[0][2] = Vm_color[2,0]
+                Buffer[0][3] = Vm_color[2,2]
+
+                Buffer[1][0] = Az_color[0,0]
+                Buffer[1][1] = Az_color[1,1]
+                Buffer[1][2] = Az_color[2,0]
+                Buffer[1][3] = Az_color[2,2]
+
+
+                Buffer[2][0] = Am_color[0,2]
+                Buffer[2][1] = Am_color[1,1]
+                Buffer[2][2] = Am_color[2,0]
+                Buffer[2][3] = Am_color[2,2]           
+
+                Buffer[3][0] = Vd_color[2,2]
+                Buffer[3][1] = Br_color[0,2]            
+                Buffer[3][2] = Lr_color[2,0]
+
+                #  =============================================================
+
+                Az_color[2,2] = Buffer[0][0] 
+                Az_color[1,1] = Buffer[0][1] 
+                Az_color[0,0] = Buffer[0][2] 
+                Az_color[2,0] = Buffer[0][3] 
+
+                Am_color[2,2] = Buffer[1][0] 
+                Am_color[1,1] = Buffer[1][1] 
+                Am_color[2,2] = Buffer[1][2] 
+                Am_color[0,2] = Buffer[1][3] 
+
+                Vm_color[0,2] = Buffer[2][0] 
+                Vm_color[1,1] = Buffer[2][1] 
+                Vm_color[2,0] = Buffer[2][2] 
+                Vm_color[2,2] = Buffer[2][3]
+
+                Br_color[0,2] = Buffer[3][0]
+                Lr_color[2,0] = Buffer[3][1]
+                Vd_color[2,2] = Buffer[3][2]
+        
+        elif turn == "L":
+            Buffer[0][0] = Vd_color[0,0]
+            Buffer[0][1] = Vd_color[1,1]
+            Buffer[0][2] = Vd_color[2,0]
+            Buffer[0][3] = Vd_color[2,2]
+
+            Buffer[1][0] = Am_color[0,0]
+            Buffer[1][1] = Am_color[0,2]
+            Buffer[1][2] = Am_color[1,1]
+            Buffer[1][3] = Am_color[2,0]
+
+
+            Buffer[2][0] = Lr_color[0,2]
+            Buffer[2][1] = Lr_color[1,1]
+            Buffer[2][2] = Lr_color[2,0]
+            Buffer[2][3] = Lr_color[2,2]           
+
+            Buffer[3][0] = Vm_color[2,0]
+            Buffer[3][1] = Br_color[2,0]            
+            Buffer[3][2] = Az_color[2,2]
+
+            #  =============================================================
+
+            Am_color[0,0] = Buffer[0][0] 
+            Am_color[1,1] = Buffer[0][1] 
+            Am_color[2,0] = Buffer[0][2] 
+            Am_color[2,2] = Buffer[0][3] 
+
+            Lr_color[2,2] = Buffer[1][0] 
+            Lr_color[2,0] = Buffer[1][1] 
+            Lr_color[1,1] = Buffer[1][2] 
+            Lr_color[0,2] = Buffer[1][3] 
+
+            Vd_color[2,2] = Buffer[2][0] 
+            Vd_color[1,1] = Buffer[2][1] 
+            Vd_color[0,0] = Buffer[2][2] 
+            Vd_color[2,0] = Buffer[2][3]
+
+            Az_color[2,2] = Buffer[3][0]
+            Vm_color[2,0] = Buffer[3][1]
+            Br_color[2,0] = Buffer[3][2]
+        
+        elif turn == "L'":
+            for i in range(2):
+                Buffer[0][0] = Vd_color[0,0]
+                Buffer[0][1] = Vd_color[1,1]
+                Buffer[0][2] = Vd_color[2,0]
+                Buffer[0][3] = Vd_color[2,2]
+
+                Buffer[1][0] = Am_color[0,0]
+                Buffer[1][1] = Am_color[0,2]
+                Buffer[1][2] = Am_color[1,1]
+                Buffer[1][3] = Am_color[2,0]
+
+
+                Buffer[2][0] = Lr_color[0,2]
+                Buffer[2][1] = Lr_color[1,1]
+                Buffer[2][2] = Lr_color[2,0]
+                Buffer[2][3] = Lr_color[2,2]           
+
+                Buffer[3][0] = Vm_color[2,0]
+                Buffer[3][1] = Br_color[2,0]            
+                Buffer[3][2] = Az_color[2,2]
+
+                #  =============================================================
+
+                Am_color[0,0] = Buffer[0][0] 
+                Am_color[1,1] = Buffer[0][1] 
+                Am_color[2,0] = Buffer[0][2] 
+                Am_color[2,2] = Buffer[0][3] 
+
+                Lr_color[2,2] = Buffer[1][0] 
+                Lr_color[2,0] = Buffer[1][1] 
+                Lr_color[1,1] = Buffer[1][2] 
+                Lr_color[0,2] = Buffer[1][3] 
+
+                Vd_color[2,2] = Buffer[2][0] 
+                Vd_color[1,1] = Buffer[2][1] 
+                Vd_color[0,0] = Buffer[2][2] 
+                Vd_color[2,0] = Buffer[2][3]
+
+                Az_color[2,2] = Buffer[3][0]
+                Vm_color[2,0] = Buffer[3][1]
+                Br_color[2,0] = Buffer[3][2]
+        
+        elif turn == "U":
+            Buffer[0][0] = Br_color[0,0]
+            Buffer[0][1] = Br_color[0,2]
+            Buffer[0][2] = Br_color[1,1]
+            Buffer[0][3] = Br_color[2,0]
+
+            Buffer[1][0] = Lr_color[0,0]
+            Buffer[1][1] = Lr_color[0,2]
+            Buffer[1][2] = Lr_color[1,1]
+            Buffer[1][3] = Lr_color[2,0]
+
+
+            Buffer[2][0] = Az_color[0,0]
+            Buffer[2][1] = Az_color[0,2]
+            Buffer[2][2] = Az_color[1,1]
+            Buffer[2][3] = Az_color[2,2]           
+
+            Buffer[3][0] = Vm_color[0,2]
+            Buffer[3][1] = Vd_color[0,0]            
+            Buffer[3][2] = Am_color[2,0]
+
+            #  =============================================================
+
+            Lr_color[0,0] = Buffer[0][0] 
+            Lr_color[0,2] = Buffer[0][1] 
+            Lr_color[1,1] = Buffer[0][2] 
+            Lr_color[2,0] = Buffer[0][3] 
+
+            Az_color[0,2] = Buffer[1][0] 
+            Az_color[2,2] = Buffer[1][1] 
+            Az_color[1,1] = Buffer[1][2] 
+            Az_color[0,0] = Buffer[1][3] 
+
+            Br_color[2,0] = Buffer[2][0] 
+            Br_color[0,0] = Buffer[2][1] 
+            Br_color[1,1] = Buffer[2][2] 
+            Br_color[0,2] = Buffer[2][3]
+
+            Vd_color[0,0] = Buffer[3][0]
+            Am_color[2,0] = Buffer[3][1]
+            Vm_color[0,2] = Buffer[3][2]
+        
+        elif turn == "U'":
+            for i in range(2):
+                Buffer[0][0] = Br_color[0,0]
+                Buffer[0][1] = Br_color[0,2]
+                Buffer[0][2] = Br_color[1,1]
+                Buffer[0][3] = Br_color[2,0]
+
+                Buffer[1][0] = Lr_color[0,0]
+                Buffer[1][1] = Lr_color[0,2]
+                Buffer[1][2] = Lr_color[1,1]
+                Buffer[1][3] = Lr_color[2,0]
+
+
+                Buffer[2][0] = Az_color[0,0]
+                Buffer[2][1] = Az_color[0,2]
+                Buffer[2][2] = Az_color[1,1]
+                Buffer[2][3] = Az_color[2,2]           
+
+                Buffer[3][0] = Vm_color[0,2]
+                Buffer[3][1] = Vd_color[0,0]            
+                Buffer[3][2] = Am_color[2,0]
+
+                #  =============================================================
+
+                Lr_color[0,0] = Buffer[0][0] 
+                Lr_color[0,2] = Buffer[0][1] 
+                Lr_color[1,1] = Buffer[0][2] 
+                Lr_color[2,0] = Buffer[0][3] 
+
+                Az_color[0,2] = Buffer[1][0] 
+                Az_color[2,2] = Buffer[1][1] 
+                Az_color[1,1] = Buffer[1][2] 
+                Az_color[0,0] = Buffer[1][3] 
+
+                Br_color[2,0] = Buffer[2][0] 
+                Br_color[0,0] = Buffer[2][1] 
+                Br_color[1,1] = Buffer[2][2] 
+                Br_color[0,2] = Buffer[2][3]
+
+                Vd_color[0,0] = Buffer[3][0]
+                Am_color[2,0] = Buffer[3][1]
+                Vm_color[0,2] = Buffer[3][2]
+        
+        elif turn == "B":
+            Buffer[0][0] = Az_color[0,2]
+            Buffer[0][1] = Az_color[1,1]
+            Buffer[0][2] = Az_color[2,0]
+            Buffer[0][3] = Az_color[2,2]
+
+            Buffer[1][0] = Lr_color[0,0]
+            Buffer[1][1] = Lr_color[1,1]
+            Buffer[1][2] = Lr_color[2,0]
+            Buffer[1][3] = Lr_color[2,2]
+
+
+            Buffer[2][0] = Am_color[0,0]
+            Buffer[2][1] = Am_color[1,1]
+            Buffer[2][2] = Am_color[2,0]
+            Buffer[2][3] = Am_color[2,2]           
+
+            Buffer[3][0] = Vm_color[2,2]
+            Buffer[3][1] = Br_color[0,0]            
+            Buffer[3][2] = Vd_color[2,0]
+
+            #  =============================================================
+
+            Lr_color[2,2] = Buffer[0][0] 
+            Lr_color[1,1] = Buffer[0][1] 
+            Lr_color[0,0] = Buffer[0][2] 
+            Lr_color[2,0] = Buffer[0][3] 
+
+            Am_color[0,0] = Buffer[1][0] 
+            Am_color[1,1] = Buffer[1][1] 
+            Am_color[2,0] = Buffer[1][2] 
+            Am_color[2,2] = Buffer[1][3] 
+
+            Az_color[2,0] = Buffer[2][0] 
+            Az_color[1,1] = Buffer[2][1] 
+            Az_color[2,2] = Buffer[2][2] 
+            Az_color[0,2] = Buffer[2][3]
+
+            Br_color[0,0] = Buffer[3][0]
+            Vd_color[2,0] = Buffer[3][1]
+            Vm_color[2,2] = Buffer[3][2]
+        
+        elif turn == "B'":
+            for i in range(2):
+                Buffer[0][0] = Az_color[0,2]
+                Buffer[0][1] = Az_color[1,1]
+                Buffer[0][2] = Az_color[2,0]
+                Buffer[0][3] = Az_color[2,2]
+
+                Buffer[1][0] = Lr_color[0,0]
+                Buffer[1][1] = Lr_color[1,1]
+                Buffer[1][2] = Lr_color[2,0]
+                Buffer[1][3] = Lr_color[2,2]
+
+
+                Buffer[2][0] = Am_color[0,0]
+                Buffer[2][1] = Am_color[1,1]
+                Buffer[2][2] = Am_color[2,0]
+                Buffer[2][3] = Am_color[2,2]           
+
+                Buffer[3][0] = Vm_color[2,2]
+                Buffer[3][1] = Br_color[0,0]            
+                Buffer[3][2] = Vd_color[2,0]
+
+                #  =============================================================
+
+                Lr_color[2,2] = Buffer[0][0] 
+                Lr_color[1,1] = Buffer[0][1] 
+                Lr_color[0,0] = Buffer[0][2] 
+                Lr_color[2,0] = Buffer[0][3] 
+
+                Am_color[0,0] = Buffer[1][0] 
+                Am_color[1,1] = Buffer[1][1] 
+                Am_color[2,0] = Buffer[1][2] 
+                Am_color[2,2] = Buffer[1][3] 
+
+                Az_color[2,0] = Buffer[2][0] 
+                Az_color[1,1] = Buffer[2][1] 
+                Az_color[2,2] = Buffer[2][2] 
+                Az_color[0,2] = Buffer[2][3]
+
+                Br_color[0,0] = Buffer[3][0]
+                Vd_color[2,0] = Buffer[3][1]
+                Vm_color[2,2] = Buffer[3][2]
+        
+
+        
+
+        
     elif cube == "clock":
         if "UR" in turn:
             pass
@@ -3150,8 +3496,8 @@ def scrambler_skewb():
         elif n_move == 8:
             turn = "B'"
             
-        
-        
+        Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("skewb",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
+        ic(Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
         sum_turns.append(turn)
         pr_move = n_move
         accepted = 0
@@ -4219,17 +4565,92 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
 
         ]
 
-        ax.add_collection(Poly3DCollection(trianglesyellow, edgecolor='k',facecolor='y'))    
+        poswhite =  [
+            (Br_color[2,0]),
+            (Br_color[2,2]),
 
-        ax.add_collection(Poly3DCollection(trianglesgreen, edgecolor='k',facecolor='g'))        
+            (Br_color[0,0]),
+            (Br_color[0,2]),
 
-        ax.add_collection(Poly3DCollection(trianglesred, edgecolor='k',facecolor='r'))    
+            (Br_color[1,1]),
+            
+            ]
 
-        ax.add_collection(Poly3DCollection(trianglesblue, edgecolor='k',facecolor='b'))    
 
-        ax.add_collection(Poly3DCollection(trianglesorange, edgecolor='k',facecolor='#FFA500'))    
 
-        ax.add_collection(Poly3DCollection(triangleswhite, edgecolor='k',facecolor='w')) 
+
+        posyellow =  [
+            (Am_color[0,0]),
+            (Am_color[0,2]),
+
+            (Am_color[2,0]),
+            (Am_color[2,2]),
+
+            (Am_color[1,1]),
+
+            ]
+
+
+        posgreen =  [
+
+            (Vd_color[2,0]),
+            (Vd_color[2,2]),
+
+            (Vd_color[0,0]),
+            (Vd_color[0,2]),
+
+            (Vd_color[1,1]),            
+
+            ]
+
+        posred =  [
+
+            (Vm_color[2,0]),
+            (Vm_color[2,2]),
+
+            (Vm_color[0,0]),
+            (Vm_color[0,2]),
+
+            (Vm_color[1,1]),        
+
+            ]
+
+        posblue =  [
+
+            (Az_color[2,2]),
+            (Az_color[2,0]),
+
+            (Az_color[0,2]),
+            (Az_color[0,0]),
+
+            (Az_color[1,1]),            
+
+            ]
+        
+        posorange =  [
+
+            (Lr_color[2,2]),
+            (Lr_color[2,0]),
+
+            (Lr_color[0,2]),
+            (Lr_color[0,0]),
+
+            (Lr_color[1,1]),
+            
+
+            ]
+
+        ax.add_collection(Poly3DCollection(trianglesyellow, edgecolor='k',facecolor=posyellow))    
+
+        ax.add_collection(Poly3DCollection(trianglesgreen, edgecolor='k',facecolor=posgreen))        
+
+        ax.add_collection(Poly3DCollection(trianglesred, edgecolor='k',facecolor=posred))    
+
+        ax.add_collection(Poly3DCollection(trianglesblue, edgecolor='k',facecolor=posblue))    
+
+        ax.add_collection(Poly3DCollection(trianglesorange, edgecolor='k',facecolor=posorange))    
+
+        ax.add_collection(Poly3DCollection(triangleswhite, edgecolor='k',facecolor=poswhite)) 
 
 
     # Hide axes ticks
