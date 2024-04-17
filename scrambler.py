@@ -1503,7 +1503,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
             Az_color[0,0] = Buffer[0][2] 
             Az_color[2,0] = Buffer[0][3] 
 
-            Am_color[2,2] = Buffer[1][0] 
+            Am_color[2,0] = Buffer[1][0] 
             Am_color[1,1] = Buffer[1][1] 
             Am_color[2,2] = Buffer[1][2] 
             Am_color[0,2] = Buffer[1][3] 
@@ -1546,7 +1546,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
                 Az_color[0,0] = Buffer[0][2] 
                 Az_color[2,0] = Buffer[0][3] 
 
-                Am_color[2,2] = Buffer[1][0] 
+                Am_color[2,0] = Buffer[1][0] 
                 Am_color[1,1] = Buffer[1][1] 
                 Am_color[2,2] = Buffer[1][2] 
                 Am_color[0,2] = Buffer[1][3] 
@@ -1583,10 +1583,10 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
 
             #  =============================================================
 
-            Am_color[0,0] = Buffer[0][0] 
+            Am_color[0,2] = Buffer[0][0] 
             Am_color[1,1] = Buffer[0][1] 
-            Am_color[2,0] = Buffer[0][2] 
-            Am_color[2,2] = Buffer[0][3] 
+            Am_color[0,0] = Buffer[0][2] 
+            Am_color[2,0] = Buffer[0][3] 
 
             Lr_color[2,2] = Buffer[1][0] 
             Lr_color[2,0] = Buffer[1][1] 
@@ -1626,10 +1626,10 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
 
                 #  =============================================================
 
-                Am_color[0,0] = Buffer[0][0] 
+                Am_color[0,2] = Buffer[0][0] 
                 Am_color[1,1] = Buffer[0][1] 
-                Am_color[2,0] = Buffer[0][2] 
-                Am_color[2,2] = Buffer[0][3] 
+                Am_color[0,0] = Buffer[0][2] 
+                Am_color[2,0] = Buffer[0][3] 
 
                 Lr_color[2,2] = Buffer[1][0] 
                 Lr_color[2,0] = Buffer[1][1] 
@@ -3455,7 +3455,7 @@ def scrambler_skewb():
     Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("skewb","color") 
 
     sum_turns = []
-    for i in range(12):
+    for i in range(12):    
 
         while accepted == 0:
             n_move = random.randrange(1,9,1)
@@ -3470,7 +3470,7 @@ def scrambler_skewb():
             elif (n_move == 7 or n_move == 8) and (pr_move == 7 or pr_move == 8):
                 accepted = 0           
             else:
-                accepted = 1
+                accepted = 1        
 
         if n_move == 1:
             turn = "R"
