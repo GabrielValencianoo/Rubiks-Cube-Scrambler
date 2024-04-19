@@ -155,6 +155,23 @@ canvas = FigureCanvasTkAgg(fig,	master = root)
 
 #faces
 
+def treat_status(vf,average):
+    list_3  = status[vf-3:vf]
+    list_5  = status[vf-5:vf]
+    list_12 = status[vf-12:vf]    
+
+    if average == "3":
+        if "DNF" in list_3:
+            return "DNF"
+    if average == "5":
+        if list_5.count("DNF") >= 2:
+            return "DNF"
+    if average == "12":
+        if list_12.count("DNF") >= 2:
+            return "DNF"
+    else:
+        return average
+        
 
 
 def trunc(n, decimals=0):
@@ -318,29 +335,49 @@ def estatistica(index):
     pmedia_3 = time_convert(media_3)
     pmedia_5 = time_convert(media_5)
     pmedia_12 = time_convert(media_12)  
+
     pbest_mo3 = time_convert(best_mo3) 
     pbest_ao5 = time_convert(best_ao5) 
     pbest_ao12 = time_convert(best_ao12)    
 
-    pmedia_3  = pmedia_3 if index >= 3 else 0
-    pmedia_5  = pmedia_5 if index >= 5 else 0
-    pmedia_12 = pmedia_12 if index >= 12 else 0
+    pmedia_3Status   = treat_status(index,"3")
+    pmedia_5Status   = treat_status(index,"5")
+    pmedia_12Status  = treat_status(index,"12")  
 
-    pbest_mo3  = pbest_mo3 if index >= 3 else 0
-    pbest_ao5  = pbest_ao5 if index >= 5 else 0
-    pbest_ao12 = pbest_ao12 if index >= 12 else 0
+    pbest_mo3Status  = treat_status(index,"3") 
+    pbest_ao5Status  = treat_status(index,"5") 
+    pbest_ao12Status = treat_status(index,"12") 
+    
+    if pmedia_3Status == "DNF":
+        pmedia_3 = "DNF"        
+    if pbest_mo3Status == "DNF":
+        pbest_mo3 = "DNF"
+    if index < 3:
+        pmedia_3 = 0
+        pbest_mo3 = 0
+    
+    if pmedia_5Status == "DNF":
+        pmedia_5 = "DNF"        
+    if pbest_ao5Status == "DNF":
+        pbest_ao5 = "DNF"
+    if index < 5:
+        pmedia_5 = 0
+        pbest_ao5 = 0
+    
+    if pmedia_12Status == "DNF":
+        pmedia_12 = "DNF"        
+    if pbest_ao12Status == "DNF":
+        pbest_ao12 = "DNF"
+    if index < 12:
+        pmedia_12 = 0
+        pbest_ao12 = 0
 
     
     if status[index-1] == "DNF":
         ptempo = "DNF"
     elif status[index-1] == "+2":
         ptempo += "+"
-
-    
-    # tb_stat.insert(tk.END,"n° solves: " + str(len(tempos)))   
-    # tb_stat.insert(tk.END,"pior:" + str(pglobal_worst_solve))
-    # tb_stat.insert(tk.END,"media: " + str(pmedia))
-   
+       
 
     # tb_stat.delete(1)    
     for i in tb_stat.get_children():
@@ -5267,10 +5304,8 @@ def statusVar_Change(tempoValue,statusValue,action,selected):
         status[int(selected)-1] = "OK"
     elif statusValue == "DNF" and action == "+2":
         tempos[int(selected)-1] +=2*multiplier
-        status[int(selected)-1] = "+2"
+        status[int(selected)-1] = "+2"    
     
-    ic(tempos)
-    ic(status)
     atualizar()
 
     
