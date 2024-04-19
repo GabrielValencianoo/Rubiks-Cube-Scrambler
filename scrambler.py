@@ -3497,7 +3497,7 @@ def scrambler_skewb():
             turn = "B'"
             
         Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("skewb",turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
-        ic(Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
+        
         sum_turns.append(turn)
         pr_move = n_move
         accepted = 0
@@ -4961,6 +4961,27 @@ def resetar():
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
 
+def atualizar():
+    global tempos      
+
+    for i in tb_stat.get_children():
+        tb_stat.delete(i) 
+
+    for i in tb_times.get_children():
+        tb_times.delete(i) 
+    
+    for i in tb_ranking.get_children():
+        tb_ranking.delete(i) 
+
+    s1 = 0
+    
+
+    for solve in range(len(tempos)):
+        s1 += 1        
+        estatistica(s1)
+
+        
+
 def deletar():
     global tempos
     global scrambles
@@ -5222,6 +5243,41 @@ def themeVar_change():
     if first_scan == False:      
         write_txt_setting()
 
+def statusVar_Change(tempoValue,statusValue,action,selected):
+    
+    if precisionTimer == 1:
+        multiplier = 10
+    elif precisionTimer == 2:
+        multiplier = 100
+    elif precisionTimer == 3:
+        multiplier = 1000
+
+    if statusValue == "OK" and action == "+2":
+        tempos[int(selected)-1] +=2*multiplier
+        status[int(selected)-1] = "+2"
+    elif statusValue == "OK" and action == "DNF":
+        status[int(selected)-1] = "DNF"
+    elif statusValue == "+2" and action == "OK":
+        tempos[int(selected)-1] -=2*multiplier
+        status[int(selected)-1] = "OK"
+    elif statusValue == "+2" and action == "DNF":
+        tempos[int(selected)-1] -=2*multiplier
+        status[int(selected)-1] = "DNF"
+    elif statusValue == "DNF" and action == "OK":        
+        status[int(selected)-1] = "OK"
+    elif statusValue == "DNF" and action == "+2":
+        tempos[int(selected)-1] +=2*multiplier
+        status[int(selected)-1] = "+2"
+    
+    ic(tempos)
+    ic(status)
+    atualizar()
+
+    
+
+
+    
+
 def donothing():
    filewin = tk.Toplevel(root)
    button = tk.Button(filewin, text="Do nothing button")
@@ -5239,18 +5295,26 @@ def donothing_event(event):
        button = tk.Button(filewin, text="Do nothing button")
        button.pack()
        selected = tb_times.focus()   
-       print(selected)
+       print(selected)      
 
        print_valor = tk.Label(filewin, text = tempos[int(selected)-1]) 
+       print_status = tk.Label(filewin, text = status[int(selected)-1]) 
        print_valor.pack()       
+       print_status.pack()       
        btn_mo03 = tk.Button(filewin, text = "mo03") 
        btn_ao05 = tk.Button(filewin, text = "ao05") 
        btn_ao12 = tk.Button(filewin, text = "ao12") 
+       btn_OK = tk.Button(filewin, text = "OK",command= lambda: statusVar_Change(tempos[int(selected)-1],status[int(selected)-1],"OK",selected)) 
+       btn_2 = tk.Button(filewin, text = "+2",command= lambda: statusVar_Change(tempos[int(selected)-1],status[int(selected)-1],"+2",selected)) 
+       btn_DNF = tk.Button(filewin, text = "DNF",command= lambda: statusVar_Change(tempos[int(selected)-1],status[int(selected)-1],"DNF",selected)) 
        btn_mo03.pack(side = tk.LEFT, anchor = tk.W)
        btn_ao05.pack(side = tk.LEFT, anchor = tk.W)
        btn_ao12.pack(side = tk.LEFT, anchor = tk.W)
-       print_valor = tk.Label(filewin, text = tempos[int(selected)-1]) 
-       print_valor.pack()       
+       btn_OK.pack(side = tk.LEFT, anchor = tk.W)
+       btn_2.pack(side = tk.LEFT, anchor = tk.W)
+       btn_DNF.pack(side = tk.LEFT, anchor = tk.W)
+    #    print_valor = tk.Label(filewin, text = tempos[int(selected)-1]) 
+    #    print_valor.pack()       
 
 
 ctk.CTkLabel(row1, text = "Modalidade :").grid(column = 0,row = 0) 
