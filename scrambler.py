@@ -3544,7 +3544,7 @@ def scrambler_skewb():
     
 
 def scrambler_clock():    
-    accepted = 0  
+    
     sum_turns = []
     Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("clock","color")  
 
@@ -3567,54 +3567,9 @@ def scrambler_clock():
         number = str(number)
         signal = random.randrange(0+2+1)
         signal = "+" if signal == 1 else  "-"        
-        sum_turns.append(move+number+signal)
-    
-
-    n_caps = random.randrange(1,5,1)
-
-    cap_ur = 0
-    cap_dr = 0
-    cap_dl = 0
-    cap_ul = 0
-
-    for i in range(n_caps):
-
-        while accepted == 0:
-            n_move = random.randrange(1,5,1)
-            # print(n_move)
-
-            if  (n_move == 1) and (cap_ur == 1):
-                accepted = 0
-            elif (n_move == 2) and (cap_dr == 1):
-                accepted = 0
-            elif (n_move == 3) and (cap_dl == 1):
-                accepted = 0  
-            elif (n_move == 4) and (cap_ul == 1):
-                accepted = 0           
-            else:
-                accepted = 1
-
-        if n_move == 1:
-            sum_turns.append("UR")
-            cap_ur = 1
-            
-        elif n_move == 2:
-            sum_turns.append("DR")     
-            cap_dr = 1
-            
-        elif n_move == 3:
-            sum_turns.append("DL")
-            cap_dl = 1
-            
-        elif n_move == 4:
-            sum_turns.append("UL")
-            cap_ul = 1
-
-        accepted = 0   
+        sum_turns.append(move+number+signal)    
 
 
-    # print(sum_turns)
-    # print(actual_scramble)   
     draw_scramble("clock",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
     
     actual_scramble.set(" ".join(sum_turns))
