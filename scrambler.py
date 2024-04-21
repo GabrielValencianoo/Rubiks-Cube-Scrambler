@@ -297,7 +297,7 @@ def estatistica(index):
     media_5  = ao5(index)  if index >= 5  else media_5
     media_12 = ao12(index) if index >= 12 else media_12
 
-    mediana = statistics.median(tempos)
+    mediana = statistics.median(tempos)    
     ic(mediana)
     des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
     ic(des_padrao)
@@ -423,7 +423,7 @@ def estatistica(index):
         ao_12.append(None)
     
     if saveTime == 1 and first_scan == False and flag_change_event == False:
-        update_file_tempos()    
+        update_file_tempos(index)    
 
     ch_event = eventsComboBox.get()    
   
@@ -4801,28 +4801,20 @@ def importar_tempos():
         name_file = filedialog.askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
                             filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
     elif first_scan == True or flag_change_event == True:
-        name_file = str(eventsComboBox.get()) + '.csv'
-
-    
-
+        name_file = str(eventsComboBox.get()) + '.csv' 
 
     try:
         with open(name_file, mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file, delimiter=';')
             line_count = 0
             resetar()
-            for row in csv_reader:                         
-                # print(f'\t{row["No."]} ; {row["Time"]} ; {row["Scramble"]} ; {row["Date"]}.')            
-                        
+            for index,row in enumerate(csv_reader,1):                      
                 tempos.append(float(row["Time"]))            
                 scrambles.append(row["Scramble"])
                 datas.append(row["Date"])
                 status.append(row["Status"])
-
-
-                line_count += 1
-                estatistica(line_count)
-                    
+                
+                estatistica(index)                    
 
             print(f'Processed {line_count} lines.')
     except Exception as error: 
@@ -4838,21 +4830,31 @@ def exportar_tempos():
     with open(name_file, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow(["No.", "Time", "Scramble","Date"])
+        employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
 
         for i in range(len(tempos)):
-            employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i]])
+            employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i],status[i]])
 
     messagebox.showinfo( "Warning", "Export completo.")
-     
-def update_file_tempos():    
+
+
+def clear_file_tempos():    
+    name_file = eventsComboBox.get()  
+    name_file = name_file + '.csv'
+
+    with open(name_file, mode='w') as employee_file:
+        employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
+
+def update_file_tempos(index):    
     name_file = eventsComboBox.get()  
     name_file = name_file + '.csv'
 
     with open(name_file, mode='a') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow([len(tempos), tempos[-1], scrambles[-1], datas[-1],status[-1]])
+        employee_writer.writerow([index, tempos[index-1], scrambles[index-1], datas[index-1],status[index-1]])
 
 def guardar_tempos():    
     events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
@@ -4867,7 +4869,7 @@ def guardar_tempos():
             
             if event == eventsComboBox.get():
                 for i in range(len(tempos)):
-                    employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i]])
+                    employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i],status[i]])
     
     messagebox.showinfo( "Warning", "Export completo.")
 
@@ -4888,7 +4890,6 @@ def ResetColorScramble():
         
     if first_scan == False:      
         write_txt_setting()
-
 
 def resetar():
     global tempos
@@ -4965,13 +4966,9 @@ def atualizar():
     for i in tb_ranking.get_children():
         tb_ranking.delete(i) 
 
-    s1 = 0
-    
-
-    for solve in range(len(tempos)):
-        s1 += 1        
-        estatistica(s1)
-
+    clear_file_tempos()
+    for index,_ in enumerate(tempos,1):    
+        estatistica(index)   
         
 
 def deletar():
@@ -5025,16 +5022,10 @@ def deletar():
     for i in tb_ranking.get_children():
         tb_ranking.delete(i) 
 
-    s1 = 0
-    
+    clear_file_tempos()
 
-    for solve in range(len(tempos)):
-        s1 += 1
-        
-        # print(s1)
-        estatistica(s1)
-
-        # print(tempos)
+    for index,_ in enumerate(tempos,1):    
+        estatistica(index)   
 
 
 def on_press_enter(event):
@@ -5188,7 +5179,7 @@ def genderVar_change():
         
         
     create_ranking()
-    # ic(first_scan)
+    
     if first_scan == False:      
         write_txt_setting()
     
@@ -5198,16 +5189,11 @@ def genderVar_change():
         for i in tb_times.get_children():
             tb_times.delete(i) 
 
-
         for i in tb_ranking.get_children():
             tb_ranking.delete(i) 
 
-        s1 = 0
-        for solve in range(len(tempos)):
-            s1 += 1
-            
-            # print(s1)
-            estatistica(s1)
+        for index,_ in enumerate(tempos,1):    
+            estatistica(index)   
 
 def ModeVar_change():    
     
@@ -5577,7 +5563,7 @@ def read_txt_setting():
             
             inspecionVar.set(1)
             inputVar.set(2) 
-            precisionVar.set(1)
+            precisionVar.set(2)
             holdVar.set(3)
             scrambleVar.set(1)
             eventsComboBox.set('3x3') 
