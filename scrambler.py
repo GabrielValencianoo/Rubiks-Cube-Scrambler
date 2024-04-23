@@ -123,11 +123,13 @@ best_mo3  = 9999999999
 best_ao5  = 9999999999
 best_ao12 = 9999999999
 
+worst_mo3  = 0
+worst_ao5  = 0
+worst_ao12 = 0
 
 media_3  = 9999999999
 media_5  = 9999999999
 media_12 = 9999999999
-
 
 global_best_solve = 9999999999
 global_worst_solve = 0
@@ -233,11 +235,7 @@ def best_worst(lista,type):
 
         return global_best_solve, global_worst_solve
         
-    if type == "local":
-        local_best_solve = 9999999999
-        local_best_solve = 9999999999
-        local_best_solve = 9999
-        local_best_solve = 9999999999
+    if type == "local":        
         local_best_solve = 9999999999
         local_worst_solve = 0
 
@@ -276,6 +274,9 @@ def estatistica(index):
     global best_mo3
     global best_ao5
     global best_ao12
+    global worst_mo3
+    global worst_ao5
+    global worst_ao12
     global media_3
     global media_5
     global media_12
@@ -300,16 +301,20 @@ def estatistica(index):
     mediana = statistics.median(tempos)    
     ic(mediana)
     des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
-    ic(des_padrao)
+    ic(des_padrao)   
+        
+    global_best_solve  = tempos[index-1] if tempos[index-1] < global_best_solve else global_best_solve
+    global_worst_solve  = tempos[index-1] if tempos[index-1] > global_worst_solve else global_worst_solve
 
-   
-    global_best_solve,global_worst_solve = best_worst(tempos,"global")
-    
-    best_mo3 = media_3 if media_3 < best_mo3 else best_mo3
+
+    best_mo3  = media_3 if media_3 < best_mo3 else best_mo3
+    worst_mo3 = media_3 if media_3 > worst_mo3 and media_3 != 9999999999 else worst_mo3
 
     best_ao5 = media_5 if media_5 < best_ao5 else best_ao5
+    worst_ao5 = media_5 if media_5 > worst_ao5 and media_5 != 9999999999 else worst_ao5
 
     best_ao12 = media_12 if media_12 < best_ao12 else best_ao12
+    worst_ao12 = media_12 if media_12 > worst_ao12 and media_12 != 9999999999 else worst_ao12
 
     index_best_mo3  = index if media_3 < best_mo3 else index_best_mo3
 
@@ -327,6 +332,9 @@ def estatistica(index):
     best_mo3 = trunc(best_mo3,precisionTimer)
     best_ao5 = trunc(best_ao5,precisionTimer)
     best_ao12 = trunc(best_ao12,precisionTimer)
+    worst_mo3 = trunc(worst_mo3,precisionTimer)
+    worst_ao5 = trunc(worst_ao5,precisionTimer)
+    worst_ao12 = trunc(worst_ao12,precisionTimer)
 
     ptempo = time_convert(tempos[index-1])
     pglobal_best_solve = time_convert(global_best_solve)
@@ -338,7 +346,12 @@ def estatistica(index):
 
     pbest_mo3 = time_convert(best_mo3) 
     pbest_ao5 = time_convert(best_ao5) 
-    pbest_ao12 = time_convert(best_ao12)    
+    pbest_ao12 = time_convert(best_ao12) 
+
+    pworst_mo3 = time_convert(worst_mo3) 
+    pworst_ao5 = time_convert(worst_ao5) 
+    pworst_ao12 = time_convert(worst_ao12)    
+   
 
     pmedia_3Status   = treat_status(index,"3")
     pmedia_5Status   = treat_status(index,"5")
@@ -388,19 +401,19 @@ def estatistica(index):
     root.update()
 
     tb_stat.insert(parent='',index='end',iid=0,text='',
-    values=('time',str(ptempo),str(pglobal_best_solve)))
+    values=('time',str(ptempo),str(pglobal_best_solve),str(pglobal_worst_solve)))
 
     if index >=3:
         tb_stat.insert(parent='',index='end',iid=1,text='',
-        values=('mo3',str(pmedia_3),str(pbest_mo3)))
+        values=('mo3',str(pmedia_3),str(pbest_mo3),str(pworst_mo3)))
     
     if index >=5:
         tb_stat.insert(parent='',index='end',iid=2,text='',
-        values=('ao5',str(pmedia_5),str(pbest_ao5)))
+        values=('ao5',str(pmedia_5),str(pbest_ao5),str(pworst_ao5)))
     
     if index >=12:
         tb_stat.insert(parent='',index='end',iid=3,text='',
-        values=('ao12',str(pmedia_12),str(pbest_ao12)))
+        values=('ao12',str(pmedia_12),str(pbest_ao12),str(pworst_ao12)))
 
     tb_times.insert(parent='',index='end',iid=index,text='',
     values=(str(index),str(ptempo),str(pmedia_3),str(pmedia_5),str(pmedia_12)))
@@ -4903,6 +4916,10 @@ def resetar():
     global best_ao5
     global best_ao12
 
+    global worst_mo3
+    global worst_ao5
+    global worst_ao12
+
     global media_3
     global media_5
     global media_12
@@ -4926,6 +4943,10 @@ def resetar():
     best_mo3  = 9999999999
     best_ao5  = 9999999999
     best_ao12 = 9999999999
+
+    worst_mo3  = 0
+    worst_ao5  = 0
+    worst_ao12 = 0
     
 
     media_3  = 9999999999
@@ -5344,17 +5365,19 @@ tb_times.bind('<ButtonRelease-1>', donothing_event )
 
 tb_stat = ttk.Treeview(row3)
 
-tb_stat['columns'] = ('tempos','atual', 'melhor')
+tb_stat['columns'] = ('tempos','atual', 'melhor',"pior")
 
 tb_stat.column("#0", width=0,  stretch=tk.NO)
 tb_stat.column("tempos",anchor=tk.CENTER,width=80)
 tb_stat.column("atual",anchor=tk.CENTER, width=80)
 tb_stat.column("melhor",anchor=tk.CENTER,width=80)
+tb_stat.column("pior",anchor=tk.CENTER,width=80)
 
 tb_stat.heading("#0",text="",anchor=tk.CENTER)
 tb_stat.heading("tempos",text="",anchor=tk.CENTER)
 tb_stat.heading("atual",text="atual",anchor=tk.CENTER)
 tb_stat.heading("melhor",text="melhor",anchor=tk.CENTER)
+tb_stat.heading("pior",text="pior",anchor=tk.CENTER)
 
 tb_stat.grid(column = 0, row = 0)
 
