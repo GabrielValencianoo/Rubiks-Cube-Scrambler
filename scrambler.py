@@ -222,27 +222,12 @@ def time_convert(time):
         
     return presult
 
-def best_worst(lista,type):
-    # 1 - global
-    # 2 - local
-    
-    if type == "global":
-        global global_best_solve
-        global global_worst_solve        
-        
-        global_best_solve  = min(lista)        
-        global_worst_solve = max(lista)
+def best_worst(lista):   
 
-        return global_best_solve, global_worst_solve
-        
-    if type == "local":        
-        local_best_solve = 9999999999
-        local_worst_solve = 0
+    local_best_solve  = min(lista)        
+    local_worst_solve = max(lista)        
 
-        local_best_solve  = min(lista)        
-        local_worst_solve = max(lista)        
-    
-        return local_best_solve, local_worst_solve
+    return local_best_solve, local_worst_solve
  
 def average():
     return sum(tempos)/len(tempos) 
@@ -255,16 +240,14 @@ def mo3(vf):
     return average    
 
 def ao5(vf):
-    list_5 = tempos[vf-5:vf]
-    
-    b,w = best_worst(list_5,"local")
-    # print(b,w)
+    list_5 = tempos[vf-5:vf]    
+    b,w = best_worst(list_5)    
     average = (sum(list_5)-b-w)/3
     return average    
 
 def ao12(vf):
     list_12 = tempos[vf-12:vf]
-    b,w = best_worst(list_12,"local")
+    b,w = best_worst(list_12)
     average = (sum(list_12)-b-w)/10
     return average    
 
