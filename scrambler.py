@@ -4974,6 +4974,36 @@ def atualizar():
     for index,_ in enumerate(tempos,1):    
         estatistica(index)   
         
+def atualizarTempoPrecision(multiplier,divider):
+    global tempos   
+
+    for i in tb_stat.get_children():
+        tb_stat.delete(i) 
+
+    for i in tb_times.get_children():
+        tb_times.delete(i) 
+    
+    for i in tb_ranking.get_children():
+        tb_ranking.delete(i) 
+
+    clear_file_tempos()      
+
+    if multiplier != 1:
+        for index, tempo in enumerate(tempos):
+            ic(tempo)
+            tempo *= multiplier
+            tempos[index] = tempo
+
+    elif  divider != 1:
+        for index, tempo in enumerate(tempos):
+            ic(tempo)
+            tempo = int(tempo/divider)
+            tempos[index] = tempo
+    
+    for index,_ in enumerate(tempos,1):    
+        estatistica(index)  
+
+    
 
 def deletar():
     global tempos
@@ -5064,17 +5094,54 @@ def inputVar_change():
 
     
 def precisionVar_change():
-    global first_scan
     global precisionTimer
+    global first_scan    
 
-    if precisionVar.get() == 1:
+    if first_scan == True: 
+        if precisionVar.get() == 1:
+            precisionTimer = 1
+
+        if precisionVar.get() == 2:
+            precisionTimer = 2        
+            
+        elif precisionVar.get() == 3:
+            precisionTimer = 3  
+        return
+
+
+
+    
+    statusValue = precisionTimer
+    action = precisionVar.get()
+
+    if statusValue == 1 and action == 2: #Décimo para centésimo
+        multiplier = 10   
+        divider = 1    
+        precisionTimer = 2   
+    elif statusValue == 1 and action == 3: #Décimo para milésimo
+        multiplier = 100
+        divider = 1
+        precisionTimer = 3
+    elif statusValue == 2 and action == 1: #Centésimo para Décimo
+        divider = 10  
+        multiplier = 1      
         precisionTimer = 1
+    elif statusValue == 2 and action == 3: #Centésimo para milésimo
+        multiplier = 10
+        divider = 1
+        precisionTimer = 3
+    elif statusValue == 3 and action == 1:     #milésimo para décimo
+        divider = 100
+        multiplier = 1
+        precisionTimer = 1
+    elif statusValue == 3 and action == 2:    #milésimo para Centésimo
+        divider = 10  
+        multiplier = 1 
+        precisionTimer = 2
 
-    if precisionVar.get() == 2:
-        precisionTimer = 2        
-        
-    elif precisionVar.get() == 3:
-        precisionTimer = 3  
+   
+    atualizarTempoPrecision(multiplier,divider)
+    
 
     if first_scan == False:      
         write_txt_setting()
