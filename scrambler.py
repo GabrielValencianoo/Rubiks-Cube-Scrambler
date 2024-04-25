@@ -5489,6 +5489,7 @@ tb_ranking.heading("NRA",text="NR",anchor=tk.CENTER)
 
 menubar = tk.Menu(root)
 filemenu = tk.Menu(menubar, tearoff=0)
+importFileMenu = tk.Menu(menubar, tearoff=0)
 optionmenu = tk.Menu(menubar, tearoff=0)
 precisionmenu = tk.Menu(menubar, tearoff=0)
 colormenu = tk.Menu(menubar, tearoff=0)
@@ -5508,9 +5509,12 @@ menubar.add_cascade(label="UI", menu=UImenu)
 menubar.add_cascade(label="Help", menu=helpmenu)
 
 
-filemenu.add_command(label="Importar tempos", command=importar_tempos)
+filemenu.add_cascade(label="Importar tempos", menu=importFileMenu)
 filemenu.add_command(label="Exportar tempos", command=exportar_tempos)
 
+
+importFileMenu.add_command(label="Arquivo", command=importar_tempos)
+importFileMenu.add_command(label="Pasta", command=importar_tempos)
 
 filemenu.add_separator()
 filemenu.add_command(label="Sair", command=exportar_tempos)
