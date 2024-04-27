@@ -4887,6 +4887,16 @@ def ResetColorScramble():
     if first_scan == False:      
         write_txt_setting()
 
+def clearTables():
+    for i in tb_stat.get_children():
+        tb_stat.delete(i) 
+
+    for i in tb_times.get_children():
+        tb_times.delete(i) 
+    
+    for i in tb_ranking.get_children():
+        tb_ranking.delete(i) 
+
 def resetar():
     global tempos
     global scrambles
@@ -4937,19 +4947,7 @@ def resetar():
     media_12 = 9999999999
     
 
-    for i in tb_times.get_children():
-        tb_times.delete(i) 
-    
-    for i in tb_stat.get_children():
-        tb_stat.delete(i) 
-    
-
-    
-    for i in tb_ranking.get_children():
-        tb_ranking.delete(i) 
-
-    for i in tb_ranking.get_children():
-        tb_ranking.delete(i) 
+    clearTables()
     
     if flag_change_event == False and first_scan == False:    
         name_file = eventsComboBox.get() 
@@ -4961,30 +4959,17 @@ def resetar():
 def atualizar():
     global tempos      
 
-    for i in tb_stat.get_children():
-        tb_stat.delete(i) 
-
-    for i in tb_times.get_children():
-        tb_times.delete(i) 
-    
-    for i in tb_ranking.get_children():
-        tb_ranking.delete(i) 
+    clearTables()
 
     clear_file_tempos()
+    
     for index,_ in enumerate(tempos,1):    
         estatistica(index)   
         
 def atualizarTempoPrecision(multiplier,divider):
     global tempos   
 
-    for i in tb_stat.get_children():
-        tb_stat.delete(i) 
-
-    for i in tb_times.get_children():
-        tb_times.delete(i) 
-    
-    for i in tb_ranking.get_children():
-        tb_ranking.delete(i) 
+    clearTables()
 
     clear_file_tempos()      
 
@@ -5047,14 +5032,7 @@ def deletar():
     best_ao12 = 9999999999
     
 
-    for i in tb_stat.get_children():
-        tb_stat.delete(i) 
-
-    for i in tb_times.get_children():
-        tb_times.delete(i) 
-    
-    for i in tb_ranking.get_children():
-        tb_ranking.delete(i) 
+    clearTables() 
 
     clear_file_tempos()
 

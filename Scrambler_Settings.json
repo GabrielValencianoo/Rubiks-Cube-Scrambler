@@ -4,7 +4,7 @@
     "Disparador cronometro": "2",
     "Precisao": "2",
     "Tempo hold": "3",
-    "Modalidade": "6x6",
+    "Modalidade": "5x5",
     "Habilitar Ranking": "False",
     "Genero": "0",
     "Salvar tempo": "True",
@@ -12,5 +12,5 @@
     "Desenho Scrambler 3D": "True",
     "Mode": "3",
     "colorTheme": "0",
-    "colors": "{'1': '#FFFFFF', '2': '#FFA500', '3': '#00ff00', '4': '#FF0000', '5': '#0000FF', '6': '#FFFF00'}"
+    "colors": "{'1': '#FFFFFF', '2': '#FFA500', '3': '#02fd9f', '4': '#FF0000', '5': '#0000FF', '6': '#FFFF00'}"
 }
