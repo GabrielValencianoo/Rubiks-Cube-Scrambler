@@ -61,7 +61,7 @@ row1 = ctk.CTkFrame(root)
 row2 = ctk.CTkFrame(root)
 row3 = ctk.CTkFrame(root)
 row4 = ctk.CTkFrame(root)
-# row3 = ttk.Frame(root)
+
 
 row1.pack()
 row2.pack()
@@ -198,7 +198,7 @@ def time_convert(time):
         presult = str(time)
         
     else:
-        # m, s = divmod(time, 60)
+        
         m = time // 60        
         m = int(m)    
 
@@ -3992,8 +3992,7 @@ def on_release_space(event):
         if inspecionVar.get() == 1:
             timer_state = 0
         else:
-            timer_state = 2
-        # timer_state = 2
+            timer_state = 2 
 
     start_timer()
     global _short_press
@@ -4111,13 +4110,8 @@ def stop_timer():
 
         scrambles.append(actual_scramble.get())
 
-        # print(tempos)
-        # print(scrambles)
-
-
         estatistica(len(tempos))
 
-        
         next_scramble() 
 
        
@@ -5344,8 +5338,6 @@ def donothing_event(event):
 
 ctk.CTkLabel(row1, text = "Modalidade :").grid(column = 0,row = 0) 
 
-# n = tk.StringVar() 
-# eventos = ttk.Combobox(row1, width = 10,textvariable = n,state = "readonly") 
 eventosValues = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
 eventsComboBox = ctk.CTkComboBox(row1,state = "readonly", values = eventosValues, command=change_event) 
 # Adding combobox drop down list 
