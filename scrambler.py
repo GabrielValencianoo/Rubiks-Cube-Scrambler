@@ -4124,7 +4124,7 @@ def change_event(event):
     resetar()     
     create_ranking()   
     # guardar_tempos() 
-    importar_tempos()    
+    importar_tempos_file()    
         
     ch_event = eventsComboBox.get()
     print(ch_event)
@@ -4783,7 +4783,7 @@ def importar_ranking():
 
     create_ranking()
 
-def importar_tempos():    
+def importar_tempos_file():    
 
     global first_scan
     global flag_change_event
@@ -4792,6 +4792,35 @@ def importar_tempos():
                             filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
     elif first_scan == True or flag_change_event == True:
         name_file = str(eventsComboBox.get()) + '.csv' 
+
+    try:
+        with open(name_file, mode='r') as csv_file:
+            csv_reader = csv.DictReader(csv_file, delimiter=';')
+            line_count = 0
+            resetar()
+            for index,row in enumerate(csv_reader,1):                      
+                tempos.append(float(row["Time"]))            
+                scrambles.append(row["Scramble"])
+                datas.append(row["Date"])
+                status.append(row["Status"])
+                
+                estatistica(index)                    
+
+            print(f'Processed {line_count} lines.')
+    except Exception as error: 
+        print("An error occurred:", error) # An error occurred: name 'x' is not defined:      
+        print("nao foi possivel importar")
+
+def importar_tempos_folder():    
+
+    global first_scan
+    global flag_change_event
+    if first_scan == False and flag_change_event == False:
+        # name_file = filedialog.askdirectory(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
+        #                     filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
+        folderPath = filedialog.askdirectory()
+    elif first_scan == True or flag_change_event == True:
+        name_file = folderPath + str(eventsComboBox.get()) + '.csv'         
 
     try:
         with open(name_file, mode='r') as csv_file:
@@ -5483,8 +5512,8 @@ filemenu.add_cascade(label="Importar tempos", menu=importFileMenu)
 filemenu.add_command(label="Exportar tempos", command=exportar_tempos)
 
 
-importFileMenu.add_command(label="Arquivo", command=importar_tempos)
-importFileMenu.add_command(label="Pasta", command=importar_tempos)
+importFileMenu.add_command(label="Arquivo", command=importar_tempos_file)
+importFileMenu.add_command(label="Pasta", command=importar_tempos_folder)
 
 filemenu.add_separator()
 filemenu.add_command(label="Sair", command=exportar_tempos)
