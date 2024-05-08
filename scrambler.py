@@ -4812,33 +4812,32 @@ def importar_tempos_file():
         print("nao foi possivel importar")
 
 def importar_tempos_folder():    
+    
+    events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
+    
+    folderPath = filedialog.askdirectory(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
+                        filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
+    # folderPath = filedialog.askdirectory()
 
-    global first_scan
-    global flag_change_event
-    if first_scan == False and flag_change_event == False:
-        # name_file = filedialog.askdirectory(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
-        #                     filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
-        folderPath = filedialog.askdirectory()
-    elif first_scan == True or flag_change_event == True:
-        name_file = folderPath + str(eventsComboBox.get()) + '.csv'         
+    for event in events:
+        event = folderPath + event + '.csv' 
+        try:
+            with open(event, mode='r') as csv_file:
+                csv_reader = csv.DictReader(csv_file, delimiter=';')
+                line_count = 0
+                resetar()
+                for index,row in enumerate(csv_reader,1):                      
+                    tempos.append(float(row["Time"]))            
+                    scrambles.append(row["Scramble"])
+                    datas.append(row["Date"])
+                    status.append(row["Status"])
+                    
+                    estatistica(index)                    
 
-    try:
-        with open(name_file, mode='r') as csv_file:
-            csv_reader = csv.DictReader(csv_file, delimiter=';')
-            line_count = 0
-            resetar()
-            for index,row in enumerate(csv_reader,1):                      
-                tempos.append(float(row["Time"]))            
-                scrambles.append(row["Scramble"])
-                datas.append(row["Date"])
-                status.append(row["Status"])
-                
-                estatistica(index)                    
-
-            print(f'Processed {line_count} lines.')
-    except Exception as error: 
-        print("An error occurred:", error) # An error occurred: name 'x' is not defined:      
-        print("nao foi possivel importar")
+                print(f'Processed {line_count} lines.')
+        except Exception as error: 
+            print("An error occurred:", error) # An error occurred: name 'x' is not defined:      
+            print("nao foi possivel importar")
         
 
 def exportar_tempos():

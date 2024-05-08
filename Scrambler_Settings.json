@@ -1,10 +1,10 @@
 {
     "Tempo de inspecao": "True",
     "Desenho Scrambler": "True",
-    "Disparador cronometro": "1",
+    "Disparador cronometro": "2",
     "Precisao": "2",
     "Tempo hold": "3",
-    "Modalidade": "6x6",
+    "Modalidade": "5x5",
     "Habilitar Ranking": "False",
     "Genero": "0",
     "Salvar tempo": "True",
