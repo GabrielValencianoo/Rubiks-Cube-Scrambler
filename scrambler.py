@@ -4876,11 +4876,9 @@ def update_file_tempos(index):
 
 def guardar_tempos():    
     events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
-    name_file = eventsComboBox.get() 
-    name_file = name_file + '.csv'  
-    for event in events:
-        name_file = event
-        name_file = name_file + '.csv' 
+    
+    for event in events:        
+        name_file = event + '.csv' 
         with open(name_file, mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
