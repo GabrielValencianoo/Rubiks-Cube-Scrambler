@@ -109,7 +109,7 @@ datas = []
 des_padrao = []
 mediana = []
 faceColors = {'1':'#FFFFFF','2':'#FFA500','3':'#00FF00','4':'#FF0000','5':'#0000FF','6':'#FFFF00'}
-
+precisions = {'2x2':'2','3x3':'2','4x4':'2','5x5':'2','6x6':'2','7x7':'2','pyraminx':'2','megaminx':'2','skewb':'2','clock':'2',}
 first_scan = False
 flag_change_event = False   
 precisionTimer = 2
@@ -282,9 +282,9 @@ def estatistica(index):
     media_12 = ao12(index) if index >= 12 else media_12
 
     mediana = statistics.median(tempos)    
-    ic(mediana)
+    # ic(mediana)
     des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
-    ic(des_padrao)   
+    # ic(des_padrao)   
         
     global_best_solve  = tempos[index-1] if tempos[index-1] < global_best_solve else global_best_solve
     global_worst_solve  = tempos[index-1] if tempos[index-1] > global_worst_solve else global_worst_solve
@@ -419,6 +419,7 @@ def estatistica(index):
         ao_12.append(None)
     
     if saveTime == 1 and first_scan == False and flag_change_event == False:
+        # print("printoo")
         update_file_tempos(index)    
 
     ch_event = eventsComboBox.get()    
@@ -4127,7 +4128,7 @@ def change_event(event):
     importar_tempos_file()    
         
     ch_event = eventsComboBox.get()
-    print(ch_event)
+    print(ch_event)    
     if ch_event == '2x2':
         scrambler_NxN("2x2")                 
     elif ch_event == '3x3':
@@ -4150,7 +4151,8 @@ def change_event(event):
         scrambler_clock()  
 
     flag_change_event = False   
-    write_txt_setting()       
+    write_txt_setting()   
+    precisionVar_change(ch_event)    
 
 def plot():       
 
@@ -4869,11 +4871,16 @@ def update_file_tempos(index):
     name_file = eventsComboBox.get()  
     name_file = name_file + '.csv'
 
-    with open(name_file, mode='a') as employee_file:
-        employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    try:
+        with open(name_file, mode='a') as employee_file:
+            employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow([index, tempos[index-1], scrambles[index-1], datas[index-1],status[index-1]])
+            employee_writer.writerow([index, tempos[index-1], scrambles[index-1], datas[index-1],status[index-1]])
+            # print("insert feito")
 
+    except Exception as error: 
+            print("An error occurred:", error) # An error occurred: name 'x' is not defined:      
+            print("nao foi possivel importar")
 def guardar_tempos():    
     events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
     
@@ -4989,11 +4996,45 @@ def atualizar():
 def atualizarTempoPrecision(multiplier,divider):
     global tempos   
 
-    clearTables()
+    clearTables()   
+    clear_file_tempos()
 
-    clear_file_tempos()      
+    global global_best_solve
+    global global_worst_solve
+
+    global best_mo3
+    global best_ao5
+    global best_ao12
+
+    global worst_mo3
+    global worst_ao5
+    global worst_ao12
+
+    global media_3
+    global media_5
+    global media_12    
+    
+    mo_3.clear()
+    ao_5.clear()
+    ao_12.clear()   
+
+    global_best_solve = 9999999999
+    global_worst_solve = 0
+
+    best_mo3  = 9999999999
+    best_ao5  = 9999999999
+    best_ao12 = 9999999999
+
+    worst_mo3  = 0
+    worst_ao5  = 0
+    worst_ao12 = 0    
+
+    media_3  = 9999999999
+    media_5  = 9999999999
+    media_12 = 9999999999  
 
     if multiplier != 1:
+        print('no multiplier')
         for index, tempo in enumerate(tempos):
             ic(tempo)
             tempo *= multiplier
@@ -5004,6 +5045,8 @@ def atualizarTempoPrecision(multiplier,divider):
             ic(tempo)
             tempo = int(tempo/divider)
             tempos[index] = tempo
+    
+    ic(tempos)
     
     for index,_ in enumerate(tempos,1):    
         estatistica(index)  
@@ -5091,7 +5134,7 @@ def inputVar_change():
         write_txt_setting()
 
     
-def precisionVar_change():
+def precisionVar_change(cube):
     global precisionTimer
     global first_scan    
 
@@ -5105,12 +5148,22 @@ def precisionVar_change():
         elif precisionVar.get() == 3:
             precisionTimer = 3  
         return
+    elif first_scan == False: 
+        if precisionVar.get() == 1:
+            precisionTimer = 1
+
+        if precisionVar.get() == 2:
+            precisionTimer = 2        
+            
+        elif precisionVar.get() == 3:
+            precisionTimer = 3  
 
 
-
-    
-    statusValue = precisionTimer
+    precision = int(precisions[cube])
+    statusValue = precision
     action = precisionVar.get()
+    ic(statusValue)
+    ic(action)
 
     if statusValue == 1 and action == 2: #Décimo para centésimo
         multiplier = 10   
@@ -5135,7 +5188,16 @@ def precisionVar_change():
     elif statusValue == 3 and action == 2:    #milésimo para Centésimo
         divider = 10  
         multiplier = 1 
-        precisionTimer = 2
+        precisionTimer = 2   
+    else: 
+        divider = 1  
+        multiplier = 1 
+        precisionTimer = precisions[cube]
+
+    
+    precisions[cube] = precisionTimer
+    ic(multiplier)
+    ic(divider)
 
    
     atualizarTempoPrecision(multiplier,divider)
@@ -5549,10 +5611,9 @@ inputmenu.add_radiobutton(label="Manual input", value=1, variable=inputVar, comm
 inputmenu.add_radiobutton(label="Tecla Espaço", value=2, variable=inputVar, command=inputVar_change)
 inputmenu.add_radiobutton(label="Stackmat", value=3, variable=inputVar, command=inputVar_change)
 
-precisionmenu.add_radiobutton(label="0.1", value=1, variable=precisionVar, command= precisionVar_change)
-precisionmenu.add_radiobutton(label="0.01", value=2, variable=precisionVar, command= precisionVar_change)
-precisionmenu.add_radiobutton(label="0.001", value=3, variable=precisionVar, command= precisionVar_change)
-
+precisionmenu.add_radiobutton(label="0.1", value=1, variable=precisionVar, command= lambda: precisionVar_change(str(eventsComboBox.get())))
+precisionmenu.add_radiobutton(label="0.01", value=2, variable=precisionVar, command= lambda: precisionVar_change(str(eventsComboBox.get())))
+precisionmenu.add_radiobutton(label="0.001", value=3, variable=precisionVar, command= lambda: precisionVar_change(str(eventsComboBox.get())))
 holdmenu.add_radiobutton(label="0", value=1, variable=holdVar, command= holdVar_change)
 holdmenu.add_radiobutton(label="0.3", value=2, variable=holdVar, command= holdVar_change)
 holdmenu.add_radiobutton(label="0.55", value=3, variable=holdVar, command= holdVar_change)
@@ -5589,6 +5650,7 @@ def read_txt_setting():
     global rankingPath
     global first_scan
     global faceColors
+    global precisions
 
     first_scan = True
     try:
@@ -5596,12 +5658,12 @@ def read_txt_setting():
 
             
             with open('Scrambler_Settings.json', 'r') as openfile:
-                jsonSettings = json.load(openfile)                  
-            
+                jsonSettings = json.load(openfile)               
+
+            precisions = json.loads(jsonSettings["precisions"].replace("'", '"'))                    
             inspecionVar.set(jsonSettings['Tempo de inspecao'])
             scrambleVar.set(jsonSettings['Desenho Scrambler'])        
-            inputVar.set(jsonSettings['Disparador cronometro'])
-            precisionVar.set(jsonSettings['Precisao'])
+            inputVar.set(jsonSettings['Disparador cronometro'])        
             holdVar.set(jsonSettings['Tempo hold'])           
             eventsComboBox.set(jsonSettings['Modalidade'])           
             rankingVar.set(jsonSettings['Habilitar Ranking'])
@@ -5610,11 +5672,13 @@ def read_txt_setting():
             rankingPath = jsonSettings['Ranking Path']
             scramble3DVar.set(jsonSettings['Desenho Scrambler 3D']) 
             ModeVar.set(jsonSettings['Mode']) 
-            themeVar.set(jsonSettings['colorTheme'])                 
+            themeVar.set(jsonSettings['colorTheme'])               
+            precisionVar.set(precisions[str(eventsComboBox.get())])  
             faceColors = json.loads(jsonSettings["colors"].replace("'", '"'))        
+            
 
             inputVar_change()
-            precisionVar_change()
+            precisionVar_change(precisionVar_change(eventsComboBox.get()))
             holdVar_change()
             inspecionVar_change()
             scrambleVar_change()
@@ -5644,10 +5708,11 @@ def read_txt_setting():
             genderVar.set(0)
             inspecionVar.set(1)
             savetimeVar.set(0)  
-            scramble3DVar.set(1)      
+            scramble3DVar.set(1)  
+            ModeVar.set(3)    
 
             inputVar_change()
-            precisionVar_change()
+            precisionVar_change(precisionVar_change(eventsComboBox.get()))
             holdVar_change()
             inspecionVar_change()
             scrambleVar_change()
@@ -5667,6 +5732,7 @@ def read_txt_setting():
 def write_txt_setting():
     global rankingPath    
     global faceColors
+    global precisions
 
     global gender    
     jsonSettings = {}
@@ -5685,6 +5751,7 @@ def write_txt_setting():
     jsonSettings['Mode'] = str(ModeVar.get())  
     jsonSettings['colorTheme'] = str(themeVar.get())  
     jsonSettings['colors'] = str(faceColors)  
+    jsonSettings['precisions'] = str(precisions)  
 
     with open('Scrambler_Settings.json', 'w') as openfile:
         jsonSettings = json.dump(jsonSettings,openfile,indent=4)    

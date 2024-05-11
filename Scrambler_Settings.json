@@ -2,15 +2,16 @@
     "Tempo de inspecao": "True",
     "Desenho Scrambler": "True",
     "Disparador cronometro": "2",
-    "Precisao": "2",
+    "Precisao": "3",
     "Tempo hold": "3",
-    "Modalidade": "6x6",
+    "Modalidade": "3x3",
     "Habilitar Ranking": "False",
     "Genero": "0",
     "Salvar tempo": "True",
-    "Ranking Path": "D:/Projetos",
+    "Ranking Path": "",
     "Desenho Scrambler 3D": "True",
     "Mode": "3",
     "colorTheme": "0",
-    "colors": "{'1': '#FFFFFF', '2': '#FFA500', '3': '#02fd9f', '4': '#FF0000', '5': '#0000FF', '6': '#FFFF00'}"
+    "colors": "{'1': '#FFFFFF', '2': '#FFA500', '3': '#00FF00', '4': '#FF0000', '5': '#0000FF', '6': '#FFFF00'}",
+    "precisions": "{'2x2': 3, '3x3': 3, '4x4': 3, '5x5': 3, '6x6': 3, '7x7': '2', 'pyraminx': '2', 'megaminx': '2', 'skewb': '2', 'clock': '2'}"
 }
