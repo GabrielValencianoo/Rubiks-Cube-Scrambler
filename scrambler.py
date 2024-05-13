@@ -109,7 +109,7 @@ datas = []
 des_padrao = []
 mediana = []
 faceColors = {'1':'#FFFFFF','2':'#FFA500','3':'#00FF00','4':'#FF0000','5':'#0000FF','6':'#FFFF00'}
-precisions = {'2x2':'2','3x3':'2','4x4':'2','5x5':'2','6x6':'2','7x7':'2','pyraminx':'2','megaminx':'2','skewb':'2','clock':'2',}
+precisions = {'2x2':'2','3x3':'2','4x4':'2','5x5':'2','6x6':'2','7x7':'2','pyraminx':'2','megaminx':'2','skewb':'2','clock':'2','3x3 OH':'2'}
 first_scan = False
 flag_change_event = False   
 precisionTimer = 2
@@ -852,7 +852,9 @@ def createMatrix(cube,type):
         n = 5
     elif cube == "skewb":
         n = 4
-    elif cube == "clock":
+    elif cube == "clock":   
+        n = 3    
+    elif cube == "3x3 OH":
         n = 3
     else:
         n = 4
@@ -905,6 +907,9 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
         cubeN = 'nn' 
     elif cube == "clock":
         cubeN = 'nn' 
+    elif cube == "3x3 OH":        
+        LL = 2
+        cubeN = 'n'
     
     
 
@@ -1927,7 +1932,7 @@ def draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
         our_canvas.create_rectangle(170,280,215,325,fill=Am_color[1][1])           
         
 
-    elif cube == "3x3":
+    elif cube == "3x3" or cube == "3x3 OH":
         
         #U
         our_canvas.create_rectangle(120,10,150,40, fill=Br_color[0][0])    
@@ -3045,6 +3050,8 @@ def next_scramble():
         scrambler_skewb()
     elif ch_event == 'clock':
         scrambler_clock()
+    elif ch_event == '3x3 OH':
+        scrambler_NxN("3x3")
 
 
 def scrambler_NxN(cube):
@@ -3081,7 +3088,7 @@ def scrambler_NxN(cube):
     if cube == "2x2":
         movs = 12
         range_turn = 19
-    elif cube == "3x3":
+    elif cube == "3x3" or cube == "3x3 OH":
         movs = 20
         range_turn = 19
     elif cube == "4x4":
@@ -3685,6 +3692,9 @@ def create_ranking():
         
     elif ch_event == 'clock':
         modalidade = "clock"
+    
+    elif ch_event == '3x3 OH':
+        modalidade = "333oh"
 
 
 
@@ -4149,6 +4159,8 @@ def change_event(event):
         scrambler_skewb()                  
     elif ch_event == 'clock':
         scrambler_clock()  
+    elif ch_event == '3x3 OH':
+        scrambler_NxN("3x3")
 
     flag_change_event = False   
     write_txt_setting()   
@@ -4260,7 +4272,12 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
         length = 5
     elif cube == "skewb":  
         cubeN = 'nn'
+        length = 3    
+    
+    elif cube == "3x3 OH":        
+        LL = 2
         length = 3
+        cubeN = 'n'
     else:
         cubeN = 'nn'
         length = 3
@@ -4815,7 +4832,7 @@ def importar_tempos_file():
 
 def importar_tempos_folder():    
     
-    events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
+    events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock','3x3 OH']
     
     folderPath = filedialog.askdirectory(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
                         filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
@@ -4882,7 +4899,7 @@ def update_file_tempos(index):
             print("An error occurred:", error) # An error occurred: name 'x' is not defined:      
             print("nao foi possivel importar")
 def guardar_tempos():    
-    events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
+    events = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock','3x3 OH']
     
     for event in events:        
         name_file = event + '.csv' 
@@ -5426,7 +5443,7 @@ def donothing_event(event):
 
 ctk.CTkLabel(row1, text = "Modalidade :").grid(column = 0,row = 0) 
 
-eventosValues = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock']
+eventosValues = ['2x2','3x3', '4x4','5x5','6x6','7x7','pyraminx','megaminx','skewb','clock','3x3 OH']
 eventsComboBox = ctk.CTkComboBox(row1,state = "readonly", values = eventosValues, command=change_event) 
 # Adding combobox drop down list 
 
