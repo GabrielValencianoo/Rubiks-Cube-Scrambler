@@ -282,9 +282,10 @@ def estatistica(index):
     media_12 = ao12(index) if index >= 12 else media_12
 
     mediana = statistics.median(tempos)    
-    # ic(mediana)
+    ic(media)
+    ic(mediana)
     des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
-    # ic(des_padrao)   
+    ic(des_padrao)   
         
     global_best_solve  = tempos[index-1] if tempos[index-1] < global_best_solve else global_best_solve
     global_worst_solve  = tempos[index-1] if tempos[index-1] > global_worst_solve else global_worst_solve
@@ -397,6 +398,9 @@ def estatistica(index):
     if index >=12:
         tb_stat.insert(parent='',index='end',iid=3,text='',
         values=('ao12',str(pmedia_12),str(pbest_ao12),str(pworst_ao12)))
+    
+    tb_stat.insert(parent='',index='end',iid=4,text='',
+        values=('ao',str(media),str(mediana),str(des_padrao)))
 
     tb_times.insert(parent='',index='end',iid=index,text='',
     values=(str(index),str(ptempo),str(pmedia_3),str(pmedia_5),str(pmedia_12)))
@@ -3595,13 +3599,14 @@ def create_ranking():
         try:
             paises = pd.read_csv('WCA_export_Countries.tsv', sep='\t', header=0)
             pessoas = pd.read_csv('WCA_export_Persons.tsv', sep='\t', header=0)
-            ranking_single = pd.read_csv('WCA_export_RanksSingle.tsv', sep='\t', header=0)       
-            ranking_average = pd.read_csv('WCA_export_RanksAverage.tsv' , sep='\t', header=0)
+            ranking_single = pd.read_csv('WCA_export_RanksSingle.tsv', sep='\t', header=0,dtype={'eventId': 'string'})       
+            ranking_average = pd.read_csv('WCA_export_RanksAverage.tsv' , sep='\t', header=0,dtype={'eventId': 'string'})   
         
-            ranking_average = ranking_average.astype({'eventId': 'string'})
-            ranking_single = ranking_single.astype({'eventId': 'string'})
+            # ranking_average = ranking_average.astype({'eventId': 'string','personId': 'string'})
+            # ranking_single = ranking_single.astype({'eventId': 'string'})
             pessoas = pessoas.astype({'gender': 'string'})
             print("dentro da pasta")
+            print(ranking_single.dtypes)
         except:
             try:
                 paises = pd.read_csv(os.path.join(rankingPath,'WCA_export_Countries.tsv'), sep='\t', header=0)
@@ -3633,7 +3638,7 @@ def create_ranking():
     CR = paises.query('continentId == @continente')
     CR = CR['id'].tolist()
 
-    print(pessoas.dtypes)
+    # print(pessoas.dtypes)
 
     if gender == 3:
         country_Person = pessoas.query('countryId == @pais and gender == "f"')
