@@ -104,6 +104,7 @@ mo_3  = []
 ao_5  = []
 ao_12 = []
 scrambles = []
+countdowns = []
 status = []
 datas = []
 des_padrao = []
@@ -3944,9 +3945,7 @@ def inspection():
 
         # mark.config(text = count)
         global actual_timer
-        actual_timer.set(countdown)
-        
-        print(countdown)
+        actual_timer.set(int(countdown))        
        
         if countdown <= -2:
             statusFlag = "DNF"
@@ -3960,8 +3959,8 @@ def inspection():
 
         #Increment the count after
         #every 1 second
-        root.after(1000, inspection)
-        countdown -= 1 
+        root.after(100, inspection)
+        countdown -= 0.1 
 
 _short_press = None
 _do_space_longpress = None
@@ -4101,7 +4100,8 @@ def stop_timer():
         timer_state = 5                
         
         global countdown 
-        
+        ic(countdown)        
+        countdowns.append(round(15-countdown,1))
         countdown = 15
 
         global statusFlag
@@ -4823,7 +4823,8 @@ def importar_tempos_file():
             line_count = 0
             resetar()
             for index,row in enumerate(csv_reader,1):                      
-                tempos.append(float(row["Time"]))            
+                tempos.append(float(row["Time"]))   
+                countdowns.append(float(row["Inspection"]))          
                 scrambles.append(row["Scramble"])
                 datas.append(row["Date"])
                 status.append(row["Status"])
@@ -4851,7 +4852,8 @@ def importar_tempos_folder():
                 line_count = 0
                 resetar()
                 for index,row in enumerate(csv_reader,1):                      
-                    tempos.append(float(row["Time"]))            
+                    tempos.append(float(row["Time"])) 
+                    countdowns.append(float(row["Inspection"]))            
                     scrambles.append(row["Scramble"])
                     datas.append(row["Date"])
                     status.append(row["Status"])
@@ -4872,7 +4874,7 @@ def exportar_tempos():
     with open(name_file, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
+        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status"])
 
         for i in range(len(tempos)):
             employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i],status[i]])
@@ -4887,7 +4889,7 @@ def clear_file_tempos():
     with open(name_file, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
+        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status"])
 
 def update_file_tempos(index):    
     name_file = eventsComboBox.get()  
@@ -4897,7 +4899,7 @@ def update_file_tempos(index):
         with open(name_file, mode='a') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-            employee_writer.writerow([index, tempos[index-1], scrambles[index-1], datas[index-1],status[index-1]])
+            employee_writer.writerow([index, tempos[index-1],countdowns[index-1], scrambles[index-1], datas[index-1],status[index-1]])
             # print("insert feito")
 
     except Exception as error: 
@@ -4910,11 +4912,11 @@ def guardar_tempos():
         name_file = event + '.csv' 
         with open(name_file, mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
+            employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status"])
             
             if event == eventsComboBox.get():
                 for i in range(len(tempos)):
-                    employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i],status[i]])
+                    employee_writer.writerow([i+1, tempos[i], countdowns[i],scrambles[i], datas[i],status[i]])
     
     messagebox.showinfo( "Warning", "Export completo.")
 
