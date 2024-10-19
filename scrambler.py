@@ -4178,14 +4178,17 @@ def plot():
     window.geometry('1200x700+1200+200') 
 
     # global tempos 
-    fig = Figure(figsize = (8, 8),dpi = 100)   
+    fig  = Figure(figsize = (8, 8),dpi = 100)   
     fig2 = Figure(figsize = (8, 8),dpi = 100)   
+    fig3 = Figure(figsize = (8, 8),dpi = 100)   
 
 	# adding the subplot 
     plot1 = fig.add_subplot(111) 
     plot2 = fig2.add_subplot(111) 
+    plot3 = fig3.add_subplot(111) 
 
 	# plotting the graph 
+    plot3.hist(countdowns)     
     plot2.hist(tempos)     
     plot1.plot(tempos)     
     plot1.plot(mo_3)     
@@ -4196,14 +4199,17 @@ def plot():
     mplcursors.cursor(plot1)
 	# creating the Tkinter canvas 
 	# containing the Matplotlib figure 
-    canvas = FigureCanvasTkAgg(fig,	master = window) 
+    canvas  = FigureCanvasTkAgg(fig,	master = window) 
     canvas2 = FigureCanvasTkAgg(fig2,	master = window) 
+    canvas3 = FigureCanvasTkAgg(fig3,	master = window) 
     canvas.draw() 
     canvas2.draw() 
+    canvas3.draw() 
 
 	# placing the canvas on the Tkinter root 
     canvas.get_tk_widget().pack(side = tk.LEFT)  
-    canvas2.get_tk_widget().pack(side = tk.RIGHT)  
+    canvas2.get_tk_widget().pack(side = tk.LEFT)  
+    canvas3.get_tk_widget().pack(side = tk.RIGHT)  
 
     
 
@@ -4217,6 +4223,7 @@ def plot():
 
     canvas.flush_events()
     canvas2.flush_events()
+    canvas3.flush_events()
 
 
 
