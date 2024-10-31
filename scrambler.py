@@ -252,6 +252,19 @@ def ao12(vf):
     average = (sum(list_12)-b-w)/10
     return average    
 
+def ramgeNext(vf):
+    list_5 = tempos[vf-4:vf]
+    list_5.append(0)
+    b,w = best_worst(list_5)  
+    best = (sum(list_5)-b-w)/3
+
+    list_5 = tempos[vf-4:vf]
+    list_5.append(9999999999)
+    b,w = best_worst(list_5)  
+    worst = (sum(list_5)-b-w)/3
+    return best,worst
+
+
 def estatistica(index):
     global global_best_solve
     global global_worst_solve
@@ -281,12 +294,15 @@ def estatistica(index):
     media_3  = mo3(index)  if index >= 3  else media_3
     media_5  = ao5(index)  if index >= 5  else media_5
     media_12 = ao12(index) if index >= 12 else media_12
+    next_avg  = ramgeNext(index)  if index >= 5  else media_5
 
     mediana = statistics.median(tempos)    
     ic(media)
     ic(mediana)
     des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
-    ic(des_padrao)   
+    ic(des_padrao)  
+
+    ic(next_avg) 
         
     global_best_solve  = tempos[index-1] if tempos[index-1] < global_best_solve else global_best_solve
     global_worst_solve  = tempos[index-1] if tempos[index-1] > global_worst_solve else global_worst_solve
