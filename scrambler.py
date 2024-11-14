@@ -106,6 +106,7 @@ ao_12 = []
 scrambles = []
 countdowns = []
 status = []
+inputs = []
 datas = []
 des_padrao = []
 mediana = []
@@ -3906,9 +3907,7 @@ def enter_time():
 
     print(tempo)
     
-    tempos.append(tempo)
-
-    print(tempos)
+    tempos.append(tempo)    
 
     tempo = trunc(tempo,precisionTimer)
 
@@ -3925,6 +3924,16 @@ def enter_time():
     global statusFlag
     statusFlag = "OK"
     status.append(statusFlag)
+
+    global countdown 
+    ic(countdown)        
+    countdowns.append(0)
+
+    global inputs
+    dic = {1:"Manual",2:"Timer",3:"Stackmat"}
+    ax = dic[inputVar.get()]
+    inputs.append(ax)
+    
 
     estatistica(len(tempos))
     input_timer.delete(0,tk.END)
@@ -4141,6 +4150,11 @@ def stop_timer():
         global scrambles
 
         scrambles.append(actual_scramble.get())
+
+        global inputs
+        dic = {1:"Manual",2:"Timer",3:"Stackmat"}
+        ax = dic[inputVar.get()]
+        inputs.append(ax)
 
         estatistica(len(tempos))
 
@@ -4851,6 +4865,7 @@ def importar_tempos_file():
                 scrambles.append(row["Scramble"])
                 datas.append(row["Date"])
                 status.append(row["Status"])
+                inputs.append(row["Input"])
                 
                 estatistica(index)                    
 
@@ -4880,6 +4895,7 @@ def importar_tempos_folder():
                     scrambles.append(row["Scramble"])
                     datas.append(row["Date"])
                     status.append(row["Status"])
+                    inputs.append(row["Input"])
                     
                     estatistica(index)                    
 
@@ -4897,10 +4913,10 @@ def exportar_tempos():
     with open(name_file, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status"])
+        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input"])
 
         for i in range(len(tempos)):
-            employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i],status[i]])
+            employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i],status[i],inputs[i]])
 
     messagebox.showinfo( "Warning", "Export completo.")
 
@@ -4912,7 +4928,7 @@ def clear_file_tempos():
     with open(name_file, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status"])
+        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input"])
 
 def update_file_tempos(index):    
     name_file = eventsComboBox.get()  
@@ -4922,7 +4938,7 @@ def update_file_tempos(index):
         with open(name_file, mode='a') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-            employee_writer.writerow([index, tempos[index-1],countdowns[index-1], scrambles[index-1], datas[index-1],status[index-1]])
+            employee_writer.writerow([index, tempos[index-1],countdowns[index-1], scrambles[index-1], datas[index-1],status[index-1],inputs[index-1]])
             # print("insert feito")
 
     except Exception as error: 
@@ -4935,11 +4951,11 @@ def guardar_tempos():
         name_file = event + '.csv' 
         with open(name_file, mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status"])
+            employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input"])
             
             if event == eventsComboBox.get():
                 for i in range(len(tempos)):
-                    employee_writer.writerow([i+1, tempos[i], countdowns[i],scrambles[i], datas[i],status[i]])
+                    employee_writer.writerow([i+1, tempos[i], countdowns[i],scrambles[i], datas[i],status[i],inputs[i]])
     
     messagebox.showinfo( "Warning", "Export completo.")
 
@@ -4975,6 +4991,7 @@ def resetar():
     global tempos
     global scrambles
     global datas
+    global inputs
 
     global global_best_solve
     global global_worst_solve
@@ -5001,6 +5018,7 @@ def resetar():
     scrambles.clear()
     datas.clear()
     status.clear()
+    inputs.clear()
 
     
 
@@ -5654,8 +5672,8 @@ colormenu.add_command(label="Face 5", command= lambda: changeColorScramble('5'))
 colormenu.add_command(label="Face 6", command= lambda: changeColorScramble('6'))
 colormenu.add_command(label="Reset Colors", command= ResetColorScramble)
 
-inputmenu.add_radiobutton(label="Manual input", value=1, variable=inputVar, command=inputVar_change)
-inputmenu.add_radiobutton(label="Tecla Espaço", value=2, variable=inputVar, command=inputVar_change)
+inputmenu.add_radiobutton(label="Manual", value=1, variable=inputVar, command=inputVar_change)
+inputmenu.add_radiobutton(label="Timer", value=2, variable=inputVar, command=inputVar_change)
 inputmenu.add_radiobutton(label="Stackmat", value=3, variable=inputVar, command=inputVar_change)
 
 precisionmenu.add_radiobutton(label="0.1", value=1, variable=precisionVar, command= lambda: precisionVar_change(str(eventsComboBox.get())))
