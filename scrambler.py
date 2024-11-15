@@ -253,7 +253,7 @@ def ao12(vf):
     average = (sum(list_12)-b-w)/10
     return average    
 
-def ramgeNext(vf):
+def rangeNext(vf):
     list_5 = tempos[vf-4:vf]
     list_5.append(0)
     b,w = best_worst(list_5)  
@@ -264,6 +264,12 @@ def ramgeNext(vf):
     b,w = best_worst(list_5)  
     worst = (sum(list_5)-b-w)/3
     return best,worst
+
+def bestNext(vf,avg):
+    list_4 = tempos[vf-4:vf]
+    b,w = best_worst(list_4) 
+    result = (3*avg) - (sum(list_4))+b+w
+    return result
 
 
 def estatistica(index):
@@ -295,7 +301,8 @@ def estatistica(index):
     media_3  = mo3(index)  if index >= 3  else media_3
     media_5  = ao5(index)  if index >= 5  else media_5
     media_12 = ao12(index) if index >= 12 else media_12
-    next_avg  = ramgeNext(index)  if index >= 5  else media_5
+    next_avg  = rangeNext(index)  if index >= 5  else (9999999999,9999999999)
+    best_next , _ = next_avg
 
     mediana = statistics.median(tempos)    
     ic(media)
@@ -304,6 +311,10 @@ def estatistica(index):
     ic(des_padrao)  
 
     ic(next_avg) 
+
+    
+
+    
         
     global_best_solve  = tempos[index-1] if tempos[index-1] < global_best_solve else global_best_solve
     global_worst_solve  = tempos[index-1] if tempos[index-1] > global_worst_solve else global_worst_solve
@@ -323,6 +334,15 @@ def estatistica(index):
     index_best_ao5  = index if media_5 < best_ao5 else index_best_ao5
 
     index_best_ao12  = index if media_12 < best_ao12 else index_best_ao12
+
+
+    if best_next < best_ao5:
+        new_best = bestNext(index,best_ao5-1)        
+        ic(tempos[index-5:index])
+        ic(new_best)
+        print(f"O proximo tempo precisa ser menor que {new_best} para melhor o PB")
+        
+
 
     tempos[index-1] = trunc(tempos[index-1],precisionTimer)
     global_best_solve = trunc(global_best_solve,precisionTimer)
