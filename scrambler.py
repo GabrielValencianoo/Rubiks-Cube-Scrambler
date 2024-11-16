@@ -56,6 +56,22 @@ root.geometry('1600x700+1200+200')
 
 # root.iconphoto(False, tk.PhotoImage(file='/path/to/ico/icon.png'))
 
+
+try:               
+    with open('Scrambler_Settings.json', 'r') as openfile:
+        jsonSettings = json.load(openfile)
+    
+    theme = jsonSettings['colorTheme']    
+
+    if theme == '1':        
+        ctk.set_default_color_theme("blue")
+        
+    elif theme == '2':        
+        ctk.set_default_color_theme("green")               
+    
+except:
+    pass    
+
 # Label 
 row1 = ctk.CTkFrame(root)
 row2 = ctk.CTkFrame(root)
