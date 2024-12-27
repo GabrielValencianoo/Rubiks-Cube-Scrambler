@@ -359,6 +359,7 @@ def estatistica(index):
         print(f"O proximo tempo precisa ser menor que {new_best} para melhor o PB")
         
 
+    precisionTimer = int(precisionTimer)
 
     tempos[index-1] = trunc(tempos[index-1],precisionTimer)
     global_best_solve = trunc(global_best_solve,precisionTimer)
@@ -4138,6 +4139,7 @@ def stop_timer():
         global enable_start_timer 
 
         global precisionTimer  
+        precisionTimer = int(precisionTimer)        
 
         if precisionTimer == 1:
             multiplier = 10
@@ -4147,7 +4149,7 @@ def stop_timer():
             penalty = 200
         elif precisionTimer == 3:
             multiplier = 1000
-            penalty = 2000
+            penalty = 2000    
 
         dt = (t1-t0)*multiplier
         tempo = dt
@@ -5258,7 +5260,6 @@ def precisionVar_change(cube):
             
         elif precisionVar.get() == 3:
             precisionTimer = 3  
-
 
     precision = int(precisions[cube])
     statusValue = precision
