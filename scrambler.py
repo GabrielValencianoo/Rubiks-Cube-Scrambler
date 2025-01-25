@@ -3615,9 +3615,9 @@ def scrambler_clock():
     moves2 = ["U","R","D","L","ALL"]   
 
     for move in moves1:
-        number = random.randrange(0+7+1)
+        number = random.randrange(0,7)
         number = str(number)
-        signal = random.randrange(0+2+1)
+        signal = random.randrange(0,2)
         signal = "+" if signal == 1 else  "-"        
         sum_turns.append(move+number+signal)   
         turn =  move+number+signal
@@ -3626,9 +3626,9 @@ def scrambler_clock():
     sum_turns.append("y2")
     
     for move in moves2:
-        number = random.randrange(0+7+1)
+        number = random.randrange(0,7)
         number = str(number)
-        signal = random.randrange(0+2+1)
+        signal = random.randrange(0,2)
         signal = "+" if signal == 1 else  "-"        
         sum_turns.append(move+number+signal)    
 
