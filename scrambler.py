@@ -33,6 +33,7 @@ import pandas as pd
 import os
 
 from matplotlib.figure import Figure 
+from matplotlib.ticker import FuncFormatter, MaxNLocator
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
 NavigationToolbar2Tk)
 
@@ -4239,6 +4240,49 @@ def change_event(event):
     write_txt_setting()   
     precisionVar_change(ch_event)    
 
+
+# Função para formatar o eixo Y
+def format_time(time,pos):
+    global precisionTimer    
+
+    if precisionTimer == 1:        
+        time /= 10
+    
+    elif precisionTimer == 2:        
+        time /= 100
+
+    elif precisionTimer == 3:        
+        time /= 1000
+
+    
+    if time < 60:
+        presult = str(time)
+        
+    else:
+        
+        m = time // 60        
+        m = int(m)    
+
+        s = time % 60          
+
+        if precisionTimer == 1:                  
+            sStr = format(s,'.1f')              
+
+        if precisionTimer == 2:
+            sStr = format(s,'.2f')      
+            
+        elif precisionTimer == 3:
+            sStr = format(s,'.3f')
+
+        if s < 10:                   
+            presult = str(m) + ":0" + sStr    
+            
+        else:                                
+            presult = str(m) + ":" + sStr
+            
+        
+    return presult
+
 def plot():       
 
 	# the figure that will contain the plot 
@@ -4263,6 +4307,13 @@ def plot():
     plot1.plot(ao_5)     
     plot1.plot(ao_12)
     plot1.legend(['Tempos', 'mo3','ao5','ao12']) 
+
+    #Formatar para mostrar valores corretos no eixos de tempo
+    plot1.yaxis.set_major_formatter(FuncFormatter(format_time))
+    plot2.xaxis.set_major_formatter(FuncFormatter(format_time))
+
+    # Forçando valores inteiros no eixo X
+    plot1.xaxis.set_major_locator(MaxNLocator(integer=True))  # Forçando valores inteiros no eixo X
 
     mplcursors.cursor(plot1)
 	# creating the Tkinter canvas 
