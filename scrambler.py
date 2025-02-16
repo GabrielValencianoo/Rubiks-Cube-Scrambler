@@ -91,8 +91,9 @@ row4.pack(side=tk.RIGHT,anchor = tk.E)
 t0 = 0
 t1 = 0
 
-actual_scramble = tk.StringVar()
+actual_scramble = []
 actual_timer = tk.StringVar()
+sum_turns_str = ""
 
 flag_R = 0
 flag_L = 0
@@ -1572,7 +1573,7 @@ def turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,
 
     elif cube == "megaminx":
         pass
-    elif cube == "skewb":
+    elif cube == "skewb":        
         if turn == "R":
 
             Buffer[0][0] = Vm_color[0,2]
@@ -3113,6 +3114,61 @@ def next_scramble():
     elif ch_event == '3x3 OH':
         scrambler_NxN("3x3")
 
+def dividir_texto(texto, max_caracteres=100):
+    """ Divide o texto em linhas para evitar que fique muito longo """
+    palavras = texto.split(" ")
+    linhas = []
+    linha_atual = ""
+
+    for palavra in palavras:
+        if len(linha_atual) + len(palavra) + 1 > max_caracteres:
+            linhas.append(linha_atual.strip())
+            linha_atual = palavra
+        else:
+            linha_atual += " " + palavra
+
+    if linha_atual:  # Adiciona a última linha
+        linhas.append(linha_atual.strip())
+
+    return linhas
+
+def update_label_scramble(novo_texto):
+    """ Atualiza a interface com um novo texto """
+    global actual_scramble  # Permite modificar a lista de labels
+    for widget in row2.winfo_children():
+        widget.destroy()  # Remove os labels e frames antigos
+
+    actual_scramble = []  # Reseta a lista de labels
+    linhas = dividir_texto(novo_texto)
+
+    for linha in linhas:
+        linha_frame = ctk.CTkFrame(row2)  # Cada linha fica em um novo frame
+        linha_frame.pack(anchor="w")  # Mantém alinhado à esquerda
+
+        for i, palavra in enumerate(linha.split(" ")):
+            print_scramble = ctk.CTkLabel(linha_frame,text = palavra + " ", font=("Arial", 18),wraplength = 500)            
+            print_scramble.pack(side=tk.LEFT)            
+            print_scramble.bind("<Button-1>", lambda e, idx=len(actual_scramble): on_word_click(e, idx))
+            actual_scramble.append(print_scramble)
+    
+
+def on_word_click(event, index):
+    """ Destaca todas as palavras até o índice clicado e apaga as seguintes """
+    cube = eventsComboBox.get()
+    Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix(cube,"color")     
+    
+    for i, label in enumerate(actual_scramble):        
+        turn = label.cget("text")  
+        turn = turn.strip()            
+        if i <= index:
+            label.configure(text_color="white")  # Palavras já clicadas ficam normais
+            
+            Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
+        else:
+            label.configure(text_color="gray")  # Palavras futuras ficam apagadas
+    
+    draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)    
+    # ic(Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)
 
 def scrambler_NxN(cube):
     turn = "" #actual turn (string)
@@ -3121,6 +3177,8 @@ def scrambler_NxN(cube):
     accepted = 0
 
     global actual_scramble 
+    global sum_turns_str
+    sum_turns_str = ""
     
     global flag_R
     global flag_L
@@ -3383,14 +3441,17 @@ def scrambler_NxN(cube):
         
         Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw(cube,turn,Br_color,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
         
-        sum_turns.append(turn)             
+        # sum_turns.append(" ")
+        sum_turns.append(turn)
         pr_move = n_move
         accepted = 0
     
     reset_flags()      
     draw_scramble(cube,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)    
     
-    actual_scramble.set(" ".join(sum_turns))
+    sum_turns_str = (" ".join(sum_turns))
+    
+    update_label_scramble(sum_turns_str)
 
 
 
@@ -3399,7 +3460,10 @@ def scrambler_pyraminx():
     n_move = 0 #actual turn
     pr_move = 0 #previous turn
     global actual_scramble 
-    accepted = 0    
+    accepted = 0   
+
+    global sum_turns_str
+    sum_turns_str = "" 
 
     Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("pyraminx","color") 
 
@@ -3449,7 +3513,7 @@ def scrambler_pyraminx():
         sum_turns.append(turn)
         pr_move = n_move
         Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("pyraminx",turn,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
-        draw_scramble("pyraminx",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
+        # draw_scramble("pyraminx",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
         # print(turn) 
         accepted = 0
 
@@ -3513,18 +3577,24 @@ def scrambler_pyraminx():
         sum_turns.append(turn)
         pr_move = n_move
         Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color = turn_draw("pyraminx",turn,Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color,Buffer)
-        draw_scramble("pyraminx",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)        
         
+    
         # print(turn) 
-        accepted = 0
+        accepted = 0    
+    draw_scramble("pyraminx",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color)   
+    sum_turns_str = (" ".join(sum_turns))
+    
+    update_label_scramble(sum_turns_str) 
 
    
     # print(actual_scramble)    
     
-    actual_scramble.set(" ".join(sum_turns))
+    # actual_scramble.set(" ".join(sum_turns))
     
 
 def scrambler_megaminx():
+    global sum_turns_str
+    sum_turns_str = ""
     sum_turns = []
     Br_color, Lr_color, Vd_color, Vm_color, Az_color, Am_color, Buffer = createMatrix("megaminx","color")  
 
@@ -3544,8 +3614,10 @@ def scrambler_megaminx():
     
     # print(sum_turns)
     draw_scramble("megaminx",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
+    sum_turns_str = (" ".join(sum_turns))
+    update_label_scramble(sum_turns_str) 
     
-    actual_scramble.set(" ".join(sum_turns))
+    # actual_scramble.set(" ".join(sum_turns))
           
 def scrambler_skewb():
     turn = "" #actual turn (string)
@@ -3604,7 +3676,10 @@ def scrambler_skewb():
         accepted = 0
     # print(actual_scramble)    
     draw_scramble("skewb",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
-    actual_scramble.set(" ".join(sum_turns))
+    sum_turns_str = (" ".join(sum_turns))
+    
+    update_label_scramble(sum_turns_str)
+    # actual_scramble.set(" ".join(sum_turns))
     
 
 def scrambler_clock():    
@@ -3635,8 +3710,11 @@ def scrambler_clock():
 
 
     draw_scramble("clock",Br_color ,Lr_color,Vd_color,Vm_color ,Az_color, Am_color) 
+    sum_turns_str = (" ".join(sum_turns))
     
-    actual_scramble.set(" ".join(sum_turns))
+    update_label_scramble(sum_turns_str)
+    
+    # actual_scramble.set(" ".join(sum_turns))
     
 def create_ranking():   
 
@@ -4187,8 +4265,9 @@ def stop_timer():
         actual_timer.set(ptempo)    
 
         global scrambles
+        global sum_turns_str
 
-        scrambles.append(actual_scramble.get())
+        scrambles.append(sum_turns_str)
 
         global inputs
         dic = {1:"Manual",2:"Timer",3:"Stackmat"}
@@ -5595,8 +5674,8 @@ eventsComboBox.grid(column = 1, row = 0)
 # label_img.pack(expand = "yes",anchor = tk.SE)
 # label_img.pack(fill = "both", expand = "yes",side=tk.TOP , anchor = tk.S)
 
-print_scramble = ctk.CTkLabel(row2,textvariable = actual_scramble,wraplength = 500,font = ("Arial", 18))
-print_scramble.grid(column = 0, row = 0)
+# print_scramble = ctk.CTkLabel(row2,text = actual_scramble,wraplength = 500,font = ("Arial", 18))
+# print_scramble.grid(column = 0, row = 0)
 
 
 tb_times = ttk.Treeview(row3)
