@@ -5081,10 +5081,10 @@ def exportar_tempos():
     with open(name_file, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input","Ao5","Ao12"])
+        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input","Mo3","Ao5","Ao12"])
 
         for i in range(len(tempos)):
-            employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i],status[i],inputs[i],ao_5[i],ao_12[i]])
+            employee_writer.writerow([i+1, tempos[i], scrambles[i], datas[i],status[i],inputs[i],mo_3[i],ao_5[i],ao_12[i]])
 
     messagebox.showinfo( "Warning", "Export completo.")
 
@@ -5096,7 +5096,7 @@ def clear_file_tempos():
     with open(name_file, mode='w') as employee_file:
         employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input","Ao5","Ao12"])
+        employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input","Mo3","Ao5","Ao12"])
 
 def update_file_tempos(index):    
     name_file = eventsComboBox.get()  
@@ -5106,7 +5106,7 @@ def update_file_tempos(index):
         with open(name_file, mode='a') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-            employee_writer.writerow([index, tempos[index-1],countdowns[index-1], scrambles[index-1], datas[index-1],status[index-1],inputs[index-1],ao_5[index-1],ao_12[index-1]])
+            employee_writer.writerow([index, tempos[index-1],countdowns[index-1], scrambles[index-1], datas[index-1],status[index-1],inputs[index-1],mo_3[index-1],ao_5[index-1],ao_12[index-1]])
             # print("insert feito")
 
     except Exception as error: 
@@ -5119,11 +5119,11 @@ def guardar_tempos():
         name_file = event + '.csv' 
         with open(name_file, mode='w') as employee_file:
             employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input","Ao5","Ao12"])
+            employee_writer.writerow(["No.", "Time", "Inspection","Scramble","Date","Status","Input","Mo3","Ao5","Ao12"])
             
             if event == eventsComboBox.get():
                 for i in range(len(tempos)):
-                    employee_writer.writerow([i+1, tempos[i], countdowns[i],scrambles[i], datas[i],status[i],inputs[i],ao_5[i],ao_12[i]])
+                    employee_writer.writerow([i+1, tempos[i], countdowns[i],scrambles[i], datas[i],status[i],inputs[i],mo_3[i],ao_5[i],ao_12[i]])
     
     messagebox.showinfo( "Warning", "Export completo.")
 
