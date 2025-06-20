@@ -4317,7 +4317,7 @@ def change_event(event):
 
     flag_change_event = False   
     write_txt_setting()   
-    precisionVar_change(ch_event)    
+    # precisionVar_change(ch_event)    
 
 
 # Função para formatar o eixo Y
