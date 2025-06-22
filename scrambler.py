@@ -37,6 +37,7 @@ from matplotlib.ticker import FuncFormatter, MaxNLocator
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
 NavigationToolbar2Tk)
 
+import threading
 import requests
 import json
 
@@ -4893,19 +4894,46 @@ def plot3D(cube,Br_color,Lr_color,Vd_color,Vm_color,Az_color,Am_color):
 
 
 
-def progresso_bloco(count, tamanho_bloco, tamanho_total):
-    percentual = count * tamanho_bloco * 100 // tamanho_total
-    print(f"\r{percentual}%", end='')
-    # messagebox.showinfo( "Warning", percentual)
+def download_file(url, save_path):
+    response = requests.get(url, stream=True)
+    total_size = int(response.headers.get('content-length', 0))
+    block_size = 1024  # 1 KB
+    downloaded = 0
+    start_time = time.time()
 
-def download_data():
-    import urllib.request
+    with open(save_path, 'wb') as file:
+        for data in response.iter_content(block_size):
+            file.write(data)
+            downloaded += len(data)
+            elapsed = time.time() - start_time
+            speed = downloaded / elapsed if elapsed > 0 else 0
+            percent = int(downloaded * 100 / total_size) if total_size else 0
+
+            # Atualiza a GUI
+            progress_var.set(percent)
+            percent_label.config(text=f"{percent}%")
+            speed_label.config(text=f"{speed/1024:.2f} KB/s")
+            downloaded_label.config(text=f"{downloaded/1024:.2f} KB / {total_size/1024:.2f} KB")
+            DownloadWin.update_idletasks()
+
+    status_label.config(text="Download concluído!")
+    unzip_database()
+
+def start_download():   
     global rankingPath
     url =  "https://www.worldcubeassociation.org/export/results/WCA_export.tsv.zip"
     nome_do_arquivo = rankingPath + '/' + 'WCA_export.zip'
-    print (nome_do_arquivo)
-    urllib.request.urlretrieve(url, nome_do_arquivo, reporthook=progresso_bloco)
-   
+
+    status_label.config(text="Baixando...")
+    threading.Thread(
+        target=download_file,
+        args=(url, nome_do_arquivo),
+        daemon=True
+    ).start()
+
+
+
+
 
 def update_ranking():
 
@@ -4947,8 +4975,7 @@ def update_ranking():
         else:   
             res = messagebox.askquestion( "Ranking Files", "Arquivo não atualizado. \n Deseja atualizar ?")     
             if res == 'yes':                                
-                download_data()
-                unzip_database()
+                start_download()                
 
             else:
                 pass    
@@ -4957,8 +4984,7 @@ def update_ranking():
     except:
         res = messagebox.askquestion( "Ranking Files", "Arquivos não encontrados. \n Deseja baixa-los ?")     
         if res == 'yes':                                
-            download_data()
-            unzip_database()
+            start_download()            
 
         else:
             pass            
@@ -5872,8 +5898,34 @@ modemenu.add_radiobutton(label="Dark", value=3, variable=ModeVar, command= ModeV
 thememenu.add_radiobutton(label="Blue", value=1, variable=themeVar, command= themeVar_change)
 thememenu.add_radiobutton(label="Green", value=2, variable=themeVar, command= themeVar_change)
 
-helpmenu.add_command(label="Help Index", command=download_data)
+helpmenu.add_command(label="Help Index", command=donothing)
 helpmenu.add_command(label="About...", command=donothing)
+
+
+
+# GUI Download WCA Ranking
+DownloadWin = tk.Toplevel()
+DownloadWin.title("Downloader")
+
+progress_var = tk.IntVar()
+
+ttk.Label(DownloadWin, text="Progresso do Download:").pack(pady=5)
+progress_bar = ttk.Progressbar(DownloadWin, length=400, variable=progress_var, maximum=100)
+progress_bar.pack(pady=5)
+
+percent_label = ttk.Label(DownloadWin, text="0%")
+percent_label.pack()
+
+speed_label = ttk.Label(DownloadWin, text="Velocidade: 0 KB/s")
+speed_label.pack()
+
+downloaded_label = ttk.Label(DownloadWin, text="0 KB / 0 KB")
+downloaded_label.pack()
+
+status_label = ttk.Label(DownloadWin, text="Pronto")
+status_label.pack(pady=10)
+
+ttk.Button(DownloadWin, text="Iniciar Download", command=start_download).pack(pady=10)
 
 jsonSettings = {}
 

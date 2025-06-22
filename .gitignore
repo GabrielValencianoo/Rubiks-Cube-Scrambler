@@ -14,3 +14,4 @@ WCA_export_Countries.tsv
 WCA_export_Persons.tsv
 WCA_export_RanksAverage.tsv
 WCA_export_RanksSingle.tsv
+export_api.json
