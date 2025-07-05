@@ -312,6 +312,7 @@ def estatistica(index):
     global mediana
     global des_padrao
     global statusFlag
+    global flag_change_event
 
     
     # global tempos
@@ -324,12 +325,12 @@ def estatistica(index):
     best_next , _ = next_avg
 
     mediana = statistics.median(tempos)    
-    ic(media)
-    ic(mediana)
     des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
-    ic(des_padrao)  
-
-    ic(next_avg) 
+    if flag_change_event == False:
+        ic(media)
+        ic(mediana)    
+        ic(des_padrao)  
+        ic(next_avg) 
 
     
 
@@ -355,7 +356,7 @@ def estatistica(index):
     index_best_ao12  = index if media_12 < best_ao12 else index_best_ao12
 
 
-    if best_next < best_ao5:
+    if best_next < best_ao5 and flag_change_event == False:
         new_best = bestNext(index,best_ao5-1)        
         ic(tempos[index-5:index])
         ic(new_best)
@@ -4901,6 +4902,34 @@ def download_file(url, save_path):
     downloaded = 0
     start_time = time.time()
 
+    # def GUI_Download():
+        # GUI Download WCA Ranking
+    DownloadWin = tk.Toplevel()
+    DownloadWin.title("Downloader")
+
+    progress_var = tk.IntVar()
+
+    ttk.Label(DownloadWin, text="Progresso do Download:").pack(pady=5)
+    progress_bar = ttk.Progressbar(DownloadWin, length=400, variable=progress_var, maximum=100)
+    progress_bar.pack(pady=5)
+
+    percent_label = ttk.Label(DownloadWin, text="0%")
+    percent_label.pack()
+
+    speed_label = ttk.Label(DownloadWin, text="Velocidade: 0 KB/s")
+    speed_label.pack()
+
+    downloaded_label = ttk.Label(DownloadWin, text="0 KB / 0 KB")
+    downloaded_label.pack()
+
+    status_label = ttk.Label(DownloadWin, text="Pronto")
+    status_label.pack(pady=10)
+
+    # ttk.Button(DownloadWin, text="Iniciar Download", command=start_download).pack(pady=10)
+
+    
+    # GUI_Download()
+    status_label.config(text="Baixando...")
     with open(save_path, 'wb') as file:
         for data in response.iter_content(block_size):
             file.write(data)
@@ -4924,7 +4953,7 @@ def start_download():
     url =  "https://www.worldcubeassociation.org/export/results/WCA_export.tsv.zip"
     nome_do_arquivo = rankingPath + '/' + 'WCA_export.zip'
 
-    status_label.config(text="Baixando...")
+    
     threading.Thread(
         target=download_file,
         args=(url, nome_do_arquivo),
@@ -5903,29 +5932,7 @@ helpmenu.add_command(label="About...", command=donothing)
 
 
 
-# GUI Download WCA Ranking
-DownloadWin = tk.Toplevel()
-DownloadWin.title("Downloader")
 
-progress_var = tk.IntVar()
-
-ttk.Label(DownloadWin, text="Progresso do Download:").pack(pady=5)
-progress_bar = ttk.Progressbar(DownloadWin, length=400, variable=progress_var, maximum=100)
-progress_bar.pack(pady=5)
-
-percent_label = ttk.Label(DownloadWin, text="0%")
-percent_label.pack()
-
-speed_label = ttk.Label(DownloadWin, text="Velocidade: 0 KB/s")
-speed_label.pack()
-
-downloaded_label = ttk.Label(DownloadWin, text="0 KB / 0 KB")
-downloaded_label.pack()
-
-status_label = ttk.Label(DownloadWin, text="Pronto")
-status_label.pack(pady=10)
-
-ttk.Button(DownloadWin, text="Iniciar Download", command=start_download).pack(pady=10)
 
 jsonSettings = {}
 
