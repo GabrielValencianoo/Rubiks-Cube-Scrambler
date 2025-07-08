@@ -140,6 +140,7 @@ rankingPath = ""
 gender = 0
 saveTime = 0
 
+media = 0
 best_mo3  = 9999999999
 best_ao5  = 9999999999
 best_ao12 = 9999999999
@@ -290,8 +291,8 @@ def bestNext(vf,avg):
     result = (3*avg) - (sum(list_4))+b+w
     return result
 
-
-def estatistica(index):
+def print_on_table(index):
+    global media
     global global_best_solve
     global global_worst_solve
     global best_mo3
@@ -313,55 +314,6 @@ def estatistica(index):
     global des_padrao
     global statusFlag
     global flag_change_event
-
-    
-    # global tempos
-
-    media = average()
-    media_3  = mo3(index)  if index >= 3  else media_3
-    media_5  = ao5(index)  if index >= 5  else media_5
-    media_12 = ao12(index) if index >= 12 else media_12
-    next_avg  = rangeNext(index)  if index >= 5  else (9999999999,9999999999)
-    best_next , _ = next_avg
-
-    mediana = statistics.median(tempos)    
-    des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
-    if flag_change_event == False:
-        ic(media)
-        ic(mediana)    
-        ic(des_padrao)  
-        ic(next_avg) 
-
-    
-
-    
-        
-    global_best_solve  = tempos[index-1] if tempos[index-1] < global_best_solve else global_best_solve
-    global_worst_solve  = tempos[index-1] if tempos[index-1] > global_worst_solve else global_worst_solve
-
-
-    best_mo3  = media_3 if media_3 < best_mo3 else best_mo3
-    worst_mo3 = media_3 if media_3 > worst_mo3 and media_3 != 9999999999 else worst_mo3
-
-    best_ao5 = media_5 if media_5 < best_ao5 else best_ao5
-    worst_ao5 = media_5 if media_5 > worst_ao5 and media_5 != 9999999999 else worst_ao5
-
-    best_ao12 = media_12 if media_12 < best_ao12 else best_ao12
-    worst_ao12 = media_12 if media_12 > worst_ao12 and media_12 != 9999999999 else worst_ao12
-
-    index_best_mo3  = index if media_3 < best_mo3 else index_best_mo3
-
-    index_best_ao5  = index if media_5 < best_ao5 else index_best_ao5
-
-    index_best_ao12  = index if media_12 < best_ao12 else index_best_ao12
-
-
-    if best_next < best_ao5 and flag_change_event == False:
-        new_best = bestNext(index,best_ao5-1)        
-        ic(tempos[index-5:index])
-        ic(new_best)
-        print(f"O proximo tempo precisa ser menor que {new_best} para melhor o PB")
-        
 
     precisionTimer = int(precisionTimer)
 
@@ -461,8 +413,9 @@ def estatistica(index):
     tb_stat.insert(parent='',index='end',iid=4,text='',
         values=('ao',str(media),str(mediana),str(des_padrao)))
 
-    tb_times.insert(parent='',index='end',iid=index,text='',
-    values=(str(index),str(ptempo),str(pmedia_3),str(pmedia_5),str(pmedia_12)))
+    if flag_change_event == False and first_scan == False:
+        tb_times.insert(parent='',index='end',iid=index,text='',
+        values=(str(index),str(ptempo),str(pmedia_3),str(pmedia_5),str(pmedia_12)))
     
     tb_times.yview_moveto(1)
 
@@ -484,10 +437,10 @@ def estatistica(index):
     if saveTime == 1 and first_scan == False and flag_change_event == False:
         # print("printoo")
         update_file_tempos(index)    
-
-    ch_event = eventsComboBox.get()    
+    
   
     if enableRanking == 1:
+        ch_event = eventsComboBox.get()    
         if ch_event == '6x6' or ch_event == '7x7':
             media = media_3
             best = best_mo3
@@ -509,6 +462,83 @@ def estatistica(index):
         tb_ranking.insert(parent='',index='end',iid=1,text='',
         values=(str(current_ranking[2]),str(current_ranking[1]),str(current_ranking[0]),str(ptempo),str(pmedia),
             str(current_ranking[3]),str(current_ranking[4]),str(current_ranking[5])))
+
+def estatistica(index):
+    global media
+    global global_best_solve
+    global global_worst_solve
+    global best_mo3
+    global best_ao5
+    global best_ao12
+    global worst_mo3
+    global worst_ao5
+    global worst_ao12
+    global media_3
+    global media_5
+    global media_12
+    global precisionTimer
+    global index_best_mo3
+    global index_best_ao5 
+    global index_best_ao12
+    global enableRanking
+    global rankingPath   
+    global mediana
+    global des_padrao
+    global statusFlag
+    global flag_change_event
+
+    
+    # global tempos
+
+    media = average()
+    media_3  = mo3(index)  if index >= 3  else media_3
+    media_5  = ao5(index)  if index >= 5  else media_5
+    media_12 = ao12(index) if index >= 12 else media_12
+    next_avg  = rangeNext(index)  if index >= 5  else (9999999999,9999999999)
+    best_next , _ = next_avg
+
+    mediana = statistics.median(tempos)    
+    des_padrao = statistics.stdev(tempos) if index >= 3  else des_padrao
+    if flag_change_event == False:
+        ic(media)
+        ic(mediana)    
+        ic(des_padrao)  
+        ic(next_avg) 
+
+    
+
+    
+        
+    global_best_solve  = tempos[index-1] if tempos[index-1] < global_best_solve else global_best_solve
+    global_worst_solve  = tempos[index-1] if tempos[index-1] > global_worst_solve else global_worst_solve
+
+
+    best_mo3  = media_3 if media_3 < best_mo3 else best_mo3
+    worst_mo3 = media_3 if media_3 > worst_mo3 and media_3 != 9999999999 else worst_mo3
+
+    best_ao5 = media_5 if media_5 < best_ao5 else best_ao5
+    worst_ao5 = media_5 if media_5 > worst_ao5 and media_5 != 9999999999 else worst_ao5
+
+    best_ao12 = media_12 if media_12 < best_ao12 else best_ao12
+    worst_ao12 = media_12 if media_12 > worst_ao12 and media_12 != 9999999999 else worst_ao12
+
+    index_best_mo3  = index if media_3 < best_mo3 else index_best_mo3
+
+    index_best_ao5  = index if media_5 < best_ao5 else index_best_ao5
+
+    index_best_ao12  = index if media_12 < best_ao12 else index_best_ao12
+
+
+    if best_next < best_ao5 and flag_change_event == False:
+        new_best = bestNext(index,best_ao5-1)        
+        ic(tempos[index-5:index])
+        ic(new_best)
+        print(f"O proximo tempo precisa ser menor que {new_best} para melhor o PB")
+    
+    print_on_table(index)
+        
+
+
             
 
 def define_flags(cube,n_move):
@@ -5071,6 +5101,14 @@ def importar_tempos_file():
 
     global first_scan
     global flag_change_event
+    global global_best_solve
+    global global_worst_solve
+    global best_mo3
+    global best_ao5
+    global best_ao12
+    global worst_mo3
+    global worst_ao5
+    global worst_ao12
     if first_scan == False and flag_change_event == False:
         name_file = filedialog.askopenfilename(initialdir="C:/Users/Batman/Documents/Programming/tkinter/",
                             filetypes =(("CSV Files","*.csv"),("Text File", "*.txt"),("All Files","*.*")),title = "Choose a file.")
@@ -5080,7 +5118,7 @@ def importar_tempos_file():
     try:
         with open(name_file, mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file, delimiter=';')
-            line_count = 0
+            
             resetar()
             for index,row in enumerate(csv_reader,1):                      
                 tempos.append(float(row["Time"]))   
@@ -5089,13 +5127,33 @@ def importar_tempos_file():
                 datas.append(row["Date"])
                 status.append(row["Status"])
                 inputs.append(row["Input"])
+                mo_3.append(float(row["Mo3"]) if isinstance(row["Mo3"], str) and row["Mo3"].strip() else None)
+                ao_5.append(float(row["Ao5"]) if isinstance(row["Ao5"], str) and row["Ao5"].strip() else None)
+                ao_12.append(float(row["Ao12"]) if isinstance(row["Ao12"], str) and row["Ao12"].strip() else None)
                 
-                estatistica(index)                    
+                
+            print(f'Processed {index} lines.')
+            # Verificar se há valores válidos antes de calcular o mínimo e o máximo
+            if any(val for val in mo_3 if isinstance(val, (int, float))):
+                best_mo3 = min(val for val in mo_3 if isinstance(val, (int, float)))
+                worst_mo3 = max(val for val in mo_3 if isinstance(val, (int, float)))
 
-            print(f'Processed {line_count} lines.')
+            if any(val for val in ao_5 if isinstance(val, (int, float))):
+                best_ao5 = min(val for val in ao_5 if isinstance(val, (int, float)))
+                worst_ao5 = max(val for val in ao_5 if isinstance(val, (int, float)))
+
+            if any(val for val in ao_12 if isinstance(val, (int, float))):
+                best_ao12 = min(val for val in ao_12 if isinstance(val, (int, float)))
+                worst_ao12 = max(val for val in ao_12 if isinstance(val, (int, float)))    
+
+            global_best_solve = min(tempos)
+            global_worst_solve = max(tempos)
+
+
     except Exception as error: 
         print("An error occurred:", error) # An error occurred: name 'x' is not defined:      
         print("nao foi possivel importar")
+    estatistica(len(tempos))                    
 
 def importar_tempos_folder():    
     
