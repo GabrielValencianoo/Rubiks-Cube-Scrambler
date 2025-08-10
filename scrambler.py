@@ -5153,7 +5153,8 @@ def importar_tempos_file():
     except Exception as error: 
         print("An error occurred:", error) # An error occurred: name 'x' is not defined:      
         print("nao foi possivel importar")
-    estatistica(len(tempos))                    
+    if len(tempos) > 0:
+        estatistica(len(tempos))                    
 
 def importar_tempos_folder():    
     
@@ -5323,11 +5324,13 @@ def resetar():
     clearTables()
     
     if flag_change_event == False and first_scan == False:    
-        name_file = eventsComboBox.get() 
-        name_file = name_file + '.csv'  
-        with open(name_file, mode='w') as employee_file:
-            employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
+        res = messagebox.askquestion( "Apagar tempos", "Todos os tempos serão apagados. \n Deseja continuar ?")     
+        if res == 'yes': 
+            name_file = eventsComboBox.get() 
+            name_file = name_file + '.csv'  
+            with open(name_file, mode='w') as employee_file:
+                employee_writer = csv.writer(employee_file, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                employee_writer.writerow(["No.", "Time", "Scramble","Date","Status"])
 
 def atualizar():
     global tempos      
