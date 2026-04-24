@@ -3981,7 +3981,7 @@ def enter_time():
       messagebox.showinfo( "Warning", "Digite um valor!")
       return   
     
-    chars = set('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\|<>;/?´`[{]}=!@#$%¨&*() *-+')
+    chars = set(r'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\|<>;/?´`[{]}=!@#$%¨&*() *-+')
     if any((c in chars) for c in input_timer.get()):        
         messagebox.showinfo( "Warning", "Digite apenas números!")
         return
@@ -5815,8 +5815,8 @@ tb_times.heading("ao12",text="ao12",anchor=tk.CENTER)
 
 tb_times.grid(column = 0, row = 1)
 
-tb_times.bind('<ButtonRelease-1>', donothing_event )
-
+#tb_times.bind('<ButtonRelease-1>', donothing_event )
+tb_times.bind('<Double-1>', donothing_event )
 
 
 tb_stat = ttk.Treeview(row3)
